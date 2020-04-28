@@ -13,8 +13,7 @@
 |Fat_rate|integer||
 |Carbohydrate_rate|integer||
 ### Association
-- Has_many :users_managements
-- Has_many :manegements, thorugh: :users_manegements
+- Has_many :managements
 
 ## managementsテーブル
 |Colmun|Type|Option|
@@ -25,30 +24,61 @@
 |total_protain|integer||
 |total_fat|integer||
 |total_carbohydrate|integer||
+|user|references|null: false, foreign_key: true|
+|log|references|null: false, foreign_key: true|
+
 ### Association
-- Has_many :users_managements
-- Has_many :users, thorough: :users_manegements
-- Has_many :manegements_logs
-- Has_many :logs, thorough: :manegements_logs
+- belongs_to :user
+- Has_many :logs
 
 ## logsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
 |created_at|date|null: false|
 |menu|string|null: false|
-|protain|integer||
-|fat|intenger||
-|carbohydrate|integer||
-### Asosociation
-- Has_many :manegements_logs
-- Has_many :manegements, thorough: :manegements_logs
+
+### Association
+- belongs_to :management
 - Has_many :logs_menus
 - Has_many :menus, thorough: :logs_menus
+
+## logs_menusテーブル
+|Column|Type|Options|
+|------|----|-------|
+|log|references|null: false, foreign_key: true|
+|menu|references|null: false, foreign_key: true|
+### Association
+- belongs_to :log
+- bekongs_to :menu
 
 ## menusテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|food
+|menu|string|null: false|
+|mass|integer|null: false|
+### Association
+- Has_many :logs_menus
+- Has_many :logs, through: :logs_menus
+- Has_many :menus_foods
+- Has_many :foods, through: :menus_foods
 
+## menus_foodsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|menu|references|null: false, foreign_key: true|
+|food|references|null: false, foreign_key: true|
+### Association
+- belongs_to :user
+- bekongs_to :management
 
+## foodsテーブル
+|Colmun|Type|Option|
+|-------|----|------|
+|food|string|null: false|
+|protain|double|null: false|
+|fat|double|null: false|
+|carbohydrate|double|null: false|
+### Associtaion
+- Has_many :menus_foods
+- Has_many :menus, through: :menus_foods
 
