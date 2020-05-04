@@ -6,6 +6,7 @@ class CreateLogs < ActiveRecord::Migration[5.2]
       t.integer :total_protain
       t.integer :total_fat
       t.integer :total_carbohydrate
+      t.references :user,     foreign_key: true
       t.references :management,     foreign_key: true
       t.references :menu,           foreign_key: true
       t.timestamps
