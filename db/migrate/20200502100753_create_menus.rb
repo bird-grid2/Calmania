@@ -3,7 +3,6 @@ class CreateMenus < ActiveRecord::Migration[5.2]
     create_table :menus do |t|
       t.string :menu,     null: false
       t.decimal :mass,    null: false, precision: 4, scale: 1
-      t.references :food, null: false, foreign_key: true 
       t.timestamps
     end
   end

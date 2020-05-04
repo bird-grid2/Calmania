@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ManegementsControllerTest < ActionDispatch::IntegrationTest
+class ManagementsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

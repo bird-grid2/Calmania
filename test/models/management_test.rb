@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ManegementTest < ActiveSupport::TestCase
+class ManagementTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
