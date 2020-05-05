@@ -39,12 +39,14 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
     t.integer "total_protain"
     t.integer "total_fat"
     t.integer "total_carbohydrate"
+    t.bigint "user_id"
     t.bigint "management_id"
     t.bigint "menu_id"
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_logs_on_created_at"
     t.index ["management_id"], name: "index_logs_on_management_id"
     t.index ["menu_id"], name: "index_logs_on_menu_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "managements", force: :cascade do |t|
@@ -72,7 +74,8 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "nickname", default: "", null: false
+    t.string "nickname", null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
   add_foreign_key "log_menus", "menus"
   add_foreign_key "logs", "managements"
   add_foreign_key "logs", "menus"
+  add_foreign_key "logs", "users"
   add_foreign_key "managements", "users"
   add_foreign_key "menu_foods", "foods"
   add_foreign_key "menu_foods", "menus"
