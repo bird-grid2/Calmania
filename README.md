@@ -14,6 +14,7 @@
 |Carbohydrate_rate|double||
 ### Association
 - has_many :managements
+- has_many :logs
 
 ## managementsテーブル
 |Colmun|Type|Option|
@@ -38,6 +39,7 @@
 |menu|string|null: false|
 
 ### Association
+- belongs_to :user
 - belongs_to :management
 - has_many :logs_menus
 - has_many :menus, thorough: :logs_menus

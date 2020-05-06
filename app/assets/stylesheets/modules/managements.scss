@@ -1,3 +1,15 @@
-// Place all the styles related to the managements controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+footer {
+  height: 1.2em;
+  width: 100vw;
+  background-color: mediumslateblue;
+  font-size: 15px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
