@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
   create_table "logs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "log_name", null: false
+    t.decimal "weight", precision: 4, scale: 1
+    t.decimal "bfp", precision: 4, scale: 3
+    t.integer "total_cal"
     t.integer "total_protain"
     t.integer "total_fat"
     t.integer "total_carbohydrate"

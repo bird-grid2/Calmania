@@ -1,3 +1,53 @@
-// Place all the styles related to the logs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.wrapper{
+  height: 100vh;
+  width: 100vw;
+  background-image: url("stylesheets/modules/image.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  .upper-info{
+    height: 80vh;
+    width: 80vw;
+    background-color: mediumspringgreen;
+    overflow: scroll;
+    display: block;
+    text-align: center;
+    table {
+      tr {
+        display: flex;
+        justify-content: space-between;
+        .table-title{
+          display: block;
+          height: 50px;
+          width: 100px;
+          font-size: 20px;
+          font-family: 'Lucida Sans Unicode';
+          line-height: 50px;
+        }
+        .table-item{
+          display: block;
+          height: 50px;
+          width: 100px;
+          font-size: 15px;
+          font-family: 'Lucida Sans Unicode';
+          line-height: 50px;
+        }
+      }
+    }
+  }
+  .bottom-info{
+    height: 10vh;
+    width: 80vw;
+    .home-btn{
+      height: 25px;
+      width: 25px;
+      background: gold;
+    }
+  }
+}

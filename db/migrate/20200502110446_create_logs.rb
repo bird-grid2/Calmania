@@ -4,9 +4,8 @@ class CreateLogs < ActiveRecord::Migration[5.2]
       t.date :created_at,           null: false, index: true
       t.string :log_name,           null: false
       t.decimal :weight,            precision: 4, scale: 1
-      t.integer :total_protain
-      t.integer :total_fat
-      t.integer :total_carbohydrate
+      t.decimal :bfp,               precision: 4, scale: 3
+      t.integer :total_cal         
       t.references :user,     foreign_key: true
       t.references :management,     foreign_key: true
       t.references :menu,           foreign_key: true

@@ -1,0 +1,23 @@
+.wrapper
+  .upper-info
+    %table
+      %tr
+        %th.table-title Date
+        %th.table-title Menu
+        %th.table-title Weight
+        %th.table-title BFP
+        %th.table-title Total Cal
+      %tr
+        %td.table-item
+        -#  = @logs.created_at
+        %td.table-item
+        -#  = @logs.log_name
+        %td.table-item
+        -#  = @logs.weight
+        %td.table-item
+        -#  = @logs.bfp
+        %td.table-item
+        -#  = @logs.total_cal
+
+  .bottom-info
+    =link_to icon('fas', 'fa-home'), root_path, class: 'home-btn'
