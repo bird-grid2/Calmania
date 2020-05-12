@@ -6,7 +6,7 @@
 .wrapper{
   height: 100vh;
   width: 100vw;
-  background-image: url("stylesheets/modules/image.jpg");
+  background: image-url('image.jpg');  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,21 +14,26 @@
   .upper-info{
     height: 80vh;
     width: 80vw;
-    background-color: mediumspringgreen;
+    background-color: darkgreen;
+    color: white;
     overflow: scroll;
     display: block;
     text-align: center;
+    border: ridge 30px brown;
     table {
       tr {
+        display: block;
         display: flex;
-        justify-content: space-between;
+        margin-right: 20px;
         .table-title{
           display: block;
+          text-align: center;
           height: 50px;
           width: 100px;
           font-size: 20px;
           font-family: 'Lucida Sans Unicode';
           line-height: 50px;
+          margin: 0px 30px;
         }
         .table-item{
           display: block;
@@ -37,6 +42,7 @@
           font-size: 15px;
           font-family: 'Lucida Sans Unicode';
           line-height: 50px;
+          margin: 0px 30px;
         }
       }
     }
@@ -44,10 +50,16 @@
   .bottom-info{
     height: 10vh;
     width: 80vw;
-    .home-btn{
-      height: 25px;
-      width: 25px;
-      background: gold;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0px;
+    .fas{
+      width: 30px;
+      color: deepskyblue;
+      font-size: 30px;
+      margin-left: 30px;
+      text-align: center;
+      line-height: 40px;
     }
   }
 }
