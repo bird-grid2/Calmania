@@ -1,5 +1,8 @@
 class FoodsController < ApplicationController
 
+  def new
+  end
+
   def create
   end
 

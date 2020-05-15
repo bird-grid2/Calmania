@@ -1,0 +1,24 @@
+.show_foods_detail
+  .show_foods_detail__name
+    豚肉
+  .show_foods_detail__protain-rate
+    0.29
+  .show_foods_detail__fat-rate
+    0.32
+  .show_foods_detail__carbohydrate-rate
+    0.65
+
+.input-form
+  .input-form__name
+    = f.text_field method, {}
+  .input-form__protain
+    = f.text_field method, {}
+  .input-form__fat
+    = f.text_field method, {}
+  .input-form__carbohydrate
+    = f.text_field method, {}
+
+.bottom-info
+  = link_to "create", log_menu_foods_path, method: :post, class: "btn"
+  = link_to "cancel", log_menu_foods_path, class: "btn"
+

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :graphs , only: :index  #, defaults: { format: 'json' }
   resources :logs, only: [ :new, :create, :index, :edit, :destroy, :update ] do
     resources :menus, only: [ :new, :create, :index, :edit, :update ] do
-      resources :foods, only: [ :create, :index, :edit, :update ]
+      resources :foods, only: [ :new, :create, :index, :edit, :update ]
     end
   end
 end

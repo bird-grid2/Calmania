@@ -1,0 +1,44 @@
+.upper-info
+  .input_height Height
+    175  
+  .input_weight Weight
+    80
+
+.input-form
+  .menu_colunmns
+    .input_form
+      豚の角煮
+    .show_cal
+      1600 kcal
+    .show_Protain
+      600 kcal
+    .show_Fat
+      400 kcal
+    .show_Carbohydrate
+      600 kcal
+  .menu_colunmns
+    .input_form
+      味噌汁
+    .show_cal
+      300 kcal
+    .show_Protain
+      10 kcal
+    .show_Fat
+      150 kcal
+    .show_Carbohydrate
+      140 kcal
+  .menu_colunmns
+    .input_form
+      ご飯
+    .show_cal
+      400 kcal
+    .show_Protain
+      1 kcal
+    .show_Fat
+      49 kcal
+    .show_Carbohydrate
+      350 kcal
+    
+.bottom-info
+  = link_to "Logs Create", logs_path, method: :post, class: "btn"
+  = link_to "Cancel", logs_path, class: "btn"
