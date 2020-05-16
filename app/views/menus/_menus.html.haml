@@ -1,0 +1,21 @@
+.wrapper
+  .upper_content
+    .menu_name
+      豚の角煮
+
+  .input-form
+    .input_form__column
+      .input_form__column__input_name
+        豚肉
+      .input_form__column__input_mass
+        500g
+      .input_form__column__protain
+        100 kcal
+      .input_form__column__fat
+        89 kcal
+      .input_form__column__carbohydrate
+        10 kcal
+
+    .bottom_content
+      = link_to "Menu create", log_menus_path, method: :post, class: "btn"
+      = link_to "cancel", log_menus_path, class: "btn"

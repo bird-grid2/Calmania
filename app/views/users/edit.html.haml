@@ -1,0 +1,20 @@
+.warpper
+  .input-form
+    = form_for(current_user) do |f|
+      .name_label
+        = f.label :nickname
+      .text-box
+        = f.text_field :nickname, autofocus: true
+      .e-mail_label
+        = f.label :email
+      .text-box
+        = f.email_field :email
+      .btn
+        = f.submit "reload", class: 'btn'
+
+  .bottom-contents
+    = link_to destroy_user_session_path, method: :destroy, class: "fas fa-sign-out-alt"　do
+      = icon("fas", "fa-sign-out-alt")
+    %span<>
+    = link_to root_path, class: 'fas fa-home' do
+      = icon('fas', 'fa-home')

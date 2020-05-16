@@ -1,0 +1,30 @@
+.wrapper
+  .upper-info
+    %table
+      %tr
+        %th.table-title Menu
+        %th.table-title Mass
+        %th.table-title Total Protain
+        %th.table-title Total Fat
+        %th.table-title Total Carbohydrate
+      %tr
+        %td.table-item
+        -#  = @menus.name
+        %td.table-item
+        -#  = @menus.mass
+        %td.table-item
+        -#  = @menus.total_protain
+        %td.table-item
+        -#  = @menus.total_fat
+        %td.table-item
+        -#  = @menus.total_carbohydrate
+
+  .bottom-info
+    = link_to root_path, class: 'fas fa-home' do
+      = icon('fas', 'fa-home')
+    %span<>
+    = link_to '#', class: 'fas fa-th-list' do
+      = icon("fas", "fa-th-list")
+    %span<>
+    = link_to '#', class: 'fas fa-plus-circle' do
+      = icon("fas", "fa-plus-circle")

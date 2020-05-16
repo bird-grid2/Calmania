@@ -1,0 +1,44 @@
+.top-managements
+  .top-managements__left-contents
+    .top-managements__left-contents--title
+      %h1 BMI
+    .top-managements__right-contents--value
+      %h3 25.0
+  .top-managements__right-contents
+    .top-managements__right-contents-title
+      %h1 Weight
+    .top-managements__right-contents--value
+      %h3 65.9 kg
+    .top-managements__right-contents-title
+      %h1 BFP
+    .top-managements__right-contents--value
+      %h3 50.0%
+.middle-managements
+  .middle-managements__left-contents
+    .middle-managements__left-contents--main-title
+      .main-title
+        %h2 Total Calory
+      .total-value
+        %h3 4000 kcal
+    .middle-managements__left-contents--title
+      .titles
+        %h4 Total Protain
+      .value
+        %h6 1000 kcal
+    .middle-managements__left-contents--title
+      .titles
+        %h4 Total Fat
+      .value
+        %h6 1000 kcal
+    .middle-managements__left-contents--title
+      .titles
+        %h4 Total Carbohydrate
+      .value
+        %h6 1000 kcal
+  .middle-managements__right-contents
+
+.bottom-management
+  .bottom-management__btn
+    = link_to 'Graph', graphs_path, class: 'btn'
+  .bottom-management__btn
+    = link_to 'Logs', logs_path, class: 'btn'

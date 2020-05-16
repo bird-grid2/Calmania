@@ -1,0 +1,128 @@
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.wrapper{
+  height: 100vh;
+  width: 100vw;
+  background: image-url('image.jpg');  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  .upper-info{
+    height: 80vh;
+    width: 80vw;
+    background-color: darkgreen;
+    color: white;
+    overflow: scroll;
+    display: block;
+    text-align: center;
+    border: ridge 30px brown;
+    table {
+      tr {
+        display: block;
+        display: flex;
+        margin-right: 20px;
+        .table-title{
+          display: block;
+          text-align: center;
+          height: 50px;
+          width: 100px;
+          font-size: 20px;
+          font-family: 'Lucida Sans Unicode';
+          line-height: 50px;
+          margin: 0px 30px;
+        }
+        .table-item{
+          display: block;
+          height: 50px;
+          width: 100px;
+          font-size: 15px;
+          font-family: 'Lucida Sans Unicode';
+          line-height: 50px;
+          margin: 0px 30px;
+        }
+      }
+    }
+  }
+  .bottom-info{
+    height: 10vh;
+    width: 80vw;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0px;
+    .fas{
+      width: 30px;
+      color: deepskyblue;
+      font-size: 30px;
+      margin-left: 30px;
+      text-align: center;
+      line-height: 40px;
+    }
+  }
+  .show_foods_detail{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    &__name{
+      height: 70%;
+      width: 20%;
+      background-color: darkcyan;
+    }
+    &__protain-rate{
+      height: 70%;
+      width: 20%;
+      background-color: hotpink;
+    }
+    &__fat-rate{
+      height: 70%;
+      width: 20%;
+      background-color: palevioletred;
+    }
+    &__carbohydrate-rate{
+      height: 70%;
+      width: 20%;
+      background-color: olivedrab;
+    }
+  }
+  .input-form{
+    height: 60%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__name{
+      width: auto;
+      background-color: orangered;
+    }
+    &__protain{
+      width: auto;
+      background-color: forestgreen;
+    }
+    &__fat{
+      width: auto;
+      background-color: blueviolet;
+    }
+    &__carbohydrare{
+      width: auto;
+      background-color: navy;
+    }
+  }
+  .bottom_content {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .btn{
+      height: 20px;
+      width: 20px;
+      background-color: coral;
+      margin-left: 15px;
+    }
+  }
+}
