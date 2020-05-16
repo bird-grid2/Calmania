@@ -3,7 +3,7 @@
   text-decoration: none;
 }
 
-.wrapper{
+.wrapper {
   height: 100vh;
   width: 100vw;
   background: image-url('image.jpg');  
@@ -62,56 +62,46 @@
       line-height: 40px;
     }
   }
-  .upper-content{
-    height: 30%;
-    width: 90%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    .input-height{
-      height: 60%;
-      width: 30%;
-      background-color: tomato;
-    }
-    .input-weight{
-      height: 60%;
-      width: 30%;
-      background-color: lightgray;
+  .upper_content{
+    height: 15vh;
+    width: 100vw;
+    .menu_name{
+      height: 30%;
+      width: 20%;
+      background-color: black;
     }
   }
-  .input-form{
-    height: 60%;
-    width: 90%;
-    .menu_columns{
-      height: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .input-name{
+  .input_form{
+    height: 60vh;
+    width: 80vw;
+    &__column{
+      height: 30%;
+      background-color: red;
+      &__input_name{
         width: auto;
-        background-color: lightskyblue;
+        background-color: orange;
       }
-      .show_cal{
+      &__input_mass{
         width: auto;
-        background-color: maroon;
+        background-color: yellow;
       }
-      .show_protain{
+      &__protain{
         width: auto;
-        background-color: mediumslateblue;
+        background-color: yellowgreen;
       }
-      .show_fat{
+      &__fat{
         width: auto;
-        background-color: midnightblue;
+        background-color: bisque;
       }
-      .show_carbohydrate{
+      &__carbohydrate{
         width: auto;
-        background-color: mintcream;
+        background-color: chocolate;
       }
     }
   }
   .bottom_content {
-    height: 10%;
-    width: 100%;
+    height: 25vh;
+    width: 100vw;
     display: flex;
     justify-content: flex-end;
     align-items: center;

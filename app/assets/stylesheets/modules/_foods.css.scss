@@ -62,51 +62,54 @@
       line-height: 40px;
     }
   }
-  .upper-content{
+  .show_foods_detail{
     height: 30%;
-    width: 90%;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
-    .input-height{
-      height: 60%;
-      width: 30%;
-      background-color: tomato;
+    &__name{
+      height: 70%;
+      width: 20%;
+      background-color: darkcyan;
     }
-    .input-weight{
-      height: 60%;
-      width: 30%;
-      background-color: lightgray;
+    &__protain-rate{
+      height: 70%;
+      width: 20%;
+      background-color: hotpink;
+    }
+    &__fat-rate{
+      height: 70%;
+      width: 20%;
+      background-color: palevioletred;
+    }
+    &__carbohydrate-rate{
+      height: 70%;
+      width: 20%;
+      background-color: olivedrab;
     }
   }
   .input-form{
     height: 60%;
     width: 90%;
-    .menu_columns{
-      height: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .input-name{
-        width: auto;
-        background-color: lightskyblue;
-      }
-      .show_cal{
-        width: auto;
-        background-color: maroon;
-      }
-      .show_protain{
-        width: auto;
-        background-color: mediumslateblue;
-      }
-      .show_fat{
-        width: auto;
-        background-color: midnightblue;
-      }
-      .show_carbohydrate{
-        width: auto;
-        background-color: mintcream;
-      }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__name{
+      width: auto;
+      background-color: orangered;
+    }
+    &__protain{
+      width: auto;
+      background-color: forestgreen;
+    }
+    &__fat{
+      width: auto;
+      background-color: blueviolet;
+    }
+    &__carbohydrare{
+      width: auto;
+      background-color: navy;
     }
   }
   .bottom_content {
