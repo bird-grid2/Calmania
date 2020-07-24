@@ -1,12 +1,16 @@
 class GraphsController < ApplicationController
   
-  require 'pycall/import'
-  include PyCall::Import
-  require 'numpy'
-  np = Numpy
   
   def index
     require 'pg'
+    require 'pycall'
+
+    # matplotlibの読込および設定
+    matplotlib = PyCall.import_module('matplotlib')
+    matplotlib.use('Agg')
+
+    # pyplotの読込
+    plt = PyCall.import_module('matplotlib.pyplot')
     
     # データベース接続する
     connection = PG::connect(host: "localhost", user: "yondo", dbname: "Calmania_development", port: "5432")
