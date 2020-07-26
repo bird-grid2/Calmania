@@ -5,12 +5,13 @@ class GraphsController < ApplicationController
     require 'pg'
     require 'pycall'
 
-    # matplotlibの読込および設定
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
+    plt = matplotlib.pyplot
 
-    # pyplotの読込
-    plt = PyCall.import_module('matplotlib.pyplot')
+    os = PyCall.import_module('os')
+
+    dirpath = 'app/assets/images/'
     
     # データベース接続する
     connection = PG::connect(host: "localhost", user: "yondo", dbname: "Calmania_development", port: "5432")
@@ -22,14 +23,13 @@ class GraphsController < ApplicationController
     end
     @user = result.find(params[:id])
     
-    
-
     plt.title('height graph')
     plt.xlabel('measurement date')
     plt.ylabel('height')
-    plt.plot([70,60,50,90])
-    @graph = plt.show()
-
+    plt.plot([70,60,50,110])
+    
+    plt.savefig(os.path.join(dirpath, "test.png"))
+    plt.close()
   end
 
 end
