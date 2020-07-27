@@ -7,7 +7,7 @@ class GraphsController < ApplicationController
 
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
-    plt = matplotlib.pyplot
+    plt = PyCall.import_module('matplotlib.pyplot')
 
     os = PyCall.import_module('os')
 
@@ -23,12 +23,32 @@ class GraphsController < ApplicationController
     end
     @user = result.find(params[:id])
     
-    plt.title('height graph')
+    plt.title('Height')
     plt.xlabel('measurement date')
     plt.ylabel('height')
     plt.plot([70,60,50,110])
-    
     plt.savefig(os.path.join(dirpath, "test.png"))
+    plt.close()
+
+    plt.title('Calory')
+    plt.xlabel('measurement date')
+    plt.ylabel('Total Calory')
+    plt.plot([70,60,50,110])
+    plt.savefig(os.path.join(dirpath, "test_1.png"))
+    plt.close()
+    
+    plt.title('Body Fat')
+    plt.xlabel('measurement date')
+    plt.ylabel('Body Fat Percentage')
+    plt.plot([70,60,50,110])
+    plt.savefig(os.path.join(dirpath, "test_2.png"))
+    plt.close()
+
+    plt.title('Body Mass Index')
+    plt.xlabel('measurement date')
+    plt.ylabel('BMI')
+    plt.plot([70,60,50,110])
+    plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
   end
 

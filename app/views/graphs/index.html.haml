@@ -1,10 +1,15 @@
 
 .warpper
-  .graph-area
-    .upper_graph
+  .graph_upper
+    .left_graph
       = image_tag 'test.png'
-    .middle_graph
-    .bottom_graph
+    .right_graph
+      = image_tag 'test_1.png'
+  .graph_bottom
+    .left_graph
+      = image_tag 'test_2.png'
+    .right_graph
+      = image_tag 'test_3.png'
   .bottom-info
     = link_to root_path, class: 'fas fa-home' do
       = icon('fas', 'fa-home')
