@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  before_action :set_log, except: :new, :create, :index 
+  before_action :set_log, except: [ :new, :create, :index ]
 
   def new
     @log = Log.new
@@ -37,7 +37,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:logs)
+      params.require(:log)
     end
 
     def set_log
