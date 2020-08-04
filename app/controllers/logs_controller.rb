@@ -1,4 +1,5 @@
 class LogsController < ApplicationController
+  before_action :set_log, except: :new, :create, :index 
 
   def new
     @log = Log.new
@@ -15,11 +16,9 @@ class LogsController < ApplicationController
   end
 
   def edit
-    @log = Log.find(params[:id])
   end
 
   def destroy
-    @log = Log.find(params[:id])
     if @log.destroy do
       redirect_to logs_path
     else
@@ -28,12 +27,21 @@ class LogsController < ApplicationController
   end
 
   def update
-    @log = Log.find(params[:id])
     if @log.update do
       redirect_to logs_path
     else
       render :logs
     end
   end
+
+  private
+
+    def log_params
+      params.require(:logs)
+    end
+
+    def set_log
+      @log = Log.find(params[:id])
+    end
 
 end

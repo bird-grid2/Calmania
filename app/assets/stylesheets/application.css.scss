@@ -1,8 +1,11 @@
-@import 'reset';
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
-@import 'modules/managements';
-@import 'modules/graphs';
-@import 'modules/logs';
-@import 'modules/menus';
-@import 'modules/foods';
+@import "reset";
+@import "mixin/mixin";
+@import "modules/users";
+@import "modules/managements";
+@import "modules/graphs";
+@import "modules/logs";
+@import "modules/menus";
+@import "modules/foods";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+

@@ -1,0 +1,21 @@
+@mixin graph {
+  .left_graph{
+    height: 100%;
+    width: 50%;
+    margin-right: 10px;
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .right_graph{
+    height: 100%;
+    width: 50%;
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
