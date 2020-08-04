@@ -19,7 +19,7 @@ class LogsController < ApplicationController
   end
 
   def destroy
-    if @log.destroy do
+    if @log.destroy 
       redirect_to logs_path
     else
       render :logs
@@ -27,7 +27,7 @@ class LogsController < ApplicationController
   end
 
   def update
-    if @log.update do
+    if @log.update 
       redirect_to logs_path
     else
       render :logs
