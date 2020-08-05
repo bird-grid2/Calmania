@@ -7,8 +7,7 @@
     .input-form
       .input_form__column
         .input_form__column__input_name
-          = form.collection_select(:name, @foods, :food)
-        .
+          = form.collection_select(:name, @foods, :id, :food)
         .input_form__column__protain
           100 kcal
         .input_form__column__fat
@@ -16,6 +15,6 @@
         .input_form__column__carbohydrate
           10 kcal
 
-      .bottom_content
-        = form.submit, class: "btn"
-        = link_to "cancel", log_menus_path, class: "btn"
+    .bottom_content
+      = form.submit 'Menu Create', class: "btn"
+      = link_to "Cancel", menus_path, class: "btn"

@@ -12,6 +12,7 @@ class MenusController < ApplicationController
       redirect_to menu_path
     else
       render 'menu'
+    end
   end
 
   def index
