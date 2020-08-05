@@ -1,5 +1,5 @@
 class MenusController < ApplicationController
-  before_action :set_log
+  before_action :set_menu, except: [ :new, :create]
 
   def new
     @menu = Menu.new
@@ -16,12 +16,10 @@ class MenusController < ApplicationController
   end
 
   def edit
-    @menu = Menu.find(params[:id])
   end
 
   def update
-    @menu = Menu.find(params[:id])
-    if @menu.update do
+    if @menu.update
       redirect_to log_menus_path
     else
       render :menus
@@ -30,11 +28,12 @@ class MenusController < ApplicationController
 
   private
   def menu_params
-    params.require(:menu_param).permit(:menu, :mass, :total_protain, :total_fat, :total_carbohydrate)
+    params.require(:menus).permit(:menu, :mass, :total_protain, :total_fat, :total_carbohydrate)
   end
 
-  def set_log
-    @food = Log.find(params[:log_id])
+  def set_menu
+    binding.pry
+    @menu = Menu.find(params[:id])
   end
 
 end

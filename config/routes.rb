@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   resources :managements , only: :index  #, defaults: { format: 'json' }
   resources :graphs , only: :index  #, defaults: { format: 'json' }
   resources :logs, except: :show do
-    resources :menus, only: [ :new, :create, :index, :edit, :update ]
+    
+    member do
+      get :edit
+    end
   end
-  resources :foods, only: [ :new, :create, :index, :edit, :update ]
+  resources :menus do
+    resources :foods, only: :index
+  end
 end
