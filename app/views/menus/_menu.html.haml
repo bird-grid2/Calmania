@@ -1,0 +1,21 @@
+.wrapper
+  = form_with model: @menu, local: true do |form|
+    .upper_content
+      .menu_name
+        = form.text_field :menu
+
+    .input-form
+      .input_form__column
+        .input_form__column__input_name
+          = form.collection_select(:name, @foods, :food)
+        .
+        .input_form__column__protain
+          100 kcal
+        .input_form__column__fat
+          89 kcal
+        .input_form__column__carbohydrate
+          10 kcal
+
+      .bottom_content
+        = form.submit, class: "btn"
+        = link_to "cancel", log_menus_path, class: "btn"

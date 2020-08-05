@@ -3,7 +3,6 @@ class LogsController < ApplicationController
 
   def new
     @log = Log.new
-    @log.id << params[:id]
   end
 
   def create

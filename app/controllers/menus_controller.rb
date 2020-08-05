@@ -1,14 +1,17 @@
 class MenusController < ApplicationController
-  before_action :set_menu, except: [ :new, :create]
+  before_action :set_menu, except: [:index, :new, :create]
 
   def new
     @menu = Menu.new
-    Menu.id << params[:id]    
+    @foods = Food.all
   end
 
   def create
     @menu = Menu.new(menu_params)
-    @menu.save
+    if @menu.save
+      redirect_to menu_path
+    else
+      render 'menu'
   end
 
   def index
@@ -32,7 +35,6 @@ class MenusController < ApplicationController
   end
 
   def set_menu
-    binding.pry
     @menu = Menu.find(params[:id])
   end
 
