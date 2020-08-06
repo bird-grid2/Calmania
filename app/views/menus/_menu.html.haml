@@ -4,16 +4,11 @@
       .menu_name
         = form.text_field :menu
 
-    .input-form
+    .input_form
       .input_form__column
         .input_form__column__input_name
           = form.collection_select :name, @foods, :id, :food, prompt: '選択してください'
-        .input_form__column__protain
-          100 kcal
-        .input_form__column__fat
-          89 kcal
-        .input_form__column__carbohydrate
-          10 kcal
+        .input_form__column__box
 
     .bottom_content
       = form.submit 'Menu Create', class: "btn"

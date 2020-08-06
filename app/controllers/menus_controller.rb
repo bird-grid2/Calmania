@@ -4,6 +4,13 @@ class MenusController < ApplicationController
   def new
     @menu = Menu.new
     @foods = Food.all
+
+    food = []
+
+    @foods.each_with_index do |elem|
+      food << elem
+    end
+    gon.food = food
   end
 
   def create
