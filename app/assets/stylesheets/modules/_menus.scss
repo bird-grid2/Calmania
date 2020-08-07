@@ -63,20 +63,29 @@
     }
   }
   .upper_content{
-    height: 15vh;
+    height: 5vh;
     width: 100vw;
+    display: flex;
+    p {
+      display: block;
+      padding: 1vh 1vh 1vh 12vh;
+      line-height: 3vh;
+    }
     .menu_name{
-      height: 30%;
+      display: block;
+      height: 3vh;
       width: 20%;
-      background-color: black;
+      margin: 1vh 0px;
     }
   }
   .input_form{
     height: 60vh;
     width: 80vw;
+    margin: 0 auto; 
     &__column{
       height: 30%;
       background-color: red;
+      display: flex;
       &__input_name{
         width: auto;
         background-color: orange;
@@ -86,16 +95,33 @@
         background-color: yellow;
       }
       &__protain{
-        width: auto;
+        width: 15vh;
         background-color: yellowgreen;
       }
       &__fat{
-        width: auto;
+        width: 15vh;
         background-color: bisque;
       }
       &__carbohydrate{
-        width: auto;
+        width: 15vh;
         background-color: chocolate;
+      }
+      &__box{
+        display: flex;
+        width: 45vw;
+      }
+      .label {
+        display: flex;
+        justify-content: center;
+        margin: 2vh 0vh;
+        height: 3vh;
+        p {
+          line-height: 3vh;
+          padding: 0vh 1vh 0vh 0vh;
+        }
+        .mass {
+          display: block;
+        }
       }
     }
   }

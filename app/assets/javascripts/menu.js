@@ -1,21 +1,24 @@
 $(document).on('turbolinks:load', function(){
-  $('#menu_name').on('change', function(){
-    var id = $(this).val()
+  $('.mass').on('change', function(){
+    
+    const mass = $(this).val();
+    var id = $('#menu_name').val();
 
     function buildHTML(count) {
-      var html =  `<div class='input_form__column__protain'>
-                    <p>${count.protain_rate}</p>
+      var html =  `<div class='input_form__column__protain'> Protain
+                    <p>${count.protain_rate * mass}</p>
                    </div>
-                   <div class='input_form__column__fat'>
-                    <p>${count.fat_rate}</p>
+                   <div class='input_form__column__fat'> Fat
+                    <p>${count.fat_rate * mass}</p>
                    </div>
-                   <div class='input_form__column__carbohydrate'>
-                    <p>${count.carbohydrate_rate}</p>
+                   <div class='input_form__column__carbohydrate'> Carbohydrate
+                    <p>${count.carbohydrate_rate * mass}</p>
                    </div>`
       return html;
     };
     
-    $('.input_form__column__box').append(buildHTML(gon.food[(id - 1)]))
+    $('.input_form__column__box').append(buildHTML(gon.food[(id - 1)]));
+
   });
 });
 
