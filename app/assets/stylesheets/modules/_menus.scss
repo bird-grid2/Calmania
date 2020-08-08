@@ -42,6 +42,11 @@
       }
     }
   }
+  .calculate_box {
+    width: 100vw;
+    height: 20vh;
+    background-color: yellow;
+  }
   .bottom-info{
     height: 10vh;
     width: 80vw;
@@ -142,9 +147,14 @@
     .btn{
       display: block;
       height: 50px;
-      width: 200px;
+      width: 150px;
+      margin: 0 10px;
+      text-align: center;
       background-color: royalblue;
-      margin-left: 15px;
+      color: white;
+      font-size: 20px;
+      line-height: 45px;
+      border: groove 2px rgb(118, 118, 118);
     }
   }
 }
