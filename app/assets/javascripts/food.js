@@ -1,10 +1,11 @@
 $(document).on('turbolinks:load', function(){
-  $('#menu-plus').on('click', function(){
+  $('body').on('click', '#menu-plus', function(){
     function addHTML() {
       var html =  `<div class="input_form__column">
                     <div class="input_form__column__label">
                       <i class="fas fa-plus-circle icon" id="menu-plus"></i>
                       <i class="fas fa-minus-circle icon" id="menu-minus"></i>
+                    </div>
                     <div class="input_form__column__input_name">
                       <select name="menu[name]" id="menu_name">
                         <option value="">選択してください</option>
@@ -1717,7 +1718,7 @@ $(document).on('turbolinks:load', function(){
   
   });
 
-  $('#menu-minus').on('click', function(){
-    $(this).parent().parent().remove();
+  $('body').on('click', '#menu-minus', function(){
+    $(this).parent().parent().remove()
   });
 });

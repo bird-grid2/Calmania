@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  $("#menu_food").on('change', function(){
+  $('body').on('change', '#menu_food', function(){
 
     var mass = $(this).val();
     var id = $(this).parent().parent().children().val();

@@ -1,6 +1,6 @@
 .wrapper
   = form_with model: @menu, local: true do |form|
-    .upper_content
+    .upper_menu_content
       %p MenuName : 
       = form.text_field :menu, class: 'menu_name'
 
@@ -16,6 +16,6 @@
         .input_form__column__box
           
 
-    .bottom_content
-      = form.submit 'Menu Create', class: "btn"
+    .bottom_menu_content
+      = form.submit "Menu Create", class: "btn"
       = link_to "Cancel", menus_path, class: "btn"
