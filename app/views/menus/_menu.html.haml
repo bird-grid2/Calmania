@@ -6,11 +6,13 @@
 
     .input_form
       .input_form__column
+        .input_form__column__label
+          =icon('fas', 'plus-circle', class: 'icon', id: 'menu-plus')
         .input_form__column__input_name
           = form.collection_select :name, @foods, :id, :food, prompt: '選択してください'
           .label
             %p Mass [g] : 
-            = form.text_area :food_mass, class: 'mass'
+            = form.text_field :food_mass, class: 'mass', id: 'menu_food'
         .input_form__column__box
           
 

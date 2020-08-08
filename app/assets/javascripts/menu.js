@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function(){
-  $('.mass').on('change', function(){
-    
-    const mass = $(this).val();
-    var id = $('#menu_name').val();
+  $("#menu_food").on('change', function(){
+
+    var mass = $(this).val();
+    var id = $(this).parent().parent().children().val();
 
     function buildHTML(count) {
       var html =  `<div class='input_form__column__protain'> Protain
@@ -19,23 +19,9 @@ $(document).on('turbolinks:load', function(){
                   </div>`
       return html;
     };
-
-    function addHTML() {
-      var html = `<div class= 'input_form__column__input_name'>
-                    <%= form.collection_select :name, @foods, :id, :food, prompt: '選択してください' %>
-                    <div class= 'label'>
-                      <p> Mass [g] :</p> 
-                      <%= form.text_area :food_mass, class: 'mass' %>
-                    </div>
-                  </div>
-                  <div class= 'input_form__column__box'>
-                  </div>`
-      return html;
-    }
     
-    $('.input_form__column__box').append(buildHTML(gon.food[(id - 1)]));
-
-    $('.input_form__column').append(addHTML());
+    $(this).parent().parent().parent().children().last().children().remove();
+    $(this).parent().parent().parent().children().last().append(buildHTML(gon.food[(id - 1)]));
 
   });
 });
