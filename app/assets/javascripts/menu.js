@@ -11,7 +11,8 @@ $(document).on('turbolinks:load', function(){
     var protain = [];
     var fat = [];
     var carbohydrate = [];
-    var sum  = (arr)=>{
+    
+    var sum  =(arr)=>{
       var sum = 0;
       arr.forEach((elm)=>{
           sum += elm;
@@ -22,16 +23,16 @@ $(document).on('turbolinks:load', function(){
     //PFCのカロリーを計算して、HTMLに追加する関数の定義
     function buildHTML(count) {
       var html =  `<div class='input_form__column__protain'> Protain
-                    <p>${protain_cal} [kCal]</p>
+                    <p>${protain_cal}</p><p> [kCal]</p>
                    </div>
                    <div class='input_form__column__fat'> Fat
-                    <p>${fat_cal} [kCal]</p>
+                    <p>${fat_cal}</p><p> [kCal]</p>
                    </div>
                    <div class='input_form__column__carbohydrate'> Carbohydrate
-                    <p>${carbohydrate_cal} [kCal]</p>
+                    <p>${carbohydrate_cal}</p><p> [kCal]</p>
                    </div>
                    <div class='input_form__column__total_mass'> Total
-                   <p>${protain_cal + fat_cal + carbohydrate_cal} [kCal]</p>
+                   <p>${protain_cal + fat_cal + carbohydrate_cal}</p><p> [kCal]</p>
                   </div>`
       return html;
     };
@@ -47,27 +48,24 @@ $(document).on('turbolinks:load', function(){
     };
 
     //計算結果の挿入
-    if(check(protain) || check(fat) || check(carbohydrate)){
+    for(let i = 0; i < $('.input_form__column').length; i++){
 
-      protain.push(protain_cal);
-      fat.push(fat_cal);
-      carbohydrate.push(carbohydrate_cal);
+      p = Number($('.input_form__column__protain')[i].children[0].textContent);
+      f = Number($('.input_form__column__fat')[i].children[0].textContent);
+      c = Number($('.input_form__column__carbohydrate')[i].children[0].textContent);
 
-      $('.calculate_box--protain').children().remove();
-      $('.calculate_box--protain').append(calcHTML(protain));
-      $('.calculate_box--fat').children().remove();
-      $('.calculate_box--fat').append(calcHTML(fat));
-      $('.calculate_box--carbohydrate').children().remove();
-      $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
-    
-    }else{
-      protain.push(protain_cal);
-      fat.push(fat_cal);
-      carbohydrate.push(carbohydrate_cal);
-      $('.calculate_box--protain').append(calcHTML(protain));
-      $('.calculate_box--fat').append(calcHTML(fat));
-      $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
-    }
+      protain.push(p);
+      fat.push(f);
+      carbohydrate.push(c);
+    };
+
+    $('.calculate_box--protain').children().remove();
+    $('.calculate_box--protain').append(calcHTML(protain));
+    $('.calculate_box--fat').children().remove();
+    $('.calculate_box--fat').append(calcHTML(fat));
+    $('.calculate_box--carbohydrate').children().remove();
+    $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
+
   });
 });
 
