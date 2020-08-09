@@ -40,13 +40,6 @@ $(document).on('turbolinks:load', function(){
     $(this).parent().parent().parent().children().last().children().remove();
     $(this).parent().parent().parent().children().last().append(buildHTML(target));
 
-    //それぞれの成分を配列に挿入
-    protain.push(protain_cal);
-    fat.push(fat_cal);
-    carbohydrate.push(carbohydrate_cal);
-
-    console.log(protain)
-
     //計算結果のHTML定義
     function calcHTML(target) {
       var html = `<p> ${sum(target)} [kCal]</p>`
@@ -54,15 +47,27 @@ $(document).on('turbolinks:load', function(){
     };
 
     //計算結果の挿入
-    $('.calculate_box--protain').children().remove();
-    $('.calculate_box--protain').append(calcHTML(protain));
+    if(check(protain) || check(fat) || check(carbohydrate)){
 
-    $('.calculate_box--fat').children().remove();
-    $('.calculate_box--fat').append(calcHTML(fat));
+      protain.push(protain_cal);
+      fat.push(fat_cal);
+      carbohydrate.push(carbohydrate_cal);
 
-    $('.calculate_box--carbohydrate').children().remove();
-    $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
-
+      $('.calculate_box--protain').children().remove();
+      $('.calculate_box--protain').append(calcHTML(protain));
+      $('.calculate_box--fat').children().remove();
+      $('.calculate_box--fat').append(calcHTML(fat));
+      $('.calculate_box--carbohydrate').children().remove();
+      $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
+    
+    }else{
+      protain.push(protain_cal);
+      fat.push(fat_cal);
+      carbohydrate.push(carbohydrate_cal);
+      $('.calculate_box--protain').append(calcHTML(protain));
+      $('.calculate_box--fat').append(calcHTML(fat));
+      $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
+    }
   });
 });
 
