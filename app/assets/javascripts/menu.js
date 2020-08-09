@@ -18,6 +18,7 @@ $(document).on('turbolinks:load', function(){
       arr.forEach((elm)=>{
           sum += elm;
       });
+      (Math.ceil(sum) * 10) / 10;
       return sum;
     };
 
