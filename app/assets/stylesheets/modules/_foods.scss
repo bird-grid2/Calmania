@@ -1,208 +1,157 @@
 .wrapper {
-  height: 100vh;
-  width: 100vw;
-  background: image-url('image.jpg');  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  .upper-info{
-    height: 80%;
-    width: 80%;
-    background-color: darkgreen;
-    color: white;
-    overflow: scroll;
-    display: block;
-    text-align: center;
-    border: ridge 30px brown;
-    table {
-      tr {
-        display: block;
-        display: flex;
-        margin-right: 20px;
-        .table-title{
-          display: block;
-          text-align: center;
-          height: 50px;
-          width: 100px;
-          font-size: 20px;
-          font-family: 'Lucida Sans Unicode';
-          line-height: 50px;
-          margin: 0px 30px;
-        }
-        .table-item{
-          display: block;
-          height: 50px;
-          width: 100px;
-          font-size: 15px;
-          font-family: 'Lucida Sans Unicode';
-          line-height: 50px;
-          margin: 0px 30px;
-        }
-      }
-    }
-  }
-  .calculate_box {
-    width: 90%;
-    height: 20%;
-    background-color: white;
-    border: double 5px $maincolor;
-    text-align: center;
-    margin: 0 5vw;
-    &__title {
-      height: 30%;
+  @include wrapper;
+  form {
+    height: 100%;
+    width: 100%;
+    .upper_menu_content{
+      height: 10%;
+      width: 100%;
       display: flex;
-      h2 {
-        width: 25%;
-        font-size: 1.3em;
-        color: black;
-      }
-    }
-    &__result {
-      height: 70%;
-      display: flex;
-      h3 {
-        display: block;
-        font-size: 3em;
-        margin: auto auto;
-        color: black;
-      }
+      justify-content: center;
+      font-size: 15px;
       p {
         display: block;
-        font-size: 1.5em;
-        margin: auto auto;
+        line-height: 5rem;
+        padding: 1rem;
       }
-      &--protain{
-        width: 25%;
-        display: flex;
-        justify-content: space-between;
-      }
-      &--fat {
-        width: 25%;
-        display: flex;
-        justify-content: space-between;
-      }
-      &--carbohydrate {
-        width: 25%;
-        display: flex;
-        justify-content: space-between;
-      }
-      &--total {
-        width: 25%;
-        display: flex;
-        justify-content: space-between;
+      .menu_name{
+        display: block;
+        height: 3rem;
+        width: 50%;
+        margin: 2rem 0;
       }
     }
-  }
-  .bottom-info{
-    height: 10vh;
-    width: 80vw;
-    display: flex;
-    justify-content: flex-end;
-    padding: 15px 0px;
-    .fas{
-      width: 30px;
-      color: $maincolor;
-      font-size: 30px;
-      margin-left: 30px;
+    .input_form{
+      height: 55%;
+      width: 100%;
+      &__column{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        &__label{
+          width: 2%;
+          margin: auto 0;
+          i {
+            display: block;
+            margin: 5px 0px;
+            color: $maincolor;
+          }
+        }
+        &__input_name {
+          width: 30%;
+          #menu_name{
+            height: 35%;
+            width: 100%;
+          }
+          .label {
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            height: 3vh;
+            p {
+              line-height: 3vh;
+              padding: 0vh 1vh 0vh 0vh;
+            }
+            .mass {
+              display: block;
+              width: 10em;
+            }
+          }
+        }
+        &__box{
+          display: flex;
+          width: 68%;
+          text-align: center;
+          h2 {
+            height: 30%;
+            font-size: 15px;
+            line-height: 20px;
+          }
+          &__total_mass{
+            @include cal-box
+          }
+          &__protain{
+            @include cal-box
+          }
+          &__fat{
+            @include cal-box
+          }
+          &__carbohydrate{
+            @include cal-box
+          }
+        }
+      }
+    }
+    .calculate_box {
+      width: 100%;
+      height: 20%;
+      background-color: white;
+      border: double 5px $maincolor;
       text-align: center;
-      line-height: 40px;
+      &__title {
+        height: 30%;
+        display: flex;
+        h2 {
+          width: 25%;
+          font-size: 1.3em;
+          color: black;
+        }
+      }
+      &__result {
+        height: 70%;
+        display: flex;
+        h3 {
+          display: block;
+          font-size: 3em;
+          margin: auto auto;
+          color: black;
+        }
+        p {
+          display: block;
+          font-size: 1.5em;
+          margin: auto auto;
+        }
+        &--protain{
+          width: 25%;
+          display: flex;
+          justify-content: space-between;
+        }
+        &--fat {
+          width: 25%;
+          display: flex;
+          justify-content: space-between;
+        }
+        &--carbohydrate {
+          width: 25%;
+          display: flex;
+          justify-content: space-between;
+        }
+        &--total {
+          width: 25%;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
     }
-  }
-  .upper_menu_content{
-    height: 5%;
-    width: 100%;
-    display: flex;
-    p {
-      display: block;
-      padding: 1vh 1vh 1vh 12vh;
-      line-height: 3vh;
-    }
-    .menu_name{
-      display: block;
-      height: 3vh;
-      width: 20%;
-      margin: 1vh 0px;
-    }
-  }
-  .input_form{
-    height: 60vh;
-    width: 80vw;
-    margin: 0 auto; 
-    &__column{
-      height: 7vh;
+    .bottom_menu_content {
+      height: 10%;
+      width: 100%;
       display: flex;
-      &__label{
-        width: 2.5vw;
-        i {
-          display: block;
-          margin: 5px 0.5vw;
-          color: coral;
-        }
-      }
-      &__input_name{
-        width: auto;
-        background-color: orange;
-      }
-      &__total_mass{
-        width: 13vw;
-        background-color: yellow;
-      }
-      &__protain{
-        width: 13vw;
-        background-color: yellowgreen;
-      }
-      &__fat{
-        width: 13vw;
-        background-color: bisque;
-      }
-      &__carbohydrate{
-        width: 13vw;
-        background-color: chocolate;
-      }
-      &__box{
-        display: flex;
-        width: 52vw;
+      justify-content: flex-end;
+      align-items: center;
+      .btn{
+        display: block;
+        height: 50px;
+        width: 150px;
+        margin: 0 10px;
         text-align: center;
-        p {
-          margin-top: 1vh;
-        }
+        background-color: $maincolor;
+        color: white;
+        font-size: 20px;
+        line-height: 45px;
+        border: inset 2px rgb(118, 118, 118);
       }
-      .label {
-        display: flex;
-        justify-content: center;
-        margin: 0.5vh 0vh;
-        height: 3vh;
-        p {
-          line-height: 3vh;
-          padding: 0vh 1vh 0vh 0vh;
-        }
-        .mass {
-          display: block;
-        }
-      }
-    }
-  }
-  .bottom_menu_content {
-    height: 10vh;
-    width: 100vw;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .btn{
-      display: block;
-      height: 50px;
-      width: 150px;
-      margin: 0 10px;
-      text-align: center;
-      background-color: $maincolor;
-      color: white;
-      font-size: 20px;
-      line-height: 45px;
-      border: inset 2px rgb(118, 118, 118);
     }
   }
 }
