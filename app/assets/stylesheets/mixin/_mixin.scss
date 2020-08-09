@@ -19,3 +19,24 @@
     }
   }
 }
+
+@mixin cal-box {
+  width: 25%;
+  background-color: $maincolor;
+  .input_form_warpper {
+    height: 70%;
+    display: flex;
+    position: relative;
+    h3 {
+      width: 80%;
+      font-size: 30px;
+    }
+    p {
+      position: absolute;
+      right: 0px;
+      bottom: 10px;
+      font-size: 15px;
+
+    }
+  }
+}

@@ -15,12 +15,20 @@
             = form.text_field :food_mass, class: 'mass', id: 'menu_food'
         .input_form__column__box
     .calculate_box
-      .calculate_box--protain
-        %p --- kCal
-      .calculate_box--fat
-        %p --- kCal
-      .calculate_box--carbohydrate
-        %p --- kCal
+      .calculate_box__title
+        %h2 Protain Total
+        %h2 Fat Total
+        %h2 Carbohydrate Total
+        %h2 Total Calory
+      .calculate_box__result
+        .calculate_box__result--protain
+          %p --- kCal
+        .calculate_box__result--fat
+          %p --- kCal
+        .calculate_box__result--carbohydrate
+          %p --- kCal
+        .calculate_box__result--total
+          %p --- kCal
 
     .bottom_menu_content
       = form.submit "Menu Create", class: "btn"

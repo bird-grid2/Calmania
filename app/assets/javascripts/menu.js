@@ -11,6 +11,7 @@ $(document).on('turbolinks:load', function(){
     var protain = [];
     var fat = [];
     var carbohydrate = [];
+    var total = [];
     
     var sum  =(arr)=>{
       var sum = 0;
@@ -22,17 +23,29 @@ $(document).on('turbolinks:load', function(){
 
     //PFCのカロリーを計算して、HTMLに追加する関数の定義
     function buildHTML(count) {
-      var html =  `<div class='input_form__column__protain'> Protain
-                    <p>${protain_cal}</p><p> [kCal]</p>
+      var html =  `<div class='input_form__column__box__protain'> 
+                    <h2>Protain</h2>
+                    <div class='input_form_warpper'>
+                      <h3>${protain_cal}</h3><p> [kCal]</p>
+                    </div>
                    </div>
-                   <div class='input_form__column__fat'> Fat
-                    <p>${fat_cal}</p><p> [kCal]</p>
+                   <div class='input_form__column__box__fat'>
+                    <h2>Fat</h2>
+                    <div class='input_form_warpper'>
+                      <h3>${fat_cal}</h3><p> [kCal]</p>
+                    </div>
                    </div>
-                   <div class='input_form__column__carbohydrate'> Carbohydrate
-                    <p>${carbohydrate_cal}</p><p> [kCal]</p>
+                   <div class='input_form__column__box__carbohydrate'>
+                    <h2>Carbohydrate</h2>
+                    <div class='input_form_warpper'>
+                      <h3>${carbohydrate_cal}</h3><p> [kCal]</p>
+                    </div>
                    </div>
-                   <div class='input_form__column__total_mass'> Total
-                   <p>${protain_cal + fat_cal + carbohydrate_cal}</p><p> [kCal]</p>
+                   <div class='input_form__column__box__total_mass'>
+                    <h2>Total</h2>
+                    <div class='input_form_warpper'>
+                      <h3>${protain_cal + fat_cal + carbohydrate_cal}</h3><p> [kCal]</p>
+                    </div>
                   </div>`
       return html;
     };
@@ -43,28 +56,32 @@ $(document).on('turbolinks:load', function(){
 
     //計算結果のHTML定義
     function calcHTML(target) {
-      var html = `<p> ${sum(target)} [kCal]</p>`
+      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>`
       return html;
     };
 
     //計算結果の挿入
     for(let i = 0; i < $('.input_form__column').length; i++){
 
-      p = Number($('.input_form__column__protain')[i].children[0].textContent);
-      f = Number($('.input_form__column__fat')[i].children[0].textContent);
-      c = Number($('.input_form__column__carbohydrate')[i].children[0].textContent);
+      p = Number($('.input_form__column__box__protain')[i].children[1].children[0].textContent);
+      f = Number($('.input_form__column__box__fat')[i].children[1].children[0].textContent);
+      c = Number($('.input_form__column__box__carbohydrate')[i].children[1].children[0].textContent);
 
       protain.push(p);
       fat.push(f);
       carbohydrate.push(c);
+      total.push((p + f + c))
     };
 
-    $('.calculate_box--protain').children().remove();
-    $('.calculate_box--protain').append(calcHTML(protain));
-    $('.calculate_box--fat').children().remove();
-    $('.calculate_box--fat').append(calcHTML(fat));
-    $('.calculate_box--carbohydrate').children().remove();
-    $('.calculate_box--carbohydrate').append(calcHTML(carbohydrate));
+    
+    $('.calculate_box__result--protain').children().remove();
+    $('.calculate_box__result--protain').append(calcHTML(protain));
+    $('.calculate_box__result--fat').children().remove();
+    $('.calculate_box__result--fat').append(calcHTML(fat));
+    $('.calculate_box__result--carbohydrate').children().remove();
+    $('.calculate_box__result--carbohydrate').append(calcHTML(carbohydrate));
+    $('.calculate_box__result--total').children().remove();
+    $('.calculate_box__result--total').append(calcHTML(total));
 
   });
 });
