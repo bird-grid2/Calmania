@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  $('body').on('change', '#menu_foods', function(){
+  $('body').on('change', '#menu_names', function(){
     function massHTML(){
       var html = `<div class="label">
                     <p>Mass [g] :</p>

@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function(){
                       <i class="fas fa-minus-circle icon" id="menu-minus"></i>
                     </div>
                     <div class="input_form__column__input_name">
-                      <select name="menu[foods][]" id="menu_foods">
+                      <select name="menu[names][]" id="menu_names">
                         <option value="">選択してください</option>
                         <option value="1">アマランサス</option>
                         <option value="2">あわ</option>
