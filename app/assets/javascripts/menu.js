@@ -8,6 +8,7 @@ $(document).on('turbolinks:load', function(){
       return html;
     };
 
+    $(this).next().remove();
     $(this).parent().append(massHTML());
   });
 
@@ -73,15 +74,13 @@ $(document).on('turbolinks:load', function(){
 
     //計算結果のHTML定義
     function calcHTML(target) {
-      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>
-                  <input value="${sum(target)}" type="hidden" name="menu[total_protain]" id="menu_total_protain">`
+      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>`
       return html;
     };
 
-    console.log($('body, #menu_food'))
 
     //計算結果の挿入
-    for(let i = 0; i < $('.input_form__column').length; i++){
+    for(let i = 0; i < $('.input_form__column__box__protain').length; i++){
 
       p = Number($('.input_form__column__box__protain')[i].children[1].children[0].textContent);
       f = Number($('.input_form__column__box__fat')[i].children[1].children[0].textContent);
@@ -93,10 +92,10 @@ $(document).on('turbolinks:load', function(){
       total.push((p + f + c))
     };
 
-    for(let j = 1; j < $('.input_form__column').length + 1; j++){
+    for(let j = 1; j < $('.input_form__column__box__protain').length + 1; j++){
 
-      target_food = $('body, #menu_name')[i].val();
-      target_mass = $('body, #menu_food')[i].val();
+      target_food = $('body, #menu_name')[j].value;
+      target_mass = $('body, #menu_food')[j].value;
       
       foods.push(target_food);
       masses.push(target_mass);
@@ -105,9 +104,9 @@ $(document).on('turbolinks:load', function(){
     function formHTML(){
       var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>
                   <input value="${masses}" type="hidden" name="menu[masses]" id="menu_masses"></input>
-                  <input value="${protain}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
-                  <input value="${fat}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
-                  <input value="${carbohydrate}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
+                  <input value="${sum(protain)}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
+                  <input value="${sum(fat)}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
+                  <input value="${sum(carbohydrate)}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
       return html;
     }
 
