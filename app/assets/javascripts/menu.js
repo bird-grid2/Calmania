@@ -1,4 +1,18 @@
 $(document).on('turbolinks:load', function(){
+  $('body').on('change', '#menu_name', function(){
+    function massHTML(){
+      var html = `<div class="label">
+                    <p>Mass [g] :</p>
+                    <input class="mass" id="menu_food" type="number" name="menu[food_mass]">
+                  </div>`
+      return html;
+    };
+
+    $(this).parent().append(massHTML());
+  });
+
+
+
   $('body').on('change', '#menu_food', function(){
 
    //式の定義

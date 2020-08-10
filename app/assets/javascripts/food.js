@@ -1703,10 +1703,6 @@ $(document).on('turbolinks:load', function(){
                         <option value="1692"> お茶漬け(さけ)</option>
                         <option value="1693"> ふりかけ(たまご)</option>
                       </select>
-                      <div class="label">
-                        <p>Mass [g] :</p>
-                        <input class="mass" id="menu_food" type="text" name="menu[food_mass]">
-                      </div>
                     </div>
                     <div class='input_form__column__box'>
                     </div>
