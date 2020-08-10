@@ -40,7 +40,7 @@ $(document).on('turbolinks:load', function(){
     };
 
     //PFCのカロリーを計算して、HTMLに追加する関数の定義
-    function buildHTML(count) {
+    function buildHTML() {
       var html =  `<div class='input_form__column__box__protain'> 
                     <h2>Protain</h2>
                     <div class='input_form_warpper'>
@@ -70,11 +70,11 @@ $(document).on('turbolinks:load', function(){
     
     //表示のリセットとHTML追加
     $(this).parent().parent().parent().children().last().children().remove();
-    $(this).parent().parent().parent().children().last().append(buildHTML(target));
+    $(this).parent().parent().parent().children().last().append(buildHTML());
 
     //計算結果のHTML定義
     function calcHTML(target) {
-      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>`
+      var html = `<h3>${Math.ceil(sum(target) * 10)/10}</h3><p> [kCal]</p>`
       return html;
     };
 
@@ -98,13 +98,14 @@ $(document).on('turbolinks:load', function(){
       target_mass = $('body, #menu_food')[j].value;
       
       if(target_food == ""){
-        continue;
+        j += 1;
+        target_food = $('body, #menu_name')[j].value;
+        j -= 1;
       }
+      
       foods.push(target_food);
       masses.push(target_mass);
     };
-
-    console.log(foods)
 
     function formHTML(){
       var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>

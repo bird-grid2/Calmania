@@ -1715,6 +1715,6 @@ $(document).on('turbolinks:load', function(){
   });
 
   $('body').on('click', '#menu-minus', function(){
-    $(this).parent().parent().remove()
+    $(this).parent().parent().remove();
   });
 });
