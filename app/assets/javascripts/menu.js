@@ -97,9 +97,14 @@ $(document).on('turbolinks:load', function(){
       target_food = $('body, #menu_name')[j].value;
       target_mass = $('body, #menu_food')[j].value;
       
+      if(target_food == ""){
+        continue;
+      }
       foods.push(target_food);
       masses.push(target_mass);
     };
+
+    console.log(foods)
 
     function formHTML(){
       var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>
