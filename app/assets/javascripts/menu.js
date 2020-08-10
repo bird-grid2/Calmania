@@ -110,9 +110,9 @@ $(document).on('turbolinks:load', function(){
     function formHTML(){
       var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>
                   <input value="${masses}" type="hidden" name="menu[masses]" id="menu_masses"></input>
-                  <input value="${sum(protain)}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
-                  <input value="${sum(fat)}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
-                  <input value="${sum(carbohydrate)}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
+                  <input value="${Math.ceil(sum(protain)*10)/10}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
+                  <input value="${Math.ceil(sum(fat)*10)/10}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
+                  <input value="${Math.ceil(sum(carbohydrate)*10)/10}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
       return html;
     }
 
