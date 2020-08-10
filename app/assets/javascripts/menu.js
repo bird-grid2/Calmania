@@ -1,9 +1,9 @@
 $(document).on('turbolinks:load', function(){
-  $('body').on('change', '#menu_foods', function(){
+  $('body').on('change', '#menu_name', function(){
     function massHTML(){
       var html = `<div class="label">
                     <p>Mass [g] :</p>
-                    <input class="mass" id="menu_masses" type="number" name="menu[masses]">
+                    <input class="mass" id="menu_mass" type="number" name="menu[mass]">
                   </div>`
       return html;
     };
@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function(){
 
 
 
-  $('body').on('change', '#menu_masses', function(){
+  $('body').on('change', '#menu_mass', function(){
 
    //式の定義
     var mass = $(this).val();
@@ -94,12 +94,12 @@ $(document).on('turbolinks:load', function(){
 
     for(let j = 1; j < $('.input_form__column__box__protain').length + 1; j++){
 
-      target_food = $('body, #menu_foods')[j].value;
-      target_mass = $('body, #menu_masses')[j].value;
+      target_food = $('body, #menu_name')[j].value;
+      target_mass = $('body, #menu_mass')[j].value;
       
       if(target_food == ""){
         j += 1;
-        target_food = $('body, #menu_foods')[j].value;
+        target_food = $('body, #menu_name')[j].value;
         j -= 1;
       }
       
@@ -108,7 +108,9 @@ $(document).on('turbolinks:load', function(){
     };
 
     function formHTML(){
-      var html = `<input value="${Math.ceil(sum(protain)*10)/10}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
+      var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>
+                  <input value="${masses}" type="hidden" name="menu[masses]" id="menu_masses"></input>
+                  <input value="${Math.ceil(sum(protain)*10)/10}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
                   <input value="${Math.ceil(sum(fat)*10)/10}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
                   <input value="${Math.ceil(sum(carbohydrate)*10)/10}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
       return html;
