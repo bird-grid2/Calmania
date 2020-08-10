@@ -14,6 +14,7 @@ class MenusController < ApplicationController
   end
 
   def create
+    binding.pry
     @menu = Menu.new(menu_params)
     if @menu.save
       redirect_to menu_path
@@ -39,7 +40,7 @@ class MenusController < ApplicationController
 
   private
   def menu_params
-    params.require(:menus).permit(:menu, :mass, :total_protain, :total_fat, :total_carbohydrate)
+    params.require(:menu)
   end
 
   def set_menu
