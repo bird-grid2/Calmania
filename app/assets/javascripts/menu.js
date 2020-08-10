@@ -62,7 +62,7 @@ $(document).on('turbolinks:load', function(){
                    <div class='input_form__column__box__total_mass'>
                     <h2>Total</h2>
                     <div class='input_form_warpper'>
-                      <h3>${protain_cal + fat_cal + carbohydrate_cal}</h3><p> [kCal]</p>
+                      <h3>${Math.ceil((protain_cal + fat_cal + carbohydrate_cal) * 10) / 10}</h3><p> [kCal]</p>
                     </div>
                   </div>`
       return html;
