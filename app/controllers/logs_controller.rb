@@ -1,9 +1,8 @@
 class LogsController < ApplicationController
-  before_action :set_log, except: :new, :create, :index 
+  before_action :set_log, except: [ :new, :create, :index ]
 
   def new
     @log = Log.new
-    @log.id << params[:id]
   end
 
   def create
@@ -19,7 +18,7 @@ class LogsController < ApplicationController
   end
 
   def destroy
-    if @log.destroy do
+    if @log.destroy 
       redirect_to logs_path
     else
       render :logs
@@ -27,7 +26,7 @@ class LogsController < ApplicationController
   end
 
   def update
-    if @log.update do
+    if @log.update 
       redirect_to logs_path
     else
       render :logs
@@ -37,7 +36,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:logs)
+      params.require(:log)
     end
 
     def set_log

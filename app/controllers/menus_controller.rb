@@ -1,14 +1,25 @@
 class MenusController < ApplicationController
-  before_action :set_log
+  before_action :set_menu, except: [:index, :new, :create]
 
   def new
     @menu = Menu.new
-    Menu.id << params[:id]    
+    @foods = Food.all
+
+    food = []
+
+    @foods.each_with_index do |elem|
+      food << elem
+    end
+    gon.food = food
   end
 
   def create
     @menu = Menu.new(menu_params)
-    @menu.save
+    if @menu.save
+      redirect_to menus_path
+    else
+      render 'menu'
+    end
   end
 
   def index
@@ -16,12 +27,10 @@ class MenusController < ApplicationController
   end
 
   def edit
-    @menu = Menu.find(params[:id])
   end
 
   def update
-    @menu = Menu.find(params[:id])
-    if @menu.update do
+    if @menu.update
       redirect_to log_menus_path
     else
       render :menus
@@ -30,11 +39,11 @@ class MenusController < ApplicationController
 
   private
   def menu_params
-    params.require(:menu_param).permit(:menu, :mass, :total_protain, :total_fat, :total_carbohydrate)
+    params.require(:menu).permit(:menu, :total_protain, :total_fat, :total_carbohydrate, names: [], masses:[])
   end
 
-  def set_log
-    @food = Log.find(params[:log_id])
+  def set_menu
+    @menu = Menu.find(params[:id])
   end
 
 end
