@@ -68,10 +68,8 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
 
   create_table "menus", force: :cascade do |t|
     t.string "menu", null: false
-    t.integer "name", null: false
-    t.integer "mass", null: false
-    t.string "foods", null: false, array: true
-    t.string "masses", null: false, array: true
+    t.integer "foods", null: false, array: true
+    t.integer "masses", null: false, array: true
     t.decimal "total_protain", precision: 5, scale: 1
     t.decimal "total_fat", precision: 5, scale: 1
     t.decimal "total_carbohydrate", precision: 5, scale: 1
