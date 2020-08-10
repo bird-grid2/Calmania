@@ -17,6 +17,11 @@
  - サーバーサイド作業(log, menu , graph , トップページ)
  - graph情報の更新(x軸 , y軸, jsonで非同期通信)
 
+# problem
+  - foodメニューを選択しないといけない（インクリメンタルサーチをやりたい)
+  - editメニューでfoodを選択できない(恐らくidsで配列にすればできるか？)
+  -
+
 # CaLmania DB設計
 
 ## usersテーブル

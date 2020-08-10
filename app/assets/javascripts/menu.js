@@ -26,6 +26,8 @@ $(document).on('turbolinks:load', function(){
     var fat = [];
     var carbohydrate = [];
     var total = [];
+    var foods = [];
+    var masses = [];
     
     var sum  =(arr)=>{
       var sum = 0;
@@ -71,9 +73,12 @@ $(document).on('turbolinks:load', function(){
 
     //計算結果のHTML定義
     function calcHTML(target) {
-      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>`
+      var html = `<h3>${sum(target)}</h3><p> [kCal]</p>
+                  <input value="${sum(target)}" type="hidden" name="menu[total_protain]" id="menu_total_protain">`
       return html;
     };
+
+    console.log($('body, #menu_food'))
 
     //計算結果の挿入
     for(let i = 0; i < $('.input_form__column').length; i++){
@@ -88,6 +93,24 @@ $(document).on('turbolinks:load', function(){
       total.push((p + f + c))
     };
 
+    for(let j = 1; j < $('.input_form__column').length + 1; j++){
+
+      target_food = $('body, #menu_name')[i].val();
+      target_mass = $('body, #menu_food')[i].val();
+      
+      foods.push(target_food);
+      masses.push(target_mass);
+    };
+
+    function formHTML(){
+      var html = `<input value="${foods}" type="hidden" name="menu[foods]" id="menu_foods"></input>
+                  <input value="${masses}" type="hidden" name="menu[masses]" id="menu_masses"></input>
+                  <input value="${protain}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
+                  <input value="${fat}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
+                  <input value="${carbohydrate}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
+      return html;
+    }
+
     
     $('.calculate_box__result--protain').children().remove();
     $('.calculate_box__result--protain').append(calcHTML(protain));
@@ -97,7 +120,8 @@ $(document).on('turbolinks:load', function(){
     $('.calculate_box__result--carbohydrate').append(calcHTML(carbohydrate));
     $('.calculate_box__result--total').children().remove();
     $('.calculate_box__result--total').append(calcHTML(total));
-
+    $('.calculate_box__result--form').children().remove();
+    $('.calculate_box__result--form').append(formHTML());
   });
 });
 
