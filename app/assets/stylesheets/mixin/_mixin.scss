@@ -50,3 +50,19 @@
     }
   }
 }
+
+@mixin bottom-info {
+  .bottom-info{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .fas{
+      font-size: 30px;
+      line-height: 40px;
+      color: deepskyblue;
+      margin-left: 10px;
+    }
+  }
+}

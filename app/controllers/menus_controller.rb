@@ -26,6 +26,14 @@ class MenusController < ApplicationController
     @menus = Menu.all
   end
 
+  def search
+    @menus = Menu.search(params[:keyword])
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
   def edit
   end
 

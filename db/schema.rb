@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
     t.decimal "total_carbohydrate", precision: 5, scale: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["menu"], name: "index_menus_on_menu"
   end
 
   create_table "users", force: :cascade do |t|
