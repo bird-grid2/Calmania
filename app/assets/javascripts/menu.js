@@ -27,8 +27,6 @@ $(document).on('turbolinks:load', function(){
     var fat = [];
     var carbohydrate = [];
     var total = [];
-    var foods = [];
-    var masses = [];
     
     var sum  =(arr)=>{
       var sum = 0;
