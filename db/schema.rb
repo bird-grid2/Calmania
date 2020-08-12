@@ -34,16 +34,18 @@ ActiveRecord::Schema.define(version: 2020_05_02_121613) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.datetime "created_at", null: false
+    t.date "date", null: false
     t.decimal "weight", precision: 4, scale: 1
     t.decimal "bfp", precision: 4, scale: 3
     t.integer "total_cal"
     t.text "description"
+    t.string "menus", array: true
     t.bigint "user_id"
     t.bigint "management_id"
     t.bigint "menu_id"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_logs_on_created_at"
+    t.index ["date"], name: "index_logs_on_date"
     t.index ["description"], name: "index_logs_on_description"
     t.index ["management_id"], name: "index_logs_on_management_id"
     t.index ["menu_id"], name: "index_logs_on_menu_id"

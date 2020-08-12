@@ -30,8 +30,9 @@
 
 # problem
   - メニュー作成ページでインクリメンタルサーチできない
+  - メニュー作成ページでマイナスボタン押すと、カロリー引き算できない(目星はついているので、後で実装予定)
   - menuページで、編集、削除機能が実装できていない(間に合えば実装予定)
-  - editメニューでfoodを選択できない(恐らくidsで配列にすればできるか？)
+  - 
 
 # CaLmania DB設計
 
@@ -90,21 +91,15 @@
 |Colmun|Type|Option|
 |-------|----|------|
 |menu|string|null: false|
-|mass|double|null: false|
+|names|string|array: true, null: false|
+|masses|string|array: true, null: false|
+|total_protain|decimal|precision: 5, scale: 1|
+|total_fat|decimal|precision: 5, scale: 1|
+|total_carbohydrate|decimal|precision: 5, scale: 1|
 ### Association
 - has_many :logs_menus
 - has_many :logs, through: :logs_menus
-- has_many :menus_foods
-- has_many :foods, through: :menus_foods
-
-## menus_foodsテーブル
-|Column|Type|Options|
-|------|----|-------|
-|menu|references|null: false, foreign_key: true|
-|food|references|null: false, foreign_key: true|
-### Association
-- belongs_to :food
-- belongs_to :management
+- has_many :foods
 
 ## foodsテーブル
 |Colmun|Type|Option|
@@ -114,5 +109,4 @@
 |fat|double|null: false|
 |carbohydrate|double|null: false|
 ### Associtaion
-- has_many :menus_foods
-- has_many :menus, through: :menus_foods
+- belongs_to :menu

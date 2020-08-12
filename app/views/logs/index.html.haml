@@ -7,20 +7,21 @@
         %th.table-title 体脂肪率 [%]
         %th.table-title 総カロリー [kCal]
         %th.table-title コメント
-      %tr
-        %td.table-item
-        -#  = @logs.created_at
-        %td.table-item
-        -#  = @logs.log_name
-        %td.table-item
-        -#  = @logs.weight
-        %td.table-item
-        -#  = @logs.bfp
-        %td.table-item
-        -#  = @logs.total_cal
+      - @logs.each do |log|
+        %tr
+          %td.table-item
+          -#  = log.created_at
+          %td.table-item
+            = log.weight
+          %td.table-item
+            = log.bfp
+          %td.table-item
+            = log.total_cal
+          %td.table-item
+            = log.description
 
   .bottom-info
-    .icon_box
+    .icon-box
       = link_to root_path, class: 'fas fa-home' do
         = icon('fas', 'fa-home')
       %span<>

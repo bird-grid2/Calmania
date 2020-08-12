@@ -1,44 +1,26 @@
-.upper-content
-  .input_height Height
-  %p 175
-  .input_weight Weight
-  %p 80
-
-.input-form
-  .menu_columns
-    .input_name
-      豚の角煮
-    .show_cal
-      1600 kcal
-    .show_Protain
-      600 kcal
-    .show_Fat
-      400 kcal
-    .show_Carbohydrate
-      600 kcal
-  .menu_columns
-    .input_name
-      味噌汁
-    .show_cal
-      300 kcal
-    .show_Protain
-      10 kcal
-    .show_Fat
-      150 kcal
-    .show_Carbohydrate
-      140 kcal
-  .menu_columns
-    .input_name
-      ご飯
-    .show_cal
-      400 kcal
-    .show_Protain
-      1 kcal
-    .show_Fat
-      49 kcal
-    .show_Carbohydrate
-      350 kcal
-    
-.bottom-content
-  = link_to "Logs Create", logs_path, method: :post, class: "btn"
-  = link_to "Cancel", logs_path, class: "btn"
+.logs_wrapper
+  = form_with model: @logs, local: true do |form|
+    .input-form
+      .upper_content
+        .input_date
+          %p 記録日
+          = form.date_field :date, class: 'input_box'
+        .input_weight
+          %p Weight
+          = form.number_field :weight, class: 'input_box'
+      .menu_columns
+        .input_name
+          = form.collection_select :menus, @menus, :id, :menu, {prompt: 'メニューを選択して下さい'}, { name: 'log[menus][]'}
+        .show_cal
+          1600 kcal
+        .show_Protain
+          600 kcal
+        .show_Fat
+          400 kcal
+        .show_Carbohydrate
+          600 kcal
+        
+    .bottom_content
+      
+      = form.submit "ログ作成", class: "btn"
+      = link_to "キャンセル", logs_path, class: "btn"
