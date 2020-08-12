@@ -1,20 +1,14 @@
-.wrapper{
-  height: 100vh;
-  width: 100vw;
-  background: image-url('image.jpg');  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.logs_wrapper{
+  @include wrapper;
   .upper-info{
     height: 80vh;
     width: 80vw;
     background-color: darkgreen;
     color: white;
-    overflow: scroll;
+    overflow-y: scroll;
     display: block;
     text-align: center;
-    border: ridge 30px brown;
+    border: ridge 5px $maincolor;
     table {
       tr {
         display: block;
@@ -26,7 +20,6 @@
           height: 50px;
           width: 100px;
           font-size: 20px;
-          font-family: 'Lucida Sans Unicode';
           line-height: 50px;
           margin: 0px 30px;
         }
@@ -35,7 +28,6 @@
           height: 50px;
           width: 100px;
           font-size: 15px;
-          font-family: 'Lucida Sans Unicode';
           line-height: 50px;
           margin: 0px 30px;
         }

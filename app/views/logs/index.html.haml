@@ -1,12 +1,12 @@
-.wrapper
+.logs_wrapper
   .upper-info
     %table
       %tr
-        %th.table-title Date
-        %th.table-title Menu
-        %th.table-title Weight
-        %th.table-title BFP
-        %th.table-title Total Cal
+        %th.table-title 記録日
+        %th.table-title 体重 [kg]
+        %th.table-title 体脂肪率 [%]
+        %th.table-title 総カロリー [kCal]
+        %th.table-title コメント
       %tr
         %td.table-item
         -#  = @logs.created_at
@@ -20,11 +20,12 @@
         -#  = @logs.total_cal
 
   .bottom-info
-    = link_to root_path, class: 'fas fa-home' do
-      = icon('fas', 'fa-home')
-    %span<>
-    = link_to menus_path, class: 'fas fa-th-list' do
-      = icon("fas", "fa-th-list")
-    %span<>
-    = link_to new_log_path, class: 'fas fa-plus-circle' do
-      = icon("fas", "fa-plus-circle")
+    .icon_box
+      = link_to root_path, class: 'fas fa-home' do
+        = icon('fas', 'fa-home')
+      %span<>
+      = link_to menus_path, class: 'fas fa-th-list' do
+        = icon("fas", "fa-th-list")
+      %span<>
+      = link_to new_log_path, class: 'fas fa-plus-circle' do
+        = icon("fas", "fa-plus-circle")
