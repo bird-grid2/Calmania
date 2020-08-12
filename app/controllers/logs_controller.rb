@@ -3,6 +3,15 @@ class LogsController < ApplicationController
 
   def new
     @log = Log.new
+    @menus = Menu.all
+    
+    menu =[]
+    
+    @menus.each_with_index do |log|
+      menu << log
+    end
+    
+    gon.menu = menu 
   end
 
   def create
