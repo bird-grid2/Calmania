@@ -22,7 +22,7 @@
  #### メニュー作成機能
   - カロリー計算
    ![カロリー計算](https://user-images.githubusercontent.com/61616172/89990301-1eaff880-dcbd-11ea-9151-1cc8f4083744.gif)
-  -　メニュー作成
+  - メニュー作成
    ![メニュー作成](https://user-images.githubusercontent.com/61616172/89990346-35564f80-dcbd-11ea-854a-72683b7a5f0c.gif)
 
 
