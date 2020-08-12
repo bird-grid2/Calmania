@@ -22,12 +22,24 @@
     .bottom_content
       .show_calory
         .show_calory--protain
-          %p ---- [kCal]
+          %h2 タンパク質 合計
+          .label
+            %h2 ----
+            %p[kCal]
         .show_calory--fat
-          %p ---- [kCal]
+          %h2 脂質 合計
+          .label
+            %h2 ----
+            %p[kCal]
         .show_calory--carbohydrate
-          %p ---- [kCal]
+          %h2 炭水化物 合計
+          .label
+            %h2 ----
+            %p[kCal]
         .show_calory--total
-          %p ---- [kCal]
+          %h2 総カロリー
+          .label
+            %h2 ----
+            %p[kCal]
       = form.submit "ログ作成", class: "btn"
       = link_to "キャンセル", logs_path, class: "btn"

@@ -109,7 +109,25 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      
+      .show_calory{
+        width: 60%;
+        height: 100%;
+        display: flex;
+        background-color: white;
+        border: double 3px $maincolor;
+        &--protain{
+          @include bottom_cal_area;
+        }
+        &--fat {
+          @include bottom_cal_area;
+        }
+        &--carbohydrate {
+          @include bottom_cal_area;
+        }
+        &--total {
+          @include bottom_cal_area;
+        }
+      }
       .btn{
         height: 60%;
         width: 15%;

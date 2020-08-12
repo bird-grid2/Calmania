@@ -66,16 +66,32 @@ $(document).on('turbolinks:load', function(){
 
     function addCalHTML(){
       var html = `<div class = 'show_calory--protain'>
-                    <p>${Math.ceil(sum(protain) * 10) / 10} [kCal]</p>
+                    <h2>タンパク質 合計</h2>
+                    <div class= 'label'>
+                      <h3>${Math.ceil(sum(protain) * 10) / 10}</h3>
+                      <p>[kCal]</p>
+                    </div>
                   </div>
                   <div class = "show_calory--fat">
-                    <p>${Math.ceil(sum(fat) * 10) / 10} [kCal]</p>
+                    <h2>脂質 合計</h2>
+                    <div class= 'label'>
+                      <h3>${Math.ceil(sum(fat) * 10) / 10}</h3> 
+                      <p>[kCal]</p>
+                    </div>
                   </div>
                   <div class = "show_calory--carbohydrate">
-                    <p>${Math.ceil(sum(carbo) * 10) / 10} [kCal]</p>
+                    <h2>炭水化物 合計</h2>
+                    <div class= 'label'>
+                      <h3>${Math.ceil(sum(carbo) * 10) / 10}</h3>
+                      <p>[kCal]</p>
+                    </div>
                   </div>
                   <div class = "show_calory--total">
-                    <p>${Math.ceil(sum(total) * 10) / 10} [kCal]</p>
+                    <h2>総カロリー</h2>
+                    <div class= 'label'>
+                      <h3>${Math.ceil(sum(total) * 10) / 10}</h3>
+                      <p>[kCal]</p>
+                    </div>
                   </div>`
       return html;
     };
