@@ -45,7 +45,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:log)
+      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menus: [])
     end
 
     def set_log

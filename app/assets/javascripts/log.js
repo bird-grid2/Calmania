@@ -101,7 +101,7 @@ $(document).on('turbolinks:load', function(){
     $('.show_calory').append(addCalHTML());
 
     function formHTML(){
-      var html = `<input value="${Math.ceil(sum(total) * 10 ) / 10}" type="hidden" name="menu[total_cal]" id="menu_total_cal"></input>`
+      var html = `<input value="${Math.ceil(sum(total) * 10 ) / 10}" type="hidden" name="log[total_cal]" id="log_total_cal"></input>`
       return html;
     };
     
