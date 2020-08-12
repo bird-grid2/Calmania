@@ -18,6 +18,14 @@
  - サーバーサイド作業(log, menu , graph , トップページ)
  - graph情報の更新(x軸 , y軸, jsonで非同期通信)
 
+# DEMO
+ #### メニュー作成機能
+  - カロリー計算
+   ![カロリー計算](https://user-images.githubusercontent.com/61616172/89990301-1eaff880-dcbd-11ea-9151-1cc8f4083744.gif)
+  -　メニュー作成
+   ![メニュー作成](https://user-images.githubusercontent.com/61616172/89990346-35564f80-dcbd-11ea-854a-72683b7a5f0c.gif)
+
+
 # problem
   - menuページで、編集、削除機能が実装できていない(間に合えば実装予定)
   - editメニューでfoodを選択できない(恐らくidsで配列にすればできるか？)
