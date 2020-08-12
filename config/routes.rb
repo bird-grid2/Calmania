@@ -14,5 +14,8 @@ Rails.application.routes.draw do
   end
   resources :menus do
     resources :foods, only: :index
+    collection do
+      get :search
+    end
   end
 end

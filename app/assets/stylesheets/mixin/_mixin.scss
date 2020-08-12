@@ -50,3 +50,33 @@
     }
   }
 }
+
+@mixin bottom-info {
+  .bottom-info{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .search-box {
+      width: 60%;
+      height: 60%;
+      margin-left: 20%;
+      display: flex;
+      .search-input {
+        height: 100%;
+        width: 70%;
+        margin-right: 10px;
+      }
+    }
+    .icon-box{
+      display: flex;
+      .fas{
+        font-size: 30px;
+        line-height: 40px;
+        color: deepskyblue;
+        margin-left: 10px;
+      }
+    }
+  }
+}

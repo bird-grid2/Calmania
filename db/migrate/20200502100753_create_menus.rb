@@ -7,7 +7,9 @@ class CreateMenus < ActiveRecord::Migration[5.2]
       t.decimal :total_protain, precision: 5, scale: 1
       t.decimal :total_fat, precision: 5, scale: 1
       t.decimal :total_carbohydrate, precision: 5, scale: 1
+      
       t.timestamps
     end
+    add_index :menus, :menu, unique: true
   end
 end

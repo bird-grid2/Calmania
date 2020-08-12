@@ -1,27 +1,31 @@
-.wrapper
+.menus_wrapper
   .upper-info
     %table
       %tr
         %th.table-title Menu
-        %th.table-title Mass
-        %th.table-title Total Protain
-        %th.table-title Total Fat
-        %th.table-title Total Carbohydrate
-      %tr
-        %td.table-item
-        -#  = @menus.name
-        %td.table-item
-        -#  = @menus.mass
-        %td.table-item
-        -#  = @menus.total_protain
-        %td.table-item
-        -#  = @menus.total_fat
-        %td.table-item
-        -#  = @menus.total_carbohydrate
+        %th.table-title 総重量 [g]
+        %th.table-title タンパク質 [kCal]
+        %th.table-title 脂質 [kCal]
+        %th.table-title 炭水化物 [kCal]
+      - @menus.each do |menu|
+        %tr
+          %td.table-item
+            = menu.menu
+          %td.table-item
+            = menu.masses.sum{ |num| num.to_i }
+          %td.table-item
+            = menu.total_protain
+          %td.table-item
+            = menu.total_fat
+          %td.table-item
+            = menu.total_carbohydrate
 
   .bottom-info
-    = link_to root_path, class: 'fas fa-home' do
-      = icon('fas', 'fa-home')
-    %span<>
-    = link_to new_menu_path, class: 'fas fa-plus-circle' do
-      = icon("fas", "fa-plus-circle")
+    = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
+      = f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input'
+    .icon-box
+      = link_to root_path, class: 'fas fa-home' do
+        = icon('fas', 'fa-home')
+      %span<>
+      = link_to new_menu_path, class: 'fas fa-plus-circle' do
+        = icon("fas", "fa-plus-circle")

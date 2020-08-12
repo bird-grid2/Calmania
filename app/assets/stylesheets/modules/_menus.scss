@@ -1,39 +1,41 @@
-.wrapper {
+.menus_wrapper {
   @include wrapper;
   .upper-info{
-    height: 80%;
-    width: 80%;
+    height: 90%;
+    width: 100%;
     background-color: darkgreen;
     color: white;
-    overflow: scroll;
+    overflow: auto;
     display: block;
     text-align: center;
-    border: ridge 30px brown;
+    border: double 3px $maincolor;
+    .name {
+      height: 30%;
+      width: 60%;
+      text-align: center;
+      margin: 5% 20% 0 20%;
+    }
     table {
+      height: 100%;
+      width: 100%;
+      table-layout: fixed;
       tr {
-        display: block;
         display: flex;
-        margin-right: 20px;
-        .table-title{
-          display: block;
+        width: 100%;
+        th {
+          width: 20%;
           text-align: center;
-          height: 50px;
-          width: 100px;
           font-size: 20px;
-          font-family: 'Lucida Sans Unicode';
           line-height: 50px;
-          margin: 0px 30px;
         }
-        .table-item{
-          display: block;
+        td {
           height: 50px;
-          width: 100px;
-          font-size: 15px;
-          font-family: 'Lucida Sans Unicode';
+          width: 20%;
+          font-size: 20px;
           line-height: 50px;
-          margin: 0px 30px;
         }
       }
     }
   }
+  @include bottom-info;
 }

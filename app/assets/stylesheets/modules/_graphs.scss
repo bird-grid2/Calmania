@@ -19,16 +19,5 @@
     margin-top: 3vh;
     @include graph;
   }
-  .bottom-info{
-    width: 90%;
-    height: 4vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    .fas{
-      font-size: 30px;
-      line-height: 40px;
-      color: deepskyblue;
-    }
-  }
+  @include bottom-info
 }
