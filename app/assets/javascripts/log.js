@@ -2,25 +2,38 @@ $(document).on('turbolinks:load', function(){
   $('body').on('change', '#log_menus', function(){
     
     var id = $(this).val();
-
     var target = gon.menu[ id - 1 ]
+    var protain = [];
+    var fat = [];
+    var carbo = [];
+    var total = [];
+
+    var sum  =(arr)=>{
+      var sum = 0;
+      arr.forEach((elm)=>{
+          sum += elm;
+      });
+      Math.ceil(sum)
+      return sum;
+    };
     
+    //カロリー表示HTMLの定義
     function appendHTML(log){
-      var html = `<div class="show_cal">
+      var html = `<div class="show_protain">
                     <h2>タンパク質 合計</h2>
                     <div class="label">
                       <h3>${log.total_protain}</h3>
                       <p>[kCal]</p>
                     </div>
                   </div>
-                  <div class="show_cal">
+                  <div class="show_fat">
                     <h2>脂質 合計</h2>
                     <div class="label">
                       <h3>${log.total_fat}</h3>
                       <p>[kCal]</p>
                     </div>
                   </div>
-                  <div class="show_cal">
+                  <div class="show_carbohydrate">
                     <h2>炭水化物 合計</h2>
                     <div class="label">
                       <h3>${log.total_carbohydrate}</h3>
@@ -36,8 +49,37 @@ $(document).on('turbolinks:load', function(){
                   </div>`
       return html;
     };
+
+    for(let i = 0; i < $('show_protain').length; i++){
+      p = Number($('show_protain')[i].children[1].children[0].value);
+      f = Number($('show_fat')[i].children[1].children[0].value);
+      c = Number($('show_carbohydrate')[i].children[1].children[0].value);
+
+      protain.push(Math.ceil(p * 10) / 10);
+      fat.push(Math.ceil(f * 10) / 10);
+      carbo.push(Math.ceil(c * 10) / 10);
+      total.push(Math.ceil((p + f + c) * 10) / 10);
+    };
+
+    function addCalHTML(){
+      var html = `<div class = 'show_calory--protain'>
+                    <p>${Math.ceil(sum(protain) * 10) / 10} [kCal]</p>
+                  </div>
+                  <div class = "show_calory--fat">
+                    <p>${Math.ceil(sum(fat) * 10) / 10} [kCal]</p>
+                  </div>
+                  <div class = "show_calory--carbohydrate">
+                    <p>${Math.ceil(sum(carbo) * 10) / 10} [kCal]</p>
+                  </div>
+                  <div class = "show_calory--total">
+                    <p>${Math.ceil(sum(total) * 10) / 10} [kCal]</p>
+                  </div>`
+    }
+
     $(this).parent().next().empty();
     $(this).parent().next().append(appendHTML(target));
+    $('show_calory').empty();
+    $('show_calory').append(addCalHTML());
   });
 
   //＋ボタン
@@ -80,7 +122,7 @@ $(document).on('turbolinks:load', function(){
 
     //HTML挿入
     $('.menu_columns').append(addHTML());
-    
+
   });
 
   //マイナスボタン

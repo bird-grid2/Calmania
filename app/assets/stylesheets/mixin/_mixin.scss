@@ -80,3 +80,31 @@
     }
   }
 }
+
+@mixin cal_area {
+  width: 25%;
+  background-color: $maincolor;
+  color: white;
+  h2 {
+    display: block;
+    font-size: 15px;
+    height: 30%;
+    line-height: 20px;
+    text-align: center;
+  }
+  .label {
+    display: flex;
+    height: 70%;
+    h3 {
+      width: 60%;
+      display: block;
+      font-size: 40px;
+      line-height: 70px;
+    }
+    p {
+      display: block;
+      font-size: 15px;
+      line-height: 80px;
+    }
+  }
+}
