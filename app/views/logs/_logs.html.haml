@@ -21,6 +21,14 @@
           600 kcal
         
     .bottom_content
-      
+      .show_calory
+       .show_calory--protain
+        %p ---- [kCal]
+       .show_calory--fat
+        %p ---- [kCal]
+       .show_calory--carbohydrate
+        %p ---- [kCal]
+       .show_calory--total
+        %p ---- [kCal]
       = form.submit "ログ作成", class: "btn"
       = link_to "キャンセル", logs_path, class: "btn"
