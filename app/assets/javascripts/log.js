@@ -50,10 +50,13 @@ $(document).on('turbolinks:load', function(){
       return html;
     };
 
-    for(let i = 0; i < $('show_protain').length; i++){
-      p = Number($('show_protain')[i].children[1].children[0].value);
-      f = Number($('show_fat')[i].children[1].children[0].value);
-      c = Number($('show_carbohydrate')[i].children[1].children[0].value);
+    $(this).parent().next().empty();
+    $(this).parent().next().append(appendHTML(target));
+
+    for(let i = 0; i < $('.show_protain').length; i++){
+      p = Number($('.show_protain')[i].children[1].children[0].textContent);
+      f = Number($('.show_fat')[i].children[1].children[0].textContent);
+      c = Number($('.show_carbohydrate')[i].children[1].children[0].textContent);
 
       protain.push(Math.ceil(p * 10) / 10);
       fat.push(Math.ceil(f * 10) / 10);
@@ -74,12 +77,12 @@ $(document).on('turbolinks:load', function(){
                   <div class = "show_calory--total">
                     <p>${Math.ceil(sum(total) * 10) / 10} [kCal]</p>
                   </div>`
-    }
+      return html;
+    };
 
-    $(this).parent().next().empty();
-    $(this).parent().next().append(appendHTML(target));
-    $('show_calory').empty();
-    $('show_calory').append(addCalHTML());
+    
+    $('.show_calory').empty();
+    $('.show_calory').append(addCalHTML());
   });
 
   //＋ボタン
@@ -129,6 +132,4 @@ $(document).on('turbolinks:load', function(){
   $('body').on('click', '#menu-minus', function(){
     $(this).parent().parent().remove();
   });
-
-
 });
