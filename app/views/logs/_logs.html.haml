@@ -7,10 +7,10 @@
           = form.date_field :date, class: 'input_box'
         .input_column
           %p 体重 [kg] : 
-          = form.number_field :weight, class: 'input_box'
+          = form.number_field :weight, step: '0.1', class: 'input_box'
         .input_column
           %p 体脂肪率 [%] : 
-          = form.number_field :bfp, class: 'input_box'
+          = form.number_field :bfp, step: '0.1', class: 'input_box'
       .comment_box
         %p コメント : 
         = form.text_area :description, class: 'comment'
