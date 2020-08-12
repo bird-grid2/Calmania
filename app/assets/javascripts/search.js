@@ -64,6 +64,7 @@ $(document).on('turbolinks:load', function (){
         });
       }
       else {
+        search_list.empty();
         appendErrMsgToHTML("一致するメニューがありません");
       }
     })
