@@ -99,6 +99,14 @@ $(document).on('turbolinks:load', function(){
     
     $('.show_calory').empty();
     $('.show_calory').append(addCalHTML());
+
+    function formHTML(){
+      var html = `<input value="${Math.ceil(sum(total) * 10 ) / 10}" type="hidden" name="menu[total_cal]" id="menu_total_cal"></input>`
+      return html;
+    };
+    
+    $('.show_calory').append(formHTML());
+
   });
 
   //＋ボタン

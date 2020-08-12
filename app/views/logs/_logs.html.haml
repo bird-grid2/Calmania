@@ -11,6 +11,9 @@
         .input_column
           %p 体脂肪率 [%] : 
           = form.number_field :bfp, class: 'input_box'
+      .comment_box
+        %p コメント : 
+        = form.text_area :description, class: 'comment'
       .menu_columns
         .menu_columns__col
           .menu_columns__col__label
