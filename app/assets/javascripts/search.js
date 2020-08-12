@@ -12,8 +12,7 @@ $(document).on('turbolinks:load', function (){
 
   var search_list = $(".upper-info");
 
-  function appendMenu(menu) {
-
+  function appendTable(){
     var html =  `<table>
                   <tbody>
                     <tr>
@@ -23,17 +22,23 @@ $(document).on('turbolinks:load', function (){
                       <th class = "table-title">脂質 [kCal]</th>
                       <th class = "table-title">炭水化物 [kCal]</th>
                     </tr>
-                    <tr>
-                      <td class = "table-item">${menu.menu}</td>
-                      <td class = "table-item">${sum(menu.masses)}</td>
-                      <td class = "table-item">${menu.total_protain}</td>
-                      <td class = "table-item">${menu.total_fat}</td>
-                      <td class = "table-item">${menu.total_carbohydrate}</td>
-                    </tr>
                   </tbody>
                 </table>`
-
+    
     search_list.append(html);
+  }
+
+  function appendMenu(menu) {
+
+    var html =  `<tr>
+                  <td class = "table-item">${menu.menu}</td>
+                  <td class = "table-item">${sum(menu.masses)}</td>
+                  <td class = "table-item">${menu.total_protain}</td>
+                  <td class = "table-item">${menu.total_fat}</td>
+                  <td class = "table-item">${menu.total_carbohydrate}</td>
+                </tr>`
+
+    $("tbody").append(html);
   }
 
   function appendErrMsgToHTML(msg) {
@@ -52,6 +57,7 @@ $(document).on('turbolinks:load', function (){
     })
     .done(function(menus) {
       search_list.empty();
+      appendTable();
       if (menus.length !== 0) {
         menus.forEach(function(menu){
           appendMenu(menu);
