@@ -3,14 +3,13 @@ $(document).on('turbolinks:load', function (){
   var sum  =(arr)=>{
     var sum = 0;
     arr.forEach((elm)=>{
-        sum += elm;
+      elm = Number(elm)  
+      sum += elm;
     });
     Math.ceil(sum);
     return sum;
   };
 
-  
-  
   var search_list = $(".upper-info");
 
   function appendMenu(menu) {
@@ -19,10 +18,10 @@ $(document).on('turbolinks:load', function (){
                   <tbody>
                     <tr>
                       <th class = "table-title">Menu</th>
-                      <th class = "table-title">Mass [g]</th>
-                      <th class = "table-title">Total Protain [kCal]</th>
-                      <th class = "table-title">Total Fat [kCal]</th>
-                      <th class = "table-title">Total Carb [kCal]</th>
+                      <th class = "table-title">総重量 [g]</th>
+                      <th class = "table-title">タンパク質 [kCal]</th>
+                      <th class = "table-title">脂質 [kCal]</th>
+                      <th class = "table-title">炭水化物 [kCal]</th>
                     </tr>
                     <tr>
                       <td class = "table-item">${menu.menu}</td>
@@ -57,12 +56,13 @@ $(document).on('turbolinks:load', function (){
         menus.forEach(function(menu){
           appendMenu(menu);
         });
-      } else {
+      }
+      else {
         appendErrMsgToHTML("一致するメニューがありません");
       }
     })
     .fail(function() {
-      alert('エラー');
+      alert('検索エラーです 管理者に連絡して下さい');
     });
   });
 });

@@ -3,10 +3,10 @@
     %table
       %tr
         %th.table-title Menu
-        %th.table-title Mass [g]
-        %th.table-title Total Protain [kCal]
-        %th.table-title Total Fat [kCal]
-        %th.table-title Total Carb [kCal]
+        %th.table-title 総重量 [g]
+        %th.table-title タンパク質 [kCal]
+        %th.table-title 脂質 [kCal]
+        %th.table-title 炭水化物 [kCal]
       - @menus.each do |menu|
         %tr
           %td.table-item
@@ -22,8 +22,8 @@
 
   .bottom-info
     = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
-      = f.text_field :keyword, placeholder: 'input menuName', class: 'search-input'
-      = f.submit "Search", class: 'btn'
+      = f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input'
+      = f.submit "検索", class: 'btn'
     .icon-box
       = link_to root_path, class: 'fas fa-home' do
         = icon('fas', 'fa-home')

@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function(){
   $('body').on('change', '#menu_names', function(){
     function massHTML(){
       var html = `<div class="label">
-                    <p>Mass [g] :</p>
+                    <p>重量 [g] :</p>
                     <input class="mass" id="menu_masses" type="number" name="menu[masses][]">
                   </div>`
       return html;
@@ -40,25 +40,25 @@ $(document).on('turbolinks:load', function(){
     //PFCのカロリーを計算して、HTMLに追加する関数の定義
     function buildHTML() {
       var html =  `<div class='input_form__column__box__protain'> 
-                    <h2>Protain</h2>
+                    <h2>タンパク質</h2>
                     <div class='input_form_warpper'>
                       <h3>${protain_cal}</h3><p> [kCal]</p>
                     </div>
                    </div>
                    <div class='input_form__column__box__fat'>
-                    <h2>Fat</h2>
+                    <h2>脂質</h2>
                     <div class='input_form_warpper'>
                       <h3>${fat_cal}</h3><p> [kCal]</p>
                     </div>
                    </div>
                    <div class='input_form__column__box__carbohydrate'>
-                    <h2>Carbohydrate</h2>
+                    <h2>タンパク質</h2>
                     <div class='input_form_warpper'>
                       <h3>${carbohydrate_cal}</h3><p> [kCal]</p>
                     </div>
                    </div>
                    <div class='input_form__column__box__total_mass'>
-                    <h2>Total</h2>
+                    <h2>総カロリー</h2>
                     <div class='input_form_warpper'>
                       <h3>${Math.ceil((protain_cal + fat_cal + carbohydrate_cal) * 10) / 10}</h3><p> [kCal]</p>
                     </div>
