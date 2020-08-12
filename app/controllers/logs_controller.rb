@@ -16,7 +16,12 @@ class LogsController < ApplicationController
 
   def create
     @log = Log.new(log_params)
-    @log.save
+
+    if @log.save
+      redirect_to logs_path
+    else
+      render :log
+    end
   end
 
   def index
