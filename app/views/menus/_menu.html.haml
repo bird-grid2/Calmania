@@ -1,5 +1,5 @@
-.wrapper
-  = form_with model: @menu, local: true do |form|
+.food_wrapper
+  = form_with model: menu, local: true do |form|
     .upper_menu_content
       %p MenuName : 
       = form.text_field :menu, class: 'menu_name'
@@ -9,14 +9,14 @@
         .input_form__column__label
           =icon('fas', 'plus-circle', class: 'icon', id: 'menu-plus')
         .input_form__column__input_name
-          = form.collection_select :name, @foods, :id, :food, prompt: '選択してください'
+          = form.collection_select :names, @foods, :id, :food, {prompt: '選択してください'}, {name: 'menu[names][]'}
         .input_form__column__box
     .calculate_box
       .calculate_box__title
-        %h2 Protain Total
-        %h2 Fat Total
-        %h2 Carbohydrate Total
-        %h2 Total Calory
+        %h2 タンパク質 合計
+        %h2 脂質 合計
+        %h2 炭水化物 合計
+        %h2 総カロリー
       .calculate_box__result
         .calculate_box__result--protain
           %p --- kCal
@@ -29,5 +29,5 @@
         .calculate_box__result--form
 
     .bottom_menu_content
-      = form.submit "Menu Create", class: "btn"
-      = link_to "Cancel", menus_path, class: "btn"
+      = form.submit "メニュー作成", class: "btn"
+      = link_to "キャンセル", menus_path, class: "btn"
