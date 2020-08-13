@@ -15,6 +15,15 @@ class ManagementsController < ApplicationController
     p = []
     f = []
     c = []
+    @detail = []
+    
+    # 1ヶ月間の記録
+    for i in 1..31 do
+      last = Log.where(date: Date.today - i)
+      last.each do |d|
+        @detail << d
+      end
+    end 
 
     # カロリーの計算と表示
     @cal.each do |cal|
