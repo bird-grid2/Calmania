@@ -1,44 +1,47 @@
-.top-managements
-  .top-managements__left-contents
-    .top-managements__left-contents--title
-      %h1 BMI
-    .top-managements__right-contents--value
-      %h3 25.0
-  .top-managements__right-contents
-    .top-managements__right-contents-title
-      %h1 Weight
-    .top-managements__right-contents--value
-      %h3 65.9 kg
-    .top-managements__right-contents-title
-      %h1 BFP
-    .top-managements__right-contents--value
-      %h3 50.0%
-.middle-managements
-  .middle-managements__left-contents
-    .middle-managements__left-contents--main-title
-      .main-title
-        %h2 Total Calory
-      .total-value
-        %h3 4000 kcal
-    .middle-managements__left-contents--title
-      .titles
-        %h4 Total Protain
-      .value
-        %h6 1000 kcal
-    .middle-managements__left-contents--title
-      .titles
-        %h4 Total Fat
-      .value
-        %h6 1000 kcal
-    .middle-managements__left-contents--title
-      .titles
-        %h4 Total Carbohydrate
-      .value
-        %h6 1000 kcal
-  .middle-managements__right-contents
+.main_wrapper
+  .top-managements
+    .top-managements__left-contents
+      .top-managements__left-contents--title
+        %h1 BMI
+      .top-managements__right-contents--value
+        %h3 25.0
+    .top-managements__right-contents
+      .top-managements__right-contents-title
+        %h1 体重
+      .top-managements__right-contents--value
+        <h3>#{@today_weight.present? ? @today_weight : '---'}</h3><p>[kg]</p>
+      .top-managements__right-contents-title
+        %h1 体脂肪率
+      .top-managements__right-contents--value
+        <h3>#{@today_bfp.present? ? @today_bfp : '---'}</h3><p>[%]</p>
+  .middle-managements
+    .middle-managements__left-contents
+      .middle-managements__left-contents--main-title
+        .main-title
+          %h2 本日の摂取カロリー
+        .total-value
+          <h3>#{@today_cal}</h3><p>[kCal]</p>
+      .middle-managements__left-contents--title
+        .titles
+          %h4 たんぱく質の摂取量(本日)
+        .value
+          <h6>#{@today_protain}</h6><p>[kCal]</p>
+      .middle-managements__left-contents--title
+        .titles
+          %h4 脂質の摂取量(本日)
+        .value
+          <h6>#{@today_fat}</h6><p>[kCal]</p>
+      .middle-managements__left-contents--title
+        .titles
+          %h4 炭水化物の摂取量(本日)
+        .value
+          <h6>#{@today_carb}</h6><p>[kCal]</p>
+    .middle-managements__right-contents
+      .middle-managements__right-contents__title
 
-.bottom-management
-  .bottom-management__btn
-    = link_to 'Graph', graphs_path, class: 'btn'
-  .bottom-management__btn
-    = link_to 'Logs', logs_path, class: 'btn'
+
+  .bottom-management
+    .bottom-management__btn
+      = link_to 'グラフ描画', graphs_path, class: 'btn'
+    .bottom-management__btn
+      = link_to '記録', logs_path, class: 'btn'

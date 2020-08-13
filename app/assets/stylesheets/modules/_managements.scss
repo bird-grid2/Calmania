@@ -1,122 +1,121 @@
-.top-managements{
-  height: 200px;
-  width: 100vw;
-  background-color: aquamarine;
-  box-shadow: 1px 5px 1px 1px slategray;
-  display: flex;
-  &__left-contents{
-    width: 50%;
-    padding: 30px;
+.main_wrapper {
+  @include wrapper;
+  .top-managements{
+    height: 200px;
+    width: 100%;
+    background-color: aquamarine;
+    box-shadow: 1px 5px 1px 1px slategray;
     display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-  }
-  &__right-contents{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-  }
-}
-
-.middle-managements{
-  height: calc(100vh - 300px);
-  width: 100vw;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  text-align: center;
-  &__left-contents{
-    padding: 5px;
-    height: 100%;
-    width: 50%;
-    &--main-title{
-      height: 90px;
-      margin: 25px 0px;
-      background-color: deepskyblue;
+    h1 {
+      display: block;
+      color: #ffffff;
+      font-size: 45px;
+      width: 100%;
+      line-height: 50px;  
     }
-    &--title{
-      height: 60px;
-      margin-bottom: 25px;
-      background-color: deepskyblue;
+    &__left-contents{
+      width: 50%;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+    &__right-contents{
+      width: 50%;
+      text-align: center;
+      &--value {
+        @include h3;
+        @include p;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
-}
 
-.bottom-management{
-  height: 100px;
-  width: 100vw;
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  align-items: center;
-  &__btn{
-    height: 50px;
-    width: 150px;
-    background-color: gold;
+  .middle-managements{
+    height: calc(100% - 300px);
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-items: center;
+    text-align: center;
+    &__left-contents{
+      padding: 5px;
+      height: 100%;
+      width: 30%;
+      &--main-title{
+        height: 20%;
+        margin: 0 0 25px 0;
+        background-color: deepskyblue;
+        .main-title {
+          height: 35%;
+          @include h2;
+        }
+        .total-value {
+          @include h3;
+          @include p;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      &--title{
+        height: 20%;
+        margin-bottom: 25px;
+        background-color: deepskyblue;
+        .titles {
+          height: 40%;
+          @include h4;
+        }
+        .value {
+          @include h6;
+          @include p;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60%;
+        }
+      }
+    }
+    &__right-contents {
+      width: 70%;
+      height: 100%;
+      background-color: plum;
+    }
+  }
+
+  .bottom-management{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
     align-items: center;
-    border-radius: 10px;
-    .btn {
-        display: block;
-        line-height: 45px;
-        font-size: 20px;
-        font-family: 'Lucida Sans Unicode';
-        color: white;
+    &__btn{
+      height: 50px;
+      width: 150px;
+      background-color: gold;
+      align-items: center;
+      border-radius: 10px;
+      .btn {
+          display: block;
+          line-height: 45px;
+          font-size: 20px;
+          font-family: 'Lucida Sans Unicode';
+          color: white;
+      }
     }
   }
-}
-
-h1 {
-  display: block;
-  color: #ffffff;
-  font-size: 45px;
-  font-family: 'Lucida Sans Unicode';
-  width: 100%;
-  line-height: 50px;  
-}
-
-h2 {
-  display: block;
-  line-height: 45px;
-  font-size: 20px;
-  font-family: 'Lucida Sans Unicode';
-  color: white;
-}
-
-h3 {
-  display: block;
-  color: #ffffff;
-  font-size: 30px;
-  font-family: 'Lucida Sans Unicode';
-  line-height: 50px;
-}
-
-h4 {
-  display: block;
-  font-size: 18px;
-  font-family: 'Lucida Sans Unicode';
-  color: #ffffff;
-  line-height: 30px;
-}
-
-h6 {
-  display: block;
-  font-size: 25px;
-  font-family: 'Lucida Sans Unicode';
-  color: #ffffff;
-  line-height: 30px;
-}
-
-footer {
-  height: 1.2em;
-  width: 100vw;
-  background-color: mediumslateblue;
-  font-size: 15px;
-  color: white;
-  position: absolute;
-  bottom: 0;
-  text-align: center;
+  footer {
+    height: 1.2em;
+    width: 100%;
+    background-color: mediumslateblue;
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+  }
 }
