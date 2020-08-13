@@ -37,7 +37,26 @@
         .value
           <h6>#{@today_carb}</h6><p>[kCal]</p>
     .middle-managements__right-contents
-      .middle-managements__right-contents__title
+      .upper-info
+        %table
+          %tr
+            %th.table-title 記録日
+            %th.table-title 体重 [kg]
+            %th.table-title 体脂肪率 [%]
+            %th.table-title 総カロリー [kCal]
+            %th.table-title コメント
+          - @cal.each do |cal|
+            %tr
+              %td.table-item
+                = cal.date
+              %td.table-item
+                = cal.weight
+              %td.table-item
+                = cal.bfp
+              %td.table-item
+                = cal.total_cal
+              %td.table-item
+                = cal.description
 
 
   .bottom-management

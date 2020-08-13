@@ -7,6 +7,7 @@ class ManagementsController < ApplicationController
     require 'Date'
     date = Date.today
     @cal = Log.where(date: Date.today)
+    gon.today = @cal
     total = []
     weight = []
     bfp = []
