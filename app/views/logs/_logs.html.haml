@@ -1,44 +1,48 @@
-.upper-content
-  .input_height Height
-  %p 175
-  .input_weight Weight
-  %p 80
-
-.input-form
-  .menu_columns
-    .input_name
-      豚の角煮
-    .show_cal
-      1600 kcal
-    .show_Protain
-      600 kcal
-    .show_Fat
-      400 kcal
-    .show_Carbohydrate
-      600 kcal
-  .menu_columns
-    .input_name
-      味噌汁
-    .show_cal
-      300 kcal
-    .show_Protain
-      10 kcal
-    .show_Fat
-      150 kcal
-    .show_Carbohydrate
-      140 kcal
-  .menu_columns
-    .input_name
-      ご飯
-    .show_cal
-      400 kcal
-    .show_Protain
-      1 kcal
-    .show_Fat
-      49 kcal
-    .show_Carbohydrate
-      350 kcal
-    
-.bottom-content
-  = link_to "Logs Create", logs_path, method: :post, class: "btn"
-  = link_to "Cancel", logs_path, class: "btn"
+.logs_wrapper
+  = form_with model: log, local: true do |form|
+    .input-form
+      .upper_content
+        .input_column
+          %p 記録日 :
+          = form.date_field :date, class: 'input_box'
+        .input_column
+          %p 体重 [kg] : 
+          = form.number_field :weight, step: '0.1', class: 'input_box'
+        .input_column
+          %p 体脂肪率 [%] : 
+          = form.number_field :bfp, step: '0.1', class: 'input_box'
+      .comment_box
+        %p コメント : 
+        = form.text_area :description, class: 'comment'
+      .menu_columns
+        .menu_columns__col
+          .menu_columns__col__label
+            =icon('fas', 'plus-circle', class: 'icon', id: 'menu-plus')
+          .input_name
+            = form.collection_select :menu_numbers, @menus, :id, :menu, {prompt: 'メニューを選択して下さい'}, { name: 'log[menu_numbers][]'}
+          .input_name_box
+        
+    .bottom_content
+      .show_calory
+        .show_calory--protain
+          %h2 タンパク質 合計
+          .label
+            %h3 ----
+            %p [kCal]
+        .show_calory--fat
+          %h2 脂質 合計
+          .label
+            %h3 ----
+            %p [kCal]
+        .show_calory--carbohydrate
+          %h2 炭水化物 合計
+          .label
+            %h3 ----
+            %p [kCal]
+        .show_calory--total
+          %h2 総カロリー
+          .label
+            %h3 ----
+            %p [kCal]
+      = form.submit "ログ作成", class: "btn"
+      = link_to "キャンセル", logs_path, class: "btn"

@@ -29,8 +29,10 @@
 
 
 # problem
-  - menuページで、編集、削除機能が実装できていない(間に合えば実装予定)
-  - editメニューでfoodを選択できない(恐らくidsで配列にすればできるか？)
+  - メニュー・ログ作成ページでインクリメンタルサーチできない
+  - メニュー・ログ作成ページでマイナスボタン押すと、カロリー引き算できない(目星はついているので、後で実装予定)
+  - メニュー・ログ作成ページで編集、削除機能が実装できていない(間に合えば実装予定)
+  - 
 
 # CaLmania DB設計
 
@@ -40,70 +42,38 @@
 |nickname|string|null: false|
 |password|string|null: false|
 |height|double||
-|weight|double||
-|Protein_rate|double||
-|Fat_rate|double||
-|Carbohydrate_rate|double||
+|ideal_protain_rate|double||
+|ideal_fat_rate|double||
+|ideal_carbohydrate_rate|double||
 ### Association
-- has_many :managements
-- has_many :logs
-
-## managementsテーブル
-|Colmun|Type|Option|
-|-------|----|------|
-|created_at|date|null: flase|
-|body_mass_index|double||
-|body_fat_parcentage|double||
-|total_protain|integer||
-|total_fat|integer||
-|total_carbohydrate|integer||
-|user|references|null: false, foreign_key: true|
-|log|references|null: false, foreign_key: true|
-
-### Association
-- belongs_to :user
-- has_many :logs
+- has_many :logs, dependent: :destroy
 
 ## logsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|created_at|date|null: false|
-|menu|string|null: false|
-
+|date|date|null: false|
+|weight|decimal|precision: 4, scale: 1|
+|bfp|decimal|precision: 3, scale: 1|
+|total_cal|decimal|precision: 5, scale: 1|
+|description|text||
+|menu_numbers|string|array: true|
+|user|references|foreign_key: true, on_delete: :cascade|
 ### Association
 - belongs_to :user
-- belongs_to :management
-- has_many :logs_menus
-- has_many :menus, thorough: :logs_menus
-
-## logs_menusテーブル
-|Column|Type|Options|
-|------|----|-------|
-|log|references|null: false, foreign_key: true|
-|menu|references|null: false, foreign_key: true|
-### Association
-- belongs_to :log
-- belongs_to :menu
+- has_many :menus
 
 ## menusテーブル
 |Colmun|Type|Option|
 |-------|----|------|
 |menu|string|null: false|
-|mass|double|null: false|
+|names|string|array: true, null: false|
+|masses|string|array: true, null: false|
+|total_protain|decimal|precision: 5, scale: 1|
+|total_fat|decimal|precision: 5, scale: 1|
+|total_carbohydrate|decimal|precision: 5, scale: 1|
 ### Association
-- has_many :logs_menus
-- has_many :logs, through: :logs_menus
-- has_many :menus_foods
-- has_many :foods, through: :menus_foods
-
-## menus_foodsテーブル
-|Column|Type|Options|
-|------|----|-------|
-|menu|references|null: false, foreign_key: true|
-|food|references|null: false, foreign_key: true|
-### Association
-- belongs_to :food
-- belongs_to :management
+- belongs_to :log
+- has_many :foods
 
 ## foodsテーブル
 |Colmun|Type|Option|
@@ -113,5 +83,4 @@
 |fat|double|null: false|
 |carbohydrate|double|null: false|
 ### Associtaion
-- has_many :menus_foods
-- has_many :menus, through: :menus_foods
+- belongs_to :menu

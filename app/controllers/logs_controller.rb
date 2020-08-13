@@ -3,11 +3,25 @@ class LogsController < ApplicationController
 
   def new
     @log = Log.new
+    @menus = Menu.all
+    
+    menu =[]
+    
+    @menus.each_with_index do |log|
+      menu << log
+    end
+    
+    gon.menu = menu 
   end
 
   def create
     @log = Log.new(log_params)
-    @log.save
+
+    if @log.save
+      redirect_to logs_path
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def index
@@ -36,7 +50,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:log)
+      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
     end
 
     def set_log

@@ -1,121 +1,160 @@
-.wrapper{
-  height: 100vh;
-  width: 100vw;
-  background: image-url('image.jpg');  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.logs_wrapper{
+  @include wrapper;
   .upper-info{
-    height: 80vh;
-    width: 80vw;
+    height: 80%;
+    width: 100%;
     background-color: darkgreen;
     color: white;
-    overflow: scroll;
+    overflow-y: auto;
     display: block;
     text-align: center;
-    border: ridge 30px brown;
+    border: ridge 5px $maincolor;
     table {
+      width: 100%;
+      height: 100%;
       tr {
         display: block;
         display: flex;
-        margin-right: 20px;
         .table-title{
           display: block;
           text-align: center;
           height: 50px;
-          width: 100px;
+          width: 20%;
           font-size: 20px;
-          font-family: 'Lucida Sans Unicode';
           line-height: 50px;
-          margin: 0px 30px;
         }
         .table-item{
           display: block;
           height: 50px;
-          width: 100px;
+          width: 20%;
           font-size: 15px;
-          font-family: 'Lucida Sans Unicode';
           line-height: 50px;
-          margin: 0px 30px;
         }
       }
     }
   }
-  .bottom-info{
-    height: 10vh;
-    width: 80vw;
-    display: flex;
-    justify-content: flex-end;
-    padding: 15px 0px;
-    .fas{
-      width: 30px;
-      color: deepskyblue;
-      font-size: 30px;
-      margin-left: 30px;
-      text-align: center;
-      line-height: 40px;
-    }
-  }
-  .upper-content{
-    height: 30%;
-    width: 90%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    .input-height{
-      height: 60%;
-      width: 30%;
-      background-color: tomato;
-    }
-    .input-weight{
-      height: 60%;
-      width: 30%;
-      background-color: lightgray;
-    }
-  }
-  .input-form{
-    height: 60%;
-    width: 90%;
-    .menu_columns{
-      height: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .input-name{
-        width: auto;
-        background-color: lightskyblue;
-      }
-      .show_cal{
-        width: auto;
-        background-color: maroon;
-      }
-      .show_protain{
-        width: auto;
-        background-color: mediumslateblue;
-      }
-      .show_fat{
-        width: auto;
-        background-color: midnightblue;
-      }
-      .show_carbohydrate{
-        width: auto;
-        background-color: mintcream;
-      }
-    }
-  }
-  .bottom_content {
-    height: 10%;
+  @include bottom-info;
+  form {
+    height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .btn{
-      height: 20px;
-      width: 20px;
-      background-color: coral;
-      margin-left: 15px;
+    .input-form{
+      height: 90%;
+      width: 100%;
+      .upper_content {
+        display: flex;
+        align-items: center;
+        height: 10%;
+        width: 100%;
+        .input_column{
+          height: 100%;
+          width: 30%;
+          display: flex;
+          p {
+            display: block;
+            line-height: 60px;
+          }
+          .input_box{
+            height: 50%;
+            margin: 5% 0 5% 5%;
+            border: inset 2px rgb(118, 118, 118);
+          }
+        }
+      }
+      .comment_box {
+        height: 10%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        p {
+          display: block;
+          line-height: 60px;
+          margin-right: 10px;
+        }
+        .comment {
+          height: 60%;
+          width: 90%;
+        }
+      }
+      .menu_columns{
+        height: 70%;
+        overflow-y: auto;
+        &__col{
+          display: flex;
+          width: 100%;
+          height: 20%;
+          &__label {
+            width: 2%;
+            margin: auto 0;
+            i {
+              display: block;
+              margin: 5px 0px;
+              color: $maincolor;
+            }
+          }
+          .input_name{
+            width: 23%;
+            #log_menu_numbers {
+              height: 30%;
+            }
+          }
+          .input_name_box {
+            display: flex;
+            width: 75%;
+            height: 100%;
+            font-size: 20px;
+            .show_protain {
+              @include cal_area
+            }
+            .show_fat {
+              @include cal_area
+            }
+            .show_carbohydrate{
+              @include cal_area
+            }
+            .show_cal{
+              @include cal_area
+            }
+          }
+        }
+      }
+    }
+    .bottom_content {
+      height: 10%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .show_calory{
+        width: 60%;
+        height: 100%;
+        display: flex;
+        background-color: white;
+        border: double 3px $maincolor;
+        &--protain{
+          @include bottom_cal_area;
+        }
+        &--fat {
+          @include bottom_cal_area;
+        }
+        &--carbohydrate {
+          @include bottom_cal_area;
+        }
+        &--total {
+          @include bottom_cal_area;
+        }
+      }
+      .btn{
+        height: 60%;
+        width: 15%;
+        color: white;
+        background-color: $maincolor;
+        text-align: center;
+        font-size: 20px;
+        line-height: 40px;
+        margin-left: 15px;
+        border: inset 2px rgb(118, 118, 118);
+      }
     }
   }
-  @include bottom-info
 }

@@ -1,30 +1,32 @@
-.wrapper
+.logs_wrapper
   .upper-info
     %table
       %tr
-        %th.table-title Date
-        %th.table-title Menu
-        %th.table-title Weight
-        %th.table-title BFP
-        %th.table-title Total Cal
-      %tr
-        %td.table-item
-        -#  = @logs.created_at
-        %td.table-item
-        -#  = @logs.log_name
-        %td.table-item
-        -#  = @logs.weight
-        %td.table-item
-        -#  = @logs.bfp
-        %td.table-item
-        -#  = @logs.total_cal
+        %th.table-title 記録日
+        %th.table-title 体重 [kg]
+        %th.table-title 体脂肪率 [%]
+        %th.table-title 総カロリー [kCal]
+        %th.table-title コメント
+      - @logs.each do |log|
+        %tr
+          %td.table-item
+            = log.date
+          %td.table-item
+            = log.weight
+          %td.table-item
+            = log.bfp
+          %td.table-item
+            = log.total_cal
+          %td.table-item
+            = log.description
 
   .bottom-info
-    = link_to root_path, class: 'fas fa-home' do
-      = icon('fas', 'fa-home')
-    %span<>
-    = link_to menus_path, class: 'fas fa-th-list' do
-      = icon("fas", "fa-th-list")
-    %span<>
-    = link_to new_log_path, class: 'fas fa-plus-circle' do
-      = icon("fas", "fa-plus-circle")
+    .icon-box
+      = link_to root_path, class: 'fas fa-home' do
+        = icon('fas', 'fa-home')
+      %span<>
+      = link_to menus_path, class: 'fas fa-th-list' do
+        = icon("fas", "fa-th-list")
+      %span<>
+      = link_to new_log_path, class: 'fas fa-plus-circle' do
+        = icon("fas", "fa-plus-circle")
