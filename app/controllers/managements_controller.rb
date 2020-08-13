@@ -8,9 +8,9 @@ class ManagementsController < ApplicationController
     date = Date.today
     @cal = Log.where(date: Date.today)
     total = []
-    num = []
     weight = []
     bfp = []
+    num = []
     p = []
     f = []
     c = []
@@ -28,6 +28,29 @@ class ManagementsController < ApplicationController
         c << @menu.find[i].total_carbohydrate
       end
 
+      if weight.blank? 
+        For j in 1..7
+          last = Log.where(date: (Date.today - j)) 
+          if last.present?
+            last.each do |w|
+              weight << w.weight
+            end
+            break
+          end
+        end
+      end
+
+      if bfp.blank? 
+        For k in 1..7
+          last = Log.where(date: (Date.today - k)) 
+          if last.present?
+            last.each do |b|
+              bfp << b.bfp
+            end
+            break
+          end
+        end
+      end
     end
     @today_cal = total.sum.to_s
     @today_weight = weight.max.to_s
@@ -35,7 +58,6 @@ class ManagementsController < ApplicationController
     @today_protain = p.sum.to_s
     @today_fat = f.sum.to_s
     @today_carb = c.sum.to_s
-
   end
 
 end
