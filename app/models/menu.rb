@@ -1,7 +1,6 @@
 class Menu < ApplicationRecord
 
-  has_many :log_menus
-  has_many :logs, through: :log_menu
+  belongs_to :log
   has_many :foods
 
   def self.search(search)
