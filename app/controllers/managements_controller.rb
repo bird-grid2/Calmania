@@ -27,28 +27,30 @@ class ManagementsController < ApplicationController
         f << @menu.find[i].total_fat
         c << @menu.find[i].total_carbohydrate
       end
+    end
 
-      if weight.blank? 
-        For j in 1..7
-          last = Log.where(date: (Date.today - j)) 
-          if last.present?
-            last.each do |w|
-              weight << w.weight
-            end
-            break
+    # 過去１ヶ月間の最大体重を表示
+    if weight.blank? 
+      for j in 1..31 do
+        last = Log.where(date: Date.today - j) 
+        if last.present?
+          last.each do |w|
+            weight << w.weight
           end
+          break
         end
       end
+    end
 
-      if bfp.blank? 
-        For k in 1..7
-          last = Log.where(date: (Date.today - k)) 
-          if last.present?
-            last.each do |b|
-              bfp << b.bfp
-            end
-            break
+    # 過去１ヶ月間の最大体脂肪率を表示
+    if bfp.blank? 
+      for k in 1..31 do
+        last = Log.where(date: Date.today - k) 
+        if last.present?
+          last.each do |b|
+            bfp << b.bfp
           end
+          break
         end
       end
     end
@@ -59,5 +61,4 @@ class ManagementsController < ApplicationController
     @today_fat = f.sum.to_s
     @today_carb = c.sum.to_s
   end
-
 end
