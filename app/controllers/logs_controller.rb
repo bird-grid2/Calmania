@@ -20,7 +20,7 @@ class LogsController < ApplicationController
     if @log.save
       redirect_to logs_path
     else
-      render :log
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -50,7 +50,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menus: [])
+      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
     end
 
     def set_log

@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  $('body').on('change', '#log_menus', function(){
+  $('body').on('change', '#log_menu_numbers', function(){
     
     var id = $(this).val();
     var target = gon.menu[ id - 1 ]
@@ -137,7 +137,7 @@ $(document).on('turbolinks:load', function(){
                       <i class="fas fa-minus-circle icon" id="menu-minus"></i>
                     </div>
                     <div class="input_name">
-                      <select name="log[menus][]" id="log_menus"><option value="">メニューを選択して下さい</option>
+                      <select name="log[menu_numbers][]" id="log_menu_numbers"><option value="">メニューを選択して下さい</option>
                         ${sum(option)}
                       </select>
                     </div>

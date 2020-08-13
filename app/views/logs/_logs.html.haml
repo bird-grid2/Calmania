@@ -1,5 +1,5 @@
 .logs_wrapper
-  = form_with model: @log, local: true do |form|
+  = form_with model: log, local: true do |form|
     .input-form
       .upper_content
         .input_column
@@ -19,7 +19,7 @@
           .menu_columns__col__label
             =icon('fas', 'plus-circle', class: 'icon', id: 'menu-plus')
           .input_name
-            = form.collection_select :menus, @menus, :id, :menu, {prompt: 'メニューを選択して下さい'}, { name: 'log[menus][]'}
+            = form.collection_select :menu_numbers, @menus, :id, :menu, {prompt: 'メニューを選択して下さい'}, { name: 'log[menu_numbers][]'}
           .input_name_box
         
     .bottom_content

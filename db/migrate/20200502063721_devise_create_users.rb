@@ -32,15 +32,16 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-      t.decimal :height, precision: 4, scale: 1
-      t.decimal :weight, precision: 3, scale: 1
-      t.integer :Protein_rate
-      t.integer :Fat_rate
-      t.integer :Carbohydrate_rate
+      t.decimal :body_mass_index,     precision: 3, scale: 1
+      t.decimal :body_fat_parcentage, precision: 4, scale: 3
+      t.integer :ideal_protain_rate
+      t.integer :ideal_fat_rate
+      t.integer :ideal_carbohydrate_rate
       t.timestamps null: false
     end
 
     add_index :users, :nickname,             unique: true
+    add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
