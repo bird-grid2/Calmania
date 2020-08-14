@@ -194,3 +194,29 @@
   color: #ffffff;
   line-height: 30px;
 }
+
+@mixin pop {
+  display: none;
+  width: 120px;
+  padding: 16px;
+  border-radius: 5px;
+  background: $maincolor;
+  color: #fff;
+  font-weight: bold;
+}
+
+@mixin after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 40px;
+  top: -20px;
+  margin-left: 10px;
+  border: solid transparent;
+  transform: rotate(180deg);
+  border-color: rgba(51, 204, 153, 0);
+  border-top-color: $maincolor;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}

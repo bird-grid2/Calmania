@@ -126,19 +126,66 @@
     justify-content: space-around;
     text-align: center;
     align-items: center;
-    &__btn{
-      height: 50px;
-      width: 150px;
-      background-color: gold;
-      align-items: center;
-      border-radius: 10px;
-      .btn {
-          display: block;
-          line-height: 45px;
-          font-size: 20px;
-          font-family: 'Lucida Sans Unicode';
-          color: white;
-      }
+    .fas {
+      display: block;
+      font-size: 40px;
+      color: $maincolor;
+      position: relative;
+    }
+    .far {
+      width: 10px;
+      display: block;
+      font-size: 40px;
+      color: $maincolor;
+      position: relative;
+    }
+    .pop1 {
+      position: absolute;
+      bottom: 18px;
+      left: 65px;
+      @include pop;
+    }
+    .pop2 {
+      position: absolute;
+      bottom: 12px;
+      left: 295px;
+      @include pop;
+    }
+    .pop3 {
+      position: absolute;
+      bottom: 0px;
+      left: 550px;
+      @include pop;
+    }
+    .pop4 {
+      position: absolute;
+      bottom: 15px;
+      left:815px;
+      @include pop;
+    }
+    .pop1:after {
+      @include after;
+    }
+    .pop2:after {
+      @include after;
+    }
+    .pop3:after {
+      @include after;
+    }
+    .pop4:after {
+      @include after;
+    }
+    .far:hover + .pop1 {
+      display: block;
+    }
+    .fas:hover + .pop2 {
+      display: block;
+    }
+    .fas:hover + .pop3 {
+      display: block;
+    }
+    .fas:hover + .pop4 {
+      display: block;
     }
   }
   footer {

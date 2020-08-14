@@ -64,7 +64,18 @@
 
 
   .bottom-management
-    .bottom-management__btn
-      = link_to 'グラフ描画', graphs_path, class: 'btn'
-    .bottom-management__btn
-      = link_to '記録', logs_path, class: 'btn'
+    = link_to graphs_path do
+      = icon('far', 'chart-bar')
+      %p.pop1 グラフ描画
+    %span<>
+    = link_to logs_path do
+      = icon('fas', 'file-alt')
+      %p.pop2 ログ記録
+    %span<>
+    = link_to logs_path do
+      = icon('fas', 'edit')
+      %p.pop3 ログイン情報編集
+    %span<>
+    = link_to logs_path do
+      = icon('fas', 'sign-out-alt')
+      %p.pop4 ログアウト
