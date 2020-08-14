@@ -5,13 +5,13 @@
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .field
       = f.label :nickname, value: "ニックネーム", class: 'log-in'
-      = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム"
+      = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", required: true
     .field
       = f.label :email, value: "メールアドレス", class: 'log-in'
-      = f.email_field :email, placeholder: "メールアドレス"
+      = f.email_field :email, placeholder: "メールアドレス", required: true
     .field
       = f.label :password, value: "パスワード", class: 'log-in'
-      = f.password_field :password, placeholder: "パスワード入力"
+      = f.password_field :password, placeholder: "パスワード入力", required: true
     - if devise_mapping.rememberable?
       .check_field
         = f.check_box :remember_me

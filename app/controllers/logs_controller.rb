@@ -50,7 +50,7 @@ class LogsController < ApplicationController
   private
 
     def log_params
-      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
+      params.require(:log).permit( :date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id, log_id: params[:log_id])
     end
 
     def set_log
