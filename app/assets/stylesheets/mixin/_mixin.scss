@@ -70,17 +70,22 @@
       }
     }
     .icon-box{
+      height: 60%;
       display: flex;
-      .fas{
-        font-size: 30px;
-        line-height: 40px;
-        color: deepskyblue;
+      justify-content: space-around;
+      align-items: center;
+      position: relative;
+      a {
         margin-left: 10px;
       }
+      .fas{
+        display: block;
+        font-size: 30px;
+        color: deepskyblue;
+      }     
     }
   }
 }
-
 @mixin cal_area {
   width: 25%;
   background-color: $maincolor;

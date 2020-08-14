@@ -1,24 +1,24 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :nickname
-    %br/
-    = f.text_field :nickname, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
+.user_wrapper
+  %header
+    %h2 新規作成
+    = image_tag 'b_ornament_146_0S.png'
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .field
+      = f.label :nickname, class: 'label', value: 'ニックネーム'
+      = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム"
+    .field
+      = f.label :email, class: 'label', value: 'メールアドレス'
+      = f.email_field :email, placeholder: "メールアドレス"
+    .field
+      .field-box
+        = f.label :password, class: 'password', value: 'パスワード'
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length}字以上入力)
+      = f.password_field :password, placeholder: "パスワード入力"
+    .field
+      = f.label :password_confirmation, class: 'label', value: '確認入力'
+      = f.password_field :password_confirmation, placeholder: "パスワード入力(確認)"
+    .actions
+      = f.submit "新規作成"

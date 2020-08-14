@@ -24,8 +24,12 @@
     = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
       = f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input'
     .icon-box
-      = link_to root_path, class: 'fas fa-home' do
-        = icon('fas', 'fa-home')
+      = link_to root_path do
+        = icon('fas', 'home')
       %span<>
-      = link_to new_menu_path, class: 'fas fa-plus-circle' do
-        = icon("fas", "fa-plus-circle")
+      = link_to new_menu_path do
+        = icon('fas', 'plus-circle')
+      %span<>
+      = link_to destroy_user_session_path, method: :delete do
+        = icon('fas', 'sign-out-alt')
+    
