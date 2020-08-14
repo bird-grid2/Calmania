@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
+    add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation ]
+    devise_parameter_sanitizer.permit(:sign_up, keys: add_list)
+    devise_parameter_sanitizer.permit(:account_update, keys: add_list)
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :password])
   end  
 end

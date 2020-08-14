@@ -4,7 +4,11 @@
       .top-managements__left-contents--title
         %h1 BMI
       .top-managements__right-contents--value
-        %h3 25.0
+        <h3>#{@BMI.present? ? @BMI : '---'}</h3>
+      .top-managements__left-contents--title
+        %h1 適正体重
+      .top-managements__right-contents--value
+        <h3>#{@weight.present? ? @weight : '---'}</h3><p>[kg]</p>
     .top-managements__right-contents
       .top-managements__right-contents-title
         %h1 体重

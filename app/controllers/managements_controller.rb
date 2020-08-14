@@ -3,8 +3,10 @@ class ManagementsController < ApplicationController
   def index
     @logs = Log.all
     @menus = Menu.all
+    @user = User.find(current_user.id)
     
     require 'Date'
+    require 'bigdecimal'
     date = Date.today
     @cal = Log.where(date: Date.today)
     gon.today = @cal
@@ -67,5 +69,8 @@ class ManagementsController < ApplicationController
     @today_protain = p.sum.to_s
     @today_fat = f.sum.to_s
     @today_carb = c.sum.to_s
+    @BMI = BigDecimal((weight.max / ((@user.height/100) ** 2)).to_s).ceil(1)
+    @weight = BigDecimal((((@user.height/100) ** 2) * 22).to_s).ceil(2) 
+
   end
 end
