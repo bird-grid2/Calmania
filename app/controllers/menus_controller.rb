@@ -51,7 +51,7 @@ class MenusController < ApplicationController
 
   private
   def menu_params
-    params.require(:menu).permit(:menu, :total_protain, :total_fat, :total_carbohydrate, names: [], masses:[])
+    params.require(:menu).permit(:menu, :total_protain, :total_fat, :total_carbohydrate, names: [], masses: [])
   end
 
   def set_menu
