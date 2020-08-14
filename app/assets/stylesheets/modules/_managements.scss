@@ -1,21 +1,21 @@
 .main_wrapper {
   @include wrapper;
   .top-managements{
-    height: 200px;
+    height: 20rem;
     width: 100%;
     background-color: aquamarine;
-    box-shadow: 1px 5px 1px 1px slategray;
+    box-shadow: 0.1rem 0.5rem 0.1rem 0.1rem slategray;
     display: flex;
     h1 {
       display: block;
       color: #ffffff;
-      font-size: 45px;
+      font-size: 4.5rem;
       width: 100%;
-      line-height: 50px;  
+      line-height: 5rem;  
     }
     &__left-contents{
       width: 50%;
-      padding: 30px;
+      padding: 3rem;
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -42,12 +42,12 @@
     justify-items: center;
     text-align: center;
     &__left-contents{
-      padding: 5px;
+      padding: 0.5rem;
       height: 100%;
       width: 30%;
       &--main-title{
         height: 20%;
-        margin: 0 0 25px 0;
+        margin: 0 0 2.5rem 0;
         background-color: deepskyblue;
         .main-title {
           height: 35%;
@@ -63,7 +63,7 @@
       }
       &--title{
         height: 20%;
-        margin-bottom: 25px;
+        margin-bottom: 2.5rem;
         background-color: deepskyblue;
         .titles {
           height: 40%;
@@ -100,17 +100,17 @@
             .table-title{
               display: block;
               text-align: center;
-              height: 50px;
+              height: 5rem;
               width: 20%;
-              font-size: 15px;
-              line-height: 50px;
+              font-size: 1.5rem;
+              line-height: 5rem;
             }
             .table-item{
               display: block;
-              height: 50px;
+              height: 5rem;
               width: 20%;
-              font-size: 15px;
-              line-height: 50px;
+              font-size: 1.5rem;
+              line-height: 5rem;
               overflow-x: auto;
             }
           }
@@ -120,7 +120,7 @@
   }
 
   .bottom-management{
-    height: 100px;
+    height: 10rem;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -128,39 +128,39 @@
     align-items: center;
     .fas {
       display: block;
-      font-size: 40px;
+      font-size: 4rem;
       color: $maincolor;
       position: relative;
     }
     .far {
-      width: 10px;
+      width: 1rem;
       display: block;
-      font-size: 40px;
+      font-size: 4rem;
       color: $maincolor;
       position: relative;
     }
     .pop1 {
       position: absolute;
-      bottom: 18px;
-      left: 65px;
+      bottom: 1.8rem;
+      left: 6.5rem;
       @include pop;
     }
     .pop2 {
       position: absolute;
-      bottom: 12px;
-      left: 295px;
+      bottom: 1.2rem;
+      left: 29.5rem;
       @include pop;
     }
     .pop3 {
       position: absolute;
       bottom: 0px;
-      left: 550px;
+      left: 55rem;
       @include pop;
     }
     .pop4 {
       position: absolute;
-      bottom: 15px;
-      left:815px;
+      bottom: 1.5rem;
+      left:81.5rem;
       @include pop;
     }
     .pop1:after {
@@ -187,15 +187,5 @@
     .fas:hover + .pop4 {
       display: block;
     }
-  }
-  footer {
-    height: 1.2em;
-    width: 100%;
-    background-color: mediumslateblue;
-    font-size: 15px;
-    color: white;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
   }
 }
