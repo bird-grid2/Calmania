@@ -17,9 +17,10 @@ class MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     if @menu.save
-      redirect_to menus_path
+      redirect_to menus_path, notice: 'メニューを作成しました' 
     else
-      render :new
+      flash.now[:alert] = 'メニュー作成を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -40,13 +41,19 @@ class MenusController < ApplicationController
 
   def update
     if @menu.update
-      redirect_to log_menus_path
+      redirect_to menus_path, notice: 'メニューを更新しました'
     else
-      render :menus
+      flash.now[:alert] = 'メニュー更新を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
+    if @menu.destroy
+      redirect_to menus_path, notice 'メニューを削除しました'
+    else
+      flash.now[:alert] = 'メニュー削除を失敗しました'
+      redirect_back(fallback_location: root_path)
   end
 
   private

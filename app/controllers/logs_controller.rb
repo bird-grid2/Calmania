@@ -18,8 +18,9 @@ class LogsController < ApplicationController
     @log = Log.new(log_params)
 
     if @log.save
-      redirect_to logs_path
+      redirect_to logs_path, notice: 'ログを作成しました'
     else
+      flash.now[:alert] = 'ログの作成を失敗しました'
       redirect_back(fallback_location: root_path)
     end
   end
@@ -33,17 +34,19 @@ class LogsController < ApplicationController
 
   def destroy
     if @log.destroy 
-      redirect_to logs_path
+      redirect_to logs_path, notice: 'ログを削除しました'
     else
-      render :logs
+      flash.now[:alert] = 'ログ削除を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def update
     if @log.update 
-      redirect_to logs_path
+      redirect_to logs_path, notice: 'ログを更新しました'
     else
-      render :logs
+      flash.now[:alert] = 'ログ更新を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 

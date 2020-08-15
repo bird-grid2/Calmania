@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       redirect_to root_path, notice: 'ユーザー情報を削除しました'
     else
       flash.now[:alert] = 'ユーザー情報削除に失敗しました'
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
   end
 
