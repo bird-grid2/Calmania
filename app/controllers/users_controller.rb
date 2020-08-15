@@ -3,11 +3,7 @@ class UsersController < ApplicationController
   def index
   end
 
-  def update
+  def junction
   end
-
-  def edit
-  end
-
 
 end

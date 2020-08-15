@@ -16,7 +16,7 @@
     }
   }
   .field {
-    height: 50%;
+    height: 30%;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -25,7 +25,7 @@
       display: block;
       text-align: end;
       margin-bottom: 1rem; 
-      margin: 3% 0;
+      margin: 2% 0;
       font-size: 2rem;
       line-height: 2.5rem;
     }
@@ -57,13 +57,29 @@
       display: block;
       height: 3rem;
       width: 20rem;
-      margin: 3% 0 3% 3%;
+      margin: 2% 0 2% 1%;
     }
   }
   .check_field {
     width: 60%;
     text-align: center;
     margin: 5% auto 0 auto;
+  }
+  .edit_label{
+    flex-direction: row;
+    text-align: center;
+    margin: auto 0;
+    label{
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    i {
+      display: block;
+    }
+    em {
+      display: block;
+    }
   }
   .actions {
     height: 10%;
@@ -72,8 +88,8 @@
     input {
       display: block;
       height: 5rem;
-      width: 10rem;
-      margin: 5% auto;
+      width: 20rem;
+      margin: 2% auto;
       color: white;
       background-color: $maincolor;
       font-size: 2rem;
@@ -92,6 +108,33 @@
       color: white;
       text-align: center;
       line-height: 3rem;
+      border: inset 2px rgb(118, 118, 118);
+    }
+  }
+  .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    .red-btn {
+      display: block;
+      height: 5rem;
+      width: 12rem;
+      color: white;
+      line-height: 5rem;
+      background-color: red;
+      border: inset 2px rgb(118, 118, 118);
+      margin-right: 10rem;
+    }
+    .btn {
+      display: block;
+      text-align: center;
+      line-height: 5rem;
+      height: 5rem;
+      width: 12rem;
+      background-color: $maincolor;
+      color: white;
       border: inset 2px rgb(118, 118, 118);
     }
   }
