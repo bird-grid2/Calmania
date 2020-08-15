@@ -16,14 +16,13 @@
     .field
       = f.label :height, value: '身長 [cm]' , class:'label'
       = f.number_field :height, autocomplete: "height", placeholder: '身長を入力(任意)'
+      = f.label :target_cal, value: '目標摂取カロリー' , class:'label'
+      = f.number_field :target_cal, autocomplete: "target_cal", placeholder: '目標摂取カロリー(任意)'
     .field
       = f.label :ideal_protain_rate, value: 'ＰＦＣバランス' , class:'label'
       = f.number_field :ideal_protain_rate, autocomplete: "ideal_protain_rate", placeholder: 'たんぱく質の摂取割合(任意)'
       = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
       = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
-    .field
-      = f.label :total_cal, value: '目標摂取カロリー' , class:'label'
-      = f.number_field :total_cal, autocomplete: "total_cal", placeholder: '目標摂取カロリー(任意)'
     .field
       .edit_label
         = f.label :password, value: '変更パスワード'
