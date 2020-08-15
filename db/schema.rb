@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
     t.integer "ideal_protain_rate"
     t.integer "ideal_fat_rate"
     t.integer "ideal_carbohydrate_rate"
+    t.integer "target_cal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -11,5 +11,7 @@
     .right_graph
       = image_tag 'test_3.png'
   .bottom-info
-    = link_to root_path, class: 'fas fa-home' do
-      = icon('fas', 'fa-home')
+    = link_to root_path do
+      = icon('fas', 'home')
+    = link_to destroy_user_session_path, method: :delete do
+      = icon('fas', 'sign-out-alt')

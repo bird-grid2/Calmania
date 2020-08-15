@@ -1,7 +1,7 @@
 class ManagementsController < ApplicationController
 
   def index
-    @logs = Log.all
+    @logs = Log.all.includes(:id).order(date: 'DESC')
     @menus = Menu.all
     @user = User.find(current_user.id)
     

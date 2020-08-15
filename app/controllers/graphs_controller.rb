@@ -8,46 +8,62 @@ class GraphsController < ApplicationController
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
     plt = PyCall.import_module('matplotlib.pyplot')
-
+    np = PyCall.import_module('numpy')
     os = PyCall.import_module('os')
 
     dirpath = 'app/assets/images/'
     
-    # データベース接続する
-    connection = PG::connect(host: "localhost", user: "yondo", dbname: "Calmania_development", port: "5432")
-    begin
-      result = connection.exec("SELECT * FROM User")
-    ensure
-      # データベースへのコネクションを切断する
-      connection.finish
+    result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
+    height = User.find(current_user.id).height
+
+    date = []
+    weight = []
+    total = []
+    fat = []
+    bmi = []
+
+    result.each do |w|
+      date << w.date.to_s
+      weight << w.weight.to_f
+      total << w.total_cal.to_i
+      fat << w.bfp.to_f
+      bmi << (w.weight / ((height / 100) ** 2)).to_f
     end
-    @user = result.find(params[:id])
-    
+
+    x = np.array(date)
+    y = np.array(weight)
+
     plt.title('Height')
     plt.xlabel('measurement date')
-    plt.ylabel('height [kg]')
-    plt.plot([70,60,50,110])
+    plt.ylabel('weight [kg]')
+    plt.plot(x,y)
     plt.savefig(os.path.join(dirpath, "test.png"))
     plt.close()
+
+    y = np.array(total)
 
     plt.title('Total Calory')
     plt.xlabel('measurement date')
     plt.ylabel('Calory [kCal]')
-    plt.plot([70,60,50,110])
+    plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_1.png"))
     plt.close()
+
+    y = np.array(fat)
     
     plt.title('Body Fat Percentage')
     plt.xlabel('measurement date')
     plt.ylabel('Body Fat [%]')
-    plt.plot([70,60,50,110])
+    plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_2.png"))
     plt.close()
+
+    y = np.array(bmi)
 
     plt.title('Body Mass Index')
     plt.xlabel('measurement date')
     plt.ylabel('BMI [-]')
-    plt.plot([70,60,50,110])
+    plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
   end
