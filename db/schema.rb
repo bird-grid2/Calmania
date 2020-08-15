@@ -58,8 +58,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.decimal "body_mass_index", precision: 3, scale: 1
-    t.decimal "body_fat_parcentage", precision: 4, scale: 3
+    t.decimal "height", precision: 4, scale: 1
     t.integer "ideal_protain_rate"
     t.integer "ideal_fat_rate"
     t.integer "ideal_carbohydrate_rate"

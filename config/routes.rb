@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'managements#index'
 
-  resources :users, only: [:edit, :index, :update]
-  resources :managements , only: :index  #, defaults: { format: 'json' }
+  resources :users, only: :index
+  resources :managements , only: :index
   resources :graphs , only: :index  #, defaults: { format: 'json' }
   resources :logs, except: :show do
-    
     member do
       get :edit
     end

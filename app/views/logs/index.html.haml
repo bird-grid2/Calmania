@@ -27,8 +27,11 @@
       = link_to root_path, class: 'fas fa-home' do
         = icon('fas', 'fa-home')
       %span<>
-      = link_to menus_path, class: 'fas fa-th-list' do
-        = icon("fas", "fa-th-list")
+      = link_to menus_path do
+        = icon("fas", "th-list")
       %span<>
-      = link_to new_log_path, class: 'fas fa-plus-circle' do
-        = icon("fas", "fa-plus-circle")
+      = link_to new_log_path do
+        = icon("fas", "plus-circle")
+      %span<>
+      = link_to destroy_user_session_path, method: :delete do
+        = icon('fas', 'sign-out-alt')

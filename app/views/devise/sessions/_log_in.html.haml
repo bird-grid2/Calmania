@@ -1,8 +1,0 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.hidden_field :nickname, value: "duo"
-    = f.hidden_field :email, value: "aaaaaa@google.com"
-    = f.hidden_field :password, value: "123456"
-  .actions
-    = f.submit "かんたんログイン"

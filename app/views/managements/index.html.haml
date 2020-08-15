@@ -4,7 +4,11 @@
       .top-managements__left-contents--title
         %h1 BMI
       .top-managements__right-contents--value
-        %h3 25.0
+        <h3>#{@BMI.present? ? @BMI : '---'}</h3>
+      .top-managements__left-contents--title
+        %h1 適正体重
+      .top-managements__right-contents--value
+        <h3>#{@weight.present? ? @weight : '---'}</h3><p>[kg]</p>
     .top-managements__right-contents
       .top-managements__right-contents-title
         %h1 体重
@@ -60,7 +64,19 @@
 
 
   .bottom-management
-    .bottom-management__btn
-      = link_to 'グラフ描画', graphs_path, class: 'btn'
-    .bottom-management__btn
-      = link_to '記録', logs_path, class: 'btn'
+    = link_to graphs_path do
+      = icon('far', 'chart-bar')
+      %p.pop1 グラフ描画
+    %span<>
+    = link_to logs_path do
+      = icon('fas', 'file-alt')
+      %p.pop2 ログ記録
+    %span<>
+    = link_to edit_user_registration_path do
+      = icon('fas', 'edit')
+      %p.pop3 ログイン情報編集
+    %span<>
+    = link_to destroy_user_session_path, method: :delete do
+      = icon('fas', 'sign-out-alt')
+      %p.pop4 ログアウト
+    

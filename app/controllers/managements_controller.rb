@@ -3,22 +3,23 @@ class ManagementsController < ApplicationController
   def index
     @logs = Log.all
     @menus = Menu.all
+    @user = User.find(current_user.id)
     
     require 'Date'
+    require 'bigdecimal'
     date = Date.today
     @cal = Log.where(date: Date.today)
     gon.today = @cal
     total = []
     weight = []
     bfp = []
-    num = []
     p = []
     f = []
     c = []
     @detail = []
     
     # 1ヶ月間の記録
-    for i in 1..31 do
+    for i in 0..30 do
       last = Log.where(date: Date.today - i)
       last.each do |d|
         @detail << d
@@ -30,12 +31,10 @@ class ManagementsController < ApplicationController
       total << cal.total_cal
       weight << cal.weight
       bfp << cal.bfp
-      
-      num << cal.menu_numbers
-      num.each do |i|
-        p << @menu.find[i].total_protain
-        f << @menu.find[i].total_fat
-        c << @menu.find[i].total_carbohydrate
+      cal.menu_numbers.each do |j|
+        p << @menus.find(j).total_protain
+        f << @menus.find(j).total_fat
+        c << @menus.find(j).total_carbohydrate
       end
     end
 
@@ -70,5 +69,10 @@ class ManagementsController < ApplicationController
     @today_protain = p.sum.to_s
     @today_fat = f.sum.to_s
     @today_carb = c.sum.to_s
+    
+    if @user.height.present? && weight.present?
+      @BMI = BigDecimal((weight.max / ((@user.height/100) ** 2)).to_s).ceil(1)
+      @weight = BigDecimal((((@user.height/100) ** 2) * 22).to_s).ceil(2) 
+    end
   end
 end
