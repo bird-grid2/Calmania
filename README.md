@@ -13,10 +13,9 @@
  スプレッドシートのupgrade版を実装する為、作成いたしました。
  
 # update information
- 現段階: トップページのサーバーサイド作業完了(BMI表示は除く)
- - viewが完全に作成できていないので、まずはview作成
- - サーバーサイド作業(user, graph)
- - graph情報の更新(x軸 , y軸, jsonで非同期通信)
+ - graph情報の更新(ウィンドウの表示)
+ - PFCバランスで摂取カロリー表示
+ - できれば、目標の線図を搭載
 
 # DEMO
  #### メニュー機能
@@ -30,8 +29,8 @@
 
 # problem
   - メニュー・ログ作成ページでインクリメンタルサーチできない
-  - メニュー・ログ作成ページでマイナスボタン押すと、カロリー引き算できない(目星はついているので、後で実装予定)
-  - メニュー・ログ作成ページで編集、削除機能が実装できていない(間に合えば実装予定)
+  - メニューのviewページでインクリメンタルサーチできない
+  - 引き算はできるが、floatのため誤差が生じる
 
 # CaLmania DB設計
 
@@ -39,13 +38,16 @@
 |Colmun|Type|Option|
 |-------|----|------|
 |nickname|string|null: false|
-|password|string|null: false|
-|height|double||
-|ideal_protain_rate|double||
-|ideal_fat_rate|double||
-|ideal_carbohydrate_rate|double||
+|email|string|null: false, defalult: ""|
+|encrypted_password|string|null: false, default: ""|
+|height|decimal|precision: 4, scale: 1|
+|ideal_protain_rate|integer||
+|ideal_fat_rate|integer||
+|ideal_carbohydrate_rate|integer||
+｜target＿cal｜integer｜｜
 ### Association
 - has_many :logs, dependent: :destroy
+- validates :nickname, presence: true, uniqueness: true
 
 ## logsテーブル
 |Colmun|Type|Option|
@@ -71,15 +73,15 @@
 |total_fat|decimal|precision: 5, scale: 1|
 |total_carbohydrate|decimal|precision: 5, scale: 1|
 ### Association
-- belongs_to :log
+- belongs_to :log, optional: true
 - has_many :foods
 
 ## foodsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
 |food|string|null: false|
-|protain|double|null: false|
-|fat|double|null: false|
-|carbohydrate|double|null: false|
+|protain_rate|decimal|null: false, precision: 6, scale: 5|
+|fat_rate|decimal|null: false, precision: 6, scale: 5|
+|carbohydrate_rate|decimal|null: false, precision: 6, scale: 5|
 ### Associtaion
 - belongs_to :menu
