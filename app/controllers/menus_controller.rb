@@ -50,10 +50,11 @@ class MenusController < ApplicationController
 
   def destroy
     if @menu.destroy
-      redirect_to menus_path, notice 'メニューを削除しました'
+      redirect_to menus_path, notice: 'メニューを削除しました'
     else
       flash.now[:alert] = 'メニュー削除を失敗しました'
       redirect_back(fallback_location: root_path)
+    end
   end
 
   private

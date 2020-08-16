@@ -1,5 +1,6 @@
 class LogsController < ApplicationController
   before_action :set_log, except: [ :new, :create, :index ]
+  before_action :move_to_index, only: [ :index, :search ]
 
   def new
     @log = Log.new
@@ -29,7 +30,30 @@ class LogsController < ApplicationController
     @logs = Log.all
   end
 
+  def search
+    @logs = Log.search(params[:keyword])
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
   def edit
+    @menus = Menu.all
+    menu = []
+    num = []
+
+    @menus.each_with_index do |log|
+      menu << log
+    end
+    gon.menu = menu 
+    
+    @log.menu_numbers.each do |log|
+      num << log
+    end
+    gon.edit = num
+
+    
   end
 
   def destroy
@@ -58,6 +82,10 @@ class LogsController < ApplicationController
 
     def set_log
       @log = Log.find(params[:id])
+    end
+
+    def move_to_index
+      redirect_to action: :index unless user_signed_in?
     end
 
 end

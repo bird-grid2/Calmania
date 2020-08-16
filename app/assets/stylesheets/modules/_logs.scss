@@ -18,17 +18,28 @@
         .table-title{
           display: block;
           text-align: center;
-          height: 50px;
-          width: 20%;
-          font-size: 20px;
-          line-height: 50px;
+          height: 5rem;
+          width: 18%;
+          font-size: 2rem;
+          line-height: 5rem;
+        }
+        .table-icon {
+          width: 10%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          .fas {
+            display: block;
+            color: white;
+            font-size: 2rem;
+          }
         }
         .table-item{
           display: block;
-          height: 50px;
-          width: 20%;
-          font-size: 15px;
-          line-height: 50px;
+          height: 5rem;
+          width: 18%;
+          font-size: 1.5rem;
+          line-height: 5rem;
         }
       }
     }
@@ -98,7 +109,7 @@
               height: 30%;
             }
           }
-          .input_name_box {
+          #box {
             display: flex;
             width: 75%;
             height: 100%;

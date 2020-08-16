@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  if(document.URL.match(/logs/)){
+  if(document.URL.match(/logs.new/)){
     $('body').on('change', '#log_menu_numbers', function(){
       
       var id = $(this).val();
@@ -129,6 +129,8 @@ $(document).on('turbolinks:load', function(){
         option.push(html);
       });
 
+      id = $('.menu_columns__col').length
+
       //挿入するHTMLの定義
       function addHTML(){
 
@@ -142,7 +144,7 @@ $(document).on('turbolinks:load', function(){
                           ${sum(option)}
                         </select>
                       </div>
-                      <div class="input_name_box"></div>
+                      <div class="input_name_box_${id}", id='box'></div>
                     </div>`
       
         return html;
