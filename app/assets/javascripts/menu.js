@@ -128,6 +128,8 @@ $(document).on('turbolinks:load', function(){
         var html = `<option value="${food.id}">${food.food}</option>`
         option.push(html);
       });
+
+      num = $('input_form__column').length - 1;
   
       function addHTML() {
         var html =  `<div class="input_form__column">
@@ -135,13 +137,13 @@ $(document).on('turbolinks:load', function(){
                         <i class="fas fa-plus-circle icon" id="menu-plus"></i>
                         <i class="fas fa-minus-circle icon" id="menu-minus"></i>
                       </div>
-                      <div class="input_form__column__input_name">
+                      <div class="input_form__column__input_name_${num}" id='name'>
                         <select name="menu[names][]" id="menu_names">
                           <option value="">選択してください</option>
                           ${sum(option)}
                         </select>
                       </div>
-                      <div class='input_form__column__box'>
+                      <div class='input_form__column__box_${num}' id='fbox'>
                       </div>
                     </div>`
         return html;
@@ -151,8 +153,44 @@ $(document).on('turbolinks:load', function(){
     
     });
   
+    //マイナスボタンの処理
     $('body').on('click', '#menu-minus', function(){
-      $(this).parent().parent().remove();
+
+      //何もしなければ、普通に消す or 引き算処理
+      if($(this).parent().next().children()[0].value == "" || $(this).parent().next().children().next().children().next()[0].value == ""){
+        $(this).parent().parent().remove();
+      }else{
+        target =  $(this).parent().next().next().children();
+        protain = Number(target[0].children[1].children[0].textContent);
+        fat = Number(target[1].children[1].children[0].textContent);
+        carb = Number(target[2].children[1].children[0].textContent);
+        total = protain + fat + carb;
+
+        refer_p = Number($('.calculate_box__result--protain').children()[0].textContent);
+        refer_f = Number($('.calculate_box__result--fat').children()[0].textContent);
+        refer_c = Number($('.calculate_box__result--carbohydrate').children()[0].textContent);
+        refer_t = refer_p + refer_f + refer_c
+
+        refer_p = refer_p - protain;
+        refer_f = refer_f - fat;
+        refer_c = refer_c - carb;
+        refer_t = refer_t - total; 
+
+        $('.calculate_box__result--protain').children()[0].textContent = Math.ceil(refer_p * 10) /10;
+        $('.calculate_box__result--fat').children()[0].textContent = Math.ceil(refer_f * 10) / 10;
+        $('.calculate_box__result--carbohydrate').children()[0].textContent = Math.ceil(refer_c * 10) / 10;
+        $('.calculate_box__result--total').children()[0].textContent = Math.ceil(refer_t * 10) / 10;
+
+        function formHTML(){
+          var html = `<input value="${Math.ceil(refer_p * 10)/10}" type="hidden" name="menu[total_protain]" id="menu_total_protain"></input>
+                      <input value="${Math.ceil(refer_f * 10)/10}" type="hidden" name="menu[total_fat]" id="menu_total_fat"></input>
+                      <input value="${Math.ceil(refer_c * 10)/10}" type="hidden" name="menu[total_carbohydrate]" id="menu_total_carbohydrate"></input>`
+          return html;
+        }
+        $('.calculate_box__result--form').children().remove();
+        $('.calculate_box__result--form').append(formHTML());
+        $(this).parent().parent().remove();
+      };
     });
   };
 });

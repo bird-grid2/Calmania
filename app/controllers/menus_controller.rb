@@ -17,14 +17,15 @@ class MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     if @menu.save
-      redirect_to menus_path
+      redirect_to menus_path, notice: 'メニューを作成しました' 
     else
-      render :new
+      flash.now[:alert] = 'メニュー作成を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def index
-    @menus = Menu.all
+    @menus = Menu.all.order(id: 'ASC')
   end
 
   def search
@@ -36,17 +37,43 @@ class MenusController < ApplicationController
   end
 
   def edit
+    @foods = Food.all
+    food = []
+    menu = []
+    mass = []
+
+    @foods.each do |f|
+      food << f
+    end
+    gon.food = food
+
+    @menu.names.each do |m|
+      menu << m
+    end
+    gon.menu = menu
+
+    @menu.masses.each do |m|
+      mass << m
+    end
+    gon.mass = mass
   end
 
   def update
-    if @menu.update
-      redirect_to log_menus_path
+    if @menu.update(menu_params)
+      redirect_to menus_path, notice: 'メニューを更新しました'
     else
-      render :menus
+      flash.now[:alert] = 'メニュー更新を失敗しました'
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
+    if @menu.destroy
+      redirect_to menus_path, notice: 'メニューを削除しました'
+    else
+      flash.now[:alert] = 'メニュー削除を失敗しました'
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private

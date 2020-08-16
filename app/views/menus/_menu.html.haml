@@ -8,9 +8,9 @@
       .input_form__column
         .input_form__column__label
           =icon('fas', 'plus-circle', class: 'icon', id: 'menu-plus')
-        .input_form__column__input_name
+        .input_form__column__input_name_0#name
           = form.collection_select :names, @foods, :id, :food, {prompt: '選択してください'}, {name: 'menu[names][]'}
-        .input_form__column__box
+        .input_form__column__box_0#fbox
     .calculate_box
       .calculate_box__title
         %h2 タンパク質 合計

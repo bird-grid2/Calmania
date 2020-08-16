@@ -2,13 +2,20 @@
   .upper-info
     %table
       %tr
+        %th.table-icon
         %th.table-title 記録日
         %th.table-title 体重 [kg]
         %th.table-title 体脂肪率 [%]
         %th.table-title 総カロリー [kCal]
         %th.table-title コメント
-      - @logs.each do |log|
+      - @logs.each_with_index do |log|
         %tr
+          %td.table-icon
+            = link_to "logs/#{log.id}/edit" do
+              = icon('fas', 'edit')
+            %span<>
+            = link_to "logs/#{log.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
+              = icon('fas', 'trash-alt')
           %td.table-item
             = log.date
           %td.table-item
@@ -21,7 +28,7 @@
             = log.description
 
   .bottom-info
-    = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
+    = form_with url: search_logs_path, method: :get, class: 'search-box', local: true do |f|
       = f.text_field :keyword, placeholder: '記録日またはコメントを入力して下さい', class: 'search-input'
     .icon-box
       = link_to root_path, class: 'fas fa-home' do
