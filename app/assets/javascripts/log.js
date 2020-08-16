@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  if(document.URL.match(/logs.new/)){
+  if(document.URL.match(/logs/)){
     $('body').on('change', '#log_menu_numbers', function(){
       
       var id = $(this).val();

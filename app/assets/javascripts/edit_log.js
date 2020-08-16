@@ -163,5 +163,7 @@ $(document).on('turbolinks:load', function(){
     };
     
     $('.show_calory').append(formHTML());
+
+    $('.btn')[0].value = 'ログ更新'; 
   };
 });
