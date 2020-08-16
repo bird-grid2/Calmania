@@ -27,7 +27,7 @@ class LogsController < ApplicationController
   end
 
   def index
-    @logs = Log.all
+    @logs = Log.all.order(date: 'DESC')
   end
 
   def search

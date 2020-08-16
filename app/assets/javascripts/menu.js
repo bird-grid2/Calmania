@@ -166,15 +166,10 @@ $(document).on('turbolinks:load', function(){
         carb = Number(target[2].children[1].children[0].textContent);
         total = protain + fat + carb;
 
-        console.log(target)
-        console.log(total)
-
         refer_p = Number($('.calculate_box__result--protain').children()[0].textContent);
         refer_f = Number($('.calculate_box__result--fat').children()[0].textContent);
         refer_c = Number($('.calculate_box__result--carbohydrate').children()[0].textContent);
         refer_t = refer_p + refer_f + refer_c
-        console.log(refer_f)
-        console.log(refer_t)
 
         refer_p = refer_p - protain;
         refer_f = refer_f - fat;

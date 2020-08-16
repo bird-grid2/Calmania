@@ -25,7 +25,7 @@ class MenusController < ApplicationController
   end
 
   def index
-    @menus = Menu.all
+    @menus = Menu.all.order(id: 'ASC')
   end
 
   def search

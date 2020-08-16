@@ -157,7 +157,41 @@ $(document).on('turbolinks:load', function(){
 
     //マイナスボタン
     $('body').on('click', '#menu-minus', function(){
-      $(this).parent().parent().remove();
+
+      if ($(this).parent().next().children()[0].value == ""){
+        $(this).parent().parent().remove();
+      } else{
+        target = $(this).parent().next().next().children();
+        
+        protain = Number(target[0].children[1].children[0].textContent);
+        fat = Number(target[1].children[1].children[0].textContent);
+        carb = Number(target[2].children[1].children[0].textContent);
+        total = protain + fat + carb;
+
+        refer_p = Number($('.show_calory--protain').children().next().children()[0].textContent);
+        refer_f = Number($('.show_calory--fat').children().next().children()[0].textContent);
+        refer_c = Number($('.show_calory--carbohydrate').children().next().children()[0].textContent);
+        refer_t = refer_p + refer_f + refer_c;
+
+        refer_p = refer_p - protain;
+        refer_f = refer_f - fat;
+        refer_c = refer_c - carb;
+        refer_t = refer_t - total; 
+
+        $('.show_calory--protain').children().next().children()[0].textContent = Math.ceil(refer_p * 10) / 10;
+        $('.show_calory--fat').children().next().children()[0].textContent = Math.ceil(refer_f * 10) / 10;
+        $('.show_calory--carbohydrate').children().next().children()[0].textContent = Math.ceil(refer_c * 10) / 10;
+        $('.show_calory--total').children().next().children()[0].textContent = Math.ceil(refer_t * 10) / 10;
+
+        function formHTML(){
+          var html = `<input value="${Math.ceil(sum(total) * 10 ) / 10}" type="hidden" name="log[total_cal]" id="log_total_cal"></input>`
+          return html;
+        };
+        
+        $('.show_calory').append(formHTML());
+  
+        $(this).parent().parent().remove();
+      };
     });
   };
 });
