@@ -38,7 +38,7 @@
             color: $maincolor;
           }
         }
-        &__input_name {
+        #name {
           width: 30%;
           #menu_names{
             height: 35%;
@@ -60,7 +60,7 @@
             }
           }
         }
-        &__box{
+        #fbox {
           display: flex;
           width: 68%;
           text-align: center;
@@ -70,16 +70,16 @@
             line-height: 20px;
             color: white;
           }
-          &__total_mass{
+          .input_form__column__box__total_mass{
             @include cal-box
           }
-          &__protain{
+          .input_form__column__box__protain{
             @include cal-box
           }
-          &__fat{
+          .input_form__column__box__fat{
             @include cal-box
           }
-          &__carbohydrate{
+          .input_form__column__box__carbohydrate{
             @include cal-box
           }
         }

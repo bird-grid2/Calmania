@@ -37,10 +37,29 @@ class MenusController < ApplicationController
   end
 
   def edit
+    @foods = Food.all
+    food = []
+    menu = []
+    mass = []
+
+    @foods.each do |f|
+      food << f
+    end
+    gon.food = food
+
+    @menu.names.each do |m|
+      menu << m
+    end
+    gon.menu = menu
+
+    @menu.masses.each do |m|
+      mass << m
+    end
+    gon.mass = mass
   end
 
   def update
-    if @menu.update
+    if @menu.update(menu_params)
       redirect_to menus_path, notice: 'メニューを更新しました'
     else
       flash.now[:alert] = 'メニュー更新を失敗しました'

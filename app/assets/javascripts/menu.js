@@ -128,6 +128,8 @@ $(document).on('turbolinks:load', function(){
         var html = `<option value="${food.id}">${food.food}</option>`
         option.push(html);
       });
+
+      num = $('input_form__column').length - 1;
   
       function addHTML() {
         var html =  `<div class="input_form__column">
@@ -135,13 +137,13 @@ $(document).on('turbolinks:load', function(){
                         <i class="fas fa-plus-circle icon" id="menu-plus"></i>
                         <i class="fas fa-minus-circle icon" id="menu-minus"></i>
                       </div>
-                      <div class="input_form__column__input_name">
+                      <div class="input_form__column__input_name_${num}" id='name'>
                         <select name="menu[names][]" id="menu_names">
                           <option value="">選択してください</option>
                           ${sum(option)}
                         </select>
                       </div>
-                      <div class='input_form__column__box'>
+                      <div class='input_form__column__box_${num}' id='fbox'>
                       </div>
                     </div>`
         return html;

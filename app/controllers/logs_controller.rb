@@ -52,8 +52,6 @@ class LogsController < ApplicationController
       num << log
     end
     gon.edit = num
-
-    
   end
 
   def destroy
@@ -66,7 +64,7 @@ class LogsController < ApplicationController
   end
 
   def update
-    if @log.update 
+    if @log.update(log_params) 
       redirect_to logs_path, notice: 'ログを更新しました'
     else
       flash.now[:alert] = 'ログ更新を失敗しました'
