@@ -5,7 +5,7 @@ class ManagementsController < ApplicationController
     @menus = Menu.all
     @user = User.find(current_user.id)
     
-    require 'Date'
+    require 'date'
     require 'bigdecimal'
     date = Date.today
     @cal = Log.where(date: Date.today)
