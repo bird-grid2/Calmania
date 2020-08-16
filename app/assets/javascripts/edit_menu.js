@@ -6,9 +6,9 @@ $(document).on('turbolinks:load', function(){
     var carbohydrate = [];
     var total = [];
     
-    var sum  =(arr)=>{
+    var sum  = function(arr){
       var sum = 0;
-      arr.forEach((elm)=>{
+      arr.forEach(function(elm){
           sum += elm;
       });
       (Math.ceil(sum) * 10) / 10;

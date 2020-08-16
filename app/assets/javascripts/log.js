@@ -113,9 +113,9 @@ $(document).on('turbolinks:load', function(){
     //＋ボタン
     $('body').on('click', '#menu-plus', function(){
 
-      var sum  =(arr)=>{
+      var sum  = function(arr){
         var sum = 0;
-        arr.forEach((elm)=>{
+        arr.forEach(function(elm){
             sum += elm;
         });
         return sum;
