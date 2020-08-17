@@ -63,7 +63,7 @@
   - メニューのviewページでインクリメンタルサーチできない  
   - 引き算はできるが、floatのため誤差が生じる  
 
-# CaLmania DB設計
+# Calmania DB設計
 
 ## usersテーブル
 |Colmun|Type|Option|
