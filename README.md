@@ -25,15 +25,15 @@
   <img width="600" alt="graph" src="https://user-images.githubusercontent.com/61616172/90396091-97092600-e0d0-11ea-9f7e-ad878dac0ab7.png">
 
  #### メニュー ・ ログ機能
-  - カロリー計算
+  - カロリー計算  
     <img width="600" alt="calculate" src="https://user-images.githubusercontent.com/61616172/89990301-1eaff880-dcbd-11ea-9151-1cc8f4083744.gif">
-  - 作成機能
+  - 作成機能  
     <img width="600" alt="cleate" src="https://user-images.githubusercontent.com/61616172/89990346-35564f80-dcbd-11ea-854a-72683b7a5f0c.gif">
-  - 編集機能
+  - 編集機能  
    <img width="600" alt="edit" src="https://user-images.githubusercontent.com/61616172/90397044-3aa70600-e0d2-11ea-9c42-012f8c703548.gif">
-  - 削除機能
+  - 削除機能  
     <img width="600" alt="delete" src="https://user-images.githubusercontent.com/61616172/90403502-09333800-e0dc-11ea-8962-1617f4321779.gif">
-  - インクリメンタルサーチ(メニュー検索のみ)
+  - インクリメンタルサーチ(メニュー検索のみ)  
     <img width="600" alt="search" src="https://user-images.githubusercontent.com/61616172/89992424-389f0a80-dcc0-11ea-9de7-1d78862cff1e.gif">
 
 # features
