@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: Calmania_production
+  database: calmania_production
   username: postgres
   password: postgres
   #username: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_USER] %>
