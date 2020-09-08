@@ -84,4 +84,4 @@ production:
   database: calmania_production
   username: postgres
   password: postgres
-  host: calmania-web.cggtokx2kt88.ap-northeast-1.rds.amazonaws.com
+  host: [calmania-web.cggtokx2kt88.ap-northeast-1.rds.amazonaws.com]
