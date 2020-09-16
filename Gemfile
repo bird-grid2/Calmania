@@ -60,7 +60,7 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'capistrano3-rails'
+  gem 'capistrano-rails'
 end
 
 group :development, :test do
