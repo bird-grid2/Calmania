@@ -60,14 +60,12 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'capistrano-rails'
 end
 
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
-  gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
 end
 
@@ -80,3 +78,4 @@ gem 'pycall'
 gem 'pry-rails'
 gem 'jquery-rails'
 gem 'gon'
+gem 'capistrano-rails'
