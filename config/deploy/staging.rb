@@ -59,6 +59,3 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
-server '54.168.177.241', user: 'ec2-user'
-server '54.150.187.111', user: 'ec2-user'
