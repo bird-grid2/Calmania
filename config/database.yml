@@ -80,7 +80,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  <<: *default 
   database: calmania_production
   username: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_USER] %>
   password: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_PASSWORD] %>
