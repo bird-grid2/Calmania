@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: Calmania_production
+  database: calmania_production
   username: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_USER] %>
   password: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_PASSWORD] %>
   host: calmania-web.cggtokx2kt88.ap-northeast-1.rds.amazonaws.com
