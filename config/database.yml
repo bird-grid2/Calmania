@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default  
   database: Calmania_development
-  host: localhost
+  Host: localhost
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -84,4 +84,4 @@ production:
   database: calmania_production
   username: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_USER] %>
   password: <%= Rails.application.credentials.production[:CALMANIA_DATABASE_PASSWORD] %>
-  host: calmania-web.cggtokx2kt88.ap-northeast-1.rds.amazonaws.com
+  Host: calmania-web.cggtokx2kt88.ap-northeast-1.rds.amazonaws.com
