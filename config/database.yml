@@ -63,7 +63,6 @@ test:
   password: password
 
   database: docker_test
-  host: db
   port: 5432
 
 # As with config/secrets.yml, you never want to store sensitive information,
