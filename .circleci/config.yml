@@ -8,7 +8,7 @@ jobs:
       - image: circleci/ruby:2.5.1-stretch-node
         environment:
           BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: development
+          RAILS_ENV: test
       - image: circleci/postgres:latest
         environment:
           PGUSER: Calmania

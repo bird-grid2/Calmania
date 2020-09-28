@@ -3,8 +3,9 @@ services:
   db: # database.ymlと対応したものを読み込みます
     image: postgresql:latest # もともと5.6で動かしていたので
     environment:
-      POSTGRES_DATABASE: docker_development
+      POSTGRES_DATABASE: docker_test
       POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
     volumes:
       - ./database:/var/lib/postgresql # データの永続化
     ports:
