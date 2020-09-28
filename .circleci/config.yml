@@ -15,7 +15,7 @@ jobs:
           name: setup bundler
           command: |
             sudo gem update --system
-            sudo gem install -y bundler
+            sudo gem install bundler
       - run:
           name: Which bundler?
           command: bundle -v
