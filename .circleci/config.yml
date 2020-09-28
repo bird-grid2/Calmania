@@ -9,9 +9,10 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: development
-      - image: circleci/postgresql:latest
+      - image: circleci/postgres:latest
         environment:
           PGUSER: Calmania
+          POSTGRES_DB: Calmania_development
     executor: ruby/default
     steps:
       - checkout
