@@ -14,10 +14,6 @@ jobs:
           POSTGRES_DATABASE: docker_test
           POSTGRES_USER: root
           POSTGRES_PASSWORD: password
-        volumes:
-          - ./database:/var/lib/postgresql # データの永続化
-        ports:
-          - "5432:5432" # ホストからゲストへポートフォワード。sequelProと繋ぎたいので、3306ではなく4306をポートに指定
     executor: ruby/default
     steps:
       - checkout
