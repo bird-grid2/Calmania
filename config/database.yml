@@ -60,6 +60,7 @@ test:
   <<: *default  
   database: docker_test
   username: root　
+  password: password  
   port: 5432
 
 # As with config/secrets.yml, you never want to store sensitive information,

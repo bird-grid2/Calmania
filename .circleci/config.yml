@@ -15,6 +15,7 @@ jobs:
         environment:
           POSTGRES_DB: docker_test
           POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
     executor: ruby/default
     steps:
       - checkout
