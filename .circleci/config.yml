@@ -11,8 +11,13 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:latest
         environment:
-          PGUSER: Calmania
-          POSTGRES_DB: Calmania_development
+          POSTGRES_DATABASE: docker_test
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
+        volumes:
+          - ./database:/var/lib/postgresql # データの永続化
+        ports:
+          - "5432:5432" # ホストからゲストへポートフォワード。sequelProと繋ぎたいので、3306ではなく4306をポートに指定
     executor: ruby/default
     steps:
       - checkout
@@ -30,4 +35,11 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
   
       - ruby/bundle-install
+
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
       
