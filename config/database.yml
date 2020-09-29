@@ -60,7 +60,7 @@ test:
   <<: *default  
   database: Calmania_test
   username: postgres
-  password: Calmania
+  password: password
   port: 5432
 
 # As with config/secrets.yml, you never want to store sensitive information,
