@@ -14,6 +14,7 @@ jobs:
         environment:
           POSTGRES_DB: Calmania_test
           POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
     executor: ruby/default
     steps:
       - checkout
