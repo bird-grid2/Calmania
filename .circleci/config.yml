@@ -13,8 +13,7 @@ jobs:
       - image: circleci/postgres:latest
         environment:
           POSTGRES_DB: Calmania_test
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: postgres
     executor: ruby/default
     steps:
       - checkout
