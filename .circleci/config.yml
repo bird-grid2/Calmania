@@ -12,9 +12,9 @@ jobs:
           PGUSER: root
       - image: circleci/postgres:latest
         environment:
-          POSTGRES_DB: Calmania_test
+          POSTGRES_DB: docker_test
           POSTGRES_USER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_PASSWORD: password
     executor: ruby/default
     steps:
       - checkout
