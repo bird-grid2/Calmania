@@ -56,6 +56,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers'
+  gem 'rubocop'
 end
 
 group :production do
@@ -79,4 +80,3 @@ gem 'pycall'
 gem 'pry-rails'
 gem 'jquery-rails'
 gem 'gon'
-gem 'rubocop'
