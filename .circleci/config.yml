@@ -9,10 +9,10 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: test
+          PGHOST: 127.0.0.1
           PGUSER: root
       - image: circleci/postgres:latest
         environment:
-          PGHOST: localhost
           POSTGRES_DB: docker_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
