@@ -55,7 +55,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
 end
 
 group :production do
@@ -67,6 +67,7 @@ group :development, :test do
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano3-unicorn'
+  gem 'capistrano-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -78,4 +79,3 @@ gem 'pycall'
 gem 'pry-rails'
 gem 'jquery-rails'
 gem 'gon'
-gem 'capistrano-rails'
