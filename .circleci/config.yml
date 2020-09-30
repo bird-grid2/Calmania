@@ -12,6 +12,7 @@ jobs:
           PGUSER: root
       - image: circleci/postgres:latest
         environment:
+          PGHOST: 127.0.0.1
           POSTGRES_DB: docker_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
