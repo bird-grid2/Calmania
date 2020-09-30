@@ -18,20 +18,25 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
       - run:
           name: setup bundler
           command: |
             sudo gem update --system
             sudo gem install bundler
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
   
-      - ruby/bundle-install      
+      - ruby/bundle-install
+      - save_cache:
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ./vendor/bundle
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       
