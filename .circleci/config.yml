@@ -19,9 +19,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - run:
           name: setup bundler
           command: |
@@ -34,9 +34,9 @@ jobs:
   
       - ruby/bundle-install
       - save_cache:
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       
