@@ -71,7 +71,7 @@ class ManagementsController < ApplicationController
     @today_carb = c.sum.to_s
     
     if @user.height.present? && weight.present?
-      @BMI = BigDecimal((weight.max / ((@user.height/100) ** 2)).to_s).ceil(1)
+      @body_mass_index = BigDecimal((weight.max / ((@user.height/100) ** 2)).to_s).ceil(1)
       @weight = BigDecimal((((@user.height/100) ** 2) * 22).to_s).ceil(2) 
     end
   end
