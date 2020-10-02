@@ -2,7 +2,7 @@ pull_request_rules:
   - name: Automatic merge on approval
     conditions:
       - "status-success=ci/circleci: build"
-      - "#approved-reviews-by>=1"
+      - "#approved-reviews-by>=octcat"
       - base=master
 
     actions:
