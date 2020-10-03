@@ -2,24 +2,24 @@ require 'rails_helper'
 
 describe Log do
   context 'validation' do
-    it 'food名が空なら登録できない' do
-      foods = build(:food, food: nil)
-      foods.valid?
-      expect(foods.errors[:food]).to include("can't be blank")
+    it '日付が空なら登録できない' do
+      logs = build(:log, date: nil)
+      logs.valid?
+      expect(logs.errors[:date]).to include("can't be blank")
     end
-    it 'protain_rateが空なら登録できない' do
-      foods = build(:food, protain_rate: nil)
-      expect(foods.errors[:protain_rate]).to include("can't be blank")
+    it 'weightが数字以外は登録できない' do
+      logs = build(:log, weight: 'あ')
+      expect(logs.errors[:weight]).to include("can't be blank")
     end
     it 'fat_rateが空なら登録できない' do
-      foods = build(:food, fat_rate: nil)
-      foods.valid?
-      expect(foods.errors[:fat_rate]).to include("can't be blank")
+      logs = build(:log, fat_rate: nil)
+      logs.valid?
+      expect(logs.errors[:fat_rate]).to include("can't be blank")
     end
     it 'carbohydrate_rateが空なら登録できない' do
-      foods = build(:food, carbohydrate_rate: nil)
-      foods.valid?
-      expect(foods.errors[:carbohydrate_rate]).to include("can't be blank")
+      logs = build(:log, carbohydrate_rate: nil)
+      logs.valid?
+      expect(logs.errors[:carbohydrate_rate]).to include("can't be blank")
     end
   end
   context 'submit' do
