@@ -49,8 +49,10 @@
   Rails 5.2.4.3  
   jQuery-rails 4.4.0  
   Python 3.8.5  
-  Pycall 1.3.1  
-
+  Pycall 1.3.1
+  AWS(Route53、VPC、EC2、ELB、RDS)
+  CircleCI
+  Mergigy
 
 # update information
  ★ graph情報の更新(ウィンドウの表示)  
