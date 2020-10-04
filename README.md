@@ -73,11 +73,11 @@
 |nickname|string|null: false|
 |email|string|null: false, defalult: ""|
 |encrypted_password|string|null: false, default: ""|
-|height|decimal|precision: 4, scale: 1|
-|ideal_protain_rate|integer||
-|ideal_fat_rate|integer||
-|ideal_carbohydrate_rate|integer||
-|target_cal|integer||
+|height|decimal|precision: 4, scale: 1, numericality: true|
+|ideal_protain_rate|integer|numericality: true|
+|ideal_fat_rate|integer|numericality: true|
+|ideal_carbohydrate_rate|integer|numericality: true|
+|target_cal|integer|numericality: true|
 ### Association
 - has_many :logs, dependent: :destroy
 - validates :nickname, presence: true, uniqueness: true
@@ -86,9 +86,9 @@
 |Colmun|Type|Option|
 |-------|----|------|
 |date|date|null: false|
-|weight|decimal|precision: 4, scale: 1|
-|bfp|decimal|precision: 3, scale: 1|
-|total_cal|decimal|precision: 5, scale: 1|
+|weight|decimal|precision: 4, scale: 1, numericality: true|
+|bfp|decimal|precision: 3, scale: 1, numericality: true|
+|total_cal|decimal|precision: 5, scale: 1, numericality: true|
 |description|text||
 |menu_numbers|string|array: true|
 |user|references|foreign_key: true, on_delete: :cascade|
@@ -101,7 +101,7 @@
 |-------|----|------|
 |menu|string|null: false|
 |names|string|array: true, null: false|
-|masses|string|array: true, null: false|
+|masses|string|array: true, null: false, numericality: true|
 |total_protain|decimal|precision: 5, scale: 1|
 |total_fat|decimal|precision: 5, scale: 1|
 |total_carbohydrate|decimal|precision: 5, scale: 1|

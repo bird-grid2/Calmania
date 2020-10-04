@@ -6,5 +6,6 @@ class User < ApplicationRecord
   
   has_many :logs, dependent: :destroy
   validates :nickname, presence: true, uniqueness: true
+  validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: true
   
 end

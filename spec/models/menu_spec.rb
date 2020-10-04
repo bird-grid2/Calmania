@@ -15,25 +15,9 @@ describe Menu do
       menus = build(:menu, masses: nil)
       valid(menus)
     end
-    it 'carbohydrate_rateが空なら登録できない' do
-      menus = build(:menu, carbohydrate_rate: nil)
-      valid(menus)
-    end
-    it 'total_protainは全角・半角文字と英文字で登録できない' do
+    it 'massesは全角・半角文字と英文字で登録できない' do
       target.each do |i|
-        logs = build(:log, total_protain: i)
-        number(logs)
-      end
-    end
-    it 'total_fatは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        logs = build(:log, total_fat: i)
-        number(logs)
-      end
-    end
-    it 'total_carbohydrateは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        logs = build(:log, total_carbohydrate: i)
+        logs = build(:log, masses: i)
         number(logs)
       end
     end

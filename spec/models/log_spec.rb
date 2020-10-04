@@ -19,7 +19,7 @@ describe Log do
         number(logs)
       end
     end
-    it 'total_calは全角文字で登録できない' do
+    it 'total_calは全角・半角文字と英文字で登録できない' do
       target.each do |i|
         logs = build(:log, total_cal: i)
         number(logs)
