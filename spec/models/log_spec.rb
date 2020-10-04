@@ -2,29 +2,25 @@ require 'rails_helper'
 
 describe Log do
   context 'validation' do
+    target = %w[あ ｱ a １]
+
     it '日付が空なら登録できない' do
       logs = build(:log, date: nil)
       valid(logs)
     end
     it 'weightは全角・半角文字と英文字で登録できない' do
-      target = ['あ', 'ｱ', 'a', '１']
-      
       target.each do |i|
         logs = build(:log, weight: i)
         number(logs)
       end
     end
     it 'bfpは全角・半角文字と英文字で登録できない' do
-      target = ['あ', 'ｱ', 'a', '１']
-
       target.each do |i|
         logs = build(:log, bfp: i)
         number(logs)
       end
     end
     it 'total_calは全角文字で登録できない' do
-      target = ['あ', 'ｱ', 'a', '１']
-       
       target.each do |i|
         logs = build(:log, total_cal: i)
         number(logs)
