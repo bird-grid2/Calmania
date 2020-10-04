@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Log do
   context 'validation' do
     target = %w[あ ｱ a １]
-
     it '日付が空なら登録できない' do
       logs = build(:log, date: nil)
       valid(logs)
@@ -28,7 +27,7 @@ describe Log do
     end
     it 'user_idは空なら登録できない' do
       logs = build(:log, user_id: nil)
-      expect(logs.errors[:user_id]).to include("を入力してください")
+      valid(logs)
     end
   end
   context 'submit' do
@@ -36,11 +35,9 @@ describe Log do
       logs = build(:log)
       expect(logs).to be_valid
     end
-    it 'weightが空でも登録できる' do
+    it 'weight,bfpが空でも登録できる' do
       logs = build(:log, weight: nil)
       expect(logs).to be_valid
-    end
-    it 'bfpが空でも登録できる' do
       logs = build(:log, bfp: nil)
       expect(logs).to be_valid
     end
