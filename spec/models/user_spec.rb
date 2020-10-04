@@ -43,14 +43,14 @@ describe User do
     end
   end
   context 'submit' do
-    item = %w[height ideal_protain_rate ideal_fat_rate ideal_carbohydrate_rate total_cal]
+    item = %w['height: nil' 'ideal_protain_rate: nil' 'ideal_fat_rate: nil' 'ideal_carbohydrate_rate: nil' 'total_cal: nil']
     it '全てが入力されていると、登録できる' do
       users = build(:user)
       expect(users).to be_valid
     end
     it '任意の項目が空でも登録できる' do
       item.each do |i|
-        users = build(:user, i: nil)
+        users = build(:user, i)
         expect(users).to be_valid
       end
     end
