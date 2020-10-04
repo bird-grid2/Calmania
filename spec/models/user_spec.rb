@@ -22,22 +22,22 @@ describe User do
       end
     end
     it 'ideal_protain_rate, ideal_fat_rateは全角・半角文字と英文字で登録できない' do
-      target.each do |p|
-        users = build(:user, ideal_protain_rate: p)
+      target.each do |i|
+        users = build(:user, ideal_protain_rate: i)
         number(users)
       end
-      target.each do |f|
-        users = build(:user, ideal_fat_rate: f)
+      target.each do |i|
+        users = build(:user, ideal_fat_rate: i)
         number(users)
       end
     end
     it 'ideal_carbohydrate_rate, target_calは全角・半角文字と英文字で登録できない' do
-      target.each do |c|
-        users = build(:user, ideal_carbohydrate_rate: c)
+      target.each do |i|
+        users = build(:user, ideal_carbohydrate_rate: i)
         number(users)
       end
-      target.each do |t|
-        users = build(:user, target_cal: t)
+      target.each do |i|
+        users = build(:user, target_cal: i)
         number(users)
       end
     end
@@ -49,8 +49,8 @@ describe User do
       expect(users).to be_valid
     end
     it '任意の項目が空でも登録できる' do
-      item.each do |j|
-        users = build(:user, j = nil)
+      item.each do |i|
+        users = build(:user, (i): nil)
         expect(users).to be_valid
       end
     end
