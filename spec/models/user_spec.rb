@@ -25,8 +25,7 @@ describe User do
       target.each do |i|
         users = build(:user, ideal_protain_rate: i)
         number(users)
-      end
-      target.each do |i|
+        
         users = build(:user, ideal_fat_rate: i)
         number(users)
       end
@@ -35,8 +34,7 @@ describe User do
       target.each do |i|
         users = build(:user, ideal_carbohydrate_rate: i)
         number(users)
-      end
-      target.each do |i|
+
         users = build(:user, target_cal: i)
         number(users)
       end
