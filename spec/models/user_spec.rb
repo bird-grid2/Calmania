@@ -21,40 +21,36 @@ describe User do
         number(users)
       end
     end
-    it 'ideal_protain_rateは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        users = build(:user, ideal_protain_rate: i)
+    it 'ideal_protain_rate, ideal_fat_rateは全角・半角文字と英文字で登録できない' do
+      target.each do |p|
+        users = build(:user, ideal_protain_rate: p)
+        number(users)
+      end
+      target.each do |f|
+        users = build(:user, ideal_fat_rate: f)
         number(users)
       end
     end
-    it 'ideal_fat_rateは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        users = build(:user, ideal_fat_rate: i)
+    it 'ideal_carbohydrate_rate, target_calは全角・半角文字と英文字で登録できない' do
+      target.each do |c|
+        users = build(:user, ideal_carbohydrate_rate: c)
         number(users)
       end
-    end
-    it 'ideal_carbohydrate_rateは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        users = build(:user, ideal_carbohydrate_rate: i)
-        number(users)
-      end
-    end
-    it 'target_calは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
-        users = build(:user, target_cal: i)
+      target.each do |t|
+        users = build(:user, target_cal: t)
         number(users)
       end
     end
   end
   context 'submit' do
-    item = %w[ height ideal_protain_rate ideal_fat_rate ideal_carbohydrate_rate total_cal ]
+    item = %w[height ideal_protain_rate ideal_fat_rate ideal_carbohydrate_rate total_cal]
     it '全てが入力されていると、登録できる' do
       users = build(:user)
       expect(users).to be_valid
     end
     it '任意の項目が空でも登録できる' do
       item.each do |j|
-        users = build(:user, j: nil)
+        users = build(:user, j = nil)
         expect(users).to be_valid
       end
     end
