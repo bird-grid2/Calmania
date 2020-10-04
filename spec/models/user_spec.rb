@@ -54,7 +54,7 @@ describe User do
     end
     it '任意の項目が空でも登録できる' do
       item.each do |j|
-        users = build(:user, j : nil)
+        users = build(:user, j: nil)
         expect(users).to be_valid
       end
     end
