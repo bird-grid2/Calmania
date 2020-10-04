@@ -5,21 +5,21 @@ describe Food do
     it 'food名が空なら登録できない' do
       foods = build(:food, food: nil)
       foods.valid?
-      expect(foods.errors[:food]).to include("can't be blank")
+      expect(foods.errors[:food]).to include("を入力してください")
     end
     it 'protain_rateが空なら登録できない' do
       foods = build(:food, protain_rate: nil)
-      expect(foods.errors[:protain_rate]).to include("can't be blank")
+      expect(foods.errors[:protain_rate]).to include("を入力してください")
     end
     it 'fat_rateが空なら登録できない' do
       foods = build(:food, fat_rate: nil)
       foods.valid?
-      expect(foods.errors[:fat_rate]).to include("can't be blank")
+      expect(foods.errors[:fat_rate]).to include("を入力してください")
     end
     it 'carbohydrate_rateが空なら登録できない' do
       foods = build(:food, carbohydrate_rate: nil)
       foods.valid?
-      expect(foods.errors[:carbohydrate_rate]).to include("can't be blank")
+      expect(foods.errors[:carbohydrate_rate]).to include("を入力してください")
     end
   end
   context 'submit' do
