@@ -4,19 +4,19 @@ describe Food do
   context 'validation' do
     it 'food名が空なら登録できない' do
       foods = build(:food, food: nil)
-      valid(foods, :food)
+      valid(foods)
     end
     it 'protain_rateが空なら登録できない' do
       foods = build(:food, protain_rate: nil)
-      valid(foods, :protain_rate)
+      valid(foods)
     end
     it 'fat_rateが空なら登録できない' do
       foods = build(:food, fat_rate: nil)
-      valid(foods, :fat_rate)
+      valid(foods)
     end
     it 'carbohydrate_rateが空なら登録できない' do
       foods = build(:food, carbohydrate_rate: nil)
-      valid(foods, :carbohydrate_rate)
+      valid(foods)
     end
   end
   context 'submit' do
