@@ -8,5 +8,4 @@ module ApplicationHelper
     num.valid?
     expect(num.errors).to include 'は数値で入力してください'
   end
-
 end

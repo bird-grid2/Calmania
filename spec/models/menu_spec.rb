@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Menu do
-
   context 'validation' do
     it 'menu名が空なら登録できない' do
       menus = build(:menu, menu: nil)
