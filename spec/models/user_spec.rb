@@ -25,9 +25,9 @@ describe User do
       target.each do |i|
         users = build(:user, ideal_protain_rate: i)
         number(users)
-        
-        users = build(:user, ideal_fat_rate: i)
-        number(users)
+
+        users_2 = build(:user, ideal_fat_rate: i)
+        number(users_2)
       end
     end
     it 'ideal_carbohydrate_rate, target_calは全角・半角文字と英文字で登録できない' do
@@ -35,8 +35,8 @@ describe User do
         users = build(:user, ideal_carbohydrate_rate: i)
         number(users)
 
-        users = build(:user, target_cal: i)
-        number(users)
+        users_2 = build(:user, target_cal: i)
+        number(users_2)
       end
     end
   end
