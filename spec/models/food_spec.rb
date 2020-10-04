@@ -4,22 +4,19 @@ describe Food do
   context 'validation' do
     it 'food名が空なら登録できない' do
       foods = build(:food, food: nil)
-      foods.valid?
-      expect(foods.errors[:food]).to include("を入力してください")
+      valid(foods, :food)
     end
     it 'protain_rateが空なら登録できない' do
       foods = build(:food, protain_rate: nil)
-      expect(foods.errors[:protain_rate]).to include("を入力してください")
+      valid(foods, :protain_rate)
     end
     it 'fat_rateが空なら登録できない' do
       foods = build(:food, fat_rate: nil)
-      foods.valid?
-      expect(foods.errors[:fat_rate]).to include("を入力してください")
+      valid(foods, :fat_rate)
     end
     it 'carbohydrate_rateが空なら登録できない' do
       foods = build(:food, carbohydrate_rate: nil)
-      foods.valid?
-      expect(foods.errors[:carbohydrate_rate]).to include("を入力してください")
+      valid(foods, :carbohydrate_rate)
     end
   end
   context 'submit' do
