@@ -14,28 +14,24 @@ describe User do
 
   context 'validation' do
     target = %w[あ ｱ a １]
-    it 'nicknameが空なら登録できない' do users = build(:user, nickname: nil) valid(users) end
-    it 'emailが空なら登録できない' do users = build(:user, email: nil) valid(users) end
-    it 'encrypted_passwordが空なら登録できない' do users = build(:user, encrypted_password: nil) valid(users) end
-    it 'heightは全角・半角文字と英文字で登録できない' do
+    it '各項目が空なら登録できない' do 
+      users = build(:user, nickname: nil)
+      valid(users)
+      users = build(:user, email: nil) 
+      valid(users)
+      users = build(:user, encrypted_password: nil) 
+      valid(users)
+    end
+    it '全角・半角文字と英文字で登録できない' do
       target.each do |i|
         users = build(:user, height: i)
         number(users)
-      end
-    end
-    it 'ideal_protain_rate, ideal_fat_rateは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
         users = build(:user, ideal_protain_rate: i)
         number(users)
         users = build(:user, ideal_fat_rate: i)
         number(users)
-      end
-    end
-    it 'ideal_carbohydrate_rate, target_calは全角・半角文字と英文字で登録できない' do
-      target.each do |i|
         users = build(:user, ideal_carbohydrate_rate: i)
         number(users)
-
         users = build(:user, target_cal: i)
         number(users)
       end
