@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :menu do
-    menu                { 'サンプルA' }
+    item                { 'サンプルA' }
     names               { [1, 2, 3] }
     masses              { 4500 }
     total_protain       { 123.4 }

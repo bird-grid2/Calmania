@@ -85,7 +85,7 @@
 ## logsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|date|date|null: false|
+|date|date|null: false, index: true|
 |weight|decimal|precision: 4, scale: 1, numericality: true|
 |bfp|decimal|precision: 3, scale: 1, numericality: true|
 |total_cal|decimal|precision: 5, scale: 1, numericality: true|
@@ -99,7 +99,7 @@
 ## menusテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|menu|string|null: false|
+|item|string|null: false, index: true|
 |names|string|array: true, null: false|
 |masses|string|array: true, null: false, numericality: true|
 |total_protain|decimal|precision: 5, scale: 1|
@@ -112,7 +112,7 @@
 ## foodsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|food|string|null: false|
+|name|string|null: false, index: true|
 |protain_rate|decimal|null: false, precision: 6, scale: 5|
 |fat_rate|decimal|null: false, precision: 6, scale: 5|
 |carbohydrate_rate|decimal|null: false, precision: 6, scale: 5|

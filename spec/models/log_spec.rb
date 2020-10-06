@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe Log, type: :model do
+RSpec.describe Log, type: :model do
   context 'validation' do
     it '日付とuser_idが空なら登録できない' do
       test = ['date: nil', 'user_id: nil']

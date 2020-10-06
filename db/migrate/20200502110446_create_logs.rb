@@ -8,7 +8,8 @@ class CreateLogs < ActiveRecord::Migration[5.2]
       t.text :description, index: true
       t.string :menu_numbers,  array: true
       t.references :user, foreign_key: true, on_delete: :cascade
+      
       t.timestamps
-    end 
+    end
   end
 end

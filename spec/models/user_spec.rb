@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe User, type: :model do
+RSpec.describe User, type: :model do
   context 'validation' do
     it 'user名、email、encrypted_passwordが空なら登録できない' do 
       test = ['nickname: nil', 'email: nil', 'encrypted_password: nil']
