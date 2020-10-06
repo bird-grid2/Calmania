@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+Rspec.describe User, type: :model do
 
   def valid(val)
     val.valid?
@@ -14,7 +14,7 @@ describe User do
 
   context 'validation' do
     target = %w[あ ｱ a １]
-    it '各項目が空なら登録できない' do 
+    it 'user名、email、encrypted_passwordが空なら登録できない' do 
       users = build(:user, nickname: nil)
       valid(users)
       users = build(:user, email: nil) 
