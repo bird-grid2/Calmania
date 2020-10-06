@@ -1,35 +1,28 @@
 require 'rails_helper'
 
 Rspec.describe Log, type: :model do
-
-  def valid(val)
-    val.valid?
-    expect(val.errors).to include 'を入力してください'
-  end
-
-  def number(num)
-    num.valid?
-    expect(num.errors).to include 'は数値で入力してください'
-  end
-
   context 'validation' do
-    target = %w[あ ｱ a １]
-
     it '日付とuser_idが空なら登録できない' do
-      logs = build(:log, date: nil)
-      valid(logs)
-      logs = build(:log, user_id: nil)
-      valid(logs)
+      test = %w['date: nil' 'user_id: nil']
+      test.each do |i|
+        logs = build(:log, i)
+        logs.valid?
+        expect(logs.errors).to include 'を入力してください'
+      end
     end
 
     it 'weightとbfpとtotal_calは全角・半角文字と英文字で登録できない' do
+      target = %w[あ ｱ a １]
       target.each do |i|
         logs = build(:log, weight: i)
-        number(logs)
+        logs.valid?
+        expect(logs.errors[:weight]).to include 'は数値で入力してください'
         logs = build(:log, bfp: i)
-        number(logs)
+        logs.valid?
+        expect(logs.errors[:bfp]).to include 'は数値で入力してください'
         logs = build(:log, total_cal: i)
-        number(logs)
+        logs.valid?
+        expect(logs.errors[:total_cal]).to include 'は数値で入力してください'
       end
     end
   end
@@ -39,6 +32,7 @@ Rspec.describe Log, type: :model do
       logs = build(:log)
       expect(logs).to be_valid
     end
+    
     it '１項目が空でも登録できる' do
       logs = build(:log, weight: nil)
       expect(logs).to be_valid
