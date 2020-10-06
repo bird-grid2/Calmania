@@ -3,7 +3,7 @@ require 'rails_helper'
 Rspec.describe Log, type: :model do
   context 'validation' do
     it '日付とuser_idが空なら登録できない' do
-      test = %w['date: nil' 'user_id: nil']
+      test = ['date: nil', 'user_id: nil']
       test.each do |i|
         logs = build(:log, i)
         logs.valid?

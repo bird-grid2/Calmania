@@ -3,7 +3,7 @@ require 'rails_helper'
 Rspec.describe User, type: :model do
   context 'validation' do
     it 'user名、email、encrypted_passwordが空なら登録できない' do 
-      test = %w['nickname: nil' 'email: nil' 'encrypted_password: nil']
+      test = ['nickname: nil', 'email: nil', 'encrypted_password: nil']
       
       test.each do |i|
         users = build(:user, i)
@@ -41,7 +41,7 @@ Rspec.describe User, type: :model do
     end
     
     it '任意の項目が空でも登録できる' do
-      item = %w['height: nil' 'ideal_protain_rate: nil' 'ideal_fat_rate: nil' 'ideal_carbohydrate_rate: nil' 'total_cal: nil']
+      item = ['height: nil', 'ideal_protain_rate: nil', 'ideal_fat_rate: nil', 'ideal_carbohydrate_rate: nil', 'total_cal: nil']
       item.each do |i|
         users = build(:user, i)
         expect(users).to be_valid

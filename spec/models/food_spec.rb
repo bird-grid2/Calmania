@@ -3,7 +3,7 @@ require 'rails_helper'
 Rspec.describe Food, type: :model do
   context 'validation' do
     it '各項目が空なら登録できない' do
-      test = %w['food: nil' 'protain_rate: nil' 'fat_rate: nil' 'carbohydrate_rete: nil']
+      test = ['food: nil', 'protain_rate: nil', 'fat_rate: nil', 'carbohydrate_rete: nil']
       test.each do |i|
         foods = build(:food, i)
         foods.valid?

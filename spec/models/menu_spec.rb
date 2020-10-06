@@ -3,7 +3,7 @@ require 'rails_helper'
 Rspec.describe Menu, type: :model do
   context 'validation' do
     it 'menu名、names、massesが空なら登録できない' do
-      test = %w['menu: nil' 'names: nil' 'masses: nil']
+      test = ['menu: nil', 'names: nil', 'masses: nil']
       
       test.each do |i|
         menus = build(:menu, i)
