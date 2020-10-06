@@ -1,20 +1,22 @@
 require 'rails_helper'
 
 describe User do
+
+  def valid(val)
+    val.valid?
+    expect(val.errors).to include 'を入力してください'
+  end
+
+  def number(num)
+    num.valid?
+    expect(num.errors).to include 'は数値で入力してください'
+  end
+
   context 'validation' do
     target = %w[あ ｱ a １]
-    it 'nicknameが空なら登録できない' do
-      users = build(:user, nickname: nil)
-      valid(users)
-    end
-    it 'emailが空なら登録できない' do
-      users = build(:user, email: nil)
-      valid(users)
-    end
-    it 'encrypted_passwordが空なら登録できない' do
-      users = build(:user, encrypted_password: nil)
-      valid(users)
-    end
+    it { 'nicknameが空なら登録できない', users = build(:user, nickname: nil), valid(users) }
+    it { 'emailが空なら登録できない', users = build(:user, email: nil), valid(users) }
+    it { 'encrypted_passwordが空なら登録できない', users = build(:user, encrypted_password: nil), valid(users) }
     it 'heightは全角・半角文字と英文字で登録できない' do
       target.each do |i|
         users = build(:user, height: i)
@@ -25,7 +27,6 @@ describe User do
       target.each do |i|
         users = build(:user, ideal_protain_rate: i)
         number(users)
-
         users = build(:user, ideal_fat_rate: i)
         number(users)
       end

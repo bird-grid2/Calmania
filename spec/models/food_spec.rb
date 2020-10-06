@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Food do
+Rspec.describe Food, type: :model do
   context 'validation' do
     it 'food名が空なら登録できない' do
       foods = build(:food, food: nil)
