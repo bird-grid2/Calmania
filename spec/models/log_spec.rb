@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe Log, type: :model do
   context 'validation' do
     it '日付とuser_idが空なら登録できない' do
-        logs = build(:log, date: nil)
-        logs.valid?
-        expect(logs.errors).to include 'を入力してください'
-        logs = build(:log, user_id: nil)
-        logs.valid?
-        expect(logs.errors).to include 'を入力してください'
+      logs = build(:log, date: nil)
+      logs.valid?
+      expect(logs.errors).to include 'を入力してください'
+      logs = build(:log, user_id: nil)
+      logs.valid?
+      expect(logs.errors).to include 'を入力してください'
     end
 
     it 'weightとbfpとtotal_calは全角・半角文字と英文字で登録できない' do
@@ -31,7 +31,6 @@ RSpec.describe Log, type: :model do
       logs = build(:log)
       expect(logs).to be_valid
     end
-    
     it '１項目が空でも登録できる' do
       logs = build(:log, weight: nil)
       expect(logs).to be_valid

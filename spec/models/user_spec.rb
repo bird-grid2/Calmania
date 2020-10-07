@@ -3,13 +3,14 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'validation' do
     it 'user名、email、encrypted_passwordが空なら登録できない' do 
-      test = ['nickname: nil', 'email: nil', 'encrypted_password: nil']
-        users = build(:user, nickname: nil)
+      test = [:nickname, :email, :encrypted_password]
+      test.each do |i|
+        users = build(:user)
+        users[i] = nil
         users.valid?
-        expect(users.errors[:nickname]).to include 'を入力してください'
+        expect(users.errors[i]).to include 'を入力してください'
       end
     end
-
     it '全角・半角文字と英文字で登録できない' do
       target = %w[あ ｱ a １]
       target.each do |i|
@@ -31,13 +32,11 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
   context 'submit' do
     it '全てが入力されていると、登録できる' do
       users = build(:user)
       expect(users).to be_valid
     end
-    
     it '任意の項目が空でも登録できる' do
       item = ['height: nil', 'ideal_protain_rate: nil', 'ideal_fat_rate: nil', 'ideal_carbohydrate_rate: nil', 'total_cal: nil']
       item.each do |i|

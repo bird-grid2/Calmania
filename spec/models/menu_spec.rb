@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Menu, type: :model do
-
   context 'validation' do
     it 'menu_name、names、massesが空なら登録できない' do
       menus = build(:menu, item: nil)
@@ -15,7 +14,6 @@ RSpec.describe Menu, type: :model do
       expect(menus.errors[:masses]).to include 'を入力してください'
     end
   end
-
   context 'submit' do
     it '全てが入力されていると、登録できる' do
       menus = build(:menu)
