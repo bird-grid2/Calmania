@@ -4,11 +4,9 @@ RSpec.describe User, type: :model do
   context 'validation' do
     it 'user名、email、encrypted_passwordが空なら登録できない' do 
       test = ['nickname: nil', 'email: nil', 'encrypted_password: nil']
-      
-      test.each do |i|
-        users = build(:user, i)
+        users = build(:user, nickname: nil)
         users.valid?
-        expect(users.errors).to include 'を入力してください'
+        expect(users.errors[:nickname]).to include 'を入力してください'
       end
     end
 

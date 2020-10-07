@@ -4,9 +4,9 @@ RSpec.describe Menu, type: :model do
 
   context 'validation' do
     it 'menu_name、names、massesが空なら登録できない' do
-      menus = build(:menu, menu_name: nil)
+      menus = build(:menu, item: nil)
       menus.valid?
-      expect(menus.errors[:menu_name]).to include 'を入力してください'
+      expect(menus.errors[:item]).to include 'を入力してください'
       menus = build(:menu, names: nil)
       menus.valid?
       expect(menus.errors[:names]).to include 'を入力してください'

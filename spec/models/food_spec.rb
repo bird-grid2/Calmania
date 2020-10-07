@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Food do
+RSpec.describe Food, type: :model do
   context 'validation' do
     it '各項目が空なら登録できない' do
-      foods = build(:food, food: nil)
+      foods = build(:food, name: nil)
       foods.valid?
-      expect(foods.errors[:food]).to include 'を入力してください'
+      expect(foods.errors[:name]).to include 'を入力してください'
       foods = build(:food, protain_rate: nil)
       foods.valid?
       expect(foods.errors[:protain_rate]).to include 'を入力してください'
