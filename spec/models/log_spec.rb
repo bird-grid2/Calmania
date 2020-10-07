@@ -5,24 +5,22 @@ RSpec.describe Log, type: :model do
     it '日付とuser_idが空なら登録できない' do
       logs = build(:log, date: nil)
       logs.valid?
-      expect(logs.errors).to include 'を入力してください'
-      logs = build(:log, user_id: nil)
-      logs.valid?
-      expect(logs.errors).to include 'を入力してください'
+      expect(logs.errors[:date]).to include "を入力してください"
     end
 
-    it 'weightとbfpとtotal_calは全角・半角文字と英文字で登録できない' do
+    it "weightとbfpとtotal_calは全角・半角文字と英文字で登録できない" do
       target = %w[あ ｱ a １]
+      logs = build(:log)
       target.each do |i|
-        logs = build(:log, weight: i)
+        logs[:weight] = i
         logs.valid?
-        expect(logs.errors[:weight]).to include 'は数値で入力してください'
-        logs = build(:log, bfp: i)
+        expect(logs.errors[:weight]).to include "は数値で入力してください"
+        logs[:bfp] = i
         logs.valid?
-        expect(logs.errors[:bfp]).to include 'は数値で入力してください'
-        logs = build(:log, total_cal: i)
+        expect(logs.errors[:bfp]).to include "は数値で入力してください"
+        logs[:total_cal] = i
         logs.valid?
-        expect(logs.errors[:total_cal]).to include 'は数値で入力してください'
+        expect(logs.errors[:total_cal]).to include "は数値で入力してください"
       end
     end
   end

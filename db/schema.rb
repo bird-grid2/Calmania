@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
   enable_extension "plpgsql"
 
   create_table "foods", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "material", null: false
     t.decimal "protain_rate", precision: 6, scale: 5, null: false
     t.decimal "fat_rate", precision: 6, scale: 5, null: false
     t.decimal "carbohydrate_rate", precision: 6, scale: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_foods_on_name"
+    t.index ["material"], name: "index_foods_on_material"
   end
 
   create_table "logs", force: :cascade do |t|
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.string "item", null: false
+    t.string "element", null: false
     t.string "names", null: false, array: true
     t.string "masses", null: false, array: true
     t.decimal "total_protain", precision: 5, scale: 1
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
     t.decimal "total_carbohydrate", precision: 5, scale: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item"], name: "index_menus_on_item"
+    t.index ["element"], name: "index_menus_on_element"
   end
 
   create_table "users", force: :cascade do |t|
