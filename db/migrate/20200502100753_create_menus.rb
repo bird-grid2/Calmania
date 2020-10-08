@@ -1,7 +1,7 @@
 class CreateMenus < ActiveRecord::Migration[5.2]
   def change
     create_table :menus do |t|
-      t.string :element,             null: false, index: true
+      t.string :b,             null: false, index: true
       t.string :names,               array: true, null: false
       t.string :masses,              array: true, null: false
       t.decimal :total_protain,      precision: 5, scale: 1
