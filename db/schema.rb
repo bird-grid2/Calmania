@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_110446) do
+ActiveRecord::Schema.define(version: 2020_10_08_154807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "foods", force: :cascade do |t|
-    t.string "a", null: false
+    t.string "element", null: false
     t.decimal "protain_rate", precision: 6, scale: 5, null: false
     t.decimal "fat_rate", precision: 6, scale: 5, null: false
     t.decimal "carbohydrate_rate", precision: 6, scale: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["a"], name: "index_foods_on_a"
+    t.index ["element"], name: "index_foods_on_element"
   end
 
   create_table "logs", force: :cascade do |t|
@@ -35,13 +35,12 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["date"], name: "index_logs_on_date"
-    t.index ["description"], name: "index_logs_on_description"
+    t.index ["date", "description"], name: "index_logs_on_date_and_description"
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
-    t.string "b", null: false
+    t.string "material", null: false
     t.string "names", null: false, array: true
     t.string "masses", null: false, array: true
     t.decimal "total_protain", precision: 5, scale: 1
@@ -49,7 +48,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_110446) do
     t.decimal "total_carbohydrate", precision: 5, scale: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["b"], name: "index_menus_on_b"
+    t.index ["material"], name: "index_menus_on_material"
   end
 
   create_table "users", force: :cascade do |t|

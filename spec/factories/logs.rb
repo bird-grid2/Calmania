@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :log do
-    id            { 1 }
     date          { "2020/10/2" }
     weight        { 75.3 }
     bfp           { 25.1 }

@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe Log, type: :model do
   context 'validation' do
     it '日付とuser_idが空なら登録できない' do

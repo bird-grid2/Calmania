@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :menu do
-    b {'あいうえお'}
+    material {'カレー'}
     names { [1, 2, 3] }
     masses { [200, 100, 300] }
     total_protain { 123.4 }
