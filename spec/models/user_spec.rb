@@ -1,8 +1,8 @@
 require "rails_helper"
 RSpec.describe User, type: :model do
   context "validation" do
-    it "user名、email、passwordが空なら登録できない" do
-      target = [:nickname, :email, :password, :password_confirmation]
+    it "user名、email、encrypted_passwordが空なら登録できない" do
+      target = [:nickname, :email, :encrypted_password]
       target.each do |user|
         users = build(:user)
         users[user] = nil

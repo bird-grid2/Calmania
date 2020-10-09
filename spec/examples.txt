@@ -1,14 +1,14 @@
 example_id                        | status | run_time        |
 --------------------------------- | ------ | --------------- |
-./spec/models/food_spec.rb[1:1:1] | passed | 0.1245 seconds  |
-./spec/models/food_spec.rb[1:2:1] | failed | 0.01563 seconds |
-./spec/models/log_spec.rb[1:1:1]  | passed | 0.00668 seconds |
-./spec/models/log_spec.rb[1:1:2]  | passed | 0.02707 seconds |
-./spec/models/log_spec.rb[1:2:1]  | passed | 0.01331 seconds |
-./spec/models/log_spec.rb[1:2:2]  | passed | 0.00753 seconds |
-./spec/models/menu_spec.rb[1:1:1] | passed | 0.0039 seconds  |
-./spec/models/menu_spec.rb[1:2:1] | passed | 0.01087 seconds |
-./spec/models/user_spec.rb[1:1:1] | passed | 0.0114 seconds  |
-./spec/models/user_spec.rb[1:1:2] | passed | 0.06803 seconds |
-./spec/models/user_spec.rb[1:2:1] | passed | 0.00334 seconds |
-./spec/models/user_spec.rb[1:2:2] | passed | 0.03257 seconds |
+./spec/models/food_spec.rb[1:1:1] | passed | 0.0149 seconds  |
+./spec/models/food_spec.rb[1:2:1] | passed | 0.00123 seconds |
+./spec/models/log_spec.rb[1:1:1]  | passed | 0.00634 seconds |
+./spec/models/log_spec.rb[1:1:2]  | passed | 0.03841 seconds |
+./spec/models/log_spec.rb[1:2:1]  | passed | 0.01808 seconds |
+./spec/models/log_spec.rb[1:2:2]  | passed | 0.0116 seconds  |
+./spec/models/menu_spec.rb[1:1:1] | passed | 0.00292 seconds |
+./spec/models/menu_spec.rb[1:2:1] | passed | 0.00976 seconds |
+./spec/models/user_spec.rb[1:1:1] | passed | 0.01191 seconds |
+./spec/models/user_spec.rb[1:1:2] | passed | 0.06928 seconds |
+./spec/models/user_spec.rb[1:2:1] | passed | 0.1236 seconds  |
+./spec/models/user_spec.rb[1:2:2] | passed | 0.01071 seconds |
