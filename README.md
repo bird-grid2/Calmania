@@ -49,8 +49,10 @@
   Rails 5.2.4.3  
   jQuery-rails 4.4.0  
   Python 3.8.5  
-  Pycall 1.3.1  
-
+  Pycall 1.3.1
+  AWS(Route53、VPC、EC2、ELB、RDS)
+  CircleCI
+  Mergigy
 
 # update information
  ★ graph情報の更新(ウィンドウの表示)  
@@ -71,11 +73,11 @@
 |nickname|string|null: false|
 |email|string|null: false, defalult: ""|
 |encrypted_password|string|null: false, default: ""|
-|height|decimal|precision: 4, scale: 1|
-|ideal_protain_rate|integer||
-|ideal_fat_rate|integer||
-|ideal_carbohydrate_rate|integer||
-|target_cal|integer||
+|height|decimal|precision: 4, scale: 1, numericality: true|
+|ideal_protain_rate|integer|numericality: true|
+|ideal_fat_rate|integer|numericality: true|
+|ideal_carbohydrate_rate|integer|numericality: true|
+|target_cal|integer|numericality: true|
 ### Association
 - has_many :logs, dependent: :destroy
 - validates :nickname, presence: true, uniqueness: true
@@ -83,10 +85,10 @@
 ## logsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|date|date|null: false|
-|weight|decimal|precision: 4, scale: 1|
-|bfp|decimal|precision: 3, scale: 1|
-|total_cal|decimal|precision: 5, scale: 1|
+|date|date|null: false, index: true|
+|weight|decimal|precision: 4, scale: 1, numericality: true|
+|bfp|decimal|precision: 3, scale: 1, numericality: true|
+|total_cal|decimal|precision: 5, scale: 1, numericality: true|
 |description|text||
 |menu_numbers|string|array: true|
 |user|references|foreign_key: true, on_delete: :cascade|
@@ -97,9 +99,9 @@
 ## menusテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|menu|string|null: false|
+|item|string|null: false, index: true|
 |names|string|array: true, null: false|
-|masses|string|array: true, null: false|
+|masses|string|array: true, null: false, numericality: true|
 |total_protain|decimal|precision: 5, scale: 1|
 |total_fat|decimal|precision: 5, scale: 1|
 |total_carbohydrate|decimal|precision: 5, scale: 1|
@@ -110,7 +112,7 @@
 ## foodsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|food|string|null: false|
+|name|string|null: false, index: true|
 |protain_rate|decimal|null: false, precision: 6, scale: 5|
 |fat_rate|decimal|null: false, precision: 6, scale: 5|
 |carbohydrate_rate|decimal|null: false, precision: 6, scale: 5|
