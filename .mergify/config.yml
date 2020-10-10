@@ -5,10 +5,9 @@ pull_request_rules:
       - author=bird-grid2
     actions:
       merge:
-        strict: "smart"
-        method: rebase
-
-pull_request_rules:
+        strict: true
+        method: merge
+        
   - name: delete head branch after merge
     conditions:
       - merged
