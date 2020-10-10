@@ -73,48 +73,54 @@
 |nickname|string|null: false|
 |email|string|null: false, defalult: ""|
 |encrypted_password|string|null: false, default: ""|
-|height|decimal|precision: 4, scale: 1, numericality: true|
-|ideal_protain_rate|integer|numericality: true|
-|ideal_fat_rate|integer|numericality: true|
-|ideal_carbohydrate_rate|integer|numericality: true|
-|target_cal|integer|numericality: true|
+|height|decimal|precision: 4, scale: 1|
+|ideal_protain_rate|integer||
+|ideal_fat_rate|integer||
+|ideal_carbohydrate_rate||
+|target_cal|integer||
 ### Association
 - has_many :logs, dependent: :destroy
 - validates :nickname, presence: true, uniqueness: true
+- validates :encrypted_password, presence: true
+- validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: { allow_nil: true }
 
 ## logsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|date|date|null: false, index: true|
-|weight|decimal|precision: 4, scale: 1, numericality: true|
-|bfp|decimal|precision: 3, scale: 1, numericality: true|
-|total_cal|decimal|precision: 5, scale: 1, numericality: true|
+|date|date|null: false|
+|weight|decimal|precision: 4, scale: 1|
+|bfp|decimal|precision: 3, scale: 1|
+|total_cal|decimal|precision: 5, scale: 1|
 |description|text||
 |menu_numbers|string|array: true|
 |user|references|foreign_key: true, on_delete: :cascade|
 ### Association
 - belongs_to :user
 - has_many :menus
+- validates :date, :user_id, presence: true
+- validates :weight, :bfp, :total_cal, numericality: { allow_nil: true }
 
 ## menusテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|item|string|null: false, index: true|
+|material|string|null: false|
 |names|string|array: true, null: false|
-|masses|string|array: true, null: false, numericality: true|
+|masses|string|array: true, null: false|
 |total_protain|decimal|precision: 5, scale: 1|
 |total_fat|decimal|precision: 5, scale: 1|
 |total_carbohydrate|decimal|precision: 5, scale: 1|
 ### Association
 - belongs_to :log, optional: true
 - has_many :foods
+- validates :material, :names, :masses, presence: true
 
 ## foodsテーブル
 |Colmun|Type|Option|
 |-------|----|------|
-|name|string|null: false, index: true|
+|element|string|null: false|
 |protain_rate|decimal|null: false, precision: 6, scale: 5|
 |fat_rate|decimal|null: false, precision: 6, scale: 5|
 |carbohydrate_rate|decimal|null: false, precision: 6, scale: 5|
 ### Associtaion
 - belongs_to :menu
+- validates :element, :protain_rate, :fat_rate, :carbohydrate_rate, presence: true
