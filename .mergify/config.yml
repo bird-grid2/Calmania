@@ -1,13 +1,12 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
+      - "status-success=ci/circleci: build"
       - author=bird-grid2
-      - status-success=Circle CI - Pull Request
-      - base=master
     actions:
       merge:
-        method: merge
-        strict: true
+        strict: "smart"
+        method: rebase
 
 pull_request_rules:
   - name: delete head branch after merge
