@@ -6,7 +6,6 @@ pull_request_rules:
       - "#review-requested=0"
       - "#changes-requested-reviews-by=0"
       - "#commented-reviews-by=0"
-      - base=master
 
     actions:
       merge:
