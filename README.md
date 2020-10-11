@@ -76,7 +76,7 @@
 |height|decimal|precision: 4, scale: 1|
 |ideal_protain_rate|integer||
 |ideal_fat_rate|integer||
-|ideal_carbohydrate_rate||
+|ideal_carbohydrate_rate|integer||
 |target_cal|integer||
 ### Association
 - has_many :logs, dependent: :destroy
