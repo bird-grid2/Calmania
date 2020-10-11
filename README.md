@@ -45,14 +45,17 @@
 - メニューの作成
 
 # Environment
+
   Ruby 2.5.1  
   Rails 5.2.4.3  
   jQuery-rails 4.4.0  
   Python 3.8.5  
-  Pycall 1.3.1
-  AWS(Route53、VPC、EC2、ELB、RDS)
-  CircleCI
-  Mergigy
+  Pycall 1.3.1  
+  AWS(Route53、VPC、EC2、ELB、RDS)  
+  CircleCI  
+  Mergify  
+  
+<img width="600" alt="infra" src="https://user-images.githubusercontent.com/61616172/95674018-7351f000-0be8-11eb-9034-29247a0c2c10.png">
 
 # update information
  ★ graph情報の更新(ウィンドウの表示)  
