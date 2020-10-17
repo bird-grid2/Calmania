@@ -24,6 +24,12 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       - run:
+          name: setup nodejs
+          command: |
+            curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+            sudo yum install -y nodejs
+      
+      - run:
           name: setup bundler
           command: |
             sudo gem update --system

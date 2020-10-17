@@ -1,20 +1,16 @@
 .wrapper
   .side-management
-    = link_to graphs_path do
+    = link_to graphs_path, data: { toggle: "tooltip", placement: "right"}, title: "グラフ描画"  do
       = icon('far', 'chart-bar')
-      %p.pop1 グラフ描画
     %span<>
     = link_to logs_path do
       = icon('fas', 'file-alt')
-      %p.pop2 ログ記録
     %span<>
     = link_to edit_user_registration_path do
       = icon('fas', 'edit')
-      %p.pop3 ログイン情報編集
     %span<>
     = link_to destroy_user_session_path, method: :delete do
       = icon('fas', 'sign-out-alt')
-      %p.pop4 ログアウト
   .main_wrapper
     .top-managements
       .top-managements__left-contents
