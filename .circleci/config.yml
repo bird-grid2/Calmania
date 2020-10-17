@@ -27,7 +27,7 @@ jobs:
           name: setup nodejs
           command: |
             curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-            sudo yum install -y nodejs
+            apt-get install -y nodejs
       
       - run:
           name: setup bundler
