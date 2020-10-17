@@ -24,10 +24,10 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       - run:
-          name: setup nodejs
-          command: |
-            curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-            apt-get install -y nodejs
+        name: "Node.js と npm の更新"
+        command: |
+          curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+          curl https://www.npmjs.com/install.sh | sudo bash
       
       - run:
           name: setup bundler
