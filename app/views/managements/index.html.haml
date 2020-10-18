@@ -1,6 +1,6 @@
 .wrapper
   .side-management
-    = link_to graphs_path, data: { toggle: "tooltip", placement: "right"}, title: "グラフ描画"  do
+    = link_to graphs_path, title: 'グラフ描画' do
       = icon('far', 'chart-bar')
     %span<>
     = link_to logs_path do
@@ -16,11 +16,11 @@
       .top-managements__left-contents
         .top-managements__left-contents--title
           %h1 BMI
-        .top-managements__right-contents--value
+        .top-managements__left-contents--value
           <h3>#{@body_mass_index.present? ? @body_mass_index : '---'}</h3>
         .top-managements__left-contents--title
           %h1 適正体重
-        .top-managements__right-contents--value
+        .top-managements__left-contents--value
           <h3>#{@weight.present? ? @weight : '---'}</h3><p>[kg]</p>
       .top-managements__right-contents
         .top-managements__right-contents-title
@@ -35,22 +35,22 @@
       .middle-managements__left-contents
         .middle-managements__left-contents--main-title
           .main-title
-            %h2 本日の摂取カロリー
+            %h2 摂取カロリー
           .total-value
             <h3>#{@today_cal}</h3><p>[kCal]</p>
         .middle-managements__left-contents--title
           .titles
-            %h4 たんぱく質の摂取量(本日)
+            %h4 たんぱく質摂取量
           .value
             <h6>#{@today_protain}</h6><p>[kCal]</p>
         .middle-managements__left-contents--title
           .titles
-            %h4 脂質の摂取量(本日)
+            %h4 脂質摂取量
           .value
             <h6>#{@today_fat}</h6><p>[kCal]</p>
         .middle-managements__left-contents--title
           .titles
-            %h4 炭水化物の摂取量(本日)
+            %h4 炭水化物摂取量
           .value
             <h6>#{@today_carb}</h6><p>[kCal]</p>
       .middle-managements__right-contents

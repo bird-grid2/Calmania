@@ -9,28 +9,15 @@
       h1 {
         display: block;
         color: #ffffff;
-        font-size: 4.5rem;
+        font-size: 4vw;
         width: 100%;
         line-height: 5rem;  
       }
       &__left-contents{
-        width: 50%;
-        padding: 3rem;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
+        @include top-manegement;
       }
       &__right-contents{
-        width: 50%;
-        text-align: center;
-        &--value {
-          @include h3;
-          @include p;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+        @include top-manegement;
       }
     }
     .middle-managements{
@@ -38,21 +25,24 @@
       width: 100%;
       background-color: white;
       display: flex;
-      justify-items: center;
+      justify-content: center;
       text-align: center;
       &__left-contents{
         padding: 0.5rem;
         height: 100%;
         width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         &--main-title{
-          height: 20%;
-          margin: 0 0 2.5rem 0;
+          height: 25%;
           background-color: deepskyblue;
           .main-title {
-            height: 35%;
+            height: 40%;
             @include h2;
           }
           .total-value {
+            height: 60%;
             @include h3;
             @include p;
             display: flex;
@@ -62,13 +52,13 @@
         }
         &--title{
           height: 20%;
-          margin-bottom: 2.5rem;
           background-color: deepskyblue;
           .titles {
             height: 40%;
             @include h4;
           }
           .value {
+            height: 60%;
             @include h6;
             @include p;
             display: flex;
@@ -100,15 +90,15 @@
                 text-align: center;
                 height: 5rem;
                 width: 20%;
-                font-size: 1.5rem;
-                line-height: 5rem;
+                font-size: 1.5vw;
+                line-height: 5vh;
               }
               .table-item{
                 display: block;
                 height: 5rem;
                 width: 20%;
-                font-size: 1.5rem;
-                line-height: 5rem;
+                font-size: 1.5vw;
+                line-height: 5vh;
                 overflow-x: auto;
               }
             }

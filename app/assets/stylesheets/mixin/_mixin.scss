@@ -1,3 +1,50 @@
+@mixin h2 {
+  h2 {
+    height: 100%;
+    display: block;
+    line-height: 6vh;
+    font-size: 2.5vw;
+    color: white;
+  }
+}
+
+@mixin h3 {
+  h3 {
+    display: block;
+    color: #ffffff;
+    font-size: 2.5vw;
+    line-height: 5vh;
+    margin-right: 1rem;
+  }
+}
+
+@mixin h4 {
+  h4 {
+    height: 100%;
+    display: block;
+    font-size: 2vw;
+    color: #ffffff;
+    line-height: 5vh;
+  }
+}
+
+@mixin h6 {
+  h6 {
+    display: block;
+    font-size: 2.5vw;
+    color: #ffffff;
+    line-height: 3vh;
+    margin-right: 1rem;
+  }
+}
+
+@mixin p {
+  display: block;
+  font-size: 1.5rem;
+  color: #ffffff;
+  line-height: 3vh;
+}
+
 @mixin graph {
   .left_graph{
     height: 100%;
@@ -28,6 +75,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 2vh 2vw;
+}
+
+@mixin top-manegement {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &--value {
+    @include h3;
+    @include p;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @mixin cal-box {
@@ -95,9 +157,9 @@
   color: white;
   h2 {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     height: 30%;
-    line-height: 2rem;
+    line-height: 2vh;
     text-align: center;
   }
   .label {
@@ -106,13 +168,13 @@
     h3 {
       width: 60%;
       display: block;
-      font-size: 4rem;
-      line-height: 7rem;
+      font-size: 4vw;
+      line-height: 7vh;
     }
     p {
       display: block;
-      font-size: 1.5rem;
-      line-height: 8rem;
+      font-size: 1.5vw;
+      line-height: 8vh;
     }
   }
 }
@@ -124,8 +186,8 @@
     color: black;
     display: block;
     height: 30%;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 1.5vw;
+    line-height: 2vh;
     text-align: center;
   }
   .label{
@@ -137,61 +199,16 @@
       color: black;
       display: block;
       width: 75%;
-      font-size: 2.5rem;
-      line-height: 4.5rem;
+      font-size: 2.5vw;
+      line-height: 4.5vh;
     }
     p {
       display: block;
       width: 25%;
-      font-size: 1rem;
-      line-height: 7rem;
+      font-size: 1vw;
+      line-height: 7vh;
     }
   }
-}
-
-@mixin h2 {
-  h2 {
-    display: block;
-    line-height: 3rem;
-    font-size: 2rem;
-    color: white;
-  }
-}
-
-@mixin h3 {
-  h3 {
-    display: block;
-    color: #ffffff;
-    font-size: 3rem;
-    line-height: 5rem;
-    margin-right: 1rem;
-  }
-}
-
-@mixin h4 {
-  h4 {
-    display: block;
-    font-size: 1.8rem;
-    color: #ffffff;
-    line-height: 3rem;
-  }
-}
-
-@mixin h6 {
-  h6 {
-    display: block;
-    font-size: 2.5rem;
-    color: #ffffff;
-    line-height: 3rem;
-    margin-right: 1rem;
-  }
-}
-
-@mixin p {
-  display: block;
-  font-size: 2.5rem;
-  color: #ffffff;
-  line-height: 3rem;
 }
 
 @mixin pop {
