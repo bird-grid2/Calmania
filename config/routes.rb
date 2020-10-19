@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  root to: 'managements#index'
+  root to: 'shows#index'
 
   resources :users, except: [:index, :show]
-  resources :managements , only: :index
+  resources :managements, only: :index
+  resources :shows, only: :index
   resources :graphs , only: :index  #, defaults: { format: 'json' }
   resources :logs, except: :show do
     collection do

@@ -1,0 +1,32 @@
+.wrapper {
+  .side-manegement {
+    .container {
+      width: 80px;
+      height: 80px;
+      border: 2px solid deepskyblue;
+      position: relative;
+    }
+    .inner {
+      width: 60px;
+      height: 60px;
+      border: 2px solid deepskyblue;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    #target:hover {
+      animation:3s linear infinite rotation1;
+    }
+    #target_2:hover {
+      animation:3s linear infinite rotation2;
+    }
+    @keyframes rotation1{
+      0%{ transform:rotate(0);}
+      100%{ transform:rotate(360deg); }
+    }
+    @keyframes rotation2{
+      0%{ transform:rotateX(360deg);}
+      100%{ transform:rotateX(0); }
+    }
+  }
+}
