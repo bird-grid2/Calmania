@@ -1,32 +1,33 @@
 .wrapper {
   .side-management {
     .container {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border: 2px solid deepskyblue;
       position: relative;
     }
     .inner {
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       border: 2px solid deepskyblue;
       position: absolute;
-      left: 0;
-      top: 0;
+      left: 10px;
+      top: 10px;
+      font-size: 0px;
     }
     #target:hover {
-      animation:3s linear infinite rotation1;
+      animation:1s linear rotation1;
     }
     #target_2:hover {
-      animation:3s linear infinite rotation2;
+      animation:1s linear rotation2;
     }
     @keyframes rotation1{
-      0%{ transform:rotate(0);}
-      100%{ transform:rotate(360deg); }
+      0%{ transform:rotateZ(0);}
+      100%{ transform:rotateZ(-90deg); }
     }
     @keyframes rotation2{
-      0%{ transform:rotateX(360deg);}
-      100%{ transform:rotateX(0); }
+      0%{ transform:rotateZ(0);}
+      100%{ transform:rotateZ(90deg); }
     }
   }
 }
