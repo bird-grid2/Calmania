@@ -5,6 +5,7 @@
       height: 60px;
       border: 2px solid deepskyblue;
       position: relative;
+      transition: transform 0.2s linear 0s;
     }
     .inner {
       width: 40px;
@@ -13,21 +14,13 @@
       position: absolute;
       left: 10px;
       top: 10px;
-      font-size: 0px;
+      transition: transform 0.2s linear 0s;
     }
     #target:hover {
-      animation:1s linear rotation1;
+      transform:rotate(90deg);
     }
     #target_2:hover {
-      animation:1s linear rotation2;
-    }
-    @keyframes rotation1{
-      0%{ transform:rotateZ(0);}
-      100%{ transform:rotateZ(-90deg); }
-    }
-    @keyframes rotation2{
-      0%{ transform:rotateZ(0);}
-      100%{ transform:rotateZ(90deg); }
+      transform:rotate(-90deg);
     }
   }
 }
