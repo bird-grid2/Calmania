@@ -1,14 +1,10 @@
 .wrapper
   .side-management
     .container#target  
-      %button.inner#target_2
-        =link_to '#', user_session_path
-  .main_wrapper
-    .main_wrapper__header
+      = link_to '#', user_session_path, class: 'inner', id: 'target_2'
+  .top_wrapper
+    .top_wrapper__header
       Calmania
-    .main_wrapper__content
-      Let's Enjoy Calory controlling
+    .top_wrapper__content
+      Let's Enjoy Calory controlling <br>
       To ideal yourserf ...
-
-    %button
-      = link_to '#', user_session_path

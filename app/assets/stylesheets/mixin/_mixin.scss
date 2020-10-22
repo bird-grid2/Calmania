@@ -69,7 +69,6 @@
 
 @mixin wrapper {
   width: 95%;
-  background: image-url('image.jpg');  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
