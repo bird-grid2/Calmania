@@ -22,25 +22,18 @@
     }
     #target_2:hover {
       transform:rotate(-90deg);
+      background-color: deepskyblue;
     }
   }
   .top_wrapper {
-    background: image-url('IMG_20180505_123036.jpg');
-    background-size: contain;
     position: relative;
     &__header {
-      font-size: 5rem;
       color: #fff;
       position: absolute;
-      right: 100px;
-      bottom: 150px; 
     }
     &__content {
-      font-size: 3rem;
       color: #fff;
       position: absolute;
-      right: 10px;
-      bottom: 50px;
     }
   }
 }
