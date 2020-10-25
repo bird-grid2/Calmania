@@ -102,17 +102,9 @@
       }
       &__content {
         font-size: 5rem;
-        left: 65%;
-        top: 45%;
-        transform-origin: top left;
-        .char1 { transform: rotate(30deg); }
-        .char2 { transform: rotate(30deg); }
-        .char3 { transform: rotate(30deg); }
-        .char4 { transform: rotate(30deg); }
-        .char5 { transform: rotate(30deg); }
-        .char6 { transform: rotate(30deg); }
-        .char7 { transform: rotate(30deg); }
-        .char8 { transform: rotate(30deg); }
+        color: black;
+        left: 63%;
+        top: 83%;
       }
       .sp {
         display: none;
