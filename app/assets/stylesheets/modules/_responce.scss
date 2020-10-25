@@ -101,11 +101,34 @@
         top: 20px; 
       }
       &__content {
+        width: 200px;
         font-size: 5rem;
-        color: black;
-        left: 63%;
-        top: 83%;
+        color: deepskyblue;
+        left: 50vw;
+        top: 57vh;
+        h1 {
+          display: flex;
+          position: relative;
+        }
+        span {
+          display: block;
+          position: absolute;
+          line-height: 80vh;
+          height: 10%;
+          width: 30px;
+          left: 0;
+          top: 0;
+          transform-origin: top center ;
+        }
       }
+      .char1 { transform: rotate(-20deg); }
+      .char2 { transform: rotate(-30deg); }
+      .char3 { transform: rotate(-40deg); }
+      .char4 { transform: rotate(-47deg); }
+      .char5 { transform: rotate(-60deg); }
+      .char6 { transform: rotate(-70deg); }
+      .char7 { transform: rotate(-80deg); }
+      .char8 { transform: rotate(-87deg); }
       .sp {
         display: none;
       }
