@@ -1,27 +1,29 @@
-.user_wrapper
-  %header
-    %h2 新規作成
-    = image_tag 'b_ornament_146_0S.png'
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = render "devise/shared/error_messages", resource: resource
-    .field
-      = f.label :nickname, class: 'label', value: 'ニックネーム'
-      = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", required: true
-    .field
-      = f.label :email, class: 'label', value: 'メールアドレス'
-      = f.email_field :email, placeholder: "メールアドレス", required: true
-    .field
-      = f.label :height, class: 'label', value: '身長[cm]'
-      = f.number_field :height, placeholder: "身長入力(任意)", step: '0.1'
-    .field
-      .field-box
-        = f.label :password, class: 'password', value: 'パスワード', required: true
-        - if @minimum_password_length
-          %em
-            (#{@minimum_password_length}字以上入力)
-      = f.password_field :password, placeholder: "パスワード入力"
-    .field
-      = f.label :password_confirmation, class: 'label', value: '確認入力'
-      = f.password_field :password_confirmation, placeholder: "パスワード入力(確認)", required: true
-    .actions
-      = f.submit "新規作成"
+.wrapper
+  .side-management
+  .user_wrapper
+    %header
+      %h2 新規作成
+      = image_tag 'b_ornament_146_0S.png'
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .field
+        = f.label :nickname, class: 'label', value: 'ニックネーム'
+        = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", required: true
+      .field
+        = f.label :email, class: 'label', value: 'メールアドレス'
+        = f.email_field :email, placeholder: "メールアドレス", required: true
+      .field
+        = f.label :height, class: 'label', value: '身長[cm]'
+        = f.number_field :height, placeholder: "身長入力(任意)", step: '0.1'
+      .field
+        .field-box
+          = f.label :password, class: 'password', value: 'パスワード', required: true
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length}字以上入力)
+        = f.password_field :password, placeholder: "パスワード入力"
+      .field
+        = f.label :password_confirmation, class: 'label', value: '確認入力'
+        = f.password_field :password_confirmation, placeholder: "パスワード入力(確認)", required: true
+      .actions
+        = f.submit "新規作成"
