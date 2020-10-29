@@ -3,14 +3,14 @@
     .container {
       width: 40px;
       height: 40px;
-      border: 2px solid deepskyblue;
+      border: 2px solid $maincolor;
       position: relative;
       transition: transform 0.2s linear 0s;
     }
     .inner {
       width: 30px;
       height: 30px;
-      border: 2px solid deepskyblue;
+      border: 2px solid $maincolor;
       font-size: 0px;
       position: absolute;
       left: 3px;
@@ -22,7 +22,7 @@
     }
     #target_2:hover {
       transform:rotate(-90deg);
-      background-color: deepskyblue;
+      background-color: $maincolor;
     }
   }
   .top_wrapper {
@@ -30,10 +30,17 @@
     &__header {
       color: #fff;
       position: absolute;
+      font-size: 5rem;
+      left: 25%;
+      top: 5%;
     }
     &__content {
       color: #fff;
       position: absolute;
+      font-size: 3rem;
+      text-align: center;
+      left: 10%;
+      bottom: 10%;
     }
   }
 }

@@ -1,16 +1,25 @@
 .wrapper
   .side-management
-    = link_to graphs_path, title: 'グラフ描画' do
+    = link_to graphs_path do
       = icon('far', 'chart-bar')
+      %span<>
+      %h6.pc Show</br>graphs
+      %h6.sp Show graphs
     %span<>
     = link_to logs_path do
       = icon('fas', 'file-alt')
+      %h6.pc Create</br>logs
+      %h6.sp Create logs
     %span<>
     = link_to edit_user_registration_path do
       = icon('fas', 'edit')
+      %h6.pc Edit</br>profile
+      %h6.sp Edit profile
     %span<>
     = link_to destroy_user_session_path, method: :delete do
       = icon('fas', 'sign-out-alt')
+      %h6.pc Sign</br>out
+      %h6.sp Sign out
   .main_wrapper
     .top-managements
       .top-managements__left-contents
