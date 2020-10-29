@@ -6,13 +6,14 @@
     .left_box
       .field
         = f.label :nickname, value: "ニックネーム", class: 'log-in'
-        = f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", required: true
+        = f.text_field :nickname, autofocus: true, placeholder: "ニックネームを入力してください", required: true
       .field
         = f.label :email, value: "メールアドレス", class: 'log-in'
-        = f.email_field :email, placeholder: "メールアドレス", required: true
+        = f.email_field :email, placeholder: "メールアドレスを入力してください", required: true
       .field
         = f.label :password, value: "パスワード", class: 'log-in'
-        = f.password_field :password, placeholder: "パスワード入力", required: true
+        = f.password_field :password, placeholder: "パスワードを入力してください", required: true
+    .border-line
     .right_box
       - if devise_mapping.rememberable?
         .check_field

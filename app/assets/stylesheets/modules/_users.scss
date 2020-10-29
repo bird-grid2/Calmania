@@ -5,7 +5,7 @@
   padding: 5vh 5vw;
   header {
     display: block;
-    height: 15%;
+    height: 20%;
     font-size: 4rem;
     text-align: center;
     position: relative;
@@ -18,26 +18,32 @@
     }
   }
   .new_user {
-    height: 65%;
+    height: 75%;
     background-color: #ebeef1;
     display: flex;
     .left_box {
       height: 100%;
       width: 50%;
-      padding: 8rem;
+      padding: 5rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       .field {
-        width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
+        align-items: center;
         .log-in {
-          display: inline-block;
+          width: 100%;
           margin: 5% 0;
           font-size: 2rem;
           line-height: 2.5rem;
+        }
+        input {
+          width: 100%;
+          display: inline-block;
+          height: 4rem;
+          width: 25rem;
         }
         &-box {
           height: 100%;
@@ -55,12 +61,12 @@
             font-size: 1.5rem;
           }
         }
-        input {
-          display: inline-block;
-          height: 4rem;
-          width: 25rem;
-        }
       }
+    }
+    .border-line {
+      height: 80%;
+      margin: 7% 0;
+      border-left: 1px solid #000;
     }
     .right_box {
       height: 100%;
@@ -68,18 +74,20 @@
       padding: 8.5rem 4rem;
       .check_field {
         height: 10%;
-        width: 60%;
+        width: 70%;
         text-align: center;
         margin: 5% auto 0 auto;
       }
       .actions {
         height: 30%;
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         #login {
           display: inline-block;
-          margin: 0 12% 0;
           height: 5rem;
-          width: 23rem;
+          width: 22rem;
           color: white;
           background-color: $maincolor;
           font-size: 2rem;
@@ -95,13 +103,12 @@
         margin: 0 auto;
         &_label{
           display: inline-block;
-          height: 7rem;
           width: 20rem;
           margin: 2rem 0;
           background-color: $maincolor;
           color: white;
           text-align: center;
-          line-height: 3rem;
+          line-height: 5rem;
         }
         #easy_login {
           background-color: coral;
