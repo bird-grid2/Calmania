@@ -10,7 +10,7 @@
       justify-content: space-around;
       text-align: center;
       align-items: center;
-      background: rgba(0, 191, 255, 0.8);
+      background: $maincolor;
       .fas {
         @include icons;
         font-size: 2rem;
@@ -31,7 +31,10 @@
       }
     }
     .main_wrapper {
-      @include wrapper;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3% 0;
       width: 100%;
       height: 93%;
     }
@@ -73,7 +76,7 @@
       width: 8%;
       justify-content: space-around;
       text-align: center;
-      background: rgba(0, 191, 255, 0.8);
+      background: $maincolor;
       .fas {
         @include icons;
         font-size: 4rem;
@@ -94,7 +97,10 @@
       }
     }
     .main_wrapper {
-      @include wrapper;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3% 0;
       width: 92%;
       .top-manegements{
         h1 {

@@ -4,14 +4,14 @@
     display: block;
     line-height: 6vh;
     font-size: 2.5vw;
-    color: white;
+    color: $white;
   }
 }
 
 @mixin h3 {
   h3 {
     display: block;
-    color: #ffffff;
+    color: $white;
     font-size: 2.5vw;
     line-height: 5vh;
     margin-right: 1rem;
@@ -23,7 +23,7 @@
     height: 100%;
     display: block;
     font-size: 2vw;
-    color: #ffffff;
+    color: $white;
     line-height: 5vh;
   }
 }
@@ -32,7 +32,7 @@
   h6 {
     display: block;
     font-size: 2.5vw;
-    color: #ffffff;
+    color: $white;
     line-height: 3vh;
     margin-right: 1rem;
   }
@@ -41,7 +41,7 @@
 @mixin p {
   display: block;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: $white;
   line-height: 3vh;
 }
 
@@ -72,6 +72,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 3% 0;
 }
 
 @mixin icons {
@@ -85,7 +86,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   &--value {
     @include h3;
     @include p;

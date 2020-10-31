@@ -1,15 +1,15 @@
 .wrapper {
   .main_wrapper {
     .top-managements{
-      height: 20rem;
+      height: 30%;
       width: 95%;
-      background-color: aquamarine;
-      box-shadow: 0.1rem 0.5rem 0.1rem 0.1rem slategray;
       display: flex;
+      background: $black;
+      border: 1px solid $white;
       h1 {
         display: block;
-        color: #ffffff;
-        font-size: 4vw;
+        color: $white;
+        font-size: 3vw;
         width: 100%;
         line-height: 5rem;  
       }
@@ -19,88 +19,85 @@
       &__right-contents{
         @include top-manegement;
       }
+      .border-dashed {
+        width: 80%;
+        border-top: 1px dashed $white; 
+      }
     }
-    .middle-managements{
-      height: calc(100% - 300px);
-      width: 100%;
-      background-color: white;
+    .middle-managements {
+      height: 20%;
+      width: 95%;
       display: flex;
-      justify-content: center;
       text-align: center;
-      &__left-contents{
-        padding: 0.5rem;
-        height: 100%;
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        &--main-title{
-          height: 25%;
-          background-color: deepskyblue;
-          .main-title {
-            height: 40%;
-            @include h2;
-          }
-          .total-value {
-            height: 60%;
-            @include h3;
-            @include p;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+      background: $black;
+      &--main-title {
+        width: 34%;
+        .main-title {
+          height: 40%;
+          @include h2;
         }
-        &--title{
-          height: 20%;
-          background-color: deepskyblue;
-          .titles {
-            height: 40%;
-            @include h4;
-          }
-          .value {
-            height: 60%;
-            @include h6;
-            @include p;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60%;
-          }
+        .total-value {
+          height: 60%;
+          @include h3;
+          @include p;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
-      &__right-contents {
-        width: 70%;
+      &--title{
+        width: 22%;
+        .titles {
+          height: 40%;
+          @include h4;
+        }
+        .value {
+          height: 60%;
+          @include h6;
+          @include p;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60%;
+        }
+      }
+      .border-line {
         height: 100%;
-        .upper-info{
-          height: 100%;
+        padding: 10% 0;
+        border-left: 1px solid $white;
+      }
+    }
+    .bottom-managements {
+      width: 95%;
+      height: 50%;
+      .upper-info{
+        height: 100%;
+        width: 100%;
+        color: black;
+        overflow-y: auto;
+        display: block;
+        text-align: center;
+        table {
           width: 100%;
-          background-color: darkgreen;
-          color: white;
-          overflow-y: auto;
-          display: block;
-          text-align: center;
-          table {
-            width: 100%;
-            height: 100%;
-            tr {
+          height: 100%;
+          tr {
+            display: block;
+            display: flex;
+            .table-title{
               display: block;
-              display: flex;
-              .table-title{
-                display: block;
-                text-align: center;
-                height: 5rem;
-                width: 20%;
-                font-size: 1.5vw;
-                line-height: 5vh;
-              }
-              .table-item{
-                display: block;
-                height: 5rem;
-                width: 20%;
-                font-size: 1.5vw;
-                line-height: 5vh;
-                overflow-x: auto;
-              }
+              text-align: center;
+              height: 5rem;
+              width: 20%;
+              font-size: 1.5vw;
+              line-height: 5vh;
+            }
+            .table-item{
+              display: block;
+              height: 5rem;
+              width: 20%;
+              font-size: 1.5vw;
+              line-height: 5vh;
+              overflow-x: auto;
             }
           }
         }

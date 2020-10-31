@@ -27,6 +27,7 @@
           %h1 BMI
         .top-managements__left-contents--value
           <h3>#{@body_mass_index.present? ? @body_mass_index : '---'}</h3>
+        .border-dashed
         .top-managements__left-contents--title
           %h1 適正体重
         .top-managements__left-contents--value
@@ -36,51 +37,53 @@
           %h1 体重
         .top-managements__right-contents--value
           <h3>#{@today_weight.present? ? @today_weight : '---'}</h3><p>[kg]</p>
+        .border-dashed
         .top-managements__right-contents-title
           %h1 体脂肪率
         .top-managements__right-contents--value
           <h3>#{@today_bfp.present? ? @today_bfp : '---'}</h3><p>[%]</p>
     .middle-managements
-      .middle-managements__left-contents
-        .middle-managements__left-contents--main-title
-          .main-title
-            %h2 摂取カロリー
-          .total-value
-            <h3>#{@today_cal}</h3><p>[kCal]</p>
-        .middle-managements__left-contents--title
-          .titles
-            %h4 たんぱく質摂取量
-          .value
-            <h6>#{@today_protain}</h6><p>[kCal]</p>
-        .middle-managements__left-contents--title
-          .titles
-            %h4 脂質摂取量
-          .value
-            <h6>#{@today_fat}</h6><p>[kCal]</p>
-        .middle-managements__left-contents--title
-          .titles
-            %h4 炭水化物摂取量
-          .value
-            <h6>#{@today_carb}</h6><p>[kCal]</p>
-      .middle-managements__right-contents
-        .upper-info
-          %table
+      .middle-managements--main-title
+        .main-title
+          %h2 摂取カロリー
+        .total-value
+          <h3>#{@today_cal}</h3><p>[kCal]</p>
+      .border-line
+      .middle-managements--title
+        .titles
+          %h4 たんぱく質摂取量
+        .value
+          <h6>#{@today_protain}</h6><p>[kCal]</p>
+      .border-line
+      .middle-managements--title
+        .titles
+          %h4 脂質摂取量
+        .value
+          <h6>#{@today_fat}</h6><p>[kCal]</p>
+      .border-line
+      .middle-managements--title
+        .titles
+          %h4 炭水化物摂取量
+        .value
+          <h6>#{@today_carb}</h6><p>[kCal]</p>
+    .bottom-managements
+      .upper-info
+        %table
+          %tr
+            %th.table-title 記録日
+            %th.table-title 体重 [kg]
+            %th.table-title 体脂肪率 [%]
+            %th.table-title 総カロリー [kCal]
+            %th.table-title コメント
+          - @detail.each do |cal|
             %tr
-              %th.table-title 記録日
-              %th.table-title 体重 [kg]
-              %th.table-title 体脂肪率 [%]
-              %th.table-title 総カロリー [kCal]
-              %th.table-title コメント
-            - @detail.each do |cal|
-              %tr
-                %td.table-item
-                  = cal.date
-                %td.table-item
-                  = cal.weight
-                %td.table-item
-                  = cal.bfp
-                %td.table-item
-                  = cal.total_cal
-                %td.table-item
-                  = cal.description
-  
+              %td.table-item
+                = cal.date
+              %td.table-item
+                = cal.weight
+              %td.table-item
+                = cal.bfp
+              %td.table-item
+                = cal.total_cal
+              %td.table-item
+                = cal.description
