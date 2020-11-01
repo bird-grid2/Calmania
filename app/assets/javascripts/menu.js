@@ -125,7 +125,7 @@ $(document).on('turbolinks:load', function(){
         
       //foodデータの取得
       gon.food.forEach((food)=>{
-        var html = `<option value="${food.id}">${food.food}</option>`
+        var html = `<option value="${food.id}">${food.element}</option>`
         option.push(html);
       });
 
