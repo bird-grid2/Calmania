@@ -1,52 +1,52 @@
-.menus_wrapper {
-  @include wrapper;
-  .upper-info{
-    height: 90%;
-    width: 100%;
-    background-color: darkgreen;
-    color: white;
-    overflow: auto;
-    display: block;
-    text-align: center;
-    border: double 3px $maincolor;
-    .name {
-      height: 30%;
-      width: 60%;
-      text-align: center;
-      margin: 5% 20% 0 20%;
-    }
-    table {
-      height: 100%;
-      width: 100%;
-      table-layout: fixed;
-      tr {
-        display: flex;
+.wrapper {
+  .menus_wrapper {
+    @include wrapper;
+    width: 95%;
+    .upper-info{
+      height: 90%;
+      width: 97%;
+      color: white;
+      overflow: auto;
+      display: block;
+      .name {
+        height: 30%;
+        width: 60%;
+        text-align: center;
+        margin: 5% 20% 0 20%;
+      }
+      table {
+        height: 100%;
         width: 100%;
-        th {
-          width: 18%;
-          text-align: center;
-          font-size: 2rem;
-          line-height: 5rem;
-        }
-        td {
-          height: 5rem;
-          width: 18%;
-          font-size: 2rem;
-          line-height: 5rem;
-        }
-        .table-icon {
-          width: 10%;
+        table-layout: fixed;
+        tr {
           display: flex;
-          align-items: center;
-          justify-content: space-around;
-          .fas {
-            display: block;
-            color: white;
+          width: 100%;
+          th {
+            width: 18%;
+            text-align: center;
             font-size: 2rem;
+            line-height: 5rem;
+          }
+          td {
+            height: 5rem;
+            width: 18%;
+            font-size: 2rem;
+            line-height: 5rem;
+          }
+          .table-icon {
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            .fas {
+              display: block;
+              color: white;
+              font-size: 2rem;
+            }
           }
         }
       }
     }
+    @include bottom-info;
   }
-  @include bottom-info;
 }

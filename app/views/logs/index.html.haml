@@ -1,44 +1,54 @@
-.logs_wrapper
-  .upper-info
-    %table
-      %tr
-        %th.table-icon
-        %th.table-title 記録日
-        %th.table-title 体重 [kg]
-        %th.table-title 体脂肪率 [%]
-        %th.table-title 総カロリー [kCal]
-        %th.table-title コメント
-      - @logs.each_with_index do |log|
+.wrapper
+  .side-management
+    = link_to managements_path do
+      = icon('fas', 'home')
+      %h6.pc Home
+      %h6.sp Home
+    %span<>
+    = link_to menus_path do
+      = icon('fas', 'th-list')
+      %h6.pc Shows<br>menus
+      %h6.sp Shows menus
+    %span<>
+    = link_to new_log_path do
+      = icon('fas', 'plus-circle')
+      %h6.pc Create<br>logs
+      %h6.sp Create logs
+    %span<>
+    = link_to destroy_user_session_path, method: :delete do
+      = icon('fas', 'sign-out-alt')
+      %h6.pc Sign<br>out
+      %h6.sp Sign out
+  .logs_wrapper
+    .upper-info
+      %table
         %tr
-          %td.table-icon
-            = link_to "logs/#{log.id}/edit" do
-              = icon('fas', 'edit')
-            %span<>
-            = link_to "logs/#{log.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
-              = icon('fas', 'trash-alt')
-          %td.table-item
-            = log.date
-          %td.table-item
-            = log.weight
-          %td.table-item
-            = log.bfp
-          %td.table-item
-            = log.total_cal
-          %td.table-item
-            = log.description
+          %th.table-icon
+          %th.table-title 記録日
+          %th.table-title 体重 [kg]
+          %th.table-title 体脂肪率 [%]
+          %th.table-title 総カロリー [kCal]
+          %th.table-title コメント
+        - @logs.each_with_index do |log|
+          %tr
+            %td.table-icon
+              = link_to "logs/#{log.id}/edit" do
+                = icon('fas', 'edit')
+              %span<>
+              = link_to "logs/#{log.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
+                = icon('fas', 'trash-alt')
+            %td.table-item
+              = log.date
+            %td.table-item
+              = log.weight
+            %td.table-item
+              = log.bfp
+            %td.table-item
+              = log.total_cal
+            %td.table-item
+              = log.description
 
-  .bottom-info
-    = form_with url: search_logs_path, method: :get, class: 'search-box', local: true do |f|
-      = f.text_field :keyword, placeholder: '記録日またはコメントを入力して下さい', class: 'search-input'
-    .icon-box
-      = link_to root_path, class: 'fas fa-home' do
-        = icon('fas', 'fa-home')
-      %span<>
-      = link_to menus_path do
-        = icon("fas", "th-list")
-      %span<>
-      = link_to new_log_path do
-        = icon("fas", "plus-circle")
-      %span<>
-      = link_to destroy_user_session_path, method: :delete do
-        = icon('fas', 'sign-out-alt')
+    .bottom-info
+      = form_with url: search_logs_path, method: :get, class: 'search-box', local: true do |f|
+        = f.text_field :keyword, placeholder: '記録日またはコメントを入力して下さい', class: 'search-input'
+      
