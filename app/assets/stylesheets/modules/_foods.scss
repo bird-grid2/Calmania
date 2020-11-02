@@ -13,6 +13,7 @@
       display: flex;
       justify-content: center;
       font-size: 15px;
+      background: $green;
       p {
         display: block;
         line-height: 5rem;
@@ -33,6 +34,7 @@
         width: 100%;
         height: 15%;
         display: flex;
+        background: $green2;
         &__label{
           width: 2%;
           margin: auto 0;
