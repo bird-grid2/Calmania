@@ -50,7 +50,12 @@
       }
     }
     @include bottom-info;
-    form {
+  }
+  .logs_create_wrapper {
+    @include wrapper;
+    width: 100%;
+    padding: 3%;
+    #logs {
       height: 100%;
       width: 100%;
       .input-form{
