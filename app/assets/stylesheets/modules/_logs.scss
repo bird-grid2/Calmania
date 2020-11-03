@@ -73,12 +73,12 @@
             display: flex;
             p {
               display: block;
-              line-height: 60px;
+              line-height: 8vh;
             }
             .input_box{
               height: 50%;
+              width: 20vw;
               margin: 5% 0 5% 5%;
-              border: inset 2px rgb(118, 118, 118);
             }
           }
         }

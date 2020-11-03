@@ -1,7 +1,6 @@
 .user_wrapper{
   height: 100vh;
   width: 100vw;
-  align-items: center;
   padding: 5vh 5vw;
   header {
     display: block;
@@ -17,7 +16,7 @@
       margin: 0 auto;
     }
   }
-  .new_user {
+  form {
     height: 75%;
     background-color: #ebeef1;
     display: flex;
@@ -116,47 +115,69 @@
       }
     }
   }
-  .edit_label{
-    flex-direction: row;
-    text-align: center;
-    margin: auto 0;
-    label{
-      font-size: 1.5rem;
-      display: block;
-      margin-bottom: 1rem;
+  .edit_user {
+    .left_box {
+      padding: 3rem 2rem;
+      .field {
+        .edit {
+          width: 100%;
+          font-size: 2rem;
+          text-align: left;
+          margin-bottom: 3%;
+        }
+        input {
+          height: 3rem;
+        }
+        #user_ideal_protain_rate {
+          margin-bottom: 3%;
+        }
+        #user_ideal_fat_rate {
+          margin-bottom: 3%;
+        }
+      }
     }
-    i {
-      display: block;
-    }
-    em {
-      display: block;
-    }
-  }
-  .footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    .red-btn {
-      display: block;
-      height: 5rem;
-      width: 12rem;
-      color: white;
-      line-height: 5rem;
-      background-color: red;
-      border: inset 2px rgb(118, 118, 118);
-      margin-right: 10rem;
-    }
-    .btn {
-      display: block;
+    .edit_label{
+      flex-direction: row;
       text-align: center;
-      line-height: 5rem;
-      height: 5rem;
-      width: 12rem;
-      background-color: $maincolor;
-      color: white;
-      border: inset 2px rgb(118, 118, 118);
+      margin: auto 0;
+      label{
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      i {
+        display: block;
+      }
+      em {
+        display: block;
+      }
+    }
+    .footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      .red-btn {
+        display: block;
+        height: 5rem;
+        width: 12rem;
+        color: white;
+        line-height: 5rem;
+        background-color: red;
+        border: inset 2px rgb(118, 118, 118);
+        margin-right: 10rem;
+      }
+      .btn {
+        display: block;
+        text-align: center;
+        line-height: 5rem;
+        height: 5rem;
+        width: 12rem;
+        background-color: $maincolor;
+        color: white;
+        border: inset 2px rgb(118, 118, 118);
+      }
     }
   }
 }
