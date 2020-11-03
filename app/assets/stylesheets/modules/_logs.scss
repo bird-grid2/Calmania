@@ -54,18 +54,19 @@
   .logs_create_wrapper {
     @include wrapper;
     width: 100%;
-    padding: 3%;
+    padding: 2%;
     #logs {
       height: 100%;
       width: 100%;
       .input-form{
-        height: 90%;
+        height: 85%;
         width: 100%;
         .upper_content {
           display: flex;
           align-items: center;
           height: 10%;
           width: 100%;
+          background: $black2;
           .input_column{
             height: 100%;
             width: 30%;
@@ -87,6 +88,7 @@
           display: flex;
           align-items: center;
           justify-content: flex-start;
+          background: $black2;
           p {
             display: block;
             line-height: 60px;
@@ -98,8 +100,9 @@
           }
         }
         .menu_columns{
-          height: 70%;
+          height: 80%;
           overflow-y: auto;
+          background: $black4;
           &__col{
             display: flex;
             width: 100%;
@@ -107,6 +110,7 @@
             &__label {
               width: 2%;
               margin: auto 0;
+              text-align: center;
               i {
                 display: block;
                 margin: 5px 0px;
@@ -115,6 +119,7 @@
             }
             .input_name{
               width: 23%;
+              padding: 1%;
               #log_menu_numbers {
                 height: 30%;
               }
@@ -141,11 +146,13 @@
         }
       }
       .bottom_content {
-        height: 10%;
+        height: 15%;
         width: 100%;
+        padding: 1.5%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        background: $black3;
         .show_calory{
           width: 60%;
           height: 100%;
