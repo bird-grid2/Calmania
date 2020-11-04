@@ -31,14 +31,13 @@
         .edit_label
           = f.label :password, value: '変更パスワード'
           %i (変更しない場合、空白)   
-          - if @minimum_password_length
-            %em
-              = @minimum_password_length
-              文字以上入力
+        - if @minimum_password_length
+          %em
+            = @minimum_password_length
+            文字以上入力
         = f.password_field :password, autocomplete: "new-password", placeholder:'変更パスワード入力'
       .field
         = f.label :password_confirmation, value: '変更パスワード確認', class: 'label'
-        %br/
         = f.password_field :password_confirmation, autocomplete: "new-password", placeholder:'変更パスワード確認'
       .field
         .edit_label

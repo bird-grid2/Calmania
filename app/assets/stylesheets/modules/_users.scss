@@ -118,6 +118,7 @@
   .edit_user {
     .left_box {
       padding: 3rem 2rem;
+      margin: 0 auto;
       .field {
         .edit {
           width: 100%;
@@ -136,47 +137,65 @@
         }
       }
     }
-    .edit_label{
-      flex-direction: row;
-      text-align: center;
-      margin: auto 0;
-      label{
+    .right_box {
+      padding: 3rem 2rem;
+      .field {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto 5%;
         font-size: 1.5rem;
-        display: block;
-        margin-bottom: 1rem;
+        .edit_label{
+          display: flex;
+          i {
+            display: block;
+            margin-left: 2%;
+          }
+        }
+        em {
+          display: block;
+          margin-top: 1%;
+        }
+        input {
+          height: 3rem;
+          margin-top: 3%;
+        }
       }
-      i {
-        display: block;
+      .actions {
+        height: 20%;
+        input {
+          display: inline-block;
+          height: 5rem;
+          width: 13rem;
+          color: white;
+          background: $maincolor;
+        }
       }
-      em {
-        display: block;
-      }
-    }
-    .footer {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2rem;
-      .red-btn {
-        display: block;
-        height: 5rem;
-        width: 12rem;
-        color: white;
-        line-height: 5rem;
-        background-color: red;
-        border: inset 2px rgb(118, 118, 118);
-        margin-right: 10rem;
-      }
-      .btn {
-        display: block;
-        text-align: center;
-        line-height: 5rem;
-        height: 5rem;
-        width: 12rem;
-        background-color: $maincolor;
-        color: white;
-        border: inset 2px rgb(118, 118, 118);
+      .footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3%;
+        .red-btn {
+          display: block;
+          text-align: center;
+          height: 5rem;
+          width: 13rem;
+          color: white;
+          line-height: 5rem;
+          background-color: red;
+          margin-right: 8rem;
+        }
+        .btn {
+          display: block;
+          text-align: center;
+          line-height: 5rem;
+          height: 5rem;
+          width: 13rem;
+          background-color: $maincolor;
+          color: white;
+        }
       }
     }
   }
