@@ -7,6 +7,7 @@ $(document).on('turbolinks:load', function (){
       var html =  `<table>
                     <tbody>
                       <tr>
+                        <th class = "table-icon"></th>
                         <th class = "table-title">記録</th>
                         <th class = "table-title">体重 [kg]</th>
                         <th class = "table-title">体脂肪率 [%]</th>
@@ -22,6 +23,9 @@ $(document).on('turbolinks:load', function (){
     function appendLog(log) {
 
       var html =  `<tr>
+                    <td class="table-icon"><a href="logs/1/edit"><i class="fas fa-edit"></i></a>
+                    <span></span>
+                    <a data-confirm="本当に削除しますか?" rel="nofollow" data-method="delete" href="logs/1"><i class="fas fa-trash-alt"></i></a></td>
                     <td class = "table-item">${log.date}</td>
                     <td class = "table-item">${log.height}</td>
                     <td class = "table-item">${log.bfp}</td>
@@ -55,7 +59,7 @@ $(document).on('turbolinks:load', function (){
           });
         }
         else {
-          search_list.empty();
+          search_list.children().children().empty();
           appendErrMsgToHTML("一致するログがありません");
         }
       })

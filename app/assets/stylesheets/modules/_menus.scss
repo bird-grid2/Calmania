@@ -19,6 +19,9 @@
         width: 100%;
         table-layout: fixed;
         background: $green1;
+        .name {
+          font-size: 2rem;
+        }
         tr {
           display: flex;
           width: 100%;
@@ -35,6 +38,7 @@
             width: 18%;
             font-size: 2rem;
             line-height: 5rem;
+            text-align: center;
           }
           .table-icon {
             width: 10%;

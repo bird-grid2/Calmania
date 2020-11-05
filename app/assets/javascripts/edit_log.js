@@ -26,9 +26,9 @@ $(document).on('turbolinks:load', function(){
       gon.menu.forEach((menu)=>{
           
         if(menu.id == target){
-          var menuhtml = `<option value="${menu.id}" selected>${menu.menu}</option>`;  
+          var menuhtml = `<option value="${menu.id}" selected>${menu.material}</option>`;  
         }else{
-          var menuhtml = `<option value="${menu.id}">${menu.menu}</option>`
+          var menuhtml = `<option value="${menu.id}">${menu.material}</option>`
         }  
         option.push(menuhtml);
       });

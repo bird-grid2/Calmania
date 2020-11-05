@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :show]
   resources :managements, only: :index
   resources :shows, only: :index
-  resources :graphs , only: :index  #, defaults: { format: 'json' }
-  resources :logs, except: :show do
+  resources :graphs , only: :index
+  resources :logs do
+    resources :menus, only: :index
     collection do
       get :search
     end
