@@ -26,15 +26,15 @@ $(document).on('turbolinks:load', function (){
       target_2  = log.bfp;
       target_3 = log.description;
       
-      if(log.weight = 'null'){
+      if(log.weight == null){
         target_1 = '';
       }
       
-      if (log.bfp = 'null') {
+      if (log.bfp == null) {
         target_2 = '';
       }
 
-      if (log.description = '') {
+      if (log.description == null) {
         target_3 = '';
       }
 
