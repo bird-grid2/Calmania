@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  before_action :set_log, only: [ :new, :create, :destroy ]
+  before_action :set_log, only: [ :edit, :update, :destroy ]
   before_action :move_to_index, only: [ :index, :search ]
 
   def new

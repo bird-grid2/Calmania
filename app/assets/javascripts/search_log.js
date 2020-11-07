@@ -22,16 +22,20 @@ $(document).on('turbolinks:load', function (){
 
     function appendLog(log) {
 
-      if(log.height = 'undefined'){
+      target_1 = log.weight;
+      target_2  = log.bfp;
+      target_3 = log.description;
+      
+      if(log.weight = 'null'){
         target_1 = '';
-      } else if(log.bfp = '') {
-        target_2 = '---';
-      } else if(log.description = '') {
-        target_3 = '---';
-      } else {
-        target_1 = log.height;
-        target_2  = log.bfp;
-        target_3 = log.description;
+      }
+      
+      if (log.bfp = 'null') {
+        target_2 = '';
+      }
+
+      if (log.description = '') {
+        target_3 = '';
       }
 
       var html =  `<tr>
@@ -66,6 +70,15 @@ $(document).on('turbolinks:load', function (){
         search_list.empty();
         appendTable();
         if (logs.length !== 0) {
+          logs.sort(function(a,b){
+            if (a.date < b.date){
+              return 1;
+            }
+            if (a.date > b.date){
+              return -1;
+            }
+            return 0;
+          });
           logs.forEach(function(log){
             appendLog(log);
           });
