@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   resources :managements, only: :index
   resources :shows, only: :index
   resources :graphs , only: :index
-  resources :logs do
+  resources :logs, except: :show do
     resources :menus, only: :index
     collection do
       get :search
     end
   end
 
-  resources :menus do
+  resources :menus, except: :show do
     resources :foods, only: :index
     collection do
       get :search
