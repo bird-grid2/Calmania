@@ -93,6 +93,42 @@ $(document).on('turbolinks:load', function (){
         alert('検索エラーです 管理者に連絡して下さい');
       });
     });
+    $(".search-date-input").on("change", function() {
+      var input = $(".search-date-input").val();
+      console.log(input)
+      $.ajax({
+        type: 'GET',
+        url: '/logs/dsearch',
+        data: { keyword2: input },
+        dataType: 'json'
+      })
+      .done(function(logs) {
+        search_list.empty();
+        appendTable();
+        if (logs.length !== 0) {
+          logs.sort(function(a,b){
+            if (a.date < b.date){
+              return 1;
+            }
+            if (a.date > b.date){
+              return -1;
+            }
+            return 0;
+          });
+          logs.forEach(function(log){
+            appendLog(log);
+          });
+        }
+        else {
+          search_list.empty();
+          appendTable();
+          appendErrMsgToHTML("一致するログがありません");
+        }
+      })
+      .fail(function() {
+        alert('検索エラーです 管理者に連絡して下さい');
+      });
+    });
   };
 });
 

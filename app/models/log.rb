@@ -11,4 +11,11 @@ class Log < ApplicationRecord
     Log.where("description LIKE(?)", "%#{search}%")
   end
 
+  def self.dsearch(dsearch)
+    if dsearch == '' 
+      return Log.all
+    end
+    Log.where(date: dsearch.to_date)
+  end
+
 end

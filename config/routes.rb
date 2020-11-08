@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :menus, only: :index
     collection do
       get :search
+      get :dsearch
     end
   end
 

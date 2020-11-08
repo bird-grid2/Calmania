@@ -38,6 +38,14 @@ class LogsController < ApplicationController
     end
   end
 
+  def dsearch
+    @logs = Log.dsearch(params[:keyword2])
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
   def edit
     @menus = Menu.all
     menu = []

@@ -127,10 +127,23 @@
     display: flex;
     justify-content: center;
     background: $black4;
+    .search-date {
+      display: inline-block;
+      margin-right: 9rem;
+      display: flex;
+      align-items: center;
+      &-input {
+        display: inline-block;
+        height: 50%;
+      }
+    }
     .search-box {
       width: 50%;
       display: flex;
       align-items: center;
+      p {
+        width: 30%;
+      }
       .search-input {
         display: inline-block;
         height: 50%;
