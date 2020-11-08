@@ -1,59 +1,43 @@
-.main_wrapper {
-  @include wrapper;
-  .top-managements{
-    height: 20rem;
-    width: 100%;
-    background-color: aquamarine;
-    box-shadow: 0.1rem 0.5rem 0.1rem 0.1rem slategray;
-    display: flex;
-    h1 {
-      display: block;
-      color: #ffffff;
-      font-size: 4.5rem;
-      width: 100%;
-      line-height: 5rem;  
-    }
-    &__left-contents{
-      width: 50%;
-      padding: 3rem;
+.wrapper {
+  .main_wrapper {
+    .top-managements{
+      height: 30%;
+      width: 95%;
       display: flex;
-      flex-direction: column;
-      text-align: center;
-      justify-content: center;
-    }
-    &__right-contents{
-      width: 50%;
-      text-align: center;
-      &--value {
-        @include h3;
-        @include p;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      background: $black;
+      border: 1px solid $white;
+      h1 {
+        display: block;
+        color: $white;
+        font-size: 3vw;
+        width: 100%;
+        line-height: 5rem;  
+      }
+      &__left-contents{
+        @include top-manegement;
+      }
+      &__right-contents{
+        @include top-manegement;
+      }
+      .border-dashed {
+        width: 80%;
+        border-top: 1px dashed $white; 
       }
     }
-  }
-
-  .middle-managements{
-    height: calc(100% - 300px);
-    width: 100%;
-    background-color: white;
-    display: flex;
-    justify-items: center;
-    text-align: center;
-    &__left-contents{
-      padding: 0.5rem;
-      height: 100%;
-      width: 30%;
-      &--main-title{
-        height: 20%;
-        margin: 0 0 2.5rem 0;
-        background-color: deepskyblue;
+    .middle-managements {
+      height: 20%;
+      width: 95%;
+      display: flex;
+      text-align: center;
+      background: $black;
+      &--main-title {
+        width: 34%;
         .main-title {
-          height: 35%;
+          height: 40%;
           @include h2;
         }
         .total-value {
+          height: 60%;
           @include h3;
           @include p;
           display: flex;
@@ -62,14 +46,13 @@
         }
       }
       &--title{
-        height: 20%;
-        margin-bottom: 2.5rem;
-        background-color: deepskyblue;
+        width: 22%;
         .titles {
           height: 40%;
           @include h4;
         }
         .value {
+          height: 60%;
           @include h6;
           @include p;
           display: flex;
@@ -78,15 +61,19 @@
           height: 60%;
         }
       }
+      .border-line {
+        height: 100%;
+        padding: 10% 0;
+        border-left: 1px solid $white;
+      }
     }
-    &__right-contents {
-      width: 70%;
-      height: 100%;
+    .bottom-managements {
+      width: 95%;
+      height: 50%;
       .upper-info{
         height: 100%;
         width: 100%;
-        background-color: darkgreen;
-        color: white;
+        color: black;
         overflow-y: auto;
         display: block;
         text-align: center;
@@ -101,90 +88,20 @@
               text-align: center;
               height: 5rem;
               width: 20%;
-              font-size: 1.5rem;
-              line-height: 5rem;
+              font-size: 1.5vw;
+              line-height: 5vh;
             }
             .table-item{
               display: block;
               height: 5rem;
               width: 20%;
-              font-size: 1.5rem;
-              line-height: 5rem;
+              font-size: 1.5vw;
+              line-height: 5vh;
               overflow-x: auto;
             }
           }
         }
       }
-    }
-  }
-
-  .bottom-management{
-    height: 10rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    align-items: center;
-    .fas {
-      display: block;
-      font-size: 4rem;
-      color: $maincolor;
-      position: relative;
-    }
-    .far {
-      width: 1rem;
-      display: block;
-      font-size: 4rem;
-      color: $maincolor;
-      position: relative;
-    }
-    .pop1 {
-      position: absolute;
-      bottom: 1.8rem;
-      left: 11.5rem;
-      @include pop;
-    }
-    .pop2 {
-      position: absolute;
-      bottom: 1.4rem;
-      left: 45.5rem;
-      @include pop;
-    }
-    .pop3 {
-      position: absolute;
-      bottom: 0px;
-      left: 82.3rem;
-      @include pop;
-    }
-    .pop4 {
-      position: absolute;
-      bottom: 1.8rem;
-      left:120rem;
-      @include pop;
-    }
-    .pop1:after {
-      @include after;
-    }
-    .pop2:after {
-      @include after;
-    }
-    .pop3:after {
-      @include after;
-    }
-    .pop4:after {
-      @include after;
-    }
-    .far:hover + .pop1 {
-      display: block;
-    }
-    .fas:hover + .pop2 {
-      display: block;
-    }
-    .fas:hover + .pop3 {
-      display: block;
-    }
-    .fas:hover + .pop4 {
-      display: block;
     }
   }
 }

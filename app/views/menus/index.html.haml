@@ -1,42 +1,48 @@
-.menus_wrapper
-  .upper-info
-    %table
-      %tr
-        %th.table-icon
-        %th.table-title Menu
-        %th.table-title 総重量 [g]
-        %th.table-title タンパク質 [kCal]
-        %th.table-title 脂質 [kCal]
-        %th.table-title 炭水化物 [kCal]
-      - @menus.each do |menu|
+.wrapper
+  .side-management
+    = link_to managements_path do
+      = icon('fas', 'home')
+      %h6.pc Home
+      %h6.sp Home
+    %span<>
+    = link_to new_menu_path do
+      = icon('fas', 'plus-circle')
+      %h6.pc Create<br>menus
+      %h6.sp Create menus
+    %span<>
+    = link_to destroy_user_session_path, method: :delete do
+      = icon('fas', 'sign-out-alt')
+      %h6.pc Sign<br>out
+      %h6.sp Sign out
+  .menus_wrapper
+    .upper-info
+      %table
         %tr
-          %td.table-icon
-            = link_to "menus/#{menu.id}/edit" do
-              = icon('fas', 'edit')
-            %span<>
-            = link_to "menus/#{menu.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
-              = icon('fas', 'trash-alt')
-          %td.table-item
-            = menu.menu
-          %td.table-item
-            = menu.masses.sum{ |num| num.to_i }
-          %td.table-item
-            = menu.total_protain
-          %td.table-item
-            = menu.total_fat
-          %td.table-item
-            = menu.total_carbohydrate
+          %th.table-icon
+          %th.table-title Menu
+          %th.table-title 総重量 [g]
+          %th.table-title タンパク質 [kCal]
+          %th.table-title 脂質 [kCal]
+          %th.table-title 炭水化物 [kCal]
+        - @menus.each do |menu|
+          %tr
+            %td.table-icon
+              = link_to "menus/#{menu.id}/edit" do
+                = icon('fas', 'edit')
+              %span<>
+              = link_to "menus/#{menu.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
+                = icon('fas', 'trash-alt')
+            %td.table-item
+              = menu.material
+            %td.table-item
+              = menu.masses.sum{ |num| num.to_i }
+            %td.table-item
+              = menu.total_protain
+            %td.table-item
+              = menu.total_fat
+            %td.table-item
+              = menu.total_carbohydrate
 
-  .bottom-info
-    = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
-      = f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input'
-    .icon-box
-      = link_to root_path do
-        = icon('fas', 'home')
-      %span<>
-      = link_to new_menu_path do
-        = icon('fas', 'plus-circle')
-      %span<>
-      = link_to destroy_user_session_path, method: :delete do
-        = icon('fas', 'sign-out-alt')
-    
+    .bottom-info
+      = form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f|
+        = f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input'

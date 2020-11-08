@@ -17,6 +17,7 @@ $(document).on('turbolinks:load', function (){
       var html =  `<table>
                     <tbody>
                       <tr>
+                        <th class = "table-icon"></th>
                         <th class = "table-title">Menu</th>
                         <th class = "table-title">総重量 [g]</th>
                         <th class = "table-title">タンパク質 [kCal]</th>
@@ -32,7 +33,11 @@ $(document).on('turbolinks:load', function (){
     function appendMenu(menu) {
 
       var html =  `<tr>
-                    <td class = "table-item">${menu.menu}</td>
+                    <td class="table-icon">
+                    <a href="menus/1/edit"><i class="fas fa-edit"></i></a>
+                    <span></span>
+                    <a data-confirm="本当に削除しますか?" rel="nofollow" data-method="delete" href="menus/1"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class = "table-item">${menu.material}</td>
                     <td class = "table-item">${sum(menu.masses)}</td>
                     <td class = "table-item">${menu.total_protain}</td>
                     <td class = "table-item">${menu.total_fat}</td>
@@ -44,7 +49,7 @@ $(document).on('turbolinks:load', function (){
 
     function appendErrMsgToHTML(msg) {
       var html = `<div class='name'>${ msg }</div>`
-      search_list.append(html);
+      search_list.children().children().append(html);
     }
 
     $(".search-input").on("keyup", function() {
@@ -66,6 +71,7 @@ $(document).on('turbolinks:load', function (){
         }
         else {
           search_list.empty();
+          appendTable();
           appendErrMsgToHTML("一致するメニューがありません");
         }
       })

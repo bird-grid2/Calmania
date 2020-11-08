@@ -1,158 +1,167 @@
-.food_wrapper {
-  @include wrapper;
-  form {
-    height: 100%;
+.wrapper {
+  .food_wrapper {
+    @include wrapper;
     width: 100%;
-    .upper_menu_content{
-      height: 10%;
+    padding: 3%;
+    form {
+      height: 100%;
       width: 100%;
       display: flex;
-      justify-content: center;
-      font-size: 15px;
-      p {
-        display: block;
-        line-height: 5rem;
-        padding: 1rem;
-      }
-      .menu_name{
-        display: block;
-        height: 3rem;
-        width: 50%;
-        margin: 2rem 0;
-      }
-    }
-    .input_form{
-      height: 55%;
-      width: 100%;
-      overflow-y: auto;
-      &__column{
+      flex-direction: column;
+      align-items: center;
+      background: $green2;
+      .upper_menu_content{
+        height: 10%;
         width: 100%;
-        height: 15%;
         display: flex;
-        &__label{
-          width: 2%;
-          margin: auto 0;
-          i {
-            display: block;
-            margin: 5px 0px;
-            color: $maincolor;
-          }
-        }
-        #name {
-          width: 30%;
-          #menu_names{
-            height: 35%;
-            width: 100%;
-          }
-          .label {
-            height: 70%;
-            display: flex;
-            justify-content: center;
-            margin: 10px;
-            height: 3vh;
-            p {
-              line-height: 3vh;
-              padding: 0vh 1vh 0vh 0vh;
-            }
-            .mass {
-              display: block;
-              width: 10em;
-            }
-          }
-        }
-        #fbox {
-          display: flex;
-          width: 68%;
-          text-align: center;
-          h2 {
-            height: 30%;
-            font-size: 15px;
-            line-height: 20px;
-            color: white;
-          }
-          .input_form__column__box__total_mass{
-            @include cal-box
-          }
-          .input_form__column__box__protain{
-            @include cal-box
-          }
-          .input_form__column__box__fat{
-            @include cal-box
-          }
-          .input_form__column__box__carbohydrate{
-            @include cal-box
-          }
-        }
-      }
-    }
-    .calculate_box {
-      width: 100%;
-      height: 20%;
-      background-color: white;
-      border: double 5px $maincolor;
-      text-align: center;
-      &__title {
-        height: 30%;
-        display: flex;
-        h2 {
-          width: 25%;
-          font-size: 1.3em;
-          color: black;
-        }
-      }
-      &__result {
-        height: 70%;
-        display: flex;
-        h3 {
-          display: block;
-          font-size: 3em;
-          margin: auto auto;
-          color: black;
-        }
+        justify-content: center;
+        font-size: 15px;
+        background: $green;
         p {
           display: block;
-          font-size: 1.5em;
-          margin: auto auto;
+          line-height: 5rem;
+          padding: 1rem;
         }
-        &--protain{
-          width: 25%;
-          display: flex;
-          justify-content: space-between;
-        }
-        &--fat {
-          width: 25%;
-          display: flex;
-          justify-content: space-between;
-        }
-        &--carbohydrate {
-          width: 25%;
-          display: flex;
-          justify-content: space-between;
-        }
-        &--total {
-          width: 25%;
-          display: flex;
-          justify-content: space-between;
+        .menu_name{
+          display: block;
+          height: 3rem;
+          width: 50%;
+          margin: 2rem 0;
         }
       }
-    }
-    .bottom_menu_content {
-      height: 10%;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      .btn{
-        display: block;
-        height: 50px;
-        width: 150px;
-        margin: 0 10px;
+      .input_form{
+        height: 65%;
+        width: 100%;
+        overflow-y: auto;
+        &__column{
+          width: 100%;
+          height: 15%;
+          display: flex;
+          background: $green1;
+          &__label{
+            width: 2%;
+            margin: auto 0;
+            i {
+              display: block;
+              margin: 5px 0px;
+              color: $maincolor;
+            }
+          }
+          #name {
+            width: 30%;
+            #menu_names{
+              height: 35%;
+              width: 100%;
+            }
+            .label {
+              height: 70%;
+              display: flex;
+              justify-content: center;
+              margin: 10px;
+              height: 3vh;
+              p {
+                line-height: 3vh;
+                padding: 0vh 1vh 0vh 0vh;
+              }
+              .mass {
+                display: block;
+                width: 10em;
+              }
+            }
+          }
+          #fbox {
+            display: flex;
+            width: 68%;
+            text-align: center;
+            h2 {
+              height: 30%;
+              font-size: 15px;
+              line-height: 20px;
+              color: white;
+            }
+            .input_form__column__box__total_mass{
+              @include cal-box
+            }
+            .input_form__column__box__protain{
+              @include cal-box
+            }
+            .input_form__column__box__fat{
+              @include cal-box
+            }
+            .input_form__column__box__carbohydrate{
+              @include cal-box
+            }
+          }
+        }
+      }
+      .calculate_box {
+        width: 97%;
+        height: 20%;
+        background-color: white;
+        border: double 5px $maincolor;
         text-align: center;
-        background-color: $maincolor;
-        color: white;
-        font-size: 20px;
-        line-height: 45px;
-        border: inset 2px rgb(118, 118, 118);
+        &__title {
+          height: 30%;
+          display: flex;
+          h2 {
+            width: 25%;
+            font-size: 1.3em;
+            color: black;
+          }
+        }
+        &__result {
+          height: 70%;
+          display: flex;
+          h3 {
+            display: block;
+            font-size: 3em;
+            margin: auto auto;
+            color: black;
+          }
+          p {
+            display: block;
+            font-size: 1.5em;
+            margin: auto auto;
+          }
+          &--protain{
+            width: 25%;
+            display: flex;
+            justify-content: space-between;
+          }
+          &--fat {
+            width: 25%;
+            display: flex;
+            justify-content: space-between;
+          }
+          &--carbohydrate {
+            width: 25%;
+            display: flex;
+            justify-content: space-between;
+          }
+          &--total {
+            width: 25%;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+      .bottom_menu_content {
+        height: 10%;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .btn{
+          display: block;
+          height: 50px;
+          width: 150px;
+          margin: 0 10px;
+          text-align: center;
+          background-color: $maincolor;
+          color: white;
+          font-size: 20px;
+          line-height: 45px;
+        }
       }
     }
   }

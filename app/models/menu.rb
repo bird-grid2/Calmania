@@ -7,7 +7,7 @@ class Menu < ApplicationRecord
 
   def self.search(search)
     return Menu.all unless search
-    Menu.where('menu LIKE ?', "%#{search}%")
+    Menu.where('material LIKE ?', "%#{search}%")
   end
 
 end

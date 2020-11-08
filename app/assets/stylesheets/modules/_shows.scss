@@ -1,0 +1,45 @@
+.wrapper {
+  .side-management {
+    .container {
+      width: 40px;
+      height: 40px;
+      border: 2px solid white;
+      position: relative;
+      transition: transform 0.2s linear 0s;
+    }
+    .inner {
+      width: 30px;
+      height: 30px;
+      border: 2px solid white;
+      font-size: 0px;
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      transition: transform 0.2s linear 0s;
+    }
+    #target:hover {
+      transform:rotate(90deg);
+    }
+    #target_2:hover {
+      transform:rotate(-90deg);
+      background-color: white;
+    }
+  }
+  .top_wrapper {
+    position: relative;
+    &__header {
+      width: 100%;
+      font-size: 5rem;
+      color: #fff;
+      position: absolute;
+      top: 5%;
+    }
+    &__content {
+      width: 100%;
+      font-size: 3rem;
+      color: #fff;
+      position: absolute;
+      bottom: 10%;
+    }
+  }
+}

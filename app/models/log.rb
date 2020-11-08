@@ -8,7 +8,14 @@ class Log < ApplicationRecord
 
   def self.search(search)
     return Log.all unless search
-    Log.where('date LIKE ?', "%#{search}%")
+    Log.where("description LIKE(?)", "%#{search}%")
+  end
+
+  def self.dsearch(dsearch)
+    if dsearch == '' 
+      return Log.all
+    end
+    Log.where(date: dsearch.to_date)
   end
 
 end

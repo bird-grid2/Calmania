@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  before_action :set_log, except: [ :new, :create, :index ]
+  before_action :set_log, only: [ :edit, :update, :destroy ]
   before_action :move_to_index, only: [ :index, :search ]
 
   def new
@@ -32,6 +32,14 @@ class LogsController < ApplicationController
 
   def search
     @logs = Log.search(params[:keyword])
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
+  def dsearch
+    @logs = Log.dsearch(params[:keyword2])
     respond_to do |format|
       format.html
       format.json

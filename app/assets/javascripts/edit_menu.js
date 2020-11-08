@@ -26,9 +26,9 @@ $(document).on('turbolinks:load', function(){
       gon.food.forEach((food)=>{
         
         if(food.id == elem){
-          var html = `<option value="${food.id}" selected>${food.food}</option>`
+          var html = `<option value="${food.id}" selected>${food.element}</option>`
         }else{
-          var html = `<option value="${food.id}">${food.food}</option>`
+          var html = `<option value="${food.id}">${food.element}</option>`
         };
         option.push(html);
       });
