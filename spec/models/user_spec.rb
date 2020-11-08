@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     it "全角・半角文字と英文字で登録できない" do
       target = [:height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal]
       font = %w[あ ｱ a １]
-      target.each do |user| 
+      target.each do |user|
         font.each do |i|
           users = build(:user)
           users[user] = i

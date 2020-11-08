@@ -12,9 +12,7 @@ class Log < ApplicationRecord
   end
 
   def self.dsearch(dsearch)
-    if dsearch == '' 
-      return Log.all
-    end
+    return Log.all if dsearch == ''
     Log.where(date: dsearch.to_date)
   end
 
