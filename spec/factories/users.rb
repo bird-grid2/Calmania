@@ -3,8 +3,8 @@ FactoryBot.define do
     id                       { 1 }
     nickname                 { 'トリ' }
     email                    { 'abc@yahoo.co.jp' }
-    password                 {"00000000"}
-    password_confirmation    {"00000000"}
+    password                 { "00000000" }
+    password_confirmation    { "00000000" }
     height                   { 172.5 }
     ideal_protain_rate       { 3 }
     ideal_fat_rate           { 4 }

@@ -7,5 +7,5 @@ json.array! @logs do |log|
   json.description log.description
   json.menu_numbers log.menu_numbers
   json.user_id log.user_id
-  json.user_sign_in current_user 
+  json.user_sign_in current_user
 end
