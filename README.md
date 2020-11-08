@@ -36,7 +36,7 @@
   <img width="600" alt="edit" src="https://user-images.githubusercontent.com/61616172/90397044-3aa70600-e0d2-11ea-9c42-012f8c703548.gif">  
   ★ 削除機能  
   <img width="600" alt="delete" src="https://user-images.githubusercontent.com/61616172/90403502-09333800-e0dc-11ea-8962-1617f4321779.gif">  
-  ★ インクリメンタルサーチ(メニュー検索のみ)  
+  ★ インクリメンタルサーチ  
   <img width="600" alt="search" src="https://user-images.githubusercontent.com/61616172/89992424-389f0a80-dcc0-11ea-9de7-1d78862cff1e.gif">  
 
 # features
@@ -64,8 +64,7 @@
  ★ 機械学習の要素を追加したい  
 
 # problem
-  - メニュー・ログ作成ページでインクリメンタルサーチできない  
-  - メニューのviewページでインクリメンタルサーチできない  
+  - メニュー・ログ作成ページでインクリメンタルサーチできない   
   - 引き算はできるが、floatのため誤差が生じる  
 
 # Calmania DB設計
