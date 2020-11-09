@@ -57,9 +57,16 @@
       padding: 8.5rem 4rem;
       .check_field {
         height: 10%;
-        width: 70%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
         text-align: center;
         margin: 5% auto 0 auto;
+        label {
+          width: 35%;
+          display: inline-block;
+          font-size: 1.5rem;
+        }
       }
       .actions {
         height: 30%;
