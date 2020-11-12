@@ -21,5 +21,7 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  post '/callback', to: 'webhook#callback'
   
 end
