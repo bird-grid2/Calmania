@@ -1,5 +1,4 @@
 class WebhookController < ApplicationController
-  require 'sinatra'   # gem 'sinatra'
   require 'line/bot'  # gem 'line-bot-api'
 
   protect_from_forgery except: [:callback] # CSRF protection
@@ -16,7 +15,7 @@ class WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      halt 400, {'Content-Type' => 'text/plain'}, 'Bad Request'
+      halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request'
     end
 
     events = client.parse_events_from(body)
