@@ -1,19 +1,23 @@
 class WebhookController < ApplicationController
+  require 'sinatra'   # gem 'sinatra'
   require 'line/bot'  # gem 'line-bot-api'
 
   protect_from_forgery except: [:callback] # CSRF protection
 
   def client
     @client ||= Line::Bot::Client.new { |config|
-    config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-    config.channel_token = ENV["LINE_CHANNEL_TOKEN"] }
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
   end
 
-  def callback
+  post '/callback' do
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-      halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request' unless client.validate_signature(body, signature)
+    unless client.validate_signature(body, signature)
+      halt 400, {'Content-Type' => 'text/plain'}, 'Bad Request'
+    end
 
     events = client.parse_events_from(body)
 
