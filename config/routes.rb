@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   devise_for :users
   root to: 'shows#index'
-  post '/callback' => 'webhook#callback'
+  post '/callback', to: 'webhook#callback'
 
   resources :users, except: [:index, :show]
   resources :managements, only: :index
