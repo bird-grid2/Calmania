@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/callback' => 'webhook#callback'
+  post '/callback', to: 'webhook#callback'
   
 end
