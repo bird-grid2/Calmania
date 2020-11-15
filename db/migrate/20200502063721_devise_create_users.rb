@@ -37,6 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :ideal_fat_rate
       t.integer :ideal_carbohydrate_rate
       t.integer :target_cal
+      t.references :period
       t.time :send_time
       t.timestamps null: false
     end
