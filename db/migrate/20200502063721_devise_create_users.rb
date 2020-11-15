@@ -37,12 +37,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :ideal_fat_rate
       t.integer :ideal_carbohydrate_rate
       t.integer :target_cal
+      t.datetime :send_time
       t.timestamps null: false
     end
 
-    add_index :users, :nickname,             unique: true
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
+     add_index :users, :nickname,             unique: true
+     add_index :users, :email,                unique: true
+     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
