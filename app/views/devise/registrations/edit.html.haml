@@ -27,7 +27,7 @@
         = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
       .field
         = f.label :send_time, value: '定期メッセージ', class:'edit'
-        = f.date_field :send_time, autocomplete: "send_time"
+        = f.collection_select :period_id, Period.all, :id, :name
         = f.label :send_time, value: '登録時間', class: 'edit'
         = f.time_field :send_time, autocomplete: "send_time"
     .border-line
