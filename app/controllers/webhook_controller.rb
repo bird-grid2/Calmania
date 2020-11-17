@@ -26,6 +26,11 @@ class WebhookController < ApplicationController
     "OK"
   end
 
+  def broadcast
+    
+  
+  end
+
   private
 
   def client
