@@ -22,4 +22,12 @@ module Clockwork
   every(3.day, '3days.job')
   every(7.day, '1week.job')
 
+  configure do |config|
+    config[:sleep_timeout] = 5
+    config[:logger] = Logger.new(log_file_path)
+    config[:tz] = 'JST'
+    config[:max_threads] = 15
+    config[:thread] = true
+  end
+
 end

@@ -16,4 +16,8 @@ class Log < ApplicationRecord
     Log.where(date: dsearch.to_date)
   end
 
+  def frequency
+    user.send(user.period_id.pluralize)
+  end
+
 end
