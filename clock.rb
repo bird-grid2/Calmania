@@ -5,11 +5,21 @@ require './config/environment'
 
 
 module Clockwork
+  handler do |job|
+    case job
+    when '1day.job'
+      # 10 秒毎の処理
+    when '2days.job'
+      # 3 分毎の処理
+    when '3days.job'
+      # 1 時間毎の処理
+    when '1week.job'
+      # 夜中の処理（なんだかエロい…）
+    end
 
-  # required to enable database syncing support
-  Clockwork.manager = DatabaseEvents::Manager.new
-
-
-
+  every(1.day, '1day.job')
+  every(2.day, '2days.job')
+  every(3.day, '3days.job')
+  every(7.day, '1week.job')
 
 end
