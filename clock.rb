@@ -16,6 +16,7 @@ module Clockwork
     when '1week.job'
       # 夜中の処理（なんだかエロい…）
     end
+  end
 
   every(1.day, '1day.job')
   every(2.day, '2days.job')
