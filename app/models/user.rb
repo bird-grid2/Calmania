@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :logs, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to_active_hash :period, optional: true
+  belongs_to_active_hash :period, optional: true
 
   validates :nickname, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
