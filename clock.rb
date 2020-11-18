@@ -8,13 +8,13 @@ module Clockwork
   handler do |job|
     case job
     when '1day.job'
-      # 10 秒毎の処理
+      # 1day
     when '2days.job'
-      # 3 分毎の処理
+      # 2days
     when '3days.job'
-      # 1 時間毎の処理
+      # 3days
     when '1week.job'
-      # 夜中の処理（なんだかエロい…）
+      # 1week
     end
   end
 
