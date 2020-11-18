@@ -21,7 +21,6 @@ class WebhookController < ApplicationController
         end
       end
     end
-
     "OK"
   end
 
@@ -41,7 +40,5 @@ class WebhookController < ApplicationController
     unless client.validate_signature(body, signature)
       halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request'
     end
-
   end
-
 end
