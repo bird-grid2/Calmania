@@ -12,5 +12,9 @@ class User < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
   validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: { allow_nil: true }
+
+  def if?(time)
+    time.day == day && time.month == month
+  end
   
 end
