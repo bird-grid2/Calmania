@@ -4,7 +4,6 @@ class WebhookController < ApplicationController
 
   protect_from_forgery except: [:callback] # CSRF protection
 
-
   def callback
     body = request.body.read
     events = client.parse_events_from(body)
@@ -24,11 +23,6 @@ class WebhookController < ApplicationController
     end
 
     "OK"
-  end
-
-  def broadcast
-    
-  
   end
 
   private
