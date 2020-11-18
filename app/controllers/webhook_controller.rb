@@ -1,7 +1,7 @@
 class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
   before_action :validates_signature
-  
+
   protect_from_forgery except: [:callback] # CSRF protection
 
   def callback
@@ -29,7 +29,8 @@ class WebhookController < ApplicationController
   def client
     @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_ACCESS_TOKEN"] }
+      config.channel_token = ENV["LINE_ACCESS_TOKEN"]
+    }
   end
 
   def validates_signature
