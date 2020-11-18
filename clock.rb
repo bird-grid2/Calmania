@@ -37,6 +37,7 @@ module Clockwork
     every(4.day, '1week.job')
   elsif container == '1週間毎'
     every(7.day, '1week.job')
+  end
 
   configure do |config|
     config[:sleep_timeout] = 5
