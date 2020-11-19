@@ -27,15 +27,16 @@ module Clockwork
     end
   end
 
-  if container == '毎日'
+  case container
+  when '毎日'
     every(1.day, '1day.job')
-  elsif container == '1日毎'
+  when '1日毎'
     every(2.day, '2days.job')
-  elsif container == '2日毎'
+  when '2日毎'
     every(3.day, '3days.job')
-  elsif container == '3日毎'
-    every(4.day, '1week.job')
-  elsif container == '1週間毎'
+  when '3日毎'
+    every(4.day, '4days.job')
+  when '1週間毎'
     every(7.day, '1week.job')
   end
 
