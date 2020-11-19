@@ -15,15 +15,15 @@ module Clockwork
   handler do |job|
     case job
     when '1day.job'
-      broadcast()
+      broadcast
     when '2days.job'
-      broadcast()
+      broadcast
     when '3days.job'
-      broadcast()
+      broadcast
     when '4days.job'
-      broadcast()
+      broadcast
     when '1week.job'
-      broadcast()
+      broadcast
     end
   end
 
