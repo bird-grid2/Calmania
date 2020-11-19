@@ -27,10 +27,10 @@ class WebhookController < ApplicationController
   private
 
   def client
-    @client ||= Line::Bot::Client.new { |config|
+    @client ||= Line::Bot::Client.new do |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
-    }
+    end
   end
 
   def validates_signature
