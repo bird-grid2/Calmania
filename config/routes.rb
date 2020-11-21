@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   root to: 'shows#index'
   post '/callback', to: 'webhook#callback'
 
-  resources :users, except: [:index, :show]
+  resources :users, except: [:index, :show] do
+    member do
+      post :sendtime
+    end
+  end
+
   resources :managements, only: :index
   resources :shows, only: :index
   resources :graphs , only: :index
