@@ -40,4 +40,3 @@ class WebhookController < ApplicationController
     halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request' unless client.validate_signature(body, signature)
   end
 end
-
