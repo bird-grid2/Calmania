@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update(user_params)
-      redirect_to root_path, notice: 'ユーザー情報を更新しました'
+      redirect_to managements_path, notice: 'ユーザー情報を更新しました'
     else
       flash.now[:alert] = 'ユーザー情報更新に失敗しました'
       redirect_back(fallback_location: root_path)
