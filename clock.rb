@@ -4,10 +4,10 @@ require './config/boot'
 require './config/environment'
 
 module Clockwork
-  Clockwork.manager = DatabaseEvents::Manager.new
-
   class << self
     def send
+      Clockwork.manager = DatabaseEvents::Manager.new
+
       container = 0
       timer = 0
 
@@ -43,14 +43,14 @@ module Clockwork
       when '1週間毎'
         every(7.day, '1week.job', at: timer)
       end
-    end
 
-    configure do |config|
-      config[:sleep_timeout] = 5
-      config[:logger] = Logger.new(log_file_path)
-      config[:tz] = 'JST'
-      config[:max_threads] = 15
-      config[:thread] = true
+      configure do |config|
+        config[:sleep_timeout] = 5
+        config[:logger] = Logger.new(log_file_path)
+        config[:tz] = 'JST'
+        config[:max_threads] = 15
+        config[:thread] = true
+      end
     end
   end
 end
