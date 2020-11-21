@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname, :email, :encrypted_password, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_curbohydrate_rate, :target_cal, :period, :send_time)
+    params.require(:user).permit(:nickname, :email, :encrypted_password)
   end
 
   def set_user
