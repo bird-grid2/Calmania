@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def after_inactive_sign_up_path_for(resource)
     if current_user
-      user_path(resource)
+      managements_path(resource)
     else
       redirect_back(fallback_location: root_path)
     end
