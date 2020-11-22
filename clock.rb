@@ -21,7 +21,7 @@ module Clockwork
 
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "#{'Bearer ' + access_token}",
+        "Authorization": ('Bearer ' + access_token).to_s,
       }
 
       option = {
