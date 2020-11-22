@@ -8,6 +8,8 @@ module Clockwork
     def send
       Clockwork.manager = DatabaseEvents::Manager.new
 
+      url = 'https://api.line.me/v2/bot/message/broadcast'
+
       access_token = ENV["LINE_ACCESS_TOKEN"]
 
       text_data = {
@@ -17,11 +19,18 @@ module Clockwork
         }]
       }
 
-      broadcast = UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast',　{
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": "#{'Bearer ' + access_token}",
+      }
+
+      option = {
         method: 'post',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + access_token },
+        headers: headers,
         payload: JSON.stringify(text_data)
-      })
+      }
+
+      broadcast = UrlFetchApp.fetch(url, option)
 
       container = 0
       timer = 0
