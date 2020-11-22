@@ -2,7 +2,6 @@
 
 class Users < Devise::ConfirmationsController
   class ConfirmationsController
-
     # GET /resource/confirmation/new
     # def new
     #   super
