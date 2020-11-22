@@ -3,10 +3,6 @@ require 'active_support/time'
 require './config/boot'
 require './config/environment'
 
-def broadcast
-
-
-
 module Clockwork
   class << self
     def send
