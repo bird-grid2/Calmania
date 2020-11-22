@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function(){
     $('#edit_submit').on('click', ()=>{
       var url = "https://calmania.work/broadcast"
       var request = createXMLHttpRequest();
-      request.open("GET", url, true);
+      request.open("POST", url, true);
       request.send("");
     });
   };
