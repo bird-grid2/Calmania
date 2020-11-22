@@ -5,12 +5,11 @@ class Users < Devise::SessionsController
     before_action :authenticate_user!, except: [:new, :create]
     before_action :configure_sign_in_params, only: [:create]
 
-    
     protected
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_in_params
-      add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal ]
+      add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal]
       devise_parameter_sanitizer.permit(:sign_in, keys: add_list)
     end
 

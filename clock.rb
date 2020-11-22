@@ -3,11 +3,33 @@ require 'active_support/time'
 require './config/boot'
 require './config/environment'
 
+def broadcast
+
+
+
 module Clockwork
   class << self
     def send
       Clockwork.manager = DatabaseEvents::Manager.new
 
+      access_token = ENV["LINE_ACCESS_TOKEN"];
+
+      broadcast = UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + access_token,
+        },
+        payload: JSON.stringify({
+          messages: [
+            {
+                type: 'text',
+                text: '時間になりました。</br>定期入力の時間です。'
+            },
+          ]
+        }),
+      });
+  
       container = 0
       timer = 0
 
