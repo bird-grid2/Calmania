@@ -14,11 +14,11 @@ class Users < Devise::SessionsController
       devise_parameter_sanitizer.permit(:sign_in, keys: add_list)
     end
 
-    def after_sign_up_path_for(resource)
+    def after_sign_up_path_for(*)
       managements_path
     end
 
-    def after_update_path_for(resource)
+    def after_update_path_for(*)
       managements_path
     end
   end
