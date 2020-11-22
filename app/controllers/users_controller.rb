@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def sendtime
-    Clockwork.send
+    
   end
 
   private

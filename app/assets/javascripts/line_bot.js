@@ -1,6 +1,6 @@
-var  ACCESS_TOKEN = ENV["LINE_ACCESS_TOKEN"];
-
 function broadcast() {
+  var  ACCESS_TOKEN = ENV["LINE_ACCESS_TOKEN"];
+
   UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast', {
     method: 'post',
     headers: {

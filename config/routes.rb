@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controller: [
+  devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions"
-  ]
+  }
   root to: 'shows#index'
   post '/callback', to: 'webhook#callback'
 

@@ -2,7 +2,7 @@ class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
   before_action :validates_signature
 
-  protect_from_forgery except: [:callback] # CSRF protection
+  protect_from_forgery except: [ :callback , :broadcast] # CSRF protection
 
   def callback
     body = request.body.read
@@ -22,6 +22,28 @@ class WebhookController < ApplicationController
       end
     end
     "OK"
+  end
+
+  def bot_boradcast
+    function broadcast() {
+      UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+        },
+        payload: JSON.stringify({
+          messages: [
+            {
+                type: 'text',
+                text: '時間になりました。</br>定期入力の時間です。'
+            },
+          ]
+        }),
+      });
+    };
+
+    Clockwork.send
   end
 
   private
