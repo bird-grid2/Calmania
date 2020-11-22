@@ -10,19 +10,20 @@ module Clockwork
 
       access_token = ENV["LINE_ACCESS_TOKEN"]
 
+      text_data = { 
+        messages: [{
+          type: 'text',
+          text: '時間になりました。</br>定期入力の時間です。'
+        }, ]
+      }
+
       broadcast = UrlFetchApp.fetch('https://api.line.me/v2/bot/message/broadcast',
         {
           method: 'post',
-          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + access_token },
-          payload: JSON.stringify({ messages: 
-            [ 
-              {
-                type: 'text',
-                text: '時間になりました。</br>定期入力の時間です。'
-              },
-            ]
-          }),
-        })
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + access_token, },
+          payload: JSON.stringify(text_data),
+        }
+      )
   
       container = 0
       timer = 0
