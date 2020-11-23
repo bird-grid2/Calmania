@@ -25,7 +25,10 @@ class WebhookController < ApplicationController
   end
 
   def bot_boradcast
-    Clockwork.send
+    if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+    Clockwork.send(@current_user)
   end
 
   private
