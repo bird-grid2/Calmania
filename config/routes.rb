@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions"
+  }
   root to: 'shows#index'
   post '/callback', to: 'webhook#callback'
+  post '/broadcast', to: 'webhook#bot_broadcast'
 
-  resources :users, except: [:index, :show]
+  resources :users, except: [:index, :show] do
+    member do
+      post :sendtime
+    end
+  end
+
   resources :managements, only: :index
   resources :shows, only: :index
   resources :graphs , only: :index

@@ -2,8 +2,7 @@ class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
   before_action :validates_signature
 
-  protect_from_forgery except: [:callback] # CSRF protection
-
+  protect_from_forgery except: [:callback, :bot_broadcast] # CSRF protection
 
   def callback
     body = request.body.read
@@ -22,27 +21,28 @@ class WebhookController < ApplicationController
         end
       end
     end
-
     "OK"
+  end
+
+  def bot_boradcast
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+
+    Clockwork.send(@current_user)
   end
 
   private
 
   def client
-    @client ||= Line::Bot::Client.new { |config|
+    @client ||= Line::Bot::Client.new do |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
-    }
+    end
   end
 
   def validates_signature
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request'
-    end
-
+    halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request' unless client.validate_signature(body, signature)
   end
-
 end

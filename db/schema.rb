@@ -63,10 +63,13 @@ ActiveRecord::Schema.define(version: 2020_10_08_154807) do
     t.integer "ideal_fat_rate"
     t.integer "ideal_carbohydrate_rate"
     t.integer "target_cal"
+    t.bigint "period_id"
+    t.time "send_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
+    t.index ["period_id"], name: "index_users_on_period_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

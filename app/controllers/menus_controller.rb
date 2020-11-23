@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_menu, only: [ :edit, :update, :destroy ]
   before_action :move_to_index, only: [ :index, :search ] 
 

@@ -1,4 +1,5 @@
 class ManagementsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @logs = Log.all.includes(:id).order(date: 'DESC')

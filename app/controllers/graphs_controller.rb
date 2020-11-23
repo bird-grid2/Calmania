@@ -1,5 +1,5 @@
 class GraphsController < ApplicationController
-  
+  before_action :authenticate_user!
   
   def index
     require 'pg'
