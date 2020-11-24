@@ -26,9 +26,10 @@
         = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
         = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
       .field
-        = f.label :period, value: '定期メッセージ', class:'edit'
+        = f.label :period, value: 'bot送信間隔', class:'edit'
         = f.collection_select :period_id, Period.all, :id, :name, autocomplete: "period"
-        = f.label :send_time, value: '登録時間', class: 'edit'
+      .field
+        = f.label :send_time, value: 'bot送信時間', class: 'edit'
         = f.time_field :send_time, autocomplete: "send_time"
     .border-line
     .right_box

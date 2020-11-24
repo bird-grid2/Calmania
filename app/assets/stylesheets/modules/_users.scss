@@ -1,7 +1,7 @@
 .user_wrapper{
   height: 100vh;
   width: 100vw;
-  padding: 5vh 5vw;
+  padding: 4vh 4vw;
   header {
     display: block;
     height: 20%;
@@ -39,7 +39,6 @@
           line-height: 2.5rem;
         }
         input {
-          width: 100%;
           display: inline-block;
           height: 4rem;
           width: 25rem;
@@ -164,18 +163,23 @@
       .field {
         .edit {
           width: 100%;
-          font-size: 2rem;
+          font-size: 1.5rem;
           text-align: left;
           margin-bottom: 3%;
         }
         input {
-          height: 3rem;
+          height: 2.5rem;
         }
         #user_ideal_protain_rate {
           margin-bottom: 3%;
         }
         #user_ideal_fat_rate {
           margin-bottom: 3%;
+        }
+        #user_period_id {
+          display: inline-block;
+          height: 2.5rem;
+          width: 25rem;
         }
       }
     }

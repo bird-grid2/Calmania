@@ -6,13 +6,13 @@
     = render "devise/shared/error_messages", resource: resource
     .left_box
       .field
-        = f.label :nickname, class: 'label', value: 'ニックネーム (必須)'
+        = f.label :nickname, class: 'new', value: 'ニックネーム (必須)'
         = f.text_field :nickname, autofocus: true, placeholder: "ニックネームを入力してください", required: true
       .field
-        = f.label :email, class: 'label', value: 'メールアドレス (必須)'
+        = f.label :email, class: 'new', value: 'メールアドレス (必須)'
         = f.email_field :email, placeholder: "メールアドレスを入力してください", required: true
       .field
-        = f.label :height, class: 'label', value: '身長[cm] (任意)'
+        = f.label :height, class: 'new', value: '身長[cm] (任意)'
         = f.number_field :height, placeholder: "身長を入力してください", step: '0.1'
     .border-line
     .right_box 
