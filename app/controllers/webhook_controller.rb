@@ -27,30 +27,6 @@ class WebhookController < ApplicationController
   def bot_boradcast
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
 
-    url = 'https://api.line.me/v2/bot/message/broadcast'
-
-    access_token = ENV["LINE_ACCESS_TOKEN"]
-
-    text_data = {
-      messages: [{
-        type: 'text',
-        text: '時間になりました。</br>定期入力の時間です。'
-      }]
-    }
-
-    headers = {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer #{access_token}",
-    }
-
-    option = {
-      method: 'post',
-      headers: headers,
-      payload: JSON.stringify(text_data)
-    }
-
-    broadcast = UrlFetchApp.fetch(url, option)
-
     Clock.send(@current_user)
   end
 
