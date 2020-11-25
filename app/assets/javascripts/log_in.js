@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
     $('#easy_login').on('click', ()=>{
       $('#user_nickname').val('test-user');
       $('#user_email').val('test-user-calmania@gmail.com')
-      $('#user_password').val('j8746trus')
+      $('#user_password').val(ENV["PASSWORD"])
       $('#login').click();
     });
   };
