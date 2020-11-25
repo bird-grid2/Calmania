@@ -1,36 +1,12 @@
-require 'clockwork'
-require 'active_support/time'
-require './config/boot'
-require './config/environment'
+class Clock
+  def send(target)
+    require 'clockwork'
+    require 'active_support/time'
+    require './config/boot'
+    require './config/environment'
 
-module Clockwork
-  class << self
-    def send(target)
+    module Clockwork
       Clockwork.manager = DatabaseEvents::Manager.new
-
-      url = 'https://api.line.me/v2/bot/message/broadcast'
-
-      access_token = ENV["LINE_ACCESS_TOKEN"]
-
-      text_data = {
-        messages: [{
-          type: 'text',
-          text: '時間になりました。</br>定期入力の時間です。'
-        }]
-      }
-
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer #{access_token}",
-      }
-
-      option = {
-        method: 'post',
-        headers: headers,
-        payload: JSON.stringify(text_data)
-      }
-
-      broadcast = UrlFetchApp.fetch(url, option)
 
       container = 0
       timer = 0
@@ -39,8 +15,6 @@ module Clockwork
         container = model_instance.find_by(id: target).period
         timer = model_instance.find_by(id: target).send_time
       end
-
-      container = co
 
       handler do |job|
         case job
