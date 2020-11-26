@@ -4,14 +4,13 @@ class WebhookController < ApplicationController
 
   protect_from_forgery except: [:callback, :bot_broadcast] # CSRF protection
 
-  
   class Clock
     require 'clockwork'
     require 'active_support/time'
-    require File.expand_path('../boot', __FILE__)
-    require File.expand_path('../environment', __FILE__)
+    require File.expand_path('boot', __dir__)
+    require File.expand_path('environment', __dir__)
   end
-    
+
   def callback
     body = request.body.read
     events = client.parse_events_from(body)
@@ -33,15 +32,12 @@ class WebhookController < ApplicationController
   end
 
   def bot_boradcast
-    
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
 
-    obj = Webhhook::Clock.new
+    obj = Webhook::Clock.new
 
     obj.send(@current_user)
   end
-
-
 
   private
 
