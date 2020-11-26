@@ -10,7 +10,7 @@ class WebhookController < ApplicationController
     require File.expand_path('boot', __dir__)
     require File.expand_path('environment', __dir__)
   end
-  
+
   def callback
     body = request.body.read
     events = client.parse_events_from(body)
