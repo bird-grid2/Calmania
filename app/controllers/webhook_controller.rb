@@ -8,8 +8,8 @@ class WebhookController < ApplicationController
   class Clock
     require 'clockwork'
     require 'active_support/time'
-    require './config/boot'
-    require './config/environment'
+    require File.expand_path('../boot', __FILE__)
+    require File.expand_path('../environment', __FILE__)
   end
     
   def callback
