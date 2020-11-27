@@ -1,5 +1,7 @@
 require 'clockwork'
 require 'active_support/time'
+require File.expand_path('boot', __dir__)
+require File.expand_path('environment', __dir__)
 
 module Clockwork
   def send(target)
