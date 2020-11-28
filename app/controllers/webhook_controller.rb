@@ -38,7 +38,7 @@ class WebhookController < ApplicationController
             type: 'text',
             text: '時間になりました。</br>定期入力の時間です。'
           }
-          client.push_message(event['To'], message)
+          client.push_message(event['to'], message)
         end
       end
     end
