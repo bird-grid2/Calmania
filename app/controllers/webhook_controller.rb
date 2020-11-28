@@ -2,7 +2,7 @@ class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
   before_action :validates_signature
 
-  protect_from_forgery except: [:callback, :bot_broadcast] # CSRF protection
+  protect_from_forgery except: [:callback, :send] # CSRF protection
 
   def callback
     body = request.body.read
@@ -26,6 +26,7 @@ class WebhookController < ApplicationController
 
   def send
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    body = request.body.read
     events = client.parse_events_from(body)
 
     events.each do |event|
