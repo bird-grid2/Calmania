@@ -26,24 +26,22 @@ class WebhookController < ApplicationController
 
   def send
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-    url = 'https://api.line.me/v2/bot/message/broadcast'
-    access_token = ENV["LINE_ACCESS_TOKEN"]
-    text_data = {
-      messages: [{
-        type: 'text',
-        text: '時間になりました。</br>定期入力の時間です。'
-      }]
-    }
-    headers = {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer #{access_token}",
-    }
-    option = {
-      method: 'post',
-      headers: headers,
-      payload: JSON.stringify(text_data)
-    }
-    UrlFetchApp.fetch(url, option)
+    events = client.parse_events_from(body)
+
+    events.each do |event|
+      case event
+      when Line::Bot::Event::Message
+        case event.type
+        when Line::Bot::Event::MessageType::Text
+          message = {
+            type: 'text',
+            text: '時間になりました。</br>定期入力の時間です。'
+          }
+          client.push_message(event['To'], message)
+        end
+      end
+    end
+    "OK"
   end
 
   private
