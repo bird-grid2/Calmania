@@ -31,15 +31,15 @@ module Clockwork
 
   case container
   when '毎日'
-    every(1.day, '1day.job', :at => timer)
+    every(1.day, '1day.job', at: timer)
   when '1日毎'
-    every(2.day, '2days.job', :at => timer)
+    every(2.day, '2days.job', at: timer)
   when '2日毎'
-    every(3.day, '3days.job', :at => timer)
+    every(3.day, '3days.job', at: timer)
   when '3日毎'
-    every(4.day, '4days.job', :at => timer)
+    every(4.day, '4days.job', at: timer)
   when '1週間毎'
-    every(7.day, '1week.job', :at => timer)
+    every(7.day, '1week.job', at: timer)
   end
 
   configure do |config|

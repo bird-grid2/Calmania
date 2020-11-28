@@ -43,7 +43,7 @@ class WebhookController < ApplicationController
       headers: headers,
       payload: JSON.stringify(text_data)
     }
-    broadcast = UrlFetchApp.fetch(url, option)
+    UrlFetchApp.fetch(url, option)
   end
 
   private
