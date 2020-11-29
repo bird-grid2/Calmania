@@ -42,7 +42,7 @@ class WebhookController < ApplicationController
       type: 'text',
       text: '時間になりました。</br>定期入力の時間です。'
     }
-    userId = Follower.find_by(user_id : @current_user)
+    userId = Follower.find_by(user_id: @current_user)
     client.push_message(userId, message)
   end
 
