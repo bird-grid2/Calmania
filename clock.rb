@@ -4,28 +4,24 @@ require File.expand_path('boot', __dir__)
 require File.expand_path('environment', __dir__)
 
 module Clockwork
+  @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   Clockwork.manager = DatabaseEvents::Manager.new
 
-  container = 0
-  timer = 0
-
-  sync_database_events model: Users, every: 1.hour do |model_instance|
-    container = model_instance.period
-    timer = model_instance.send_time
-  end
+  container = Follower.find_by(id: @current_user).period
+  timer = Follower.find_by(id: @current_user).send_time.strftime(%R)
 
   handler do |job|
     case job
     when '1day.job'
-      broadcast
+      Webhook.broadcast_message
     when '2days.job'
-      broadcast
+      Webhook.broadcast_message
     when '3days.job'
-      broadcast
+      Webhook.broadcast_message
     when '4days.job'
-      broadcast
+      Webhook.broadcast_message
     when '1week.job'
-      broadcast
+      Webhook.broadcast_message
     end
   end
 

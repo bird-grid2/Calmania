@@ -37,7 +37,6 @@ class WebhookController < ApplicationController
   end
 
   def broadcast_message
-
     message = {
       type: 'text',
       text: '時間になりました。</br>定期入力の時間です。'
