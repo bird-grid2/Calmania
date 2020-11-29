@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   }
   root to: 'shows#index'
   post '/callback', to: 'webhook#callback'
-  post '/broadcast', to: 'webhook#send'
 
   resources :users, except: [:index, :show] do
     member do
