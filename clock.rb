@@ -8,7 +8,7 @@ module Clockwork
   Clockwork.manager = DatabaseEvents::Manager.new
 
   container = Follower.find_by(id: @current_user).period
-  timer = Follower.find_by(id: @current_user).send_time.strftime(%R)
+  timer = Follower.find_by(id: @current_user).send_time.strftime("%R")
 
   handler do |job|
     case job
