@@ -1,3 +1,3 @@
 FactoryBot.define do
-  factory :follower do; end
+  factory :follower {}
 end

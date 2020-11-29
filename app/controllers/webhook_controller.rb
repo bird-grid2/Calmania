@@ -3,7 +3,7 @@ class WebhookController < ApplicationController
   before_action :validates_signature
   before_action :login, only: [:callback, :broadcast_message]
 
-  protect_from_forgery except: [:callback, :send] # CSRF protection
+  protect_from_forgery except: [:callback, :broadcast_message] # CSRF protection
 
   def callback
     body = request.body.read
@@ -20,14 +20,14 @@ class WebhookController < ApplicationController
           }
           client.reply_message(event['replyToken'], message)
         end
-      when Line::Bot::Event::Follow 
-        userid = event['source']['userId'] 
+      when Line::Bot::Event::Follow
+        userid = event['source']['userId']
         follower = Follower.new
         follower.line_id = userid
         follower.save
         message = { type: 'text', text: '友達登録ありがとうございます' }
         client.push_message(follower.line_id, message)
-      when Line::Bot::Event::Unfollow 
+      when Line::Bot::Event::Unfollow
         userid = event['source']['userId']
         follower = Follower.find_by(line_id: userid)
         follower.destroy
@@ -37,13 +37,13 @@ class WebhookController < ApplicationController
   end
 
   def broadcast_message
-    
+
     message = {
       type: 'text',
       text: '時間になりました。</br>定期入力の時間です。'
     }
-    userId = Follower.find_by(user_id: @current_user)
-    client.push_message(userId, message)
+    follower_id = Follower.find_by(user_id: @current_user)
+    client.push_message(follower_id, message)
   end
 
   private
