@@ -1,9 +1,8 @@
 class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
   before_action :validates_signature
-  before_action :login, only: [:callback, :broadcast_message]
 
-  protect_from_forgery except: [:callback, :broadcast_message] # CSRF protection
+  protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
   def callback
     body = request.body.read
@@ -20,29 +19,17 @@ class WebhookController < ApplicationController
           }
           client.reply_message(event['replyToken'], message)
         end
-      when Line::Bot::Event::Follow
-        userid = event['source']['userId']
-        follower = Follower.new
-        follower.line_id = userid
-        follower.save
-        message = { type: 'text', text: '友達登録ありがとうございます' }
-        client.push_message(follower.line_id, message)
-      when Line::Bot::Event::Unfollow
-        userid = event['source']['userId']
-        follower = Follower.find_by(line_id: userid)
-        follower.destroy
       end
     end
     "OK"
   end
 
-  def broadcast_message
+  def broadcast
     message = {
       type: 'text',
       text: '時間になりました。</br>定期入力の時間です。'
     }
-    follower_id = Follower.find_by(user_id: @current_user)
-    client.push_message(follower_id, message)
+    client.broadcast(message)
   end
 
   private
@@ -60,9 +47,5 @@ class WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     halt 400, { 'Content-Type' => 'text/plain' }, 'Bad Request' unless client.validate_signature(body, signature)
-  end
-
-  def login
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 end
