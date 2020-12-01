@@ -7,11 +7,14 @@ module Clockwork
   @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   Clockwork.manager = DatabaseEvents::Manager.new
 
+  container = 0
+  timer = 0
+
   sync_database_events model: Users, every: 1.hour do |model_instance|
     container = model_instance.period
     timer = model_instance.send_time.strftime('%R')
   end
-  
+
   handler do |job|
     case job
     when '1day.job'
