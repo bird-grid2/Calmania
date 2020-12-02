@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   post '/callback', to: 'webhook#callback'
   post '/broadcast', to: 'webhook#broadcast_message'
 
-  resources :users, except: [:index, :show] do
-    member do
-      post :sendtime
-    end
-  end
+  resources :users, except: [:index, :show]
 
   resources :managements, only: :index
   resources :shows, only: :index
