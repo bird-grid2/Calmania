@@ -1,7 +1,7 @@
 require 'clockwork'
 require 'active_support/time'
-require File.expand_path('boot', __dir__)
-require File.expand_path('environment', __dir__)
+require File.expand_path('./config/boot', __dir__)
+require File.expand_path('./config/environment', __dir__)
 
 module Clockwork
   @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]

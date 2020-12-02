@@ -17,11 +17,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: add_list
     devise_parameter_sanitizer.permit :account_update, keys: add_list
   end
-
-  private
-
-  def redirect_root
-    redirect_to root_path unless user_signed_in?
-  end
-  
 end
