@@ -16,18 +16,7 @@ module Clockwork
   end
 
   handler do |job|
-    case job
-    when '1day.job'
-      Webhook.broadcast
-    when '2days.job'
-      Webhook.broadcast
-    when '3days.job'
-      Webhook.broadcast
-    when '4days.job'
-      Webhook.broadcast
-    when '1week.job'
-      Webhook.broadcast
-    end
+    Webhook.broadcast
   end
 
   case container
