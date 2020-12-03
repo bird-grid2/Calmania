@@ -1,6 +1,6 @@
 class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
-  before_action :validates_signature
+  before_action :validates_signature, only: [:callback]
 
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
