@@ -4,7 +4,6 @@ require File.expand_path('./config/boot', __dir__)
 require File.expand_path('./config/environment', __dir__)
 
 module Clockwork
-  @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   Clockwork.manager = DatabaseEvents::Manager.new
 
   container = 0
