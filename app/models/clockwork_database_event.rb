@@ -9,5 +9,5 @@ class ClockworkDatabaseEvent < ApplicationRecord
 
   def send_time
     User.select('send_time')
-  end  
+  end
 end
