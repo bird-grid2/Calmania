@@ -17,15 +17,15 @@ module Clockwork
 
   case container
   when '毎日'
-    every(1.day, '1day.job', at: timer){ Webhook.broadcast }
+    every(1.day, '1day.job', at: timer) { Webhook.broadcast }
   when '1日毎'
-    every(2.day, '2days.job', at: timer){ Webhook.broadcast }
+    every(2.day, '2days.job', at: timer) { Webhook.broadcast }
   when '2日毎'
-    every(3.day, '3days.job', at: timer){ Webhook.broadcast }
+    every(3.day, '3days.job', at: timer) { Webhook.broadcast }
   when '3日毎'
-    every(4.day, '4days.job', at: timer){ Webhook.broadcast }
+    every(4.day, '4days.job', at: timer) { Webhook.broadcast }
   when '1週間毎'
-    every(7.day, '1week.job', at: timer){ Webhook.broadcast }
+    every(7.day, '1week.job', at: timer) { Webhook.broadcast }
   end
 
   configure do |config|
