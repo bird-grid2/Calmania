@@ -13,9 +13,16 @@ class User < ApplicationRecord
   validates :encrypted_password, presence: true
   validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: { allow_nil: true }
 
+  def sendtime
+    self.send_time
+  end
+  
+  def period
+    self.period_id
+  end
 
   def frequency
-    self.delay(run_at: 3.minutes).send(:send_time)
-    self.delay(run_at: 3.minutes).send(:period_id)
+    # user's information send 1minute
+    60
   end
 end
