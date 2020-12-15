@@ -31,6 +31,7 @@ class WebhookController < ApplicationController
         end
       end
     end
+
     "OK"
   end
 
