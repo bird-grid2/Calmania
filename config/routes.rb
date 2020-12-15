@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
-  root to: 'shows#index'
-  post '/callback', to: 'webhook#callback'
+  root to: "shows#index"
+  post "/callback", to: "webhook#callback"
 
   resources :users, except: [:index, :show]
 
