@@ -1,8 +1,8 @@
 class WebhookController < ApplicationController
   require 'line/bot'  # gem 'line-bot-api'
-  before_action :client, only: [:callback, :broadcast]
+  before_action :client, only: [:callback]
 
-  protect_from_forgery except: [:callback, :broadcast] # CSRF protection
+  protect_from_forgery except: [:callback] # CSRF protection
 
   def callback
     body = request.body.read
@@ -28,14 +28,6 @@ class WebhookController < ApplicationController
       end
     end
     "OK"
-  end
-
-  def broadcast
-    messages = {
-      type: 'text',
-      text: '時間になりました。</br>定期入力の時間です。'
-    }
-    client.broadcast(messages)
   end
 
   private
