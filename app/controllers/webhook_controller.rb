@@ -25,14 +25,6 @@ class WebhookController < ApplicationController
     "OK"
   end
 
-  def broadcast
-    messages = {
-      type: 'text',
-      text: '時間になりました。</br>定期入力の時間です。'
-    }
-    client.broadcast(messages)
-  end
-
   private
 
   def client
