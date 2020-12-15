@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+
+  post "/callback", to: "webhook#callback"
   
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
   root to: "shows#index"
-  post "/callback", to: "webhook#callback"
 
   resources :users, except: [:index, :show]
 
