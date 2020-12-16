@@ -10,7 +10,7 @@ class WebhookController < ApplicationController
     end
   end
 
-  def callback
+  post '/callback' do
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
