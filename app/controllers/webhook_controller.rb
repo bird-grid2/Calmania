@@ -3,11 +3,11 @@ class WebhookController < ApplicationController
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
   def client
-    @client ||= Line::Bot::Client.new do |config|
+    @client ||= Line::Bot::Client.new { |config|
       congig.channel_id = ENV["LINE_CHANNEL_ID"]
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
-    end
+    }
   end
 
   def callback
