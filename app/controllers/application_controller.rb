@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
     body = request.body.read
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     return if client.validate_signature(body, signature)
+    
     error 400 do 
       'Bad Request'
     end
