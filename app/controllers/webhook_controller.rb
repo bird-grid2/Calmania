@@ -15,7 +15,9 @@ class WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      error 400 { 'Bad Request' }
+      error do
+        'Bad Request'
+      end
     end
 
     events = client.parse_events_from(body)
