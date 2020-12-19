@@ -13,12 +13,10 @@ class WebhookController < ApplicationController
 
   def callback
     body = request.body.read
-    
-    begin
-      signature = request.env['HTTP_X_LINE_SIGNATURE']
-    rescue
-      return if client.validate_signature(body, signature)
-      puts "400 Bad Request"
+    signature = request.env['HTTP_X_LINE_SIGNATURE']
+
+    unless client.validate_signature(body, signature)
+      response_bad_request
     end
 
     events = client.parse_events_from(body)
