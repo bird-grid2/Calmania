@@ -3,9 +3,26 @@ require 'line/bot'  # gem 'line-bot-api'
 class WebhookController < ApplicationController
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
+  def client
+    @client ||= Line::Bot::Client.new do |config|
+      congig.channel_id = ENV["LINE_CHANNEL_ID"]
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_ACCESS_TOKEN"]
+    end
+  end
+
   def callback
     body = request.body.read
+    
+    begin
+      signature = request.env['HTTP_X_LINE_SIGNATURE']
+    rescue
+      return if client.validate_signature(body, signature)
+      puts "400 Bad Request"
+    end
+
     events = client.parse_events_from(body)
+    
     events.each do |event|
       case event
       when Line::Bot::Event::Message
