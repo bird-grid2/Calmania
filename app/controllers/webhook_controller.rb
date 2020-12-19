@@ -1,7 +1,5 @@
-require 'line/bot'  # gem 'line-bot-api'
-require 'sinatra'
-
 class WebhookController < ApplicationController
+  require 'line/bot'  # gem 'line-bot-api'
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
   def client
@@ -12,7 +10,7 @@ class WebhookController < ApplicationController
     end
   end
 
-  post '/callback' do
+  def callback
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
