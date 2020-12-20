@@ -7,6 +7,10 @@ class WebhookController < ApplicationController
       congig.channel_id = ENV["LINE_CHANNEL_ID"]
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
+      config.http_options = {
+        open_timeout: 5,
+        read_timeout: 5,
+      }
     end
   end
 
@@ -15,9 +19,7 @@ class WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      error 400 do
-        'Bad Request'
-      end
+      response_bad_request
     end
 
     events = client.parse_events_from(body)
@@ -42,10 +44,34 @@ class WebhookController < ApplicationController
   end
 
   def broadcast
-    messages = {
-      type: 'text',
-      text: '時間になりました。</br>定期入力の時間です。'
-    }
     client.broadcast(messages)
   end
+
+  def reply_content(event, messages)
+    res = client.reply_message(
+      event['replyToken'],
+      messages
+    )
+    logger.warn res.read_body unless Net::HTTPOK === res
+    res
+  end
+
+  def handle_sticker(event)
+    # Message API available stickers
+    # https://developers.line.me/media/messaging-api/sticker_list.pdf
+    msgapi_available = event.message['packageId'].to_i <= 4
+    messages = [{
+      type: 'text',
+      text: "[STICKER]\npackageId: #{event.message['packageId']}\nstickerId: #{event.message['stickerId']}"
+    }]
+    if msgapi_available
+      messages.push(
+        type: 'sticker',
+        packageId: event.message['packageId'],
+        stickerId: event.message['stickerId']
+      )
+    end
+    reply_content(event, messages)
+  end
+  
 end
