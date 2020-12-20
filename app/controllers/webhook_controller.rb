@@ -9,7 +9,7 @@ class WebhookController < ApplicationController
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
       config.http_options = {
         open_timeout: 5,
-        read_timeout: 5,
+        read_timeout: 5
       }
     end
   end
@@ -18,9 +18,7 @@ class WebhookController < ApplicationController
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      response_bad_request
-    end
+    response_bad_request unless client.validate_signature(body, signature)
 
     events = client.parse_events_from(body)
     events.each do |event|
@@ -44,6 +42,10 @@ class WebhookController < ApplicationController
   end
 
   def broadcast
+    messages = {
+      type: 'text',
+      text: '時間になりました。</br>定期入力の時間です。'
+    }
     client.broadcast(messages)
   end
 
