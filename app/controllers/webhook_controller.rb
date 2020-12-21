@@ -75,5 +75,4 @@ class WebhookController < ApplicationController
     end
     reply_content(event, messages)
   end
-  
 end

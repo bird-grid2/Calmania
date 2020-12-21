@@ -4,6 +4,6 @@ class BroadcastJob < ApplicationJob
   discard_on ActiveJob::DeserializationError
 
   def perform(*args)
-    # 後で実行したい作業をここに書く
+    # do something
   end
 end
