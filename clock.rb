@@ -16,20 +16,23 @@ module Clockwork
   end
 
   handler do |job|
-    job
+    case job
+    when '1.day.job' || '2.day.job' || '3.days.job' || '4.days.job' || '1.week.job'
+      Webhook.broadcast
+    end
   end
 
   case container
   when 1
-    every(1.day, '1day.job', at: timer) { Webhook.broadcast }
+    every(1.day, '1.day.job', at: timer.striftime("%H:%M"))
   when 2
-    every(2.days, '2days.job', at: timer) { Webhook.broadcast }
+    every(2.days, '2.days.job', at: timer.striftime("%H:%M"))
   when 3
-    every(3.days, '3days.job', at: timer) { Webhook.broadcast }
+    every(3.days, '3.days.job', at: timer.striftime("%H:%M"))
   when 4
-    every(4.days, '4days.job', at: timer) { Webhook.broadcast }
+    every(4.days, '4.days.job', at: timer.striftime("%H:%M"))
   when 5
-    every(7.days, '1week.job', at: timer) { Webhook.broadcast }
+    every(7.days, '1.week.job', at: timer.striftime("%H:%M"))
   end
 
   configure do |config|
