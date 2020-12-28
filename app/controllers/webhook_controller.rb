@@ -38,13 +38,7 @@ class WebhookController < ApplicationController
         end
       end
     end
-    {
-      "success": true,
-      "timestamp": "2020-09-30T05:38:20.031Z",
-      "statusCode": 200,
-      "reason": "OK",
-      "detail": "200"
-    }
+    head :ok
   end
 
   def broadcast
