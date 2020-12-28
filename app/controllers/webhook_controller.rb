@@ -1,5 +1,5 @@
 class WebhookController < ApplicationController
-  require 'line/bot' 
+  require 'line/bot'
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
 
   def callback
@@ -11,6 +11,7 @@ class WebhookController < ApplicationController
     end
 
     events = client.parse_events_from(body)
+
     events.each do |event|
       case event
       when Line::Bot::Event::Message
@@ -66,7 +67,7 @@ class WebhookController < ApplicationController
     reply_content(event, messages)
   end
 
-private
+  private
 
   def client
     @client ||= Line::Bot::Client.new do |config|
