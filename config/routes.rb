@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   root to: "shows#index"
-  post '/callback', to: 'webhook#callback'
+  post '/webhook', to: 'webhook#callback'
 
   resources :users, except: [:index, :show]
 
