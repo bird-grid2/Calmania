@@ -1,24 +1,14 @@
 class WebhookController < ApplicationController
-  require 'line/bot'  # gem 'line-bot-api'
+  require 'line/bot' 
   protect_from_forgery except: [:callback, :broadcast] # CSRF protection
-
-  def client
-    @client ||= Line::Bot::Client.new do |config|
-      congig.channel_id = ENV["LINE_CHANNEL_ID"]
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_ACCESS_TOKEN"]
-      config.http_options = {
-        open_timeout: 5,
-        read_timeout: 5
-      }
-    end
-  end
 
   def callback
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    response_bad_request unless client.validate_signature(body, signature)
+    unless client.validate_signature(body, signature)
+      response_bad_request
+    end
 
     events = client.parse_events_from(body)
     events.each do |event|
@@ -74,5 +64,19 @@ class WebhookController < ApplicationController
       )
     end
     reply_content(event, messages)
+  end
+
+private
+
+  def client
+    @client ||= Line::Bot::Client.new do |config|
+      congig.channel_id = ENV["LINE_CHANNEL_ID"]
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_ACCESS_TOKEN"]
+      config.http_options = {
+        open_timeout: 5,
+        read_timeout: 5
+      }
+    end
   end
 end
