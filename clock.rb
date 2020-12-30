@@ -21,7 +21,7 @@ module Clockwork
     case job
     when '1.day.job' || '2.day.job' || '3.days.job' || '4.days.job' || '1.week.job'
       uri = URI.parse("https://calmania.work/send")
-      response = Net::HTTP.get_response(uri)
+      Net::HTTP.get_response(uri)
     end
   end
 
