@@ -23,6 +23,6 @@ class User < ApplicationRecord
 
   def frequency
     # user's information send 1minute
-    60
+    120
   end
 end
