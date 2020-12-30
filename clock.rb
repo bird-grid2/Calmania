@@ -1,3 +1,5 @@
+require 'net/http'
+require 'uri'
 require 'clockwork'
 require 'clockwork/database_events'
 require 'active_support/time'
@@ -18,7 +20,8 @@ module Clockwork
   handler do |job|
     case job
     when '1.day.job' || '2.day.job' || '3.days.job' || '4.days.job' || '1.week.job'
-      Webhook.broadcast
+      uri = URI.parse("https://calmania.work/send")
+      response = Net::HTTP.get_response(uri)
     end
   end
 
