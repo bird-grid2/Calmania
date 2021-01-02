@@ -15,8 +15,8 @@ class ClockWorkEvent < ApplicationRecord
       i += 1
     end
 
-    array.each do |run|
-      run.call
+    array.each_with_index do |run, j|
+      run[j]
     end
   end
 
