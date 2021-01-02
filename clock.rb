@@ -12,9 +12,9 @@ module Clockwork
   container = 0
   timer = 0
 
-  sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
-    container = model_instance.delay.period_frequency
-    timer = model_instance.delay.sendtime
+  sync_database_events model: ClockWorkEvent, every: 1.minute do |model_instance|
+    container = model_instance.delay.sendtime[1]
+    timer = model_instance.delay.sendtime[0]
   end
 
   handler do |job|
@@ -27,15 +27,15 @@ module Clockwork
 
   case container
   when 1
-    every(1.day, '1.day.job', at: timer.striftime("%H:%M"))
+    every(1.day, '1.day.job', at: timer)
   when 2
-    every(2.days, '2.days.job', at: timer.striftime("%H:%M"))
+    every(2.days, '2.days.job', at: timer)
   when 3
-    every(3.days, '3.days.job', at: timer.striftime("%H:%M"))
+    every(3.days, '3.days.job', at: timer)
   when 4
-    every(4.days, '4.days.job', at: timer.striftime("%H:%M"))
+    every(4.days, '4.days.job', at: timer)
   when 5
-    every(7.days, '1.week.job', at: timer.striftime("%H:%M"))
+    every(7.days, '1.week.job', at: timer)
   end
 
   configure do |config|

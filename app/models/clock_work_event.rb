@@ -6,30 +6,14 @@ class ClockWorkEvent < ApplicationRecord
 
   def sendtime
     i = 0
-    target = ClockWorkEvent.order(:send_time).pluck(:id, :send_time)
-    times = []
-    time_ids = []
+    target = ClockWorkEvent.order(:send_time).pluck(:send_time, :period_id)
+    times = 0
 
     target.each do |time|
-      times << time[i][1].strftime("%H:%M")
-      time_ids << time[i][0].to_i
+      times = [ time[i][0].strftime("%H:%M"), time[i][1].to_i]
+      times
       i += 1
     end
-    [time_ids, times]
-  end
-
-  def period_frequency
-    j = 0
-    target = ClockWorkEvent.pluck(:id, :period_id)
-    periods = []
-    period_ids = []
-
-    target.each do |period|
-      periods << period[j][1].to_i
-      period_ids << period[j][0].to_i
-      j += 1
-    end
-    [period_ids, periods]
   end
 
   def frequency
