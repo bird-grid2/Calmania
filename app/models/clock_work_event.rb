@@ -10,9 +10,13 @@ class ClockWorkEvent < ApplicationRecord
     times = []
 
     target.each do |time|
-      times = [time[i][0].strftime("%H:%M"), time[i][1].to_i]
-      times
+      array = time[i][0].strftime("%H:%M"), time[i][1].to_i
+      times << array
       i += 1
+    end
+
+    array.eaxh do |run|
+      run.call
     end
   end
 
