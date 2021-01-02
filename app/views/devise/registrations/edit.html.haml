@@ -25,12 +25,13 @@
         = f.number_field :ideal_protain_rate, autocomplete: "ideal_protain_rate", placeholder: 'たんぱく質の摂取割合(任意)'
         = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
         = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
-      .field
-        = f.label :period, value: 'bot送信間隔', class:'edit'
-        = f.collection_select :period_id, Period.all, :id, :name, autocomplete: "period"
-      .field
-        = f.label :send_time, value: 'bot送信時間', class: 'edit'
-        = f.time_field :send_time, autocomplete: "send_time"
+      = f.fields_for :clock_work_event, resource.clock_work_event ? resource.clock_work_event : resource.build_clock_work_event do |form|
+        .field
+          = form.label :period_id, class: 'edit'
+          = form.collection_select :period_id, Period.all, :id, :name
+        .field
+          = form.label :send_time, class: 'edit'
+          = form.time_field :send_time
     .border-line
     .right_box
       .field

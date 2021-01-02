@@ -3,11 +3,13 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+
+  resources :users do
+    resources :clock_work_events, except: [:index, :show]
+  end
   root to: "shows#index"
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
-
-  resources :users, except: [:index, :show]
 
   resources :managements, only: :index
   resources :shows, only: :index

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_074627) do
+ActiveRecord::Schema.define(version: 2020_12_31_081624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clock_work_events", force: :cascade do |t|
+    t.bigint "period_id"
+    t.time "send_time"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["period_id"], name: "index_clock_work_events_on_period_id"
+    t.index ["user_id"], name: "index_clock_work_events_on_user_id"
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -78,15 +88,13 @@ ActiveRecord::Schema.define(version: 2020_12_05_074627) do
     t.integer "ideal_fat_rate"
     t.integer "ideal_carbohydrate_rate"
     t.integer "target_cal"
-    t.bigint "period_id"
-    t.time "send_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
-    t.index ["period_id"], name: "index_users_on_period_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "clock_work_events", "users"
   add_foreign_key "logs", "users"
 end

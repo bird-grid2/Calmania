@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
-    add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal]
+    add_list = [:nickname, :email, :password, :password_confirmation]
     devise_parameter_sanitizer.permit(:sign_in, keys: add_list)
   end
 

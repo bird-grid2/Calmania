@@ -5,24 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :logs, dependent: :destroy
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :period, optional: true
+  has_one :clock_work_event, dependent: :destroy
+  accepts_nested_attributes_for :clock_work_event, allow_destroy: true
 
   validates :nickname, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
   validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: { allow_nil: true }
-
-  def sendtime
-    send_time
-  end
-  
-  def period
-    period_id
-  end
-
-  def frequency
-    # user's information send 1minute
-    120
-  end
 end

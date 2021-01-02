@@ -12,14 +12,14 @@ module Clockwork
   container = 0
   timer = 0
 
-  sync_database_events model: User, every: 1.hour do |model_instance|
-    container = model_instance.delay.period
+  sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
+    container = model_instance.delay.period_frequency
     timer = model_instance.delay.sendtime
   end
 
   handler do |job|
     case job
-    when '1.day.job' || '2.day.job' || '3.days.job' || '4.days.job' || '1.week.job'
+    when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
       uri = URI.parse("https://calmania.work/send")
       Net::HTTP.get_response(uri)
     end

@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal ]
-    devise_parameter_sanitizer.permit :sign_up, keys: add_list
+    add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [ :period_id, :send_time ] } ]
+    devise_parameter_sanitizer.permit :sign_up, keys: [ :nickname, :email, :height, :password, :password_confirmation ]
     devise_parameter_sanitizer.permit :account_update, keys: add_list
   end
 end
