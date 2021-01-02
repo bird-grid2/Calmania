@@ -10,7 +10,7 @@ class ClockWorkEvent < ApplicationRecord
     times = []
 
     target.each do |time|
-      array = time[i][0].strftime("%H:%M"), time[i][1].to_i
+      array = [time[i][0].strftime("%H:%M"), time[i][1].to_i]
       times << array
       times[i]
       i += 1
