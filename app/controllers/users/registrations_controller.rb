@@ -9,13 +9,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal]
+    add_list = [:nickname, :email, :height, :password, :password_confirmation]
     devise_parameter_sanitizer.permit(:sign_up, keys: add_list)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :password, :password_confirmation, :period_id, :send_time, :target_cal]
+    add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, clock_work_event_attributes: [ :period_id, :send_time]]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
   end
 

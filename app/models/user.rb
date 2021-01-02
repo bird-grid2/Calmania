@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :logs, dependent: :destroy
-  has_one :clock_work_event
-  accepts_nested_attributes_for :clock_work_event
+  has_one :clock_work_event, dependent: :destroy
+  accepts_nested_attributes_for :clock_work_event, allow_destroy: true
 
   validates :nickname, presence: true, uniqueness: true
   validates :encrypted_password, presence: true

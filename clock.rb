@@ -13,7 +13,7 @@ module Clockwork
   timer = 0
 
   sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
-    container = model_instance.delay.period
+    container = model_instance.delay.period_frequency
     timer = model_instance.delay.sendtime
   end
 

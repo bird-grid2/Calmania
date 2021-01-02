@@ -18,7 +18,7 @@ class ClockWorkEvent < ApplicationRecord
     return time_ids, times
   end
   
-  def period
+  def period_frequency
     j = 0
     target = ClockWorkEvent.pluck(:id, :period_id)
     periods = []
