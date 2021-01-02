@@ -7,10 +7,10 @@ class ClockWorkEvent < ApplicationRecord
   def sendtime
     i = 0
     target = ClockWorkEvent.order(:send_time).pluck(:send_time, :period_id)
-    times = 0
+    times = []
 
     target.each do |time|
-      times = [ time[i][0].strftime("%H:%M"), time[i][1].to_i]
+      times = [time[i][0].strftime("%H:%M"), time[i][1].to_i]
       times
       i += 1
     end
