@@ -15,9 +15,9 @@ class ClockWorkEvent < ApplicationRecord
       time_ids << time[i][0].to_i
       i += 1
     end
-    return time_ids, times
+    [time_ids, times]
   end
-  
+
   def period_frequency
     j = 0
     target = ClockWorkEvent.pluck(:id, :period_id)
@@ -25,11 +25,11 @@ class ClockWorkEvent < ApplicationRecord
     period_ids = []
 
     target.each do |period|
-      periods << time[j][1].to_i
-      period_ids << time[j][0].to_i
+      periods << period[j][1].to_i
+      period_ids << period[j][0].to_i
       j += 1
     end
-    return period_ids, periods
+    [period_ids, periods]
   end
 
   def frequency
