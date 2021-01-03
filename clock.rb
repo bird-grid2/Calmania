@@ -15,21 +15,21 @@ module Clockwork
 
   sync_database_events model: ClockWorkEvent, every: 1.week do |model_instance|
     targets = []
-    (model_instance.send_time).each do |i|
-      if i[1] == 1
+    model_instance.send_time.each do |i|
+      case i[1]
+      when 1
         targets.delay(priority: 1).push(i)
-      elsif i[1] == 2
+      when 2
         targets.delay(priority: 2).push(i)
-      elsif i[1] == 3
+      when 3
         targets.delay(priority: 3).push(i)
-      elsif i[1] == 4
+      when 4
         targets.delay(priority: 4).push(i)
-      elsif i[1] == 5
+      when 5
         targets.delay(priority: 5).push(i)
       end
     end
   end
-
 
   handler do |job|
     case job
@@ -40,7 +40,6 @@ module Clockwork
   end
 
   targets.each do |tar|
-
     timer = tar[0].strftime("%H:%M")
     container = tar[1]
 

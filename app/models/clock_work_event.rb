@@ -5,7 +5,7 @@ class ClockWorkEvent < ApplicationRecord
   belongs_to_active_hash :period, optional: true
 
   def self.sendtime
-      order(:send_time).pluck(:send_time, :period_id, :user_id)
+    order(:send_time).pluck(:send_time, :period_id, :user_id)
   end
 
   def frequency
