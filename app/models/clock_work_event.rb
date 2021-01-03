@@ -4,17 +4,8 @@ class ClockWorkEvent < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :period, optional: true
 
-  def sendtime
-    i = 0
-    target = ClockWorkEvent.order(:send_time).pluck(:send_time, :period_id)
-    times = []
-
-    target.each do |time|
-      array = [time[i][0].strftime("%H:%M"), time[i][1].to_i]
-      times << array
-      times[i]
-      i += 1
-    end
+  def self.sendtime
+      order(:send_time).pluck(:send_time, :period_id, :user_id)
   end
 
   def frequency
