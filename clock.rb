@@ -14,20 +14,19 @@ module Clockwork
   targets = []
 
   sync_database_events model: ClockWorkEvent, every: 1.week do |model_instance|
-    targets = []
-    model_instance.send_time.each do |i|
-      case i[1]
-      when 1
-        targets.delay(priority: 1).push(i)
-      when 2
-        targets.delay(priority: 2).push(i)
-      when 3
-        targets.delay(priority: 3).push(i)
-      when 4
-        targets.delay(priority: 4).push(i)
-      when 5
-        targets.delay(priority: 5).push(i)
-      end
+    list = [model_instance.send_time.strftime("%H:%M"), model_instance.period_id, model_instance.user_id]
+
+    case list[1]
+    when 1
+      targets.delay(priority: 1).push(list)
+    when 2
+      targets.delay(priority: 2).push(list)
+    when 3
+      targets.delay(priority: 3).push(list)
+    when 4
+      targets.delay(priority: 4).push(list)
+    when 5
+      targets.delay(priority: 5).push(list)
     end
   end
 
@@ -57,9 +56,11 @@ module Clockwork
     end
   end
 
+  every(1.week, 'reset.job', at: "00:00") { targets = []}
+
   configure do |config|
     config[:sleep_timeout] = 5
     config[:max_threads] = 15
     config[:thread] = true
   end
-end
+end 
