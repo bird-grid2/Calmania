@@ -6,6 +6,6 @@ class ClockWorkEvent < ApplicationRecord
 
   def frequency
     # user's information send 1week
-    604800
+    604_800
   end
 end

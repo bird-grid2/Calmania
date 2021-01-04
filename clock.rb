@@ -56,11 +56,11 @@ module Clockwork
     end
   end
 
-  every(1.week, 'reset.job', at: "00:00") { targets = []}
+  every(1.week, 'reset.job', at: "00:00") { targets = [] }
 
   configure do |config|
     config[:sleep_timeout] = 5
     config[:max_threads] = 15
     config[:thread] = true
   end
-end 
+end
