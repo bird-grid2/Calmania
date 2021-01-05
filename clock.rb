@@ -37,19 +37,22 @@ module Clockwork
 
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    
-        req = Net::HTTP::Post.new(uri.path)
-        req.set_form_data({'name': 'broadcast', 'content': 'send data'})
-    
-        res = http.request(req)
-    
+
+        message = 'test'
+
+        http.start do
+          req = Net::HTTP::Post.new(uri.path)
+          req.set_form_data({ body: message })
+          res = http.request(req)
+        end
+
       end
     end
-  
+
     targets.each do |tar|
       timer = tar[0].strftime("%H:%M")
       container = tar[1]
-  
+
       case container
       when 1
         every(1.day, '1.day.job', at: timer)
