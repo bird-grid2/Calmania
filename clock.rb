@@ -43,7 +43,7 @@ module Clockwork
         http.start do
           req = Net::HTTP::Post.new(uri.path)
           req.set_form_data({ body: message })
-          res = http.request(req)
+          http.request(req)
         end
       end
     end
