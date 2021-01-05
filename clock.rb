@@ -1,4 +1,4 @@
-require 'net/http'
+require 'net/https'
 require 'uri'
 require 'clockwork'
 require 'clockwork/database_events'
@@ -32,7 +32,17 @@ module Clockwork
     handler do |job|
       case job
       when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-        Webhook.broadcast
+        uri = URI.parse("https://calmania.work/send")
+        http = Net::HTTP.new(uri.host, uri.port)
+
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    
+        req = Net::HTTP::Post.new(uri.path)
+        req.set_form_data({'name': 'broadcast', 'content': 'send data'})
+    
+        res = http.request(req)
+    
       end
     end
   
