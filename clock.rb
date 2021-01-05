@@ -28,31 +28,30 @@ module Clockwork
     when 5
       targets.delay(priority: 5).push(list)
     end
-  end
 
-  handler do |job|
-    case job
-    when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-      uri = URI.parse("https://calmania.work/send")
-      Net::HTTP.get_response(uri)
+    handler do |job|
+      case job
+      when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
+        Webhook.broadcast
+      end
     end
-  end
-
-  targets.each do |tar|
-    timer = tar[0].strftime("%H:%M")
-    container = tar[1]
-
-    case container
-    when 1
-      every(1.day, '1.day.job', at: timer)
-    when 2
-      every(2.days, '2.days.job', at: timer)
-    when 3
-      every(3.days, '3.days.job', at: timer)
-    when 4
-      every(4.days, '4.days.job', at: timer)
-    when 5
-      every(7.days, '1.week.job', at: timer)
+  
+    targets.each do |tar|
+      timer = tar[0].strftime("%H:%M")
+      container = tar[1]
+  
+      case container
+      when 1
+        every(1.day, '1.day.job', at: timer)
+      when 2
+        every(2.days, '2.days.job', at: timer)
+      when 3
+        every(3.days, '3.days.job', at: timer)
+      when 4
+        every(4.days, '4.days.job', at: timer)
+      when 5
+        every(7.days, '1.week.job', at: timer)
+      end
     end
   end
 
