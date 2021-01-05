@@ -13,61 +13,45 @@ module Clockwork
   timer = 0
   targets = []
 
-  sync_database_events model: ClockWorkEvent, every: 1.week do |model_instance|
-    list = [model_instance.send_time.strftime("%H:%M"), model_instance.period_id, model_instance.user_id]
+  every(1.week, 'reset.job', at: "00:00") { targets = [] }
 
-    case list[1]
-    when 1
-      targets.delay(priority: 1).push(list)
-    when 2
-      targets.delay(priority: 2).push(list)
-    when 3
-      targets.delay(priority: 3).push(list)
-    when 4
-      targets.delay(priority: 4).push(list)
-    when 5
-      targets.delay(priority: 5).push(list)
-    end
+  handler do |job|
+    case job
+    when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
+      uri = URI.parse("https://calmania.work/send")
+      http = Net::HTTP.new(uri.host, uri.port)
 
-    handler do |job|
-      case job
-      when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-        uri = URI.parse("https://calmania.work/send")
-        http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      message = 'test'
 
-        message = 'test'
-
-        http.start do
-          req = Net::HTTP::Post.new(uri.path)
-          req.set_form_data({ body: message })
-          http.request(req)
-        end
-      end
-    end
-
-    targets.each do |tar|
-      timer = tar[0].strftime("%H:%M")
-      container = tar[1]
-
-      case container
-      when 1
-        every(1.day, '1.day.job', at: timer)
-      when 2
-        every(2.days, '2.days.job', at: timer)
-      when 3
-        every(3.days, '3.days.job', at: timer)
-      when 4
-        every(4.days, '4.days.job', at: timer)
-      when 5
-        every(7.days, '1.week.job', at: timer)
+      http.start do
+        req = Net::HTTP::Post.new(uri.path)
+        req.set_form_data({ body: message })
+        http.request(req)
       end
     end
   end
 
-  every(1.week, 'reset.job', at: "00:00") { targets = [] }
+  sync_database_events model: ClockWorkEvent, every: 1.week, at: "00:01" do |model_instance|
+    list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
+    timer = list[0].strftime("%H:%M")
+    container = list[1]
+  
+    case container
+    when 1
+      every(1.day, '1.day.job', at: timer)
+    when 2
+      every(2.days, '2.days.job', at: timer)
+    when 3
+      every(3.days, '3.days.job', at: timer)
+    when 4
+      every(4.days, '4.days.job', at: timer)
+    when 5
+      every(7.days, '1.week.job', at: timer)
+    end
+  end
 
   configure do |config|
     config[:sleep_timeout] = 5
