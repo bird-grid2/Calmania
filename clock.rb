@@ -11,9 +11,6 @@ module Clockwork
 
   container = 0
   timer = 0
-  targets = []
-
-  every(1.week, 'reset.job', at: "00:00") { targets = [] }
 
   handler do |job|
     case job

@@ -192,6 +192,9 @@ $(document).on('turbolinks:load', function(){
         $(this).parent().parent().remove();
       };
     });
+    $('body').on('mouseover', '#menu_names', function(){
+      $(this).select2();
+    });
   };
 });
 
