@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function(){
   if(document.URL.match(/menus...edit/)){
-    
+
     var protain = [];
     var fat = [];
     var carbohydrate = [];
