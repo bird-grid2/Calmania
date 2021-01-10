@@ -31,7 +31,7 @@ module Clockwork
     end
   end
 
-  sync_database_events model: ClockWorkEvent, every: 1.day, at: "00:05" do |model_instance|
+  sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
     list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
     timer = list[0].strftime("%H:%M")
     container = list[1]
@@ -49,6 +49,14 @@ module Clockwork
       every(7.days, '1.week.job', at: timer)
     end
   end
+
+  every(1.day, 'delete.job', at: '00:00') {
+    i = 1
+    User.count.times do
+      ClockWorkEvent.where(user_id: i).where('id < ?', ClockWorkEvent.last.id).destroy_all
+      i += 1
+    end
+  }
 
   configure do |config|
     config[:sleep_timeout] = 5
