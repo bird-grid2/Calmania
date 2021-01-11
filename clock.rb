@@ -50,14 +50,6 @@ module Clockwork
     end
   end
 
-  every(1.day, 'delete.job', at: '00:00') do
-    i = 1
-    User.count.times do
-      ClockWorkEvent.where(user_id: i).where('id < ?', ClockWorkEvent.last.id).destroy_all
-      i += 1
-    end
-  end
-
   configure do |config|
     config[:sleep_timeout] = 5
     config[:max_threads] = 15
