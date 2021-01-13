@@ -91,3 +91,4 @@ gem 'clockwork'
 gem 'daemons'
 gem 'select2-rails'
 gem 'sidekiq', require: false
+gem 'sidekiq-status'
