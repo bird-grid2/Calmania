@@ -9,7 +9,7 @@ class MenusController < ApplicationController
 
     food = []
 
-    @foods.each_with_index do |elem, i|
+    @foods.each_with_index do |elem, _|
       food << elem
     end
     gon.food = food
