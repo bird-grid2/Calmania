@@ -1,11 +1,11 @@
 class BroadcastJob < ApplicationJob
-  queue_as :default
+  queue_as :broadcast
   discard_on ActiveJob::DeserializationError
 
   def expiration
     @expiration ||= 60 * 3 # 3 minutes
   end
-  
+
   def perform(model)
     list = [model.send_time, model.period_id, model.user_id]
     timer = list[0].strftime("%H:%M")
