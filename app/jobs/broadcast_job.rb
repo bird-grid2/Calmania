@@ -1,6 +1,5 @@
 class BroadcastJob < ApplicationJob
   queue_as :broadcast
-  discard_on ActiveJob::DeserializationError
 
   def expiration
     @expiration ||= 60 * 3 # 3 minutes

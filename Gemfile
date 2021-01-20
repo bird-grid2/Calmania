@@ -93,3 +93,4 @@ gem 'select2-rails'
 gem 'sidekiq', require: false
 gem 'sidekiq-status'
 gem 'redis-namespace'
+gem 'sinatra', require: false
