@@ -9,7 +9,7 @@ class LogsController < ApplicationController
     
     menu =[]
     
-    @menus.each_with_index do |log|
+    @menus.each_with_index do |log, _|
       menu << log
     end
     
@@ -52,7 +52,7 @@ class LogsController < ApplicationController
     menu = []
     num = []
 
-    @menus.each_with_index do |log|
+    @menus.each_with_index do |log, _|
       menu << log
     end
     gon.menu = menu 
