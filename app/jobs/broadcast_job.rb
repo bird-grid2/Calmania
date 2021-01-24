@@ -6,7 +6,7 @@ class BroadcastJob < ApplicationJob
   end
 
   def perform(elem, num)
-    @container = elem
-    @timer = num
+    $container = elem
+    $timer = num
   end
 end
