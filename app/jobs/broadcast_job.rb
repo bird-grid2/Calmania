@@ -1,6 +1,5 @@
 class BroadcastJob < ApplicationJob
   queue_as :broadcast
-  require 'clockwork'
 
   def expiration
     @expiration ||= 60 * 3 # 3 minutes
