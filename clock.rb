@@ -29,7 +29,11 @@ module Clockwork
   end
 
   sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
-    BroadcastJob.perform_later model_instance
+    list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
+    timer = list[0].strftime("%H:%M")
+    container = list[1]
+
+    BroadcastJob.perform_later(container, timer)
   end
 
   configure do |config|
