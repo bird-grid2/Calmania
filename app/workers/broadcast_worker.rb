@@ -8,7 +8,7 @@ class BroadcastWorker
 
   def perform(model)
     list = [model.send_time, model.period_id, model.user_id]
-    timer = list[0].strftime("%H:%M")
-    container = list[1]
+    $timer = list[0].strftime("%H:%M")
+    $container = list[1]
   end
 end
