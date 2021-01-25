@@ -29,24 +29,20 @@ module Clockwork
   end
 
   sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
-    list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
-    timer = list[0].strftime("%H:%M")
-    container = list[1]
-
-    BroadcastJob.perform_later(container, timer)
+    BroadcastWorker.perform_async(model_instance)
   end
 
-  case $container
+  case container
   when 1
-    every(1.day, '1.day.job', at: $timer)
+    every(1.day, '1.day.job', at: timer)
   when 2
-    every(2.days, '2.days.job', at: $timer)
+    every(2.days, '2.days.job', at: timer)
   when 3
-    every(3.days, '3.days.job', at: $timer)
+    every(3.days, '3.days.job', at: timer)
   when 4
-    every(4.days, '4.days.job', at: $timer)
+    every(4.days, '4.days.job', at: timer)
   when 5
-    every(7.days, '1.week.job', at: $timer)
+    every(7.days, '1.week.job', at: timer)
   end
 
   configure do |config|

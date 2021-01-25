@@ -24,7 +24,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+# gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -62,6 +62,10 @@ end
 
 group :production do
   gem 'unicorn'
+  gem 'sidekiq', require: false
+  gem 'sidekiq-status'
+  gem 'redis-namespace'
+  gem 'sinatra', require: false
 end
 
 group :development, :test do
@@ -90,7 +94,3 @@ gem 'active_hash'
 gem 'clockwork'
 gem 'daemons'
 gem 'select2-rails'
-gem 'sidekiq', require: false
-gem 'sidekiq-status'
-gem 'redis-namespace'
-gem 'sinatra', require: false
