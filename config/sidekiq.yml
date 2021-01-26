@@ -4,4 +4,5 @@
 :concurrency:  10
 :queues:
   - broadcast
+  - test
 :retry: false
