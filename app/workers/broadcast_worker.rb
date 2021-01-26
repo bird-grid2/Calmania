@@ -8,8 +8,8 @@ class BroadcastWorker
     @expiration ||= 60 * 60 * 24 # 1 day
   end
 
-  def perform(model)
-    list = [model.send_time, model.period_id, model.user_id]
+  def perform(*args)
+    list = [ClockWorkEvent.send_time, ClockWorkEvent.period_id, ClockWorkEvent.user_id]
     timer = list[0].strftime("%H:%M")
     container = list[1]
 
