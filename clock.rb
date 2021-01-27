@@ -28,8 +28,9 @@ module Clockwork
     end
   end
 
-  sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|    
-    BroadcastWorker.perform_async(model_instance.user_id)
+  sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
+    id = model_instance.user_id   
+    BroadcastWorker.perform_async(id)
   end
 
   configure do |config|
