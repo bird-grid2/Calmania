@@ -9,7 +9,6 @@ class BroadcastWorker
   end
 
   def perform(num)
-    
     case num[0]
     when 1
       every(1.day, '1.day.job', at: num[1])

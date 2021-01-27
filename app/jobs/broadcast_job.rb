@@ -1,10 +1,7 @@
 class BroadcastJob < ApplicationJob
-  queue_as :broadcast
+  queue_as :default
 
-  
-
-  def perform(elem, num)
-    $container = elem
-    $timer = num
+  def perform(*args)
+    # do something
   end
 end
