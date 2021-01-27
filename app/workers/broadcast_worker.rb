@@ -24,6 +24,6 @@ class BroadcastWorker
       # every(4.days, '4.days.job', at: timer)
     # when 5
       # every(7.days, '1.week.job', at: timer)
-    end
+    # end
   end
 end
