@@ -8,19 +8,19 @@ class BroadcastWorker
     @expiration ||= 60 * 60 * 24 # 1 day
   end
 
-  def perform(elem, num)
+  def perform(num)
     
-    case elem
+    case num[0]
     when 1
-      every(1.day, '1.day.job', at: num)
+      every(1.day, '1.day.job', at: num[1])
     when 2
-      every(2.days, '2.days.job', at: num)
+      every(2.days, '2.days.job', at: num[1])
     when 3
-      every(3.days, '3.days.job', at: num)
+      every(3.days, '3.days.job', at: num[1])
     when 4
-      every(4.days, '4.days.job', at: num)
+      every(4.days, '4.days.job', at: num[1])
     when 5
-      every(7.days, '1.week.job', at: num)
+      every(7.days, '1.week.job', at: num[1])
     end
   end
 end

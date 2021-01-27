@@ -32,8 +32,9 @@ module Clockwork
     list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
     timer = list[0].strftime("%H:%M")
     container = list[1]
+    elem = [container, timer]
     
-    BroadcastWorker.perform_async(container, timer)
+    BroadcastWorker.perform_async(elem)
   end
 
   configure do |config|
