@@ -28,13 +28,8 @@ module Clockwork
     end
   end
 
-  sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
-    list = [model_instance.send_time, model_instance.period_id, model_instance.user_id]
-    timer = list[0].strftime("%H:%M")
-    container = list[1]
-    elem = [container, timer]
-    
-    BroadcastWorker.perform_async(elem)
+  sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|    
+    BroadcastWorker.perform_async(model_instance.user_id)
   end
 
   configure do |config|
