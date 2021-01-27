@@ -9,7 +9,7 @@ class BroadcastWorker
   end
 
   def perform(elem)
-    @clock = ClockWorkevent.find_by(user_id: elem)
+    @clock = ClockWorkEvent.find_by(user_id: elem)
     case @clock.period_id
     when 1
       every(1.day, '1.day.job', at: @clock.send_time.strftime("%H:%M"))
