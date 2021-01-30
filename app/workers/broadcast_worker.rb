@@ -1,7 +1,7 @@
 class BroadcastWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
-  require "clockwork"
+  include Clockwork
   sidekiq_options queue: :broadcast
 
   def expiration
