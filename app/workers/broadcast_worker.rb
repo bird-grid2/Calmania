@@ -10,7 +10,5 @@ class BroadcastWorker
 
   def perform(elem)
     @clock = ClockWorkEvent.find_by(user_id: elem)
-    container = @clock.period_id
-    timer = @clock.send_time.strftime("%H:%M")
   end
 end

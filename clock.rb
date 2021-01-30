@@ -33,6 +33,9 @@ module Clockwork
     BroadcastWorker.perform_async(id)
   end
 
+  container = @clock.period_id
+  timer = @clock.send_time.strftime("%H:%M")
+
   case container
   when 1
     every(1.day, '1.day.job', at: timer)
