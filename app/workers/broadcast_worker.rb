@@ -11,4 +11,8 @@ class BroadcastWorker
   def perform(elem)
     @clock = ClockWorkEvent.find_by(user_id: elem)
   end
+
+  def self.send
+    @clock
+  end
 end

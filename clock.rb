@@ -33,8 +33,8 @@ module Clockwork
     BroadcastWorker.perform_async(id)
   end
 
-  container = @clock.period_id
-  timer = @clock.send_time.strftime("%H:%M")
+  container = BroadcastWworker.send.period_id
+  timer = BroadcastWworker.send.send_time.strftime("%H:%M")
 
   case container
   when 1
