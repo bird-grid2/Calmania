@@ -10,7 +10,7 @@ module Clockwork
   Clockwork.manager = DatabaseEvents::Manager.new
 
   sync_database_events model: ClockWorkEvent, every: 4.hours do |model_instance|
-    id = model_instance.user_id   
+    id = model_instance.user_id
     BroadcastWorker.perform_async(id)
   end
 
