@@ -1,6 +1,8 @@
 class BroadcastWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
+  require 'net/https'
+  require 'uri'
   include Clockwork
   sidekiq_options queue: :broadcast
 
