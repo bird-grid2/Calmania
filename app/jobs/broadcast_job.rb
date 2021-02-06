@@ -3,5 +3,6 @@ class BroadcastJob < ApplicationJob
 
   def perform(elem)
     @clock = ClockWorkEvent.find_by(user_id: elem)
+    @clock
   end
 end
