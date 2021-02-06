@@ -31,6 +31,7 @@ module Clockwork
   sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
     id = model_instance.user_id
     BroadcastJob.perform_later(id)
+    @clock
   end
 
   container = @clock.period_id
