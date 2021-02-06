@@ -9,24 +9,24 @@ require File.expand_path('./config/environment', __dir__)
 module Clockwork
   Clockwork.manager = DatabaseEvents::Manager.new
 
-  action =  handler do |job|
-              case job
-              when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-                uri = URI.parse("https://calmania.work/send")
-                http = Net::HTTP.new(uri.host, uri.port)
+  action = handler do |job|
+    case job
+    when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
+      uri = URI.parse("https://calmania.work/send")
+      http = Net::HTTP.new(uri.host, uri.port)
 
-                http.use_ssl = true
-                http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-                message = 'test'
+      message = 'test'
 
-                http.start do
-                  req = Net::HTTP::Post.new(uri.path)
-                  req.set_form_data({ body: message })
-                  http.request(req)
-                end
-              end
-            end
+      http.start do
+        req = Net::HTTP::Post.new(uri.path)
+        req.set_form_data({ body: message })
+        http.request(req)
+      end
+    end
+  end
 
   BroadcastJob.perform_later(action)
 
