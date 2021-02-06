@@ -8,8 +8,6 @@ require File.expand_path('./config/environment', __dir__)
 
 module Clockwork
   Clockwork.manager = DatabaseEvents::Manager.new
-  container = 0
-  timer = 0
 
   handler do |job|
     case job
