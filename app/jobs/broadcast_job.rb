@@ -1,7 +1,8 @@
 class BroadcastJob < ApplicationJob
   queue_as :broadcast
 
-  def perform(*args)
-    # clockworks running
+  def perform(model)
+    container = model.period_id
+    timer = model.send_time.strftime("%H:%M")
   end
 end
