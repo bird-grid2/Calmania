@@ -10,7 +10,19 @@ module Clockwork
   handler do |job|
     case job
     when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-      BroadcastJob.perform_later
+      uri = URI.parse("https://calmania.work/send")
+      http = Net::HTTP.new(uri.host, uri.port)
+
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      message = 'test'
+
+      http.start do
+        req = Net::HTTP::Post.new(uri.path)
+        req.set_form_data({ body: message })
+        http.request(req)
+      end
     end
   end
 
@@ -20,15 +32,15 @@ module Clockwork
 
     case container
     when 1
-      every(1.day, '1.day.job', at: timer)
+      every(1.day, '1.day.job', at: timer, if: model_instance.present?)
     when 2
-      every(2.days, '2.days.job', at: timer)
+      every(2.days, '2.days.job', at: timer, if: model_instance.present?)
     when 3
-      every(3.days, '3.days.job', at: timer)
+      every(3.days, '3.days.job', at: timer, if: model_instance.present?)
     when 4
-      every(4.days, '4.days.job', at: timer)
+      every(4.days, '4.days.job', at: timer, if: model_instance.present?)
     when 5
-      every(7.days, '1.week.job', at: timer)
+      every(7.days, '1.week.job', at: timer, if: model_instance.present?)
     end
   end
 
