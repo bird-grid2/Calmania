@@ -1,4 +1,4 @@
-require 'clockwork'
+equire 'clockwork'
 require 'clockwork/database_events'
 require 'active_support/time'
 require File.expand_path('./config/boot', __dir__)
@@ -9,7 +9,7 @@ module Clockwork
 
   handler do |job|
     case job
-    when '1.day.job' || '2.days.job' || '3.days.job' || '1.week.job'
+    when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
       uri = URI.parse("https://calmania.work/send")
       http = Net::HTTP.new(uri.host, uri.port)
 
@@ -26,15 +26,15 @@ module Clockwork
     end
   end
 
-  sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
+  sync_database_events model: ClockWorkEvent, every: 1.day do |model_instance|
     container = model_instance.period_id
     timer = model_instance.send_time.strftime("%H:%M")
 
     case container
     when 0
       exit
-    when 1
-      every(1.day, '1.day.job', at: timer)
+    when 5
+      every(7.days, '1.week.job', at: timer)
     end
   end
 
