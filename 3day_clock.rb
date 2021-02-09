@@ -1,4 +1,4 @@
-equire 'clockwork'
+require 'clockwork'
 require 'clockwork/database_events'
 require 'active_support/time'
 require File.expand_path('./config/boot', __dir__)
