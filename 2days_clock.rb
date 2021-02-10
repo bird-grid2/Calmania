@@ -35,8 +35,8 @@ module Clockwork
     case container
     when 0
       exit
-    when 1
-      every(1.day, '1.day.job', at: timer)
+    when 2
+      every(2.days, '2.days.job', at: timer)
     end
   end
 
