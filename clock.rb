@@ -28,7 +28,7 @@ module Clockwork
     end
   end
 
-  sync_database_events model: ClockWorkEvent, every: 1.minute do |model_instance|
+  sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
     container = model_instance.period_id
     timer = model_instance.send_time.strftime("%H:%M")
 
