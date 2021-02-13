@@ -10,7 +10,7 @@ module Clockwork
   handler do |job|
     case job
     when '1.day.job' || '2.days.job' || '3.days.job' || '4.days.job' || '1.week.job'
-        BroadcastJob.perform_later(job)
+      BroadcastJob.perform_later(job)
     end
   end
 
