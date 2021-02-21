@@ -14,7 +14,7 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = 'app/assets/images/'
     elsif Rails.env.production?
-      dirpath = '/var/www/Calmania/current/app/assets/images'
+      dirpath = '/var/www/Calmania/current/app/assets/images/'
     end
     
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
