@@ -19,6 +19,8 @@ jobs:
       - image: circleci/python:3.6.4
         environment:
           RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
     executor: ruby/default
     steps:
       - checkout
