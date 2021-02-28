@@ -8,7 +8,6 @@ $(document).on('turbolinks:load', function(){
                     </div>`
         return html;
       };
-
       $(this).next().remove();
       $(this).parent().append(massHTML());
     });
@@ -53,7 +52,7 @@ $(document).on('turbolinks:load', function(){
                       </div>
                     </div>
                     <div class='input_form__column__box__carbohydrate'>
-                      <h2>タンパク質</h2>
+                      <h2>炭水化物</h2>
                       <div class='input_form_warpper'>
                         <h3>${carbohydrate_cal}</h3><p> [kCal]</p>
                       </div>
@@ -191,9 +190,6 @@ $(document).on('turbolinks:load', function(){
         $('.calculate_box__result--form').append(formHTML());
         $(this).parent().parent().remove();
       };
-    });
-    $('body').on('mouseover', '#menu_names', function(){
-      $(this).select2();
     });
   };
 });
