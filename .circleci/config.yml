@@ -51,6 +51,8 @@ jobs:
       - run:
           name: install module
           command: |
+            sudo python3 -m ensurepip --upgrade
+            sudo python3 -m pip install --upgrade pip
             sudo python3 -m pip install numpy
             sudo python3 -m pip install pandas
             sudo python3 -m pip install matplotlib
