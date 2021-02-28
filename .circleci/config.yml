@@ -16,11 +16,6 @@ jobs:
           POSTGRES_DB: docker_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-      - image: circleci/python:3.6.4
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
     executor: ruby/default
     steps:
       - checkout
@@ -48,14 +43,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run:
-          name: install module
-          command: |
-            sudo python3 -m ensurepip --upgrade
-            sudo python3 -m pip install --upgrade pip
-            sudo python3 -m pip install numpy
-            sudo python3 -m pip install pandas
-            sudo python3 -m pip install matplotlib
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       
