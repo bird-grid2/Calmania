@@ -48,6 +48,12 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+      - run:
+          name: install module
+          command: |
+            sudo python3 -m pip install numpy
+            sudo python3 -m pip install pandas
+            sudo python3 -m pip install matplotlib
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       
