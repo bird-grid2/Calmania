@@ -2,10 +2,11 @@ class GraphsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    require 'pg'
     require 'pycall'
     require 'pycall/import'
     include PyCall::Import
+    pyimport :numpy
+    pyimport :matplotlib
 
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
