@@ -20,6 +20,7 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/docker_test?sslmode=disable
+          PYCALL_DEBUG_FIND_LIBPYTHON: 1
 
     executor: ruby/default
     steps:
@@ -48,6 +49,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+      - run: PYCALL_DEBUG_FIND_LIBPYTHON=1 ruby -rpycall -ePyCall.builtins
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       

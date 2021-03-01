@@ -7,6 +7,7 @@ class GraphsController < ApplicationController
     include PyCall::Import
     pyimport :numpy
     pyimport :matplotlib
+    pyimport :os
 
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
