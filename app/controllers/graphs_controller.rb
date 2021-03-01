@@ -3,16 +3,13 @@ class GraphsController < ApplicationController
   
   def index
     require 'pycall'
-    require 'pycall/import'
-    include PyCall::Import
-    pyimport :numpy
-    pyimport :matplotlib
-    pyimport :os
+    require 'numpy'
+    require 'matplotlib'
 
-    matplotlib = PyCall.import_module('matplotlib')
+    matplotlib = Matplotlib
     matplotlib.use('Agg')
-    plt = PyCall.import_module('matplotlib.pyplot')
-    np = PyCall.import_module('numpy')
+    plt = Matplotlib.pyplot
+    np = Numpy
     os = PyCall.import_module('os')
 
     if Rails.env.development?
