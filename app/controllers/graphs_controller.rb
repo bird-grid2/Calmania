@@ -4,6 +4,8 @@ class GraphsController < ApplicationController
   def index
     require 'pg'
     require 'pycall'
+    require 'pycall/import'
+    include PyCall::Import
 
     matplotlib = PyCall.import_module('matplotlib')
     matplotlib.use('Agg')
