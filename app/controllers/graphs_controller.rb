@@ -4,11 +4,11 @@ class GraphsController < ApplicationController
   def index
     require 'pycall'
     require 'numpy'
-    require 'matplotlib'
+    require 'matplotlib/pyplot'
 
     matplotlib = Matplotlib
     matplotlib.use('Agg')
-    plt = Matplotlib.pyplot
+    plt = matplotlib::Pyplot
     np = Numpy
     os = PyCall.import_module('os')
 
