@@ -13,7 +13,7 @@ jobs:
           PGUSER: root
       - image: circleci/postgres:latest
         environment:
-          POSTGRES_DB: docker_test
+          POSTGRES_DB: Calmania_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
       - image: circleci/python:3.6.4
