@@ -19,7 +19,7 @@ jobs:
       - image: circleci/python:3.6.4
         environment:
           PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/docker_test?sslmode=disable
+          DATABASE_URL: postgresql://root@localhost/Calmania_test?sslmode=disable
           PYCALL_DEBUG_FIND_LIBPYTHON: 1
           PYTHON: /usr/bin/python3
 
