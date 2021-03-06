@@ -1,89 +1,89 @@
-version: 2.1
-  jobs:
-    docker:
-      - image: circleci/ruby:2.7.2-browsers
-        environment:
-          BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-      - image: circleci/postgres:latest
-        environment:
-          POSTGRES_DB: Calmania_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-      - image: circleci/python:3.6.4
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/Calmania_test?sslmode=disable
-          PYCALL_DEBUG_FIND_LIBPYTHON: 1
-          PYTHON: /usr/bin/python3
+jobs:
+  docker:
+    - image: circleci/ruby:2.7.2-browsers
+      environment:
+        BUNDLER_VERSION: 2.1.4
+        RAILS_ENV: test
+        PGHOST: 127.0.0.1
+        PGUSER: root
+    - image: circleci/postgres:latest
+      environment:
+        POSTGRES_DB: Calmania_test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+    - image: circleci/python:3.6.4
+      environment:
+        PIPENV_VENV_IN_PROJECT: true
+        DATABASE_URL: postgresql://root@localhost/Calmania_test?sslmode=disable
+        PYCALL_DEBUG_FIND_LIBPYTHON: 1
+        PYTHON: /usr/bin/python3
 
-    executor: ruby/default
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          name: "Node.js と npm の更新"
-          command: |
-            curl -sSL "https://nodejs.org/dist/v14.14.0/node-v14.14.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v14.14.0-linux-x64/bin/node
-            curl https://www.npmjs.com/install.sh | sudo bash   
-      - run:
-          name: setup bundler
-          command: |
-            sudo gem update --system
-            sudo gem install bundler
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+  executor: ruby/default
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
+    - run:
+        name: "Node.js と npm の更新"
+        command: |
+          curl -sSL "https://nodejs.org/dist/v14.14.0/node-v14.14.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v14.14.0-linux-x64/bin/node
+          curl https://www.npmjs.com/install.sh | sudo bash   
+    - run:
+        name: setup bundler
+        command: |
+          sudo gem update --system
+          sudo gem install bundler
+    - run:
+        name: install dependencies
+        command: |
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      - ruby/bundle-install
-      - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ./vendor/bundle
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+    - ruby/bundle-install
+    - save_cache:
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ./vendor/bundle
+    - run: bundle exec rake db:create
+    - run: bundle exec rake db:schema:load
 
-      
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop -a
-      
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
+    
+    - run:
+        name: Rubocop
+        command: bundle exec rubocop -a
+    
+    - run:
+        name: run tests
+        command: |
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+            circleci tests split --split-by=timings)"
 
-            bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
+          bundle exec rspec \
+            --format progress \
+            --format RspecJunitFormatter \
+            --out /tmp/test-results/rspec.xml \
+            --format progress \
+            $TEST_FILES
 
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-          
-      - add_ssh_keys:
-          fingerprints:
-            - "21:86:e8:a6:a8:ec:2f:52:da:f9:5c:63:76:86:c7:00"
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
+        
+    - add_ssh_keys:
+        fingerprints:
+          - "21:86:e8:a6:a8:ec:2f:52:da:f9:5c:63:76:86:c7:00"
 
-      - deploy:
-          name: Capistrano deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" != "master" ]; then
-              exit 0
-            fi
-            bundle exec cap production deploy
-    orbs:
-      ruby: circleci/ruby@1.1.2 
+    - deploy:
+        name: Capistrano deploy
+        command: |
+          if [ "${CIRCLE_BRANCH}" != "master" ]; then
+            exit 0
+          fi
+          bundle exec cap production deploy
+  orbs:
+      ruby: circleci/ruby@1.1.2
+  version: 2.1
