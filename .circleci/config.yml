@@ -14,7 +14,7 @@ jobs:
         environment:
           DATABASE_URL: postgresql://postgres:password@localhost/Calmania_test?sslmode=disable
           PYCALL_DEBUG_FIND_LIBPYTHON: 1
-          PYTHON: /usr/bin/python3
+          PYTHON: python3
       - image: circleci/postgres:latest
         environment:
           POSTGRES_DB: Calmania_test
