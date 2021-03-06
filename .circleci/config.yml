@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@1.1.2
 jobs:
   build:
     docker:
@@ -85,5 +85,5 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" != "master" ]; then
               exit 0
-            fi
+            if
             bundle exec cap production deploy
