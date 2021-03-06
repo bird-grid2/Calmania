@@ -17,6 +17,7 @@ jobs:
           POSTGRES_PASSWORD: password
       - image: circleci/python:3.6.4
         environment:
+          DATABASE_URL: postgresql://root@localhost/Calmania_test?sslmode=disable
           PYCALL_DEBUG_FIND_LIBPYTHON: 1
           PYTHON: /usr/bin/python3
 
@@ -81,5 +82,5 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" != "master" ]; then
               exit 0
-            if
-            bundle exec cap production deploy
+            else
+              bundle exec cap production deploy
