@@ -1,7 +1,6 @@
-version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
-
+  ruby: circleci/ruby@1.1.2 
+version: 2.1
 jobs:
   build:
     docker:
@@ -51,7 +50,8 @@ jobs:
           paths:
             - ./vendor/bundle
       - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load  
+      - run: bundle exec rake db:schema:load
+
       
       - run:
           name: Rubocop
