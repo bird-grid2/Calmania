@@ -3,7 +3,6 @@ orbs:
   ruby: circleci/ruby@1.1.2
 jobs:
   build:
-    working_directory: ~/var/www/Calmania/circle_test
     docker:
       - image: circleci/ruby:2.7.2-browsers
         environment:
@@ -17,6 +16,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
       - image: circleci/python:3.6.4
+        environment:
+          DATABASE_URL: postgresql://postgres:password@localhost/Calmania_test?sslmode=disable
 
     executor: ruby/default
     steps:
@@ -44,8 +45,8 @@ jobs:
           paths:
             - ./vendor/bundle
       - run: echo 'export PYTHON="python3"'
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load  
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load  
       
       - run:
           name: Rubocop
