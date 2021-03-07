@@ -3,6 +3,7 @@ orbs:
   ruby: circleci/ruby@1.1.2
 jobs:
   build:
+    working_directory: ~/var/www/Calmania/circle_test
     docker:
       - image: circleci/ruby:2.7.2-browsers
         environment:
@@ -10,16 +11,12 @@ jobs:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/python:3.6.4
-        environment:
-          DATABASE_URL: postgresql://postgres:password@localhost/Calmania_test?sslmode=disable
-          PYCALL_DEBUG_FIND_LIBPYTHON: 1
-          PYTHON: python3
       - image: circleci/postgres:latest
         environment:
           POSTGRES_DB: Calmania_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
+      - image: circleci/python:3.6.4
 
     executor: ruby/default
     steps:
@@ -46,7 +43,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run: echo "export PYTHON=python3"
+      - run: echo 'export PYTHON="python3"'
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load  
       
