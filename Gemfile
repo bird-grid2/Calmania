@@ -80,14 +80,17 @@ group :development, :test do
   gem 'rspec_junit_formatter'
 end
 
+group :development, :production do
+  gem 'pycall'
+  gem 'matplotlib'
+  gem 'numpy'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'haml-rails'
 gem 'font-awesome-sass'
-gem 'pycall'
-gem 'matplotlib'
-gem 'numpy'
 gem 'pry-rails'
 gem 'jquery-rails'
 gem 'gon'
