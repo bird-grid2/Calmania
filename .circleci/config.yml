@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.2-browsers
+      - image: circleci/ruby:2.7.1-node
         environment:
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: test
