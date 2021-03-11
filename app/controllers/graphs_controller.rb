@@ -43,6 +43,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('weight [kg]')
     plt.plot(x,y)
+    plt.show()
     plt.savefig(os.path.join(dirpath, "test.png"))
     plt.close()
 
@@ -52,6 +53,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('Calory [kCal]')
     plt.plot(x, y)
+    plt.show()
     plt.savefig(os.path.join(dirpath, "test_1.png"))
     plt.close()
 
@@ -61,6 +63,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('Body Fat [%]')
     plt.plot(x, y)
+    plt.show()
     plt.savefig(os.path.join(dirpath, "test_2.png"))
     plt.close()
 
@@ -70,6 +73,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
+    plt.show()
     plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
   end
