@@ -66,6 +66,7 @@ group :production do
   gem 'sidekiq-status'
   gem 'redis-namespace'
   gem 'sinatra', require: false
+  gem 'rmagick'
 end
 
 group :development, :test do

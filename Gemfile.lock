@@ -254,6 +254,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rmagick (4.2.2)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -397,6 +398,7 @@ DEPENDENCIES
   rails (~> 5.2.4, >= 5.2.4.2)
   redis-namespace
   redis-rails
+  rmagick
   rspec-rails
   rspec_junit_formatter
   rubocop
