@@ -36,6 +36,8 @@ class GraphsController < ApplicationController
       bmi << (w.weight / ((height / 100) ** 2)).to_f
     end
 
+    os.chdir(dirpath)
+    
     x = np.array(date)
     y = np.array(weight)
 
