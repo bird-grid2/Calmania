@@ -12,7 +12,13 @@ class GraphsController < ApplicationController
     plt = matplotlib::Pyplot
     np = Numpy
     os = PyCall.import_module('os')
-    dirpath = 'app/assets/images/'
+
+    if Rails.env.development?
+      dirpath = "app/assets/images/"
+    elsif Rails.env.production?
+      dirpath = "/var/www/Calmania/releases/2021040408*/app/assets/images/"
+    end
+
     
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
