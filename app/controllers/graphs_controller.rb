@@ -16,7 +16,8 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
-      dirpath = "/var/www/Calmania/current/app/assets/images"
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images"
     end
 
     
