@@ -83,8 +83,8 @@ end
 
 group :development, :production do
   gem 'pycall'
-  gem 'matplotlib'
-  gem 'numpy'
+  gem 'matplotlib', require: false
+  gem 'numpy', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

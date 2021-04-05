@@ -3,8 +3,6 @@ class GraphsController < ApplicationController
   require 'pycall'
   require 'pycall/import'
   extend PyCall::Import
-  require 'numpy'
-  require 'matplotlib/pyplot'
   
   def index
     matplotlib = Matplotlib
@@ -17,7 +15,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images"
+      dirpath += "/app/assets/images/"
     end
 
     
