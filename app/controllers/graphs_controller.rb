@@ -3,6 +3,8 @@ class GraphsController < ApplicationController
   require 'pycall'
   require 'pycall/import'
   extend PyCall::Import
+  require 'matplotlib'
+  require 'numpy'
   
   def index
     matplotlib = Matplotlib
