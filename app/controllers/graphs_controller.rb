@@ -8,18 +8,21 @@ class GraphsController < ApplicationController
   require 'numpy'
   
   def index
-    matplotlib = Matplotlib
-    matplotlib.use('Agg')
-    plt = matplotlib::Pyplot
-    np = Numpy
-    os = PyCall.import_module('os')
-
     if Rails.env.development?
       dirpath = "app/assets/images/"
+      matplotlib = Matplotlib
+      matplotlib.use('Agg')
+      plt = matplotlib::Pyplot
     elsif Rails.env.production?
+      matplotlib = Matplotlib
+      matplotlib.use('TkAgg')
+      plt = matplotlib::Pyplot
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
+
+    np = Numpy
+    os = PyCall.import_module('os')
 
     
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
