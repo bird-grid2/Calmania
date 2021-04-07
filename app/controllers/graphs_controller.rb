@@ -7,24 +7,21 @@ class GraphsController < ApplicationController
   require 'matplotlib/pyplot'
   require 'numpy'
   
+  matplotlib = Matplotlib
+  matplotlib.use('Agg')
+  plt = matplotlib::Pyplot
+
+  np = Numpy
+  os = PyCall.import_module('os')
+  
   def index
     if Rails.env.development?
       dirpath = "app/assets/images/"
-      matplotlib = Matplotlib
-      matplotlib.use('Agg')
-      plt = matplotlib::Pyplot
     elsif Rails.env.production?
-      matplotlib = Matplotlib
-      matplotlib.use('TkAgg')
-      plt = matplotlib::Pyplot
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
 
-    np = Numpy
-    os = PyCall.import_module('os')
-
-    
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
 
@@ -49,7 +46,6 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('weight [kg]')
     plt.plot(x,y)
-    plt.show()
     plt.savefig(os.path.join(dirpath, "test.png"))
     plt.close()
 
@@ -59,7 +55,6 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('Calory [kCal]')
     plt.plot(x, y)
-    plt.show()
     plt.savefig(os.path.join(dirpath, "test_1.png"))
     plt.close()
 
@@ -79,7 +74,6 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
-    plt.show()
     plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
   end
