@@ -6,15 +6,15 @@ class GraphsController < ApplicationController
   require 'matplotlib'
   require 'matplotlib/pyplot'
   require 'numpy'
-  
-  matplotlib = Matplotlib
-  matplotlib.use('Agg')
-  plt = matplotlib::Pyplot
 
-  np = Numpy
-  os = PyCall.import_module('os')
-  
   def index
+    matplotlib = Matplotlib
+    matplotlib.use('Agg')
+    plt = matplotlib::Pyplot
+
+    np = Numpy
+    os = PyCall.import_module('os')
+
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
