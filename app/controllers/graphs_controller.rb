@@ -41,7 +41,7 @@ class GraphsController < ApplicationController
 
     x = np.array(date)
     y = np.array(weight)
-    y = y.astype(float32)
+    y = y.astype(np.float32)
 
     plt.title('Height')
     plt.xlabel('measurement date')
@@ -51,7 +51,7 @@ class GraphsController < ApplicationController
     plt.close()
 
     y = np.array(total)
-    y = y.astype(uint16)
+    y = y.astype(np.uint16)
 
     plt.title('Total Calory')
     plt.xlabel('measurement date')
@@ -61,7 +61,7 @@ class GraphsController < ApplicationController
     plt.close()
 
     y = np.array(fat)
-    y = y.astype(float32)
+    y = y.astype(np.float32)
     
     plt.title('Body Fat Percentage')
     plt.xlabel('measurement date')
@@ -71,7 +71,7 @@ class GraphsController < ApplicationController
     plt.close()
 
     y = np.array(bmi)
-    y = y.astype(float32)
+    y = y.astype(np.float32)
 
     plt.title('Body Mass Index')
     plt.xlabel('measurement date')
