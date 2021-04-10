@@ -30,7 +30,6 @@ class GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
-    dtype = 0
 
     result.each do |w|
       date << w.date.to_s
@@ -41,7 +40,8 @@ class GraphsController < ApplicationController
     end
 
     x = np.array(date)
-    y = np.array(weight, dtype=np.float32)
+    y = np.array(weight)
+    y = y.astype(float32)
 
     plt.title('Height')
     plt.xlabel('measurement date')
@@ -50,7 +50,8 @@ class GraphsController < ApplicationController
     plt.savefig(os.path.join(dirpath, "test.png"))
     plt.close()
 
-    y = np.array(total, dtype=np.unint16)
+    y = np.array(total)
+    y = y.astype(uint16)
 
     plt.title('Total Calory')
     plt.xlabel('measurement date')
@@ -59,7 +60,8 @@ class GraphsController < ApplicationController
     plt.savefig(os.path.join(dirpath, "test_1.png"))
     plt.close()
 
-    y = np.array(fat, dtype=np.float32)
+    y = np.array(fat)
+    y = y.astype(float32)
     
     plt.title('Body Fat Percentage')
     plt.xlabel('measurement date')
@@ -68,7 +70,8 @@ class GraphsController < ApplicationController
     plt.savefig(os.path.join(dirpath, "test_2.png"))
     plt.close()
 
-    y = np.array(bmi, dtype=np.float32)
+    y = np.array(bmi)
+    y = y.astype(float32)
 
     plt.title('Body Mass Index')
     plt.xlabel('measurement date')
