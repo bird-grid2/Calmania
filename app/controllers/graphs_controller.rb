@@ -48,6 +48,7 @@ class GraphsController < ApplicationController
     plt.ylabel('weight [kg]')
     plt.plot(x,y)
     plt.savefig(os.path.join(dirpath, "test.png"))
+    plt.close()
 
     y = np.array(total)
     y = y.astype(np.float32)
@@ -57,6 +58,7 @@ class GraphsController < ApplicationController
     plt.ylabel('Calory [kCal]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_1.png"))
+    plt.close()
 
     y = np.array(fat)
     y = y.astype(np.float32)
@@ -66,6 +68,7 @@ class GraphsController < ApplicationController
     plt.ylabel('Body Fat [%]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_2.png"))
+    plt.close()
 
     y = np.array(bmi)
     y = y.astype(np.float32)
@@ -75,6 +78,7 @@ class GraphsController < ApplicationController
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_3.png"))
+    plt.close()
   end
 
 end
