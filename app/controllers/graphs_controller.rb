@@ -51,7 +51,7 @@ class GraphsController < ApplicationController
     plt.close()
 
     y = np.array(total)
-    y = y.astype(np.uint16)
+    y = y.astype(np.float32)
 
     plt.title('Total Calory')
     plt.xlabel('measurement date')
