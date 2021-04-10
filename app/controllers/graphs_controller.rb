@@ -30,6 +30,7 @@ class GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
+    dtype = 0
 
     result.each do |w|
       date << w.date.to_s
