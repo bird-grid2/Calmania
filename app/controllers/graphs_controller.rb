@@ -13,7 +13,6 @@ class GraphsController < ApplicationController
   private
   
   def set_graph
-
     matplotlib = Matplotlib
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
