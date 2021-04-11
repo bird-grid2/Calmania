@@ -17,6 +17,7 @@ $(document).on('turbolinks:load', function(){
                   </div>
                 </div>`
 
+    $(".graph_wrapper").remove()
     $(".graph_wrapper").append(html);
   };
 });
