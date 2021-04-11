@@ -19,7 +19,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/public/assets/"
+      dirpath += "/app/assets/images/"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
