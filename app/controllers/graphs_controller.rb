@@ -1,5 +1,6 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_graph, only: :index
   require 'pycall'
   require 'pycall/import'
   extend PyCall::Import
@@ -7,7 +8,12 @@ class GraphsController < ApplicationController
   require 'matplotlib/pyplot'
   require 'numpy'
 
-  def index
+  def index; end
+
+  private
+  
+  def set_graph
+
     matplotlib = Matplotlib
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
