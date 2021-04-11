@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function(){
                     <img src="assets/test_2.png">
                   </div>
                   <div class="right_graph">
-                    <img src="assetes/test_3.png">
+                    <img src="assets/test_3.png">
                   </div>
                 </div>`
 
