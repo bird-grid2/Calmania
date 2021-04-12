@@ -37,7 +37,7 @@ class GraphsController < ApplicationController
     bmi = []
 
     result.each do |w|
-      date << w.date.to_s
+      date << w.date.strftime("%m/%d").to_s
       weight << w.weight.to_s
       total << w.total_cal.to_s
       fat << w.bfp.to_s
