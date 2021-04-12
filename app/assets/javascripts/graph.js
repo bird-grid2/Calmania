@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function(){
                     <img src="${asset_path('test.png')}">
                   </div>
                   <div class="right_graph">
-                    <img src="${assets_path('test_1.png')}">
+                    <img src="${asset_path('test_1.png')}">
                   </div>
                 </div>
                 <div class="graph_bottom">
