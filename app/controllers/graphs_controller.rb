@@ -27,6 +27,11 @@ class GraphsController < ApplicationController
       dirpath += "/app/assets/images/"
     end
 
+    os.remove(os.path.join(dirpath, "test.png"))
+    os.remove(os.path.join(dirpath, "test_1.png"))
+    os.remove(os.path.join(dirpath, "test_2.png"))
+    os.remove(os.path.join(dirpath, "test_3.png"))
+
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
 
