@@ -1,5 +1,6 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
+  before_action :reset_graph, only: :index
   before_action :set_graph, only: :index
   require 'pycall'
   require 'pycall/import'
@@ -11,6 +12,23 @@ class GraphsController < ApplicationController
   def index; end
 
   private
+  
+  def reset_graph
+    os = PyCall.import_module('os')
+
+    if Rails.env.development?
+      dirpath = "app/assets/images/"
+    elsif Rails.env.production?
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images/"
+    end
+
+    os.remove(os.path.join(dirpath, "test.png"))
+    os.remove(os.path.join(dirpath, "test_1.png"))
+    os.remove(os.path.join(dirpath, "test_2.png"))
+    os.remove(os.path.join(dirpath, "test_3.png"))
+
+  end
   
   def set_graph
     matplotlib = Matplotlib
@@ -25,11 +43,6 @@ class GraphsController < ApplicationController
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
-
-    os.remove(os.path.join(dirpath, "test.png"))
-    os.remove(os.path.join(dirpath, "test_1.png"))
-    os.remove(os.path.join(dirpath, "test_2.png"))
-    os.remove(os.path.join(dirpath, "test_3.png"))
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
