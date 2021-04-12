@@ -1,5 +1,7 @@
 $(document).on('turbolinks:load', function(){
   if(document.URL.match(/graph/)){
+    $(".graph_wrapper").empty();
+    
     var html = `<div class="graph_upper">
                   <div class="left_graph">
                     <img src="/assets/test.png">
@@ -17,7 +19,6 @@ $(document).on('turbolinks:load', function(){
                   </div>
                 </div>`
 
-    $(".graph_wrapper").empty();
     $(".graph_wrapper").append(html);
   };
 });
