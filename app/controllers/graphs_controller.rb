@@ -1,18 +1,36 @@
 class GraphsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :reset_cache, only: :index
-  before_action :reset_graph, only: :index
-  before_action :set_graph, only: :index
   require 'pycall'
   require 'pycall/import'
   extend PyCall::Import
   require 'matplotlib'
   require 'matplotlib/pyplot'
   require 'numpy'
+  before_action :authenticate_user!
+  before_action :reset_graph, only: :index
+  before_action :reset_cache, only: :index
+  before_action :set_graph, only: :index
 
   def index; end
 
   private
+
+  def reset_graph
+    os = PyCall.import_module('os')
+
+    if Rails.env.development?
+      dirpath = "app/assets/images/"
+    elsif Rails.env.production?
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images/"
+    end
+
+    if File.exist?(os.path.join(dirpath, "test.png"))
+      os.remove(os.path.join(dirpath, "test.png"))
+      os.remove(os.path.join(dirpath, "test_1.png"))
+      os.remove(os.path.join(dirpath, "test_2.png"))
+      os.remove(os.path.join(dirpath, "test_3.png"))
+    end
+  end
 
   def reset_cache
     os = PyCall.import_module('os')
@@ -24,29 +42,14 @@ class GraphsController < ApplicationController
       dirpath += "/public/assets/"
     end
 
-    os.remove(os.path.join(dirpath, "test.png"))
-    os.remove(os.path.join(dirpath, "test_1.png"))
-    os.remove(os.path.join(dirpath, "test_2.png"))
-    os.remove(os.path.join(dirpath, "test_3.png"))
-  end
-  
-  def reset_graph
-    os = PyCall.import_module('os')
-
-    if Rails.env.development?
-      dirpath = "app/assets/images/"
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+    if File.exist?(os.path.join(dirpath, "test.png"))
+      os.remove(os.path.join(dirpath, "test.png"))
+      os.remove(os.path.join(dirpath, "test_1.png"))
+      os.remove(os.path.join(dirpath, "test_2.png"))
+      os.remove(os.path.join(dirpath, "test_3.png"))
     end
-
-    os.remove(os.path.join(dirpath, "test.png"))
-    os.remove(os.path.join(dirpath, "test_1.png"))
-    os.remove(os.path.join(dirpath, "test_2.png"))
-    os.remove(os.path.join(dirpath, "test_3.png"))
   end
 
-  
   def set_graph
     matplotlib = Matplotlib
     matplotlib.use('Agg')
@@ -118,5 +121,4 @@ class GraphsController < ApplicationController
     plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
   end
-
 end
