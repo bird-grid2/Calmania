@@ -55,7 +55,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('weight [kg]')
     plt.plot(x,y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_0.png"))
+    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     plt.close()
 
     y = np.array(total)
@@ -65,7 +65,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('Calory [kCal]')
     plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     plt.close()
 
     y = np.array(fat)
@@ -75,7 +75,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('Body Fat [%]')
     plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
     plt.close()
 
     y = np.array(bmi)
@@ -85,7 +85,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
     plt.close()
   end
 
@@ -99,11 +99,11 @@ class GraphsController < ApplicationController
       dirpath += "/app/assets/images/"
     end
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_0.png"))
+    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_0.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
   end
 end
