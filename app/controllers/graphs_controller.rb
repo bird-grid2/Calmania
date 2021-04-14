@@ -93,17 +93,17 @@ class GraphsController < ApplicationController
     os = PyCall.import_module('os')
 
     if Rails.env.development?
-      dirpath = "app/assets/images" 
+      dirpath = "public/images" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/images/"
     end
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    return unless File.exist?(asset_path("test_#{@user.id}_1.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+    os.remove(asset_path("test_#{@user.id}_1.png"))
+    os.remove(asset_path("test_#{@user.id}_2.png"))
+    os.remove(asset_path("test_#{@user.id}_3.png"))
+    os.remove(asset_path("test_#{@user.id}_4.png"))
   end
 end
