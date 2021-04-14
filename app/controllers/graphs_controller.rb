@@ -5,7 +5,7 @@ class GraphsController < ApplicationController
   require 'numpy'
   before_action :authenticate_user!
   before_action :set_user, only: :index
-  before_action :reset_cache, only: :index
+  before_action :reset_graph, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -89,14 +89,14 @@ class GraphsController < ApplicationController
     plt.close()
   end
 
-  def reset_cache
+  def reset_graph
     os = PyCall.import_module('os')
 
     if Rails.env.development?
       dirpath = "app/assets/images" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/public/assets/"
+      dirpath += "/app/assets/images/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
