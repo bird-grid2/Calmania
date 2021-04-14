@@ -21,8 +21,7 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath = os.getcwd() + "/app/assets/images/"
     end
 
     return if File.exist?(os.path.join(dirpath, "test_#{@user.id}.png")) == false
@@ -45,8 +44,7 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath = os.getcwd() + "/app/assets/images/"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
@@ -110,12 +108,11 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
-    
+
     if Rails.env.development?
       dirpath = "public/assets/"
     elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/assets/"
+      dirpath = os.getcwd() + "/public/assets/"
     end
 
     return if File.exist?(os.path.join(dirpath, "test_#{@user.id}.png")) == false
