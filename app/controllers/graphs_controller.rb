@@ -24,9 +24,9 @@ class GraphsController < ApplicationController
     np = Numpy
     os = PyCall.import_module('os')
     
-    dirpath = "app/assets/images/" if Rails.env.development?
-      
-    if Rails.env.production?
+    if Rails.env.development?
+      dirpath = "app/assets/images/" 
+    elsif Rails.env.production?
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
@@ -92,14 +92,14 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
 
-    dirpath = "public/assets" if Rails.env.development?
-
-    if Rails.env.production?
+    if Rails.env.development?
+      dirpath = "app/assets/images" 
+    elsif Rails.env.production?
       dirpath = os.getcwd()
       dirpath += "/public/assets/"
     end
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
+    exit unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
 
     os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
