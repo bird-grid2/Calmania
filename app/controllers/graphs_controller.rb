@@ -5,6 +5,7 @@ class GraphsController < ApplicationController
   require 'numpy'
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_graph, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -54,7 +55,7 @@ class GraphsController < ApplicationController
     plt.xlabel('measurement date')
     plt.ylabel('weight [kg]')
     plt.plot(x,y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}.png"))
+    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_0.png"))
     plt.close()
 
     y = np.array(total)
@@ -100,7 +101,7 @@ class GraphsController < ApplicationController
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_0.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
