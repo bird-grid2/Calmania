@@ -91,18 +91,18 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
 
-    dirpath = "app/assets/images" if Rails.env.development?
+    dirpath = "public/assets" if Rails.env.development?
 
     if Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/assets/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+    os.remove(asset_path("test_#{@user.id}.png"))
+    os.remove(asset_path("test_#{@user.id}_1.png"))
+    os.remove(asset_path("test_#{@user.id}_2.png"))
+    os.remove(asset_path("test_#{@user.id}_3.png"))
   end
 end
