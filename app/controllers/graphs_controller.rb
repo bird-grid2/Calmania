@@ -21,11 +21,11 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
-      dirpath = os.getcwd() + "/app/assets/images/"
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images/"
     end
 
     return if File.exist?(os.path.join(dirpath, "test_#{@user.id}.png")) == false
-
     os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
@@ -37,14 +37,14 @@ class GraphsController < ApplicationController
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
     np = Numpy
-
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
     
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
-      dirpath = os.getcwd() + "/app/assets/images/"
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images/"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
@@ -112,11 +112,11 @@ class GraphsController < ApplicationController
     if Rails.env.development?
       dirpath = "public/assets/"
     elsif Rails.env.production?
-      dirpath = os.getcwd() + "/public/assets/"
+      dirpath = os.getcwd()
+      dirpath += "/public/assets/"
     end
 
     return if File.exist?(os.path.join(dirpath, "test_#{@user.id}.png")) == false
-
     os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
