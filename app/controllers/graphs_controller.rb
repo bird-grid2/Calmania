@@ -4,33 +4,12 @@ class GraphsController < ApplicationController
   require 'matplotlib/pyplot'
   require 'numpy'
   before_action :authenticate_user!
-  before_action :reset_graph, only: :index
   before_action :set_graph, only: :index
   before_action :reset_cache, only: :index
 
   def index; end
 
   private
-
-  def reset_graph
-    os = PyCall.import_module('os')
-    @user = User.find(current_user.id)
-    gon.user_id = @user.id
-    
-    dirpath = "app/assets/images/" if Rails.env.development?
-
-    if Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
-    end
-
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
-
-    os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-  end
 
   def set_graph
     matplotlib = Matplotlib
@@ -39,6 +18,7 @@ class GraphsController < ApplicationController
     np = Numpy
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
+    gon.user_id = @user.id
     
     dirpath = "app/assets/images/" if Rails.env.development?
       
