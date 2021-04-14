@@ -4,8 +4,8 @@ class GraphsController < ApplicationController
   require 'matplotlib/pyplot'
   require 'numpy'
   before_action :authenticate_user!
-  before_action :set_graph, only: :index
   before_action :reset_cache, only: :index
+  before_action :set_graph, only: :index
 
   def index; end
 
