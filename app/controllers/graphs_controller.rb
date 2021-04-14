@@ -15,6 +15,7 @@ class GraphsController < ApplicationController
   def reset_graph
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
+    gon.user_id = @user.id
     
     dirpath = "app/assets/images/" if Rails.env.development?
 
