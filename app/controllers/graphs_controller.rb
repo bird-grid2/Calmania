@@ -4,11 +4,17 @@ class GraphsController < ApplicationController
   require 'matplotlib/pyplot'
   require 'numpy'
   before_action :authenticate_user!
+  before_action :set_user, only: :index
   before_action :set_graph, only: :index
 
   def index; end
 
   private
+
+  def set_user
+    @user = User.find(current_user.id)
+    gon.user_id = @user.id
+  end
 
   def set_graph
     matplotlib = Matplotlib
@@ -16,8 +22,6 @@ class GraphsController < ApplicationController
     plt = matplotlib::Pyplot
     np = Numpy
     os = PyCall.import_module('os')
-    @user = User.find(current_user.id)
-    gon.user_id = @user.id
     
     dirpath = "app/assets/images/" if Rails.env.development?
       
