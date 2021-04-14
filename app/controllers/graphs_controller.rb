@@ -17,6 +17,7 @@ class GraphsController < ApplicationController
     np = Numpy
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
+    gon.user_id = @user.id
     
     dirpath = "app/assets/images/" if Rails.env.development?
       
@@ -86,7 +87,6 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
-    gon.user_id = @user.id
 
     dirpath = "public/assets/" if Rails.env.development?
 
