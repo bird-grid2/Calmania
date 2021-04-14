@@ -14,10 +14,9 @@ class GraphsController < ApplicationController
 
   private
 
-  @user = User.find(current_user.id)
-
   def reset_graph
     os = PyCall.import_module('os')
+    @user = User.find(current_user.id)
     
     if Rails.env.development?
       dirpath = "app/assets/images/"
@@ -39,6 +38,16 @@ class GraphsController < ApplicationController
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
     np = Numpy
+
+    os = PyCall.import_module('os')
+    @user = User.find(current_user.id)
+    
+    if Rails.env.development?
+      dirpath = "app/assets/images/"
+    elsif Rails.env.production?
+      dirpath = os.getcwd()
+      dirpath += "/app/assets/images/"
+    end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
@@ -99,6 +108,9 @@ class GraphsController < ApplicationController
   end
 
   def reset_cache
+    os = PyCall.import_module('os')
+    @user = User.find(current_user.id)
+    
     if Rails.env.development?
       dirpath = "public/assets/"
     elsif Rails.env.production?
