@@ -14,9 +14,9 @@ class GraphsController < ApplicationController
 
   private
 
-  def reset_graph
-    os = PyCall.import_module('os')
+  os = PyCall.import_module('os')
 
+  def reset_graph
     if Rails.env.development?
       dirpath = "app/assets/images/"
     elsif Rails.env.production?
@@ -24,30 +24,12 @@ class GraphsController < ApplicationController
       dirpath += "/app/assets/images/"
     end
 
-    if File.exist?(os.path.join(dirpath, "test.png"))
-      os.remove(os.path.join(dirpath, "test.png"))
-      os.remove(os.path.join(dirpath, "test_1.png"))
-      os.remove(os.path.join(dirpath, "test_2.png"))
-      os.remove(os.path.join(dirpath, "test_3.png"))
-    end
-  end
+    return if File.exist?(os.path.join(dirpath, "test.png")) == false
 
-  def reset_cache
-    os = PyCall.import_module('os')
-
-    if Rails.env.development?
-      dirpath = "public/assets/"
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/assets/"
-    end
-
-    if File.exist?(os.path.join(dirpath, "test.png"))
-      os.remove(os.path.join(dirpath, "test.png"))
-      os.remove(os.path.join(dirpath, "test_1.png"))
-      os.remove(os.path.join(dirpath, "test_2.png"))
-      os.remove(os.path.join(dirpath, "test_3.png"))
-    end
+    os.remove(os.path.join(dirpath, "test.png"))
+    os.remove(os.path.join(dirpath, "test_1.png"))
+    os.remove(os.path.join(dirpath, "test_2.png"))
+    os.remove(os.path.join(dirpath, "test_3.png"))
   end
 
   def set_graph
@@ -55,14 +37,6 @@ class GraphsController < ApplicationController
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
     np = Numpy
-    os = PyCall.import_module('os')
-
-    if Rails.env.development?
-      dirpath = "app/assets/images/"
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
-    end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
@@ -120,5 +94,21 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_3.png"))
     plt.close()
+  end
+
+  def reset_cache
+    if Rails.env.development?
+      dirpath = "public/assets/"
+    elsif Rails.env.production?
+      dirpath = os.getcwd()
+      dirpath += "/public/assets/"
+    end
+
+    return  if File.exist?(os.path.join(dirpath, "test.png")) == false
+
+    os.remove(os.path.join(dirpath, "test.png"))
+    os.remove(os.path.join(dirpath, "test_1.png"))
+    os.remove(os.path.join(dirpath, "test_2.png"))
+    os.remove(os.path.join(dirpath, "test_3.png"))
   end
 end
