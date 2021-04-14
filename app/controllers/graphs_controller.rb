@@ -99,7 +99,7 @@ class GraphsController < ApplicationController
       dirpath += "/public/assets/"
     end
 
-    exit unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
+    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
 
     os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
