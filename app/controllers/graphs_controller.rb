@@ -92,13 +92,6 @@ class GraphsController < ApplicationController
   def reset_graph
     os = PyCall.import_module('os')
 
-    if Rails.env.development?
-      dirpath = "public/images" 
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/images/"
-    end
-
     return unless File.exist?(asset_path("test_#{@user.id}_1.png"))
 
     os.remove(asset_path("test_#{@user.id}_1.png"))
