@@ -1,8 +1,6 @@
 class GraphsController < ApplicationController
   require 'pycall'
   require 'pycall/import'
-  extend PyCall::Import
-  require 'matplotlib'
   require 'matplotlib/pyplot'
   require 'numpy'
   before_action :authenticate_user!
@@ -18,15 +16,19 @@ class GraphsController < ApplicationController
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
     
-    if Rails.env.development?
-      dirpath = "app/assets/images/"
-    elsif Rails.env.production?
+    dirpath = "app/assets/images/" if Rails.env.development?
+
+    if Rails.env.production?
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
-    os.remove(os.path.join(dirpath, "test_*.png"))
+
+    os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
   end
 
   def set_graph
@@ -37,9 +39,9 @@ class GraphsController < ApplicationController
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
     
-    if Rails.env.development?
-      dirpath = "app/assets/images/"
-    elsif Rails.env.production?
+    dirpath = "app/assets/images/" if Rails.env.development?
+      
+    if Rails.env.production?
       dirpath = os.getcwd()
       dirpath += "/app/assets/images/"
     end
@@ -106,14 +108,18 @@ class GraphsController < ApplicationController
     os = PyCall.import_module('os')
     @user = User.find(current_user.id)
 
-    if Rails.env.development?
-      dirpath = "public/assets/"
-    elsif Rails.env.production?
+    dirpath = "public/assets/" if Rails.env.development?
+
+    if Rails.env.production?
       dirpath = os.getcwd()
       dirpath += "/public/assets/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}.png"))
-    os.remove(os.path.join(dirpath, "test_*.png"))
+
+    os.remove(os.path.join(dirpath, "test_#{@user.id}.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
   end
 end
