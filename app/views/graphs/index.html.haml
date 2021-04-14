@@ -12,11 +12,11 @@
   .graph_wrapper
     .graph_upper
       .left_graph
-        = image_tag "test_#{@user.id}_1.png"
+        = image_tag asset_path("test_#{@user.id}_1.png")
       .right_graph
-        = image_tag "test_#{@user.id}_2.png"
+        = image_tag asset_path("test_#{@user.id}_2.png")
     .graph_bottom
       .left_graph
-        = image_tag "test_#{@user.id}_3.png"
+        = image_tag asset_path("test_#{@user.id}_3.png")
       .right_graph
-        = image_tag "test_#{@user.id}_4.png"
+        = image_tag asset_path("test_#{@user.id}_4.png")

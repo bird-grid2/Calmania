@@ -5,6 +5,7 @@ class GraphsController < ApplicationController
   require 'numpy'
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_graph, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -95,7 +96,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/public/assets/"
+      dirpath += "/app/assets/images/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
