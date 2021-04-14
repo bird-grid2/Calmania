@@ -5,6 +5,7 @@ class GraphsController < ApplicationController
   require 'numpy'
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -13,7 +14,6 @@ class GraphsController < ApplicationController
 
   def set_user
     @user = User.find(current_user.id)
-    gon.user_id = @user.id
   end
 
   def set_graph
@@ -90,7 +90,6 @@ class GraphsController < ApplicationController
 
   def reset_cache
     os = PyCall.import_module('os')
-    @user = User.find(current_user.id)
 
     dirpath = "public/assets/" if Rails.env.development?
 
