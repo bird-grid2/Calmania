@@ -96,7 +96,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/assets/"
     end
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
