@@ -28,7 +28,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images/" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/assets/"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
@@ -96,14 +96,14 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/assets/"
     end
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1*.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_1*.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_2*.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_3*.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_4*.png"))
   end
 end
