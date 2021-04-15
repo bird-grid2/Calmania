@@ -1,7 +1,6 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
-  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -95,11 +94,11 @@ class GraphsController < ApplicationController
       dirpath += "/public/assets/"
     end
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1*.png"))
+    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
 
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1*.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2*.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3*.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_4*.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+    os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
   end
 end
