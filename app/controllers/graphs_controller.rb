@@ -1,11 +1,7 @@
 class GraphsController < ApplicationController
-  require 'pycall'
-  require 'pycall/import'
-  require 'matplotlib/pyplot'
-  require 'numpy'
   before_action :authenticate_user!
   before_action :set_user, only: :index
-  before_action :reset_graph, only: :index
+  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -28,7 +24,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images/" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/public/assets/"
+      dirpath += "/app/assets/images/"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
@@ -89,7 +85,7 @@ class GraphsController < ApplicationController
     plt.close()
   end
 
-  def reset_graph
+  def reset_cache
     os = PyCall.import_module('os')
 
     if Rails.env.development?
