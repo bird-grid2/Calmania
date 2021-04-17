@@ -1,6 +1,7 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -23,7 +24,7 @@ class GraphsController < ApplicationController
       dirpath = "app/assets/images/" 
     elsif Rails.env.production?
       dirpath = os.getcwd()
-      dirpath += "/app/assets/images/"
+      dirpath += "/public/assets"
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
