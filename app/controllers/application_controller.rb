@@ -47,11 +47,7 @@ class ApplicationController < ActionController::Base
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
   end
-
-  def image_path(source)
-    source.present? ? asset_paths.compute_public_path(source, 'images') : ""
-  end
-
+  
   protected
 
   def configure_permitted_parameters

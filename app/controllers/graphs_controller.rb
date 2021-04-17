@@ -88,11 +88,11 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
 
-    return unless File.exist?(image_path("test_#{@user.id}_1.png"))
+    return unless File.exist?(helpers.asset_url("test_#{@user.id}_1.png"))
 
-    os.remove(image_path("test_#{@user.id}_1.png"))
-    os.remove(image_path("test_#{@user.id}_2.png"))
-    os.remove(image_path("test_#{@user.id}_3.png"))
-    os.remove(image_path("test_#{@user.id}_4.png"))
+    os.remove(helpers.asset_url("test_#{@user.id}_1.png"))
+    os.remove(helpers.asset_url("test_#{@user.id}_2.png"))
+    os.remove(helpers.asset_url("test_#{@user.id}_3.png"))
+    os.remove(helpers.asset_url("test_#{@user.id}_4.png"))
   end
 end
