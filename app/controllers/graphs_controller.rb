@@ -1,6 +1,7 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index; end
@@ -87,18 +88,11 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
 
-    if Rails.env.development?
-      dirpath = "app/assets/images" 
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/app/assets/images"
-    end
+    return unless File.exist?(image_path("test_#{@user.id}_1.png"))
 
-    return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+    os.remove(image_path("test_#{@user.id}_1.png"))
+    os.remove(image_path("test_#{@user.id}_2.png"))
+    os.remove(image_path("test_#{@user.id}_3.png"))
+    os.remove(image_path("test_#{@user.id}_4.png"))
   end
 end
