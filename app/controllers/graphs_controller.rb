@@ -97,5 +97,6 @@ class GraphsController < ApplicationController
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_3.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_4.png"))
+    sleep(2)
   end
 end
