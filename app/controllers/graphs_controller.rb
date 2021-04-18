@@ -1,7 +1,6 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
-  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index
