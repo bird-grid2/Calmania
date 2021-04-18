@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function(){
   if(document.URL.match(/graph/)){
     var html = `<div class="graph_upper">
                   <div class="left_graph">
-                    <img src="/asset/test_${gon.user_id}_1.png">
+                    <img src="/assets/test_${gon.user_id}_1.png">
                   </div>
                   <div class="right_graph">
                     <img src="/assets/test_${gon.user_id}_2.png">
