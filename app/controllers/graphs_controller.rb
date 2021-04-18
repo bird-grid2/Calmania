@@ -30,7 +30,6 @@ class GraphsController < ApplicationController
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
-    fresh_when result
     date = []
     weight = []
     total = []
@@ -85,6 +84,7 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
     plt.close()
+    sleep(5)
   end
 
   def reset_cache
@@ -96,6 +96,5 @@ class GraphsController < ApplicationController
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_3.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_4.png"))
-    sleep(2)
   end
 end
