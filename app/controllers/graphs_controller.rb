@@ -53,7 +53,7 @@ class GraphsController < ApplicationController
       plt.xlabel('measurement date')
       plt.ylabel('weight [kg]')
       plt.plot(x,y)
-      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
       plt.close()
 
       y = np.array(total)
@@ -63,7 +63,7 @@ class GraphsController < ApplicationController
       plt.xlabel('measurement date')
       plt.ylabel('Calory [kCal]')
       plt.plot(x, y)
-      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
       plt.close()
 
       y = np.array(fat)
@@ -73,7 +73,7 @@ class GraphsController < ApplicationController
       plt.xlabel('measurement date')
       plt.ylabel('Body Fat [%]')
       plt.plot(x, y)
-      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_6.png"))
       plt.close()
 
       y = np.array(bmi)
@@ -83,7 +83,7 @@ class GraphsController < ApplicationController
       plt.xlabel('measurement date')
       plt.ylabel('BMI [-]')
       plt.plot(x, y)
-      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_8.png"))
       plt.close()
     end
   end
@@ -91,11 +91,11 @@ class GraphsController < ApplicationController
   def reset_cache
     os = PyCall.import_module('os')
 
-    return unless File.exist?(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
+    return unless File.exist?(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
 
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_3.png"))
     os.remove(helpers.asset_url("/assets/test_#{@user.id}_4.png"))
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_6.png"))
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_8.png"))
   end
 end
