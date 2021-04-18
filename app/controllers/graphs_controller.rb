@@ -5,13 +5,13 @@ class GraphsController < ApplicationController
 
   def index
     expires_now
-    sleep(2)
   end
 
   private
 
   def set_user
     @user = User.find(current_user.id)
+    gon.user_id = @user.id
   end
 
   def set_graph
@@ -84,16 +84,5 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
     plt.close()
-  end
-
-  def reset_cache
-    os = PyCall.import_module('os')
-
-    return unless File.exist?(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
-
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_3.png"))
-    os.remove(helpers.asset_url("/assets/test_#{@user.id}_4.png"))
   end
 end
