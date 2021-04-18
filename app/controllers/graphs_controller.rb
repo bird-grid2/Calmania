@@ -4,9 +4,7 @@ class GraphsController < ApplicationController
   before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
-  def index
-    expires_now
-  end
+  def index; end
 
   private
 
@@ -31,6 +29,7 @@ class GraphsController < ApplicationController
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
+    fresh_when result
     date = []
     weight = []
     total = []
