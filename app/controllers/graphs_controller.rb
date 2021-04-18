@@ -6,6 +6,7 @@ class GraphsController < ApplicationController
 
   def index
     expires_now
+    sleep(2)
   end
 
   private
@@ -84,7 +85,6 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
     plt.close()
-    sleep(5)
   end
 
   def reset_cache
