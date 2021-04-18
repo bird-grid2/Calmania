@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   require 'numpy'
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_cache_headers
 
   def after_sign_in_path_for(*)
     managements_path
@@ -38,12 +39,20 @@ class ApplicationController < ActionController::Base
   def response_internal_server_error
     render status: 500, json: { status: 500, message: 'Internal Server Error' }
   end
-  
+
   protected
 
   def configure_permitted_parameters
     add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit :sign_up, keys: [ :nickname, :email, :height, :password, :password_confirmation ]
     devise_parameter_sanitizer.permit :account_update, keys: add_list
+  end
+
+  private
+
+  def set_cache_headers
+    response.headers["Cache-Control"] = "no-cache, no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
   end
 end
