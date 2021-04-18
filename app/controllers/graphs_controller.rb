@@ -44,46 +44,48 @@ class GraphsController < ApplicationController
       bmi << (w.weight / ((height / 100) ** 2)).to_s
     end
 
-    x = np.array(date)
-    y = np.array(weight)
-    y = y.astype(np.float32)
+    2.times do 
+      x = np.array(date)
+      y = np.array(weight)
+      y = y.astype(np.float32)
 
-    plt.title('Height')
-    plt.xlabel('measurement date')
-    plt.ylabel('weight [kg]')
-    plt.plot(x,y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    plt.close()
+      plt.title('Height')
+      plt.xlabel('measurement date')
+      plt.ylabel('weight [kg]')
+      plt.plot(x,y)
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
+      plt.close()
 
-    y = np.array(total)
-    y = y.astype(np.float32)
+      y = np.array(total)
+      y = y.astype(np.float32)
 
-    plt.title('Total Calory')
-    plt.xlabel('measurement date')
-    plt.ylabel('Calory [kCal]')
-    plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    plt.close()
+      plt.title('Total Calory')
+      plt.xlabel('measurement date')
+      plt.ylabel('Calory [kCal]')
+      plt.plot(x, y)
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
+      plt.close()
 
-    y = np.array(fat)
-    y = y.astype(np.float32)
-    
-    plt.title('Body Fat Percentage')
-    plt.xlabel('measurement date')
-    plt.ylabel('Body Fat [%]')
-    plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    plt.close()
+      y = np.array(fat)
+      y = y.astype(np.float32)
+      
+      plt.title('Body Fat Percentage')
+      plt.xlabel('measurement date')
+      plt.ylabel('Body Fat [%]')
+      plt.plot(x, y)
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
+      plt.close()
 
-    y = np.array(bmi)
-    y = y.astype(np.float32)
+      y = np.array(bmi)
+      y = y.astype(np.float32)
 
-    plt.title('Body Mass Index')
-    plt.xlabel('measurement date')
-    plt.ylabel('BMI [-]')
-    plt.plot(x, y)
-    plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
-    plt.close()
+      plt.title('Body Mass Index')
+      plt.xlabel('measurement date')
+      plt.ylabel('BMI [-]')
+      plt.plot(x, y)
+      plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+      plt.close()
+    end
   end
 
   def reset_cache
