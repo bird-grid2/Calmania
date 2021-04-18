@@ -12,7 +12,6 @@ class GraphsController < ApplicationController
 
   def set_user
     @user = User.find(current_user.id)
-    gon.user_id = @user.id
   end
 
   def set_graph
