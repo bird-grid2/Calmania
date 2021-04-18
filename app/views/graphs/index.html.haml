@@ -1,23 +1,21 @@
-
-- cache('index', expires_in: 1.seconds) do
-  .wrapper
-    .side-management
-      = link_to managements_path do
-        = icon('fas', 'home')
-        %h6.pc Home
-        %h6.sp Home
-      = link_to destroy_user_session_path, method: :delete do
-        = icon('fas', 'sign-out-alt')
-        %h6.pc Sign<br>out
-        %h6.sp Sign out
-    .graph_wrapper
-      .graph_upper
-        .left_graph
-          = image_tag "/assets/test_#{@user.id}_1.png"
-        .right_graph
-          = image_tag "/assets/test_#{@user.id}_2.png"
-      .graph_bottom
-        .left_graph
-          = image_tag "/assets/test_#{@user.id}_3.png"
-        .right_graph
-          = image_tag "/assets/test_#{@user.id}_4.png"
+.wrapper
+  .side-management
+    = link_to managements_path do
+      = icon('fas', 'home')
+      %h6.pc Home
+      %h6.sp Home
+    = link_to destroy_user_session_path, method: :delete do
+      = icon('fas', 'sign-out-alt')
+      %h6.pc Sign<br>out
+      %h6.sp Sign out
+  .graph_wrapper
+    .graph_upper
+      .left_graph
+        = image_tag "/assets/test_#{@user.id}_1.png"
+      .right_graph
+        = image_tag "/assets/test_#{@user.id}_2.png"
+    .graph_bottom
+      .left_graph
+        = image_tag "/assets/test_#{@user.id}_3.png"
+      .right_graph
+        = image_tag "/assets/test_#{@user.id}_4.png"
