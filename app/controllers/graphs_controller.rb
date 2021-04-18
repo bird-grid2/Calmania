@@ -1,6 +1,7 @@
 class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
+  before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
   def index
@@ -83,5 +84,16 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
     plt.close()
+  end
+
+  def reset_cache
+    os = PyCall.import_module('os')
+
+    return unless File.exist?(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
+
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_1.png"))
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_2.png"))
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_3.png"))
+    os.remove(helpers.asset_url("/assets/test_#{@user.id}_4.png"))
   end
 end
