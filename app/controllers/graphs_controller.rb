@@ -4,9 +4,7 @@ class GraphsController < ApplicationController
   before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
-  def index
-    expires_now
-  end
+  def index; end
 
   private
 
