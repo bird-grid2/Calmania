@@ -27,6 +27,7 @@ class GraphsController < ApplicationController
     end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
+    height = User.find(current_user.id).height
     date = []
     weight = []
     total = []
