@@ -52,6 +52,7 @@ class GraphsController < ApplicationController
     plt.plot(x,y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
     plt.close()
+    sleep(0.5)
 
     y = np.array(total)
     y = y.astype(np.float32)
@@ -62,6 +63,7 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     plt.close()
+    sleep(0.5)
 
     y = np.array(fat)
     y = y.astype(np.float32)
@@ -72,6 +74,7 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
     plt.close()
+    sleep(0.5)
 
     y = np.array(bmi)
     y = y.astype(np.float32)
