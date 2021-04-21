@@ -2,8 +2,7 @@ class GraphsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: :index
   before_action :reset_cache, only: :index
-  before_action :set_graph_1, only: :index
-  before_action :set_graph_2, only: :index
+  before_action :set_graph, only: :index
 
   def index; end
 
@@ -13,7 +12,7 @@ class GraphsController < ApplicationController
     @user = User.find(current_user.id)
   end
 
-  def set_graph_1
+  def set_graph
     matplotlib = Matplotlib
     matplotlib.use('Agg')
     plt = matplotlib::Pyplot
@@ -31,11 +30,15 @@ class GraphsController < ApplicationController
     date = []
     weight = []
     total = []
+    fat = []
+    bmi = []
 
     result.each do |w|
       date << w.date.strftime("%m/%d").to_s
       weight << w.weight.to_s
       total << w.total_cal.to_s
+      fat << w.bfp.to_s
+      bmi << (w.weight / ((height / 100) ** 2)).to_s
     end
 
     x = np.array(date)
@@ -58,35 +61,7 @@ class GraphsController < ApplicationController
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     plt.close()
-  end
 
-  def set_graph_2
-    matplotlib = Matplotlib
-    matplotlib.use('Agg')
-    plt = matplotlib::Pyplot
-    np = Numpy
-    os = PyCall.import_module('os')
-    
-    if Rails.env.development?
-      dirpath = "app/assets/images/" 
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/assets"
-    end
-
-    result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
-    height = User.find(current_user.id).height
-    date = []
-    fat = []
-    bmi = []
-
-    result.each do |w|
-      date << w.date.strftime("%m/%d").to_s
-      fat << w.bfp.to_s
-      bmi << (w.weight / ((height / 100) ** 2)).to_s
-    end
-
-    x = np.array(date)
     y = np.array(fat)
     y = y.astype(np.float32)
     
