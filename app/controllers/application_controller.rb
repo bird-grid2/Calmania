@@ -51,6 +51,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_cache_buster
-    response.set_header("Cache-Control", "no-store, max-age=0, must-revalidate")
+    response.set_header("Cache-Control", "no-store, max-age=0")
   end
 end
