@@ -52,5 +52,6 @@ class ApplicationController < ActionController::Base
 
   def set_cache_buster
     response.set_header("Cache-Control", "no-store, max-age=0")
+    response.set_header("Pragma", "no-store, max-age=0")
   end
 end
