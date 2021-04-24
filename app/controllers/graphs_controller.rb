@@ -35,13 +35,13 @@ class GraphsController < ApplicationController
     bmi = []
 
     result.each do |w|
-      if w.weight != nil || w.total_cal != nil || w.bfp != nil 
-        date << w.date.strftime("%m/%d").to_s
-        weight << w.weight.to_s
-        total << w.total_cal.to_s
-        fat << w.bfp.to_s
-        bmi << (w.weight / ((height / 100) ** 2)).to_s
-      end
+      next if w.weight || w.total_cal || w.bfp
+
+      date << w.date.strftime("%m/%d").to_s
+      weight << w.weight.to_s
+      total << w.total_cal.to_s
+      fat << w.bfp.to_s
+      bmi << (w.weight / ((height / 100) ** 2)).to_s
     end
 
     x = np.array(date)
