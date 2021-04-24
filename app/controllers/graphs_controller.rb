@@ -18,13 +18,6 @@ class GraphsController < ApplicationController
     plt = matplotlib::Pyplot
     np = Numpy
     os = PyCall.import_module('os')
-    
-    if Rails.env.development?
-      dirpath = "app/assets/images/" 
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/assets"
-    end
 
     result = Log.where(user_id: current_user.id).includes(:user).order(date: 'ASC')
     height = User.find(current_user.id).height
@@ -33,6 +26,8 @@ class GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
+    dirpath = os.getcwd()
+    dirpath += "/public/assets"
 
     result.each do |w|
       w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next 
@@ -87,13 +82,8 @@ class GraphsController < ApplicationController
 
   def reset_cache
     os = PyCall.import_module('os')
-
-    if Rails.env.development?
-      dirpath = "app/assets/images/" 
-    elsif Rails.env.production?
-      dirpath = os.getcwd()
-      dirpath += "/public/assets"
-    end
+    dirpath = os.getcwd()
+    dirpath += "/public/assets"
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
 
