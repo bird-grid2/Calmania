@@ -36,9 +36,9 @@ class GraphsController < ApplicationController
 
     result.each do |w|
       date << w.date.strftime("%m/%d").to_s
-      w.weight ? weight << w.weight.to_s
-      w.total_cal ? total << w.total_cal.to_s
-      w.bfp ? fat << w.bfp.to_s
+      weight << w.weight.to_s if w.weight
+      total << w.total_cal.to_s if w.total_cal 
+      fat << w.bfp.to_s if w.bfp
       w.weight ? bmi << (w.weight / ((height / 100) ** 2)).to_s
     end
 
