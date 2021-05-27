@@ -27,7 +27,7 @@
         = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
       = f.fields_for :clock_work_event, resource.clock_work_event ? resource.clock_work_event : resource.build_clock_work_event do |form|
         .field
-          = form.label "Remainder機能 (チャンネル登録要)", class: 'edit'
+          = form.label "Remainder機能 (LINE 公式アカウント: @681lurjb)", class: 'edit'
           = form.collection_select :period_id, Period.all, :id, :name
         .field
           = form.label "送信時間", class: 'edit'
