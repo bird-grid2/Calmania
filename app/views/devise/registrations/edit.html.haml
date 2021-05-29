@@ -17,17 +17,18 @@
       .field
         = f.label :height, value: '身長 [cm]' , class:'edit'
         = f.number_field :height, autocomplete: "height", placeholder: '身長を入力(任意)'
-      .field
-        = f.label :target_cal, value: '目標摂取カロリー' , class:'edit'
-        = f.number_field :target_cal, autocomplete: "target_cal", placeholder: '目標摂取カロリー(任意)'
-      .field
-        = f.label :ideal_PFC_rate, value: 'ＰＦＣバランス' , class:'edit'
-        = f.number_field :ideal_protain_rate, autocomplete: "ideal_protain_rate", placeholder: 'たんぱく質の摂取割合(任意)'
-        = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
-        = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
+      / .field
+      / = f.label :target_cal, value: '目標摂取カロリー' , class:'edit'
+      / = f.number_field :target_cal, autocomplete: "target_cal", placeholder: '目標摂取カロリー(任意)'
+      / .field
+      / = f.label :ideal_PFC_rate, value: 'ＰＦＣバランス' , class:'edit'
+      / = f.number_field :ideal_protain_rate, autocomplete: "ideal_protain_rate", placeholder: 'たんぱく質の摂取割合(任意)'
+      / = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
+      / = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
       = f.fields_for :clock_work_event, resource.clock_work_event ? resource.clock_work_event : resource.build_clock_work_event do |form|
         .field
           = form.label "Remainder機能 (LINE 公式アカウント: @681lurjb)", class: 'edit'
+          %p privateなアカウントには登録しないでください
           = form.collection_select :period_id, Period.all, :id, :name
         .field
           = form.label "送信時間", class: 'edit'
