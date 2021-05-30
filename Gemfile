@@ -12,6 +12,7 @@ gem 'pg', '~> 1.2', '>= 1.2.3'
 gem "puma", ">= 4.3.8"
 # Use SCSS for stylesheets
 gem 'sassc-rails'
+gem 'webpacker'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # See https://github.com/rails/execjs#readme for more supported runtimes
