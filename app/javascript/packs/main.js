@@ -12,6 +12,7 @@ import router from '../router'
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     router: router,
+    el: '#app',
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)
