@@ -1,20 +1,20 @@
 <template>
   <div class="wrapper">
     <div class='side-management'>
-        <router-view to='/management'>
-          <i class='fas fa-home'>::before</i>
+        <router-link to='/management'>
+          <i class='fas fa-home'></i>
           <h6 class='pc'>Home</h6>
           <h6 class='sp'>Home</h6>
-        </router-view>
+        </router-link>
         <span></span>
         <router-link to='new_menu_path'>
-          <i class='fas fa-plus-circle'>::before</i>
+          <i class='fas fa-plus-circle'></i>
           <h6 class='pc'>Create<br>menus</h6>
           <h6 class='sp'>Create menus</h6>
         </router-link>
         <span></span>
-        <router-link to='destroy_user_session_path' method: :delete>
-          <i class='fas fa-sign-out-alt'>::before</i>
+        <router-link to='destroy_user_session_path'>
+          <i class='fas fa-sign-out-alt'></i>
           <h6 class='pc'>Sign<br>out</h6>
           <h6 class='sp'>Sign out</h6>
         </router-link>

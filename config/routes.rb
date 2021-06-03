@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
   get '/management', to: 'shows#index'
+  get '/menu', to: 'shows#index'
   
   resources :managements, only: :index
   resources :shows, only: :index
