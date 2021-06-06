@@ -67,3 +67,12 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+  created() {
+    axios.get('/menus');
+  }
+};
+</script>

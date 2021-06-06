@@ -5,9 +5,15 @@
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
+require('@rails/activestorage').start()
 import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router'
+import axios from 'axios'
+import { csrfToken } from '@rails/ujs'
+
+axios.defaults.baseURL = "https://calmania.work";
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({

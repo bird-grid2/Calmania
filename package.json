@@ -2,8 +2,11 @@
   "name": "Calmania",
   "private": true,
   "dependencies": {
+    "@rails/activestorage": "^6.0.3-7",
+    "@rails/ujs": "^6.0.3-7",
     "@rails/webpacker": "5.4.0",
     "axios": "^0.21.1",
+    "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-eslint-parser": "^7.6.0",
     "vue-loader": "^15.9.7",

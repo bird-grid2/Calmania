@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   root to: "shows#index"
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
-  get '/management', to: 'shows#index'
-  get '/menu', to: 'shows#index'
   
   resources :managements, only: :index
   resources :shows, only: :index
@@ -34,4 +32,9 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  get '/management', to: 'shows#index'
+  get '/menu', to: 'shows#index'
+  get '/menus', to: 'menus#index'
+
 end
