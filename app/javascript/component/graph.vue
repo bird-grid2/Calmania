@@ -1,21 +1,34 @@
-wrapper
-  .side-management
-    = link_to managements_path do
-      = icon('fas', 'home')
-      %h6.pc Home
-      %h6.sp Home
-    = link_to destroy_user_session_path, method: :delete do
-      = icon('fas', 'sign-out-alt')
-      %h6.pc Sign<br>out
-      %h6.sp Sign out
-  .graph_wrapper
-    .graph_upper
-      .left_graph
-        = image_tag "/assets/test_#{@user.id}_1.png"
-      .right_graph
-        = image_tag "/assets/test_#{@user.id}_2.png"
-    .graph_bottom
-      .left_graph
-        = image_tag "/assets/test_#{@user.id}_3.png"
-      .right_graph
-        = image_tag "/assets/test_#{@user.id}_4.png"
+<template>
+  <div class='wrapper'>
+    <div class='side-management'>
+      <router-link to='/management'>
+        <i class='fas fa-home'></i>
+        <h6 class='pc'>Home</h6>
+        <h6 class='sp'>Home</h6>
+      </router-link>
+      <router-link to='/'>
+        <i class='fas fa-sign-out-alt'></i>
+        <h6 class='pc'>Sign<br>out</h6>
+        <h6 class='sp'>Sign out</h6>
+      </router-link>
+    </div>
+    <div class='graph_wrapper'>
+      <div class='graph_upper'>
+        <div class='left_graph'>
+          <image src="/assets/test_#{@user.id}_1.png">
+        </div>
+        <div class="right_graph">
+          <image src="/assets/test_#{@user.id}_2.png">
+        </div>
+      </div>
+      <div class='graph_bottom'>
+        <div class='left_graph'>
+          <image src="/assets/test_#{@user.id}_3.png">
+        </div>
+        <div class='right_graph'>
+          <image src="/assets/test_#{@user.id}_4.png">
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
