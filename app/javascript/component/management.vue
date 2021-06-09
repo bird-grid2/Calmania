@@ -3,25 +3,25 @@
     <div class='side-management'>
       <router-link to='/graph'>
         <i class='far fa-chart-bar'></i>
-        <h6 class='pc'>Show</br>graphs</h6>
+        <h6 class='pc'>Show<br>graphs</h6>
         <h6 class='sp'>Show graphs</h6>
       </router-link>
       <span></span>
       <router-link to='/log'>
         <i class='fas fa-file-alt'></i>
-        <h6 class='pc'>Create</br>logs</h6>
+        <h6 class='pc'>Create<br>logs</h6>
         <h6 class='sp'>Create logs</h6>
       </router-link>
       <span></span>
       <router-link to='/log/:id/edit'>
         <i class='fas fa-edit'></i>
-        <h6 class='pc'>Edit</br>profile</h6>
+        <h6 class='pc'>Edit<br>profile</h6>
         <h6 class='sp'>Edit profile</h6>
       </router-link>
       <span></span>
       <router-link to='/'>
         <i class='fas fa-sign-out-alt'></i>
-        <h6 class='pc'>Sign</br>out</h6>
+        <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
       </router-link>
     </div>
