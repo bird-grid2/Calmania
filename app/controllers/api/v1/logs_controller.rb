@@ -20,12 +20,12 @@ class Api::V1::LogsController < ApplicationController
     @log = Log.new(log_params)
 
     if @log.save
-      flash[:notice] = 'ログを作成しました'
+      redirect_to api_v1_logs_path, notice: 'ログを作成しました'
       render json: { status: 'SUCCESS', data: @log }
-      redirect_to :api_vi_logs_path
     else
       flash.now[:alert] = 'ログの作成を失敗しました'
       render json: { status: 'ERROR', data: @log.errors }
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 
@@ -68,23 +68,23 @@ class Api::V1::LogsController < ApplicationController
 
   def destroy
     if @log.destroy 
-      flash[:notice] = 'ログを削除しました'
+      redirect_to api_v1_logs_path, notice: 'ログを削除しました'
       render json: { status: 'SUCCESS', data: @log }
     else
       flash.now[:alert] = 'ログ削除を失敗しました'
       render json: { status: 'ERROR', data: @log.errors }
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 
   def update
     if @log.update(log_params) 
-      flash[:notice] = 'ログを更新しました'
+      redirect_to api_v1_logs_path, notice: 'ログを更新しました'
       render json: { status: 'SUCCESS', data: @log }
     else
       flash.now[:alert] = 'ログ更新を失敗しました'
       render json: { status: 'ERROR', data: @log.errors }
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 

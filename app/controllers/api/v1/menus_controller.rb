@@ -18,12 +18,12 @@ class Api::V1::MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     if @menu.save
-      flash[:notice] = 'メニューを作成しました' 
+      redirect_to api_vi_menus_path, notice: 'メニューを作成しました' 
       render json: { status: 'SUCCESS', data: @menu }
     else
       flash.now[:alert] = 'メニュー作成を失敗しました'
       render json: { status: 'ERROR', data: @menu.errors }
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 
@@ -64,23 +64,23 @@ class Api::V1::MenusController < ApplicationController
 
   def update
     if @menu.update(menu_params)
-      flash[:notice] = 'メニューを更新しました'
+      redirect_to api_v1_menus_path, notice: 'メニューを更新しました'
       render json: { status: 'SUCCESS', data: @menu }
     else
       flash.now[:alert] = 'メニュー更新を失敗しました'
       render json: { status: 'ERROR', data: @menu.errors }
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 
   def destroy
     if @menu.destroy
-      flash[:notice] = 'メニューを削除しました'
+      redirect_to api_v1_menus_path, notice: 'メニューを削除しました'
       render json: { status: 'SUCCESS', data: @menu }
     else
       flash.now[:alert] = 'メニュー削除を失敗しました'
       render json: { status: 'ERROR', data: @menu.errors }
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: ap1_v1_root_path)
     end
   end
 
