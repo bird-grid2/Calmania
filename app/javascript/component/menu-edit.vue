@@ -49,3 +49,16 @@
   </div>
 </template>
 
+<script>
+  export default {
+    data: {
+      material: "",
+      names: [],
+      masses: [],
+      total_protain: "",
+      total_fat: "",
+      total_curbohydrate: ""
+    }
+  }
+</script>
+

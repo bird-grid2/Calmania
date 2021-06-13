@@ -69,3 +69,15 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: {
+    date: "",
+    weight: "",
+    bfp: "",
+    description: "",
+    menu_numbers: []
+  }
+}
+</script>
