@@ -13,10 +13,10 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_up_path_for(*)
-    managements_path
+    api_v1_managements_path
   end
 
   def after_update_path_for(*)
-    managements_path
+    api_v1_managements_path
   end
 end
