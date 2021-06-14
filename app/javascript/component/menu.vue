@@ -31,32 +31,32 @@
               <th class='table-title'>脂質 [kCal]</th>
               <th class='table-title'>炭水化物 [kCal]</th>
             </tr>
-            <% @menus.each do |menu| %>
-              <tr>
-                <td class='table-icon'>
-                  = link_to "menus/#{menu.id}/edit" do
-                    <i class='fas fa-edit'>::before</i>
-                  <span></span>
-                  = link_to "menus/#{menu.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
-                    <i class='fas fa-trash-alt'>::before</i>
-                </td>
-                <td class='table-item'>
-                  <%= menu.material %>
-                </td>
-                <td class='table-item'>
-                  <%= menu.masses.sum{ |num| num.to_i } %>
-                </td>
-                <td class='table-item'>
-                  <%= menu.total_protain %>
-                </td>
-                <td class='table-item'>
-                  <%= menu.total_fat %>
-                </td>
-                <td class='table-item'>
-                  <%= menu.total_carbohydrate %>
-                </td>
-              </tr>
-            <% end %>
+            <tr v-for="menu in menus" :key="menu.id">
+              <td class='table-icon'>
+                <router-link :to="{ name: 'menuEdit', params: { menuId: menu.id }}">
+                  <i class='fas fa-edit'></i>
+                </router-link>
+                <span></span>
+                <router-link to="/menus/#{menu.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
+                  <i class='fas fa-trash-alt'></i>
+                </router-link>
+              </td>
+              <td class='table-item'>
+                {{menu.material}}
+              </td>
+              <td class='table-item'>
+                {{total}}
+              </td>
+              <td class='table-item'>
+                {{menu.total_protain}}
+              </td>
+              <td class='table-item'>
+                {{menu.total_fat}}
+              </td>
+              <td class='table-item'>
+                {{menu.total_carbohydrate}}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -71,8 +71,21 @@
 <script>
 import axios from 'axios'
 export default {
+  data() {
+    return {
+      menus: []
+    }
+  },
   created() {
-    axios.get('/menus');
+    axios
+    .get('api/v1/index.json')
+    .then( responce => (this.menus = responce.data));
+  },
+  computed: {
+    total: function() {
+      let sum = 0;
+      return this.menus.reduce((sum, menu) => sum + menu.masses, 0);
+    }
   }
 };
 </script>

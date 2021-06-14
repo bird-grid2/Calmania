@@ -19,7 +19,10 @@ class Api::V1::MenusController < ApplicationController
     @menu = Menu.new(menu_params)
     if @menu.save
       redirect_to api_vi_menus_path, notice: 'メニューを作成しました' 
-      render json: { status: 'SUCCESS', data: @menu }
+      respond_to do |format|
+        format.html
+        format.json { render json: { status: 'SUCCESS', data: @menu } }
+      end
     else
       flash.now[:alert] = 'メニュー作成を失敗しました'
       render json: { status: 'ERROR', data: @menu.errors }
@@ -29,7 +32,7 @@ class Api::V1::MenusController < ApplicationController
 
   def index
     @menus = Menu.all.order(id: 'ASC')
-    render json: { status: 'SUCCESS', data: @menus }
+    render 'index', format: json { status: 'SUCCESS', data: @menus }
   end
 
   def search
@@ -76,10 +79,9 @@ class Api::V1::MenusController < ApplicationController
   def destroy
     if @menu.destroy
       redirect_to api_v1_menus_path, notice: 'メニューを削除しました'
-      render json: { status: 'SUCCESS', data: @menu }
     else
       flash.now[:alert] = 'メニュー削除を失敗しました'
-      render json: { status: 'ERROR', data: @menu.errors }
+
       redirect_back(fallback_location: ap1_v1_root_path)
     end
   end

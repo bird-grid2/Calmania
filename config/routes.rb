@@ -64,9 +64,9 @@ Rails.application.routes.draw do
           get :search
         end
       end
-      get '/management', to: api_v1_root_path
-      get '/menu', to: api_v1_root_path
-      get '/log', to: api_v1_root_path
+      get '/management', to: 'ap1/v1/shows#index'
+      get '/menu', to: 'ap1/v1/shows#index'
+      get '/log', to: 'ap1/v1/shows#index'
     end
   end
 end
