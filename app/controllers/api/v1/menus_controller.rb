@@ -32,7 +32,7 @@ class Api::V1::MenusController < ApplicationController
 
   def index
     @menus = Menu.all.order(id: 'ASC')
-    render 'index', format: json { status: 'SUCCESS', data: @menus }
+    render 'index', format: 'json', handlers: 'jbuilder'
   end
 
   def search

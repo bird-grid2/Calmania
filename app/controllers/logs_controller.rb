@@ -29,6 +29,7 @@ class LogsController < ApplicationController
 
   def index
     @logs = Log.all.order(date: 'DESC')
+    render 'index', format: 'json', handlers: 'jbuilder'
   end
 
   def search

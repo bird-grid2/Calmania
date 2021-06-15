@@ -37,45 +37,60 @@
               <th class='table-title'>総カロリー [kCal]</th>
               <th class='table-title'>コメント</th>
             </tr>
-            <template>@logs.each_with_index do |log|
-              <tr>
-                <td class='table-icon'>
-                  <router-link to="logs/#{log.id}/edit">
-                    <i class='fas fa-edit'></i>
-                  </router-link>
-                  <span></span>
-                  <router-link>"logs/#{log.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
-                    <i class='fas fa-trash-alt'></i>
-                  </router-link>
-                </td>
-                <td class='table-item'>
-                  = log.date
-                </td>
-                <td class='table-item'>
-                  = log.weight
-                </td>
-                <td class='table-item'>
-                  = log.bfp
-                </td>
-                <td class='table-item'>
-                  = log.total_cal
-                </td>
-                <td class='table-item'>
-                  = log.description
-                </td>
-              </tr>
-            </template>
+            <tr v-for="log in logs" :key="log.id">
+              <td class='table-icon'>
+                <router-link to="logs/#{log.id}/edit">
+                  <i class='fas fa-edit'></i>
+                </router-link>
+                <span></span>
+                <router-link to="logs/#{log.id}" data-confirm="本当に削除しますか?"  method="delete">
+                  <i class='fas fa-trash-alt'></i>
+                </router-link>
+              </td>
+              <td class='table-item'>
+                {{log.date}}
+              </td>
+              <td class='table-item'>
+                {{log.weight}}
+              </td>
+              <td class='table-item'>
+                {{log.bfp}}
+              </td>
+              <td class='table-item'>
+                {{log.total_cal}}
+              </td>
+              <td class='table-item'>
+                {{log.description}}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
       <div class='bottom-info'>
-        = form_with url: dsearch_logs_path, method: :get, class: 'search-date',local: true do |f|
-          %p 記録日検索：
-          = f.date_field :keyword2, class: 'search-date-input'
-        = form_with url: search_logs_path, method: :get, class: 'search-box', local: true do |f|
-          %p コメント検索：
-          = f.text_field :keyword, placeholder: 'コメントを入力して下さい', class: 'search-input'
+        <form class="search-date" action="/logs/dsearch" accept-charset="UTF-8" method="get">
+          <p>記録日検索：</p><input class="search-date-input" type="date" name="keyword2" id="keyword2">
+        </form>
+        <form class="search-box" action="/logs/search" accept-charset="UTF-8" method="get">
+          <p>コメント検索：</p><input placeholder="コメントを入力して下さい" class="search-input" type="text" name="keyword" id="keyword">
+        </form>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      logs: []
+    }
+  },
+  created() {
+    axios
+    .get('api/v1/logs/index.json')
+    .then( responce => (this.logs = responce.data));
+  }
+}
+</script>

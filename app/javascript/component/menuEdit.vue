@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class='bottom_menu_content'>
-          <input type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
+          <input @click="createLogs" type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
           <router-link class="btn" to="/menu">キャンセル</router-link>
         </div>
       </form>
@@ -50,15 +50,26 @@
 </template>
 
 <script>
-  export default {
-    data: {
-      material: "",
-      names: [],
-      masses: [],
-      total_protain: "",
-      total_fat: "",
-      total_curbohydrate: ""
-    }
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      menus: {
+        material: "",
+        names: [],
+        masses: [],
+        total_protain: "",
+        total_fat: "",
+        total_curbohydrate: ""
+      }
+    };
+  },
+  methods: {
+    createLogs() {
+      axios
+      .post("api/v1/logs/create", { menu: menus });
+    };
   }
+}
 </script>
 

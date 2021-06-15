@@ -33,11 +33,11 @@
             </tr>
             <tr v-for="menu in menus" :key="menu.id">
               <td class='table-icon'>
-                <router-link :to="{ name: 'menuEdit', params: { menuId: menu.id }}">
+                <router-link :to="{name: 'menuEdit', params: { menuId: menu.id }}">
                   <i class='fas fa-edit'></i>
                 </router-link>
                 <span></span>
-                <router-link to="/menus/#{menu.id}", data: { confirm: "本当に削除しますか?" }, method: :delete do
+                <router-link to="/menus/#{menu.id}"  data-confirm="本当に削除しますか?"  method="delete">
                   <i class='fas fa-trash-alt'></i>
                 </router-link>
               </td>
@@ -61,8 +61,9 @@
         </table>
       </div>
       <div class='bottom-info'>
-        <%= form_with url: search_menus_path, method: :get, class: 'search-box', local: true do |f| %>
-          <%= f.text_field :keyword, placeholder: 'メニューを入力して下さい', class: 'search-input' %>
+        <form class="search-box" action="/menus/search" accept-charset="UTF-8" method="get">
+          <input placeholder="メニューを入力して下さい" class="search-input" type="text" name="keyword" id="keyword">
+        </form>
       </div>
     </div>
   </div>
@@ -78,7 +79,7 @@ export default {
   },
   created() {
     axios
-    .get('api/v1/index.json')
+    .get('api/v1/menus/index.json')
     .then( responce => (this.menus = responce.data));
   },
   computed: {

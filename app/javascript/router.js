@@ -3,12 +3,14 @@ import Router from "vue-router";
 import Index from "./component/index.vue";
 import Management from "./component/management.vue";
 import Menu from "./component/menu.vue";
-import menuEdit from "./component/menuEdit.vue"
+import menuEdit from "./component/menuEdit.vue";
+import logEdit from "./component/logEdit.vue";
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  routes: [{ path: "/", component: Index, name: "index"}, { path: "/management", component: Management, name: "managements"},
-  { path: "/menu", component: Menu, name: "menus"}, { path: "/menu/:menuId/edit", component: menuEdit, name: "menuEdit"}]
+  routes: [{ path: "/", name: "index", component: Index}, { path: "/management", name: "managements", component: Management},
+  { path: "/menu", name: "menus", component: Menu}, { path: "/menu/:menuId/edit", name: "menuEdit", component: menuEdit},
+  { path: "/log/:logId/edit", name: "logEdit", component: logEdit}]
 });
