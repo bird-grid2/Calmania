@@ -19,7 +19,7 @@ class Api::V1::ManagementsController < ApplicationController
     c = []
     @detail = []
     
-    # 1ヶ月間の記録
+    # record during 1 month
     for i in 0..30 do
       last = Log.where(date: ( date - i ))
       last.each do |d|
@@ -27,7 +27,7 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end 
 
-    # カロリーの計算と表示
+    # calory calculate and view
     @cal.each do |cal|
       total << cal.total_cal
       weight << cal.weight
@@ -39,7 +39,7 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
-    # 過去１ヶ月間の最大体重を表示
+    # max weight during 1 month
     if weight.blank? 
       for j in 1..31 do
         last = Log.where(date: ( date - j )) 
@@ -52,7 +52,7 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
-    # 過去１ヶ月間の最大体脂肪率を表示
+    # max body fat percentage during 1 month
     if bfp.blank? 
       for k in 1..31 do
         last = Log.where(date: ( date - k )) 
