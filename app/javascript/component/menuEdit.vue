@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class='bottom_menu_content'>
-          <input @click="createLogs" type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
+          <input @click="createMenus" type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
           <router-link class="btn" to="/menu">キャンセル</router-link>
         </div>
       </form>
@@ -65,10 +65,11 @@ export default {
     };
   },
   methods: {
-    createLogs() {
+    createMenus() {
       axios
-      .post("api/v1/logs/create", { menu: menus });
-    };
+      .post("api/v1/Menus/create", { menu: this.menus })
+      .then( (response)=> { this.$router.push({ path: "/menu" }); }, (error)=> { console.log(error); });
+    }
   }
 }
 </script>

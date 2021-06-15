@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <input type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
+          <input @click="creatLogs" type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
           <router-link class="btn" to="/logs">キャンセル</router-link>
         </div>
       </form>
@@ -72,12 +72,23 @@
 
 <script>
 export default {
-  data: {
-    date: "",
-    weight: "",
-    bfp: "",
-    description: "",
-    menu_numbers: []
+  data() {
+    return {
+      logs: { 
+        date: "",
+        weight: "",
+        bfp: "",
+        description: "",
+        menu_numbers: []
+      }
+    }
+  },
+  methods: {
+    createLogs() {
+      axios
+      .post("api/v1/Logs/create", { log: this.logs })
+      .then( (response)=> { this.$router.push({ path: "/log" }); }, (error)=> { console.log(error); });
+    }
   }
 }
 </script>

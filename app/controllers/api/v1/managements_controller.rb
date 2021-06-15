@@ -9,7 +9,7 @@ class Api::V1::ManagementsController < ApplicationController
     require 'date'
     require 'bigdecimal'
     date = Date.today
-    @cal = Log.where(date: Date.today)
+    @cal = Log.where(date: date)
     gon.today = @cal
     total = []
     weight = []
@@ -21,7 +21,7 @@ class Api::V1::ManagementsController < ApplicationController
     
     # 1ヶ月間の記録
     for i in 0..30 do
-      last = Log.where(date: Date.today - i)
+      last = Log.where(date: ( date - i ))
       last.each do |d|
         @detail << d
       end
@@ -42,7 +42,7 @@ class Api::V1::ManagementsController < ApplicationController
     # 過去１ヶ月間の最大体重を表示
     if weight.blank? 
       for j in 1..31 do
-        last = Log.where(date: Date.today - j) 
+        last = Log.where(date: ( date - j )) 
         if last.present?
           last.each do |w|
             weight << w.weight
@@ -55,7 +55,7 @@ class Api::V1::ManagementsController < ApplicationController
     # 過去１ヶ月間の最大体脂肪率を表示
     if bfp.blank? 
       for k in 1..31 do
-        last = Log.where(date: Date.today - k) 
+        last = Log.where(date: ( date - k )) 
         if last.present?
           last.each do |b|
             bfp << b.bfp
