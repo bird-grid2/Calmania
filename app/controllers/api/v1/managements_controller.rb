@@ -54,7 +54,7 @@ class Api::V1::ManagementsController < ApplicationController
     end
 
     # max body fat percentage during 1 month
-    next unless bfp.blank?
+    if bfp.blank?
       range.each do |k|
         last = Log.where(date: (date - k))
         next unless last.present?

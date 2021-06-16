@@ -28,7 +28,7 @@ class Api::V1::GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
-    dirpath = os.getcwd() + "/public/assets"
+    dirpath = "#{os.getcwd()}/public/assets"
 
     result.each do |w|
       w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next
@@ -83,7 +83,7 @@ class Api::V1::GraphsController < ApplicationController
 
   def reset_cache
     os = PyCall.import_module('os')
-    dirpath = os.getcwd() + "/public/assets"
+    dirpath = "#{os.getcwd()}/public/assets"
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
 
