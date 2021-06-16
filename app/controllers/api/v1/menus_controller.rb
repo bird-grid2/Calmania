@@ -1,7 +1,7 @@
 class Api::V1::MenusController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_menu, only: [ :edit, :update, :destroy ]
-  before_action :move_to_index, only: [ :index, :search ] 
+  before_action :set_menu, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only: [:index, :search]
 
   def new
     @menu = Menu.new
@@ -18,7 +18,7 @@ class Api::V1::MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     if @menu.save
-      redirect_to api_vi_menus_path, notice: 'メニューを作成しました' 
+      redirect_to api_vi_menus_path, notice: 'メニューを作成しました'
       respond_to do |format|
         format.html
         format.json { render json: { status: 'SUCCESS', data: @menu } }
@@ -87,6 +87,7 @@ class Api::V1::MenusController < ApplicationController
   end
 
   private
+  
   def menu_params
     params.require(:menu).permit(:material, :total_protain, :total_fat, :total_carbohydrate, names: [], masses: [])
   end

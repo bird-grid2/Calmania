@@ -63,7 +63,7 @@ class Api::V1::GraphsController < ApplicationController
 
     y = np.array(fat)
     y = y.astype(np.float32)
-    
+
     plt.title('Body Fat Percentage')
     plt.xlabel('measurement date')
     plt.ylabel('Body Fat [%]')

@@ -8,11 +8,11 @@ class Api::V1::LogsController < ApplicationController
     @menus = Menu.all
 
     menu = []
-    
+
     @menus.each_with_index do |log, _|
       menu << log
     end
-    
+
     gon.menu = menu
   end
 
@@ -58,8 +58,8 @@ class Api::V1::LogsController < ApplicationController
     @menus.each_with_index do |log, _|
       menu << log
     end
-    gon.menu = menu 
-    
+    gon.menu = menu
+
     @log.menu_numbers.each do |log|
       num << log
     end
@@ -67,7 +67,7 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def destroy
-    if @log.destroy 
+    if @log.destroy
       redirect_to api_v1_logs_path, notice: 'ログを削除しました'
       render json: { status: 'SUCCESS', data: @log }
     else
