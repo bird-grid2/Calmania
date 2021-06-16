@@ -65,7 +65,7 @@ class Api::V1::ManagementsController < ApplicationController
         end
       end
     end
-    
+
     @today_cal = total.sum.to_s
     @today_weight = weight.max.to_s
     @today_bfp = bfp.max.to_s
