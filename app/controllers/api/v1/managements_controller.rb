@@ -21,7 +21,7 @@ class Api::V1::ManagementsController < ApplicationController
     
     # record during 1 month
     for i in 0..30 do
-      last = Log.where(date: ( date - i ))
+      last = Log.where(date: (date - i))
       last.each do |d|
         @detail << d
       end
@@ -42,7 +42,7 @@ class Api::V1::ManagementsController < ApplicationController
     # max weight during 1 month
     if weight.blank? 
       for j in 1..31 do
-        last = Log.where(date: ( date - j )) 
+        last = Log.where(date: (date - j)) 
         if last.present?
           last.each do |w|
             weight << w.weight
@@ -55,7 +55,7 @@ class Api::V1::ManagementsController < ApplicationController
     # max body fat percentage during 1 month
     if bfp.blank? 
       for k in 1..31 do
-        last = Log.where(date: ( date - k )) 
+        last = Log.where(date: (date - k)) 
         if last.present?
           last.each do |b|
             bfp << b.bfp
@@ -73,7 +73,7 @@ class Api::V1::ManagementsController < ApplicationController
     
     if @user.height.present? && weight.present?
       @body_mass_index = BigDecimal((weight.max / ((@user.height/100) ** 2)).to_s).ceil(1)
-      @weight = BigDecimal((((@user.height/100) ** 2) * 22).to_s).ceil(2) 
+      @weight = BigDecimal((((@user.height/100)**2)*22).to_s).ceil(2) 
     end
   end
 end

@@ -1,19 +1,19 @@
 class Api::V1::LogsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_log, only: [ :edit, :update, :destroy ]
-  before_action :move_to_index, only: [ :index, :search ]
+  before_action :set_log, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only: [:index, :search]
 
   def new
     @log = Log.new
     @menus = Menu.all
-    
-    menu =[]
+
+    menu = []
     
     @menus.each_with_index do |log, _|
       menu << log
     end
     
-    gon.menu = menu 
+    gon.menu = menu
   end
 
   def create
@@ -78,7 +78,7 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def update
-    if @log.update(log_params) 
+    if @log.update(log_params)
       redirect_to api_v1_logs_path, notice: 'ログを更新しました'
       render json: { status: 'SUCCESS', data: @log }
     else
@@ -90,15 +90,15 @@ class Api::V1::LogsController < ApplicationController
 
   private
 
-    def log_params
-      params.require(:log).permit(:date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
-    end
+  def log_params
+    params.require(:log).permit(:date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
+  end
 
-    def set_log
-      @log = Log.find(params[:id])
-    end
+  def set_log
+    @log = Log.find(params[:id])
+  end
 
-    def move_to_index
-      redirect_to action: :index unless user_signed_in?
-    end
+  def move_to_index
+    redirect_to action: :index unless user_signed_in?
+  end
 end

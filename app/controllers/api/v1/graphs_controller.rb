@@ -28,16 +28,16 @@ class Api::V1::GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
-    dirpath = os.getcwd()
+    dirpath = os.getcwd(_)
     dirpath += "/public/assets"
 
     result.each do |w|
-      w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next 
+      w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next
       date << w.date.strftime("%m/%d").to_s
       weight << w.weight.to_s
-      total << w.total_cal.to_s 
+      total << w.total_cal.to_s
       fat << w.bfp.to_s
-      bmi << (w.weight / ((height / 100) ** 2)).to_s
+      bmi << (w.weight / ((height / 100)**2)).to_s
     end
 
     x = np.array(date)
@@ -47,9 +47,9 @@ class Api::V1::GraphsController < ApplicationController
     plt.title('Height')
     plt.xlabel('measurement date')
     plt.ylabel('weight [kg]')
-    plt.plot(x,y)
+    plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    plt.close()
+    plt.close(_)
 
     y = np.array(total)
     y = y.astype(np.float32)
@@ -59,7 +59,7 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('Calory [kCal]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_2.png"))
-    plt.close()
+    plt.close(_)
 
     y = np.array(fat)
     y = y.astype(np.float32)
@@ -69,7 +69,7 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('Body Fat [%]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    plt.close()
+    plt.close(_)
 
     y = np.array(bmi)
     y = y.astype(np.float32)
@@ -79,12 +79,12 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
-    plt.close()
+    plt.close(_)
   end
 
   def reset_cache
     os = PyCall.import_module('os')
-    dirpath = os.getcwd()
+    dirpath = os.getcwd(_)
     dirpath += "/public/assets"
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
