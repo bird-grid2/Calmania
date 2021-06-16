@@ -18,9 +18,10 @@ class Api::V1::ManagementsController < ApplicationController
     f = []
     c = []
     @detail = []
+    range = 0..30
 
     # record during 1 month
-    0..31.each do |i|
+    range.each do |i|
       last = Log.where(date: (date - i))
       last.each do |d|
         @detail << d
@@ -41,7 +42,7 @@ class Api::V1::ManagementsController < ApplicationController
 
     # max weight during 1 month
     next unless weight.blank?
-      1..31.each do |j|
+      range.each do |j|
         last = Log.where(date: (date - j))
         next unless last.present?
           last.each do |w|
@@ -54,7 +55,7 @@ class Api::V1::ManagementsController < ApplicationController
 
     # max body fat percentage during 1 month
     next unless bfp.blank?
-      1..31.each do |k|
+      range.each do |k|
         last = Log.where(date: (date - k))
         next unless last.present?
           last.each do |b|

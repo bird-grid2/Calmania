@@ -87,7 +87,7 @@ class Api::V1::MenusController < ApplicationController
   end
 
   private
-  
+
   def menu_params
     params.require(:menu).permit(:material, :total_protain, :total_fat, :total_carbohydrate, names: [], masses: [])
   end

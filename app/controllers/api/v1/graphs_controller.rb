@@ -28,8 +28,7 @@ class Api::V1::GraphsController < ApplicationController
     total = []
     fat = []
     bmi = []
-    dirpath = os.getcwd(_)
-    dirpath += "/public/assets"
+    dirpath = os.getcwd() + "/public/assets"
 
     result.each do |w|
       w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next
@@ -49,7 +48,7 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('weight [kg]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_1.png"))
-    plt.close(_)
+    plt.close()
 
     y = np.array(total)
     y = y.astype(np.float32)
@@ -69,7 +68,7 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('Body Fat [%]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_3.png"))
-    plt.close(_)
+    plt.close()
 
     y = np.array(bmi)
     y = y.astype(np.float32)
@@ -79,13 +78,12 @@ class Api::V1::GraphsController < ApplicationController
     plt.ylabel('BMI [-]')
     plt.plot(x, y)
     plt.savefig(os.path.join(dirpath, "test_#{@user.id}_4.png"))
-    plt.close(_)
+    plt.close()
   end
 
   def reset_cache
     os = PyCall.import_module('os')
-    dirpath = os.getcwd(_)
-    dirpath += "/public/assets"
+    dirpath = os.getcwd() + "/public/assets"
 
     return unless File.exist?(os.path.join(dirpath, "test_#{@user.id}_1.png"))
 
