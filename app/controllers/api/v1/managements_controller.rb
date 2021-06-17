@@ -38,22 +38,22 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
+     # max body fat percentage during 1 month
+     next unless bfp.blank?
+     range.each do |j|
+       last = Log.where(date: (date - j))
+       next unless last.present?
+         bfp << last.bfp
+       end
+     end
+   end
+
     # max weight during 1 month
     next unless weight.blank?
-      range.each do |j|
-        last = Log.where(date: (date - j))
+      range.each do |k|
+        last = Log.where(date: (date - k))
         next unless last.present?
           weight << last.weight
-        end
-      end
-    end
-
-    # max body fat percentage during 1 month
-    next unless bfp.blank?
-      range.each do |l|
-        last = Log.where(date: (date - l))
-        next unless last.present?
-          bfp << last.bfp
         end
       end
     end
