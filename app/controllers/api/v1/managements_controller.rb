@@ -41,7 +41,7 @@ class Api::V1::ManagementsController < ApplicationController
   end
 
   private
-  
+
   def set_parameter
     @logs = Log.all.includes(:id).order(date: 'DESC')
     @menus = Menu.all
