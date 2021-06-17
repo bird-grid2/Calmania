@@ -1,11 +1,8 @@
 class Api::V1::ManagementsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_parameter, only: [:index]
 
   def index
-    @logs = Log.all.includes(:id).order(date: 'DESC')
-    @menus = Menu.all
-    @user = User.find(current_user.id)
-
     require 'date'
     require 'bigdecimal'
     date = Date.today
@@ -69,5 +66,13 @@ class Api::V1::ManagementsController < ApplicationController
       @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
       @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
     end
+  end
+
+  private
+  
+  def set_parameter
+    @logs = Log.all.includes(:id).order(date: 'DESC')
+    @menus = Menu.all
+    @user = User.find(current_user.id)
   end
 end
