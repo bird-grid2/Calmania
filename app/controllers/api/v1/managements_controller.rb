@@ -14,14 +14,6 @@ class Api::V1::ManagementsController < ApplicationController
     p = []
     f = []
     c = []
-    @detail = []
-    range = 0..30
-
-    # record during 1 month
-    range.each do |i|
-      last = Log.where(date: (date - i))
-      @detail << last
-    end
 
     # calory calculate and view
     @cal.each do |cal|
@@ -35,22 +27,6 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
-    # max body fat percentage during 1 month
-    next unless bfp.blank?
-      range.each do |j|
-        last = Log.where(date: (date - j))
-        next unless last.present?
-          bfp << last.bfp
-      end
-
-    # max weight during 1 month
-    next unless weight.blank?
-      range.each do |k|
-        last = Log.where(date: (date - k))
-        next unless last.present?
-          weight << last.weight
-      end
-
     @today_cal = total.sum.to_s
     @today_weight = weight.max.to_s
     @today_bfp = bfp.max.to_s
@@ -59,8 +35,9 @@ class Api::V1::ManagementsController < ApplicationController
     @today_carb = c.sum.to_s
 
     next unless @user.height.present? && weight.present?
-      @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
-      @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
+
+    @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
+    @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
   end
 
   private
