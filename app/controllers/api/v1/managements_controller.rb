@@ -61,7 +61,6 @@ class Api::V1::ManagementsController < ApplicationController
     next unless @user.height.present? && weight.present?
       @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
       @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
-    end
   end
 
   private
