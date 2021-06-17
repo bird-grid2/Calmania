@@ -50,8 +50,8 @@ class Api::V1::ManagementsController < ApplicationController
 
     # max body fat percentage during 1 month
     next unless bfp.blank?
-      range.each do |k|
-        last = Log.where(date: (date - k))
+      range.each do |l|
+        last = Log.where(date: (date - l))
         next unless last.present?
           bfp << last.bfp
         end
