@@ -23,9 +23,7 @@ class Api::V1::ManagementsController < ApplicationController
     # record during 1 month
     range.each do |i|
       last = Log.where(date: (date - i))
-      last.each do |d|
-        @detail << d
-      end
+      @detail << last
     end
 
     # calory calculate and view
@@ -45,10 +43,7 @@ class Api::V1::ManagementsController < ApplicationController
       range.each do |j|
         last = Log.where(date: (date - j))
         next unless last.present?
-          last.each do |w|
-            weight << w.weight
-          end
-          break
+          weight << last.weight
         end
       end
     end
@@ -58,10 +53,7 @@ class Api::V1::ManagementsController < ApplicationController
       range.each do |k|
         last = Log.where(date: (date - k))
         next unless last.present?
-          last.each do |b|
-            bfp << b.bfp
-          end
-          break
+          bfp << last.bfp
         end
       end
     end
