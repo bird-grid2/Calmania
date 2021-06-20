@@ -41,10 +41,10 @@ class Api::V1::ManagementsController < ApplicationController
 
   def set_parameter
     require 'time'
-    dateTime = Time.current.midnight + 1.day
+    date_time = Time.current.midnight + 1.day
 
-    @period = Log.where(created_at: (dateTime - 31.days)..dateTime).order(date: 'DESC')
-    @cal = Log.where(created_at: (dateTime - 1.day)..dateTime)
+    @period = Log.where(created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
+    @cal = Log.where(created_at: (date_time - 1.day)..date_time)
     @menus = Menu.all
     @user = User.find(current_user.id)
   end
