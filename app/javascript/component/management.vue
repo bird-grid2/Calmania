@@ -32,7 +32,7 @@
             <h1>BMI</h1>
           </div>
           <div class='top-managements__left-contents--value'>
-            <h3>#{@body_mass_index.present? ? @body_mass_index : '---'}</h3>
+            <h3>"#{@body_mass_index.present? ? @body_mass_index : '---'}"</h3>
           <div class='border-dashed'></div>
           <div class='top-managements__left-contents--title'>
             <h1>適正体重</h1>
@@ -105,22 +105,21 @@
                 <th class='table-title'>総カロリー [kCal]</th>
                 <th class='table-title'>コメント</th>
               </tr>
-              <template>- @detail.each do |cal|
-                <tr>
+                <tr v-for="log in logs" :key="log.id">
                   <td class='table-item'>
-                    = cal.date
+                    {{ log.date }}
                   </td>
                   <td class='table-item'>
-                    = cal.weight
+                    {{ log.weight }}
                   </td>
                   <td class='table-item'>
-                    = cal.bfp
+                    {{ log.bfp }}
                   </td>
                   <td class='table-item'>
-                    = cal.total_cal
+                    {{ log.total_cal }}
                   </td>
                   <td class='table-item'>
-                    = cal.description
+                    {{ log.description }}
                   </td>
                 </tr>
               </template>
@@ -131,3 +130,19 @@
     </div>   
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      logs: []
+    }
+  },
+  created() {
+    axios
+    .get('/api/v1/managements/index.json')
+    .then(responce => { this.logs = responce.data })
+  }
+}
+</script>

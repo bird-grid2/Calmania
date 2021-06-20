@@ -3,10 +3,7 @@ class Api::V1::ManagementsController < ApplicationController
   before_action :set_parameter, only: [:index]
 
   def index
-    require 'date'
     require 'bigdecimal'
-    date = Date.today
-    @cal = Log.where(date: date)
     gon.today = @cal
     total = []
     weight = []
@@ -43,7 +40,11 @@ class Api::V1::ManagementsController < ApplicationController
   private
 
   def set_parameter
-    @logs = Log.all.includes(:id).order(date: 'DESC')
+    require 'time'
+    dateTime = Time.current.midnight + 1.day
+
+    @period = Log.where(created_at: (dateTime - 31.days)..dateTime).order(date: 'DESC')
+    @cal = Log.where(created_at: (dateTime - 1.day)..dateTime)
     @menus = Menu.all
     @user = User.find(current_user.id)
   end

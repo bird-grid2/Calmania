@@ -43,7 +43,7 @@
                   <i class='fas fa-edit'></i>
                 </router-link>
                 <span></span>
-                <router-link to="logs/#{log.id}" data-confirm="本当に削除しますか?"  method="delete">
+                <router-link to="logs/#{log.id}" data-confirm="本当に削除しますか?" rel="nofollow" data-method="delete">
                   <i class='fas fa-trash-alt'></i>
                 </router-link>
               </td>
