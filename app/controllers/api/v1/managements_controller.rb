@@ -4,7 +4,6 @@ class Api::V1::ManagementsController < ApplicationController
 
   def index
     require 'bigdecimal'
-    gon.today = @cal
     total = []
     weight = []
     bfp = []
