@@ -51,7 +51,8 @@ export default {
         nickname: "",
         email: "",
         height: "",
-        password: ""
+        password: "",
+        password_confirmation: ""
       }
     }
   },

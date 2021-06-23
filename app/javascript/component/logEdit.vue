@@ -87,7 +87,7 @@ export default {
   methods: {
     createLogs() {
       axios
-      .post("api/v1/Logs/create", { log: this.logs })
+      .post("api/v1/Logs/update", { log: this.logs })
       .then( (response)=> { this.$router.push({ path: "/log" }); }, (error)=> { console.log(error); });
     }
   }

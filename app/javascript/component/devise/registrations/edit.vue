@@ -55,8 +55,7 @@
           <label for="user_password_変更パスワード">変更パスワード</label>
           <i>(変更しない場合、空白)</i>
         </div>
-        - if @minimum_password_length
-          <em> = @minimum_password_length 文字以上入力</em>
+        <em>{{ passwordCount }}</em>
         <input autocomplete="new-password" placeholder="変更パスワード入力" type="password" name="user[password]" id="user_password">
       </div>
       <div class='field'>
@@ -71,7 +70,7 @@
         <input autocomplete="current-password" placeholder="現行パスワード入力" required="required" type="password" name="user[current_password]" id="user_current_password">
       </div>
       <div class='actions'>
-        <input type="submit" name="commit" value="ユーザー情報更新" id="edit_submit" data-disable-with="ユーザー情報更新">
+        <input type="submit" name="commit" value="ユーザー情報更新" id="edit_submit" data-disable-with="ユーザー情報更新" @click=updateUsers>
       </div>
       <div class='footer'>
         <router-link data-confirm="本当に削除しますか?" class="red-btn" rel="nofollow" data-method="delete" to="/users">ユーザー情報削除</router-link>
@@ -80,3 +79,40 @@
     </form>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      user: {
+        nickname: "",
+        email: "",
+        height: "",
+        password: "",
+        password_confirmation: "",
+        current_password: "",
+        target_cal: "",
+        ideal_protain_rate: "",
+        ideal_fat_rate: "",
+        ideal_carbohydrate_rate: "",
+        clock_work_event_attributes: { preriod_id: "", send_time: "" }
+      }
+    }
+  },
+  methods: {
+    updateUsers() {
+      axios
+      .post("api/v1/users/registrations/update", { user: this.user })
+      .then( (response)=> { this.$router.push({ path: "/management" }); }, (error)=> { console.log(error); });
+    }
+  },
+  computed: {
+    passwordCount() {
+      count = this.password.length
+      return this.password.length <= 6 ? (6 - count) + "文字以上入力" : "文字数OK" 
+    }
+  }
+}
+</script>

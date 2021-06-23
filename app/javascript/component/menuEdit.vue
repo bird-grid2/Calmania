@@ -67,7 +67,7 @@ export default {
   methods: {
     createMenus() {
       axios
-      .post("api/v1/Menus/create", { menu: this.menus })
+      .post("api/v1/Menus/update", { menu: this.menus })
       .then( (response)=> { this.$router.push({ path: "/menu" }); }, (error)=> { console.log(error); });
     }
   }

@@ -2,7 +2,7 @@
   <div class='wrapper'>
     <div class='side-management'>
       <div class='container' id='target'>  
-        <a class='inner' id='target_2' href='users/sign_in'>#</a> 
+        <router-link class='inner' id='target_2' to='api/v1/users/sign_in'>#</router-link> 
       </div>
     </div>
     <div class='top_wrapper'>
