@@ -60,7 +60,7 @@
                 {{log.total_cal}}
               </td>
               <td class='table-item'>
-                {{log.description}}
+                {{ log.description }}
               </td>
             </tr>
           </tbody>

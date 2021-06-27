@@ -15,30 +15,20 @@
     <div class='graph_wrapper'>
       <div class='graph_upper'>
         <div class='left_graph'>
-          <image src="/assets/test_#{@user.id}_1.png">
+          {{ `<img src="/assets/test_${gon.userId}_1.png">` }}
         </div>
         <div class="right_graph">
-          <image src="/assets/test_#{@user.id}_2.png">
+          {{ `<img src="/assets/test_${gon.userId}_2.png">` }}
         </div>
       </div>
       <div class='graph_bottom'>
         <div class='left_graph'>
-          <image src="/assets/test_#{@user.id}_3.png">
+          {{ `<img src="/assets/test_${gon.userId}_3.png">` }}
         </div>
         <div class='right_graph'>
-          <image src="/assets/test_#{@user.id}_4.png">
+          {{ `<img src="/assets/test_${gon.userId}_4.png">` }}
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import axios from 'axios';
-  
-export default {
-  created() {
-    axios.get('api/v1/graphs/index')
-  }
-}
-</script>

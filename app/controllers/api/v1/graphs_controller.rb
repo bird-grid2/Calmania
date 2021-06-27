@@ -5,7 +5,7 @@ class Api::V1::GraphsController < ApplicationController
   before_action :set_graph, only: :index
 
   def index
-    render json: { status: 'SUCCESS', data: @user }
+    gon.userId = @user.id
   end
 
   private

@@ -38,7 +38,13 @@ Rails.application.routes.draw do
       end
       get '/management', to: 'ap1/v1/shows#index'
       get '/menu', to: 'ap1/v1/shows#index'
+      get '/menu/:menuId/edit', to: 'api/v1/shows#index'
       get '/log', to: 'ap1/v1/shows#index'
+      get '/log/:logId/edit', to: 'api/v1/shows#index'
+      get '/signIn', to: 'api/v1/shows#index'
+      get '/signUp', to: 'api/v1/shows#index'
+      get '/user/:userId/edit', to: 'api/v1/shows#index'
+      get '/graph', to: 'api/v1/shows#index'
     end
   end
 end
