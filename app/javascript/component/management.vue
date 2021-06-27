@@ -33,6 +33,7 @@
           </div>
           <div class='top-managements__left-contents--value'>
             <h3>"#{@body_mass_index.present? ? @body_mass_index : '---'}"</h3>
+          </div>
           <div class='border-dashed'></div>
           <div class='top-managements__left-contents--title'>
             <h1>適正体重</h1>
@@ -105,24 +106,23 @@
                 <th class='table-title'>総カロリー [kCal]</th>
                 <th class='table-title'>コメント</th>
               </tr>
-                <tr v-for="log in logs" :key="log.id">
-                  <td class='table-item'>
-                    {{ log.date }}
-                  </td>
-                  <td class='table-item'>
-                    {{ log.weight }}
-                  </td>
-                  <td class='table-item'>
-                    {{ log.bfp }}
-                  </td>
-                  <td class='table-item'>
-                    {{ log.total_cal }}
-                  </td>
-                  <td class='table-item'>
-                    {{ log.description }}
-                  </td>
-                </tr>
-              </template>
+              <tr v-for="log in logs" :key="log.id">
+                <td class='table-item'>
+                  {{ log.date }}
+                </td>
+                <td class='table-item'>
+                  {{ log.weight }}
+                </td>
+                <td class='table-item'>
+                  {{ log.bfp }}
+                </td>
+                <td class='table-item'>
+                  {{ log.total_cal }}
+                </td>
+                <td class='table-item'>
+                  {{ log.description }}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

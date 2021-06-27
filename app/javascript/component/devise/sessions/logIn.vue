@@ -30,8 +30,8 @@
           <input type="submit" name="commit" value="ログイン" id="login" data-disable-with="ログイン">
         </div>
         <div class='bottom_field'>
-           <router-link class="bottom_field_label" to="/users/sign_up">ID 新規作成</router-link>
-           <button class="bottom_field_label" id="easy_login">かんたんログイン</button>
+          <router-link class="bottom_field_label" to="/users/sign_up">ID 新規作成</router-link>
+          <button class="bottom_field_label" id="easy_login">かんたんログイン</button>
         </div>
       </div>
     </form>

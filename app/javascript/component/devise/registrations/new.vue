@@ -20,11 +20,11 @@
         </div>
       </div>
       <div class='border-line'></div>
-      <div class='right_box '>
+      <div class='right_box'>
         <div class='field'>
           <div class='field-box'>
-              <label class="password" required="required" for="user_password_パスワード">パスワード</label>
-              <em>{{ passwordCount }}</em>
+            <label class="password" required="required" for="user_password_パスワード">パスワード</label>
+            <em>{{ passwordCount }}</em>
           </div>
           <input placeholder="パスワード入力" type="password" name="user[password]" id="user_password" v-model="password">
         </div>

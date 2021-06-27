@@ -25,8 +25,10 @@
             <div class='menu_columns__col'>
               <div class='menu_columns__col__label'>
                 <i class='fas fa-plus-circle icon' id='menu-plus'></i>
+              </div>
               <div class='input_name'>
                 <select name="log[menu_numbers][]" id="log_menu_numbers"></select>
+              </div>
               <div class='input_name_box_0#box'></div>
             </div>
           </div>
