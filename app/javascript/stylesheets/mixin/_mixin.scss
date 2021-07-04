@@ -1,0 +1,254 @@
+@mixin h2 {
+  h2 {
+    height: 100%;
+    display: block;
+    line-height: 6vh;
+    font-size: 2.5vw;
+    color: $white;
+  }
+}
+
+@mixin h3 {
+  h3 {
+    display: block;
+    color: $white;
+    font-size: 2.5vw;
+    line-height: 5vh;
+    margin-right: 1rem;
+  }
+}
+
+@mixin h4 {
+  h4 {
+    height: 100%;
+    display: block;
+    font-size: 2vw;
+    color: $white;
+    line-height: 5vh;
+  }
+}
+
+@mixin h6 {
+  h6 {
+    display: block;
+    font-size: 2.5vw;
+    color: $white;
+    line-height: 3vh;
+    margin-right: 1rem;
+  }
+}
+
+@mixin p {
+  display: block;
+  font-size: 1.5rem;
+  color: $white;
+  line-height: 3vh;
+}
+
+@mixin graph {
+  .left_graph{
+    height: 100%;
+    width: 50%;
+    margin-right: 1rem;
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .right_graph{
+    height: 100%;
+    width: 50%;
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+@mixin wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3% 0;
+}
+
+@mixin icons {
+  display: block;
+  color: white;
+}
+
+@mixin top-manegement {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  &--value {
+    @include h3;
+    @include p;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@mixin cal-box {
+  width: 25%;
+  background-color: $maincolor;
+  .input_form_warpper {
+    height: 70%;
+    display: flex;
+    position: relative;
+    h3 {
+      width: 70%;
+      font-size: 3rem;
+      color: #ffffff;
+      line-height: 5rem;
+      text-align: end;
+    }
+    p {
+      position: absolute;
+      color: #ffffff;
+      right: 0px;
+      bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@mixin bottom-info {
+  .bottom-info{
+    width: 97%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    background: $black4;
+    .search-date {
+      display: inline-block;
+      margin-right: 9rem;
+      display: flex;
+      align-items: center;
+      &-input {
+        display: inline-block;
+        height: 50%;
+      }
+    }
+    .search-box {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      p {
+        width: 30%;
+      }
+      .search-input {
+        display: inline-block;
+        height: 50%;
+        width: 100%;
+      }
+    }
+    .icon-box{
+      height: 60%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: relative;
+      a {
+        margin-left: 1rem;
+      }
+      .fas{
+        display: block;
+        font-size: 3rem;
+        color: deepskyblue;
+      }     
+    }
+  }
+}
+@mixin cal_area {
+  width: 25%;
+  background-color: $maincolor;
+  color: white;
+  h2 {
+    display: block;
+    font-size: 1.5vw;
+    height: 30%;
+    line-height: 30px;
+    text-align: center;
+  }
+  .label {
+    display: flex;
+    height: 70%;
+    h3 {
+      width: 50%;
+      display: block;
+      font-size: 3.5vw;
+      line-height: 7vh;
+    }
+    p {
+      display: block;
+      font-size: 1.5vw;
+      line-height: 8vh;
+    }
+  }
+}
+
+@mixin bottom_cal_area {
+  width: 25%;
+  height: 100%;
+  h2 {
+    color: black;
+    display: block;
+    height: 30%;
+    font-size: 1.5vw;
+    line-height: 3vh;
+    text-align: center;
+  }
+  .label{
+    display: flex;
+    height: 70%;
+    width: 100%;
+    text-align: center;
+    h3 {
+      color: black;
+      display: block;
+      width: 75%;
+      font-size: 2.5vw;
+      line-height: 6vh;
+    }
+    p {
+      display: block;
+      width: 25%;
+      font-size: 1vw;
+      line-height: 7vh;
+    }
+  }
+}
+
+@mixin pop {
+  display: none;
+  width: 12rem;
+  padding: 1.6rem;
+  border-radius: 0.5rem;
+  background: $maincolor;
+  color: #fff;
+  font-weight: bold;
+}
+
+@mixin after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 4rem;
+  top: -2rem;
+  margin-left: 1rem;
+  border: solid transparent;
+  transform: rotate(180deg);
+  border-color: rgba(51, 204, 153, 0);
+  border-top-color: $maincolor;
+  border-width: 1rem;
+  pointer-events: none;
+  content: " ";
+}

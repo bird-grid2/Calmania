@@ -4,21 +4,24 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
+  root to: "api/v1/shows#index"
   
-  namespace 'api' do
+  namespace 'api', { format: 'json' } do
     namespace 'v1' do
       devise_for :users, controllers: {
         registrations: "users/registrations",
         sessions: "users/sessions"
       }
-    
+
+      devise_scope :user do
+        post '/sign_in', to: 'users/sessions#create'
+        get '/sign_in', to: 'users/sessions#new'
+      end
+      
       resources :users do
         resources :clock_work_events, except: [:index, :show]
       end
-      root to: "shows#index"
-      post '/callback', to: 'webhook#callback'
-      post '/send', to: 'webhook#broadcast'
-      
+
       resources :managements, only: :index
       resources :shows, only: :index
       resources :graphs , only: :index
@@ -36,15 +39,17 @@ Rails.application.routes.draw do
           get :search
         end
       end
-      get '/management', to: 'ap1/v1/shows#index'
-      get '/menu', to: 'ap1/v1/shows#index'
-      get '/menu/:menuId/edit', to: 'api/v1/shows#index'
-      get '/log', to: 'ap1/v1/shows#index'
-      get '/log/:logId/edit', to: 'api/v1/shows#index'
-      get '/signIn', to: 'api/v1/shows#index'
-      get '/signUp', to: 'api/v1/shows#index'
-      get '/user/:userId/edit', to: 'api/v1/shows#index'
-      get '/graph', to: 'api/v1/shows#index'
+      get '/', to: 'shows#index'
+      get '/management', to: 'shows#index'
+      get '/menu', to: 'shows#index'
+      get '/menu/:menuId/edit', to: 'shows#index'
+      get '/log', to: 'shows#index'
+      get '/log/:logId/edit', to: 'shows#index'
+      get '/signIn', to: 'shows#index'
+      get '/signUp', to: 'shows#index'
+      get '/user/:userId/edit', to: 'shows#index'
+      get '/graph', to: 'shows#index'
+      get 'users/sign_in', to: 'api/v1/users/sign_in'
     end
   end
 end

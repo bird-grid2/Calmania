@@ -1,0 +1,59 @@
+.wrapper {
+  .menus_wrapper {
+    @include wrapper;
+    width: 95%;
+    .upper-info{
+      height: 90%;
+      width: 97%;
+      color: white;
+      overflow: auto;
+      display: block;
+      text-align: center;
+      .name {
+        height: 30%;
+        width: 60%;
+        font-size: 2rem;
+        margin: 5% 20% 0 20%;
+      }
+      table {
+        height: 100%;
+        width: 100%;
+        table-layout: fixed;
+        background: $green1;
+        tr {
+          display: flex;
+          width: 100%;
+          th {
+            width: 18%;
+            font-size: 1.8vw;
+            line-height: 5rem;
+            background: $green;
+            border: solid 1px $cwhite;
+          }
+          td {
+            height: 5rem;
+            width: 18%;
+            font-size: 2rem;
+            line-height: 5rem;
+            text-align: center;
+          }
+          .table-icon {
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            .fas {
+              display: block;
+              color: white;
+              font-size: 2rem;
+            }
+          }
+        }
+      }
+    }
+    @include bottom-info;
+    .bottom-info {
+      background: $green2;
+    }
+  }
+}

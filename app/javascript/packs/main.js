@@ -5,14 +5,18 @@
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
-require('@rails/activestorage').start()
-import Vue from 'vue'
-import App from '../app.vue'
-import router from '../router'
-import axios from 'axios'
-import { csrfToken } from '@rails/ujs'
+require("@rails/activestorage").start();
+require("turbolinks").start();
+require("@fortawesome/fontawesome-free");
+import Vue from 'vue';
+import App from '../app.vue';
+import router from '../router';
+import axios from 'axios';
+import { csrfToken } from '@rails/ujs';
+import '@fortawesome/fontawesome-free/js/all';
+import './application.scss';
 
-axios.defaults.baseURL = "https://calmania.work";
+axios.defaults.baseURL = process.env.API_BASE_URL;
 axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 
 document.addEventListener('DOMContentLoaded', () => {

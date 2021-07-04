@@ -1,9 +1,8 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
   require 'pycall'
   require 'pycall/import'
   require 'matplotlib/pyplot'
   require 'numpy'
-  protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_cache_buster
 

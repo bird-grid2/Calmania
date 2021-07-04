@@ -1,0 +1,19 @@
+.wrapper{
+  .graph_wrapper {
+    @include wrapper;
+    margin-left: 1%;
+    .graph_upper{
+      height: 45%;
+      width: 100%;
+      display: flex;
+      @include graph;
+    }
+    .graph_bottom{
+      height: 45%;
+      width: 100%;
+      display: flex;
+      margin-top: 3vh;
+      @include graph;
+    }
+  }
+}
