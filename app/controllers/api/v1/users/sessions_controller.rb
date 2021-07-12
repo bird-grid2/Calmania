@@ -7,10 +7,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def create
     user = User.find_by(email: configure_sign_in_params[:email])
 
-    if user&.authenticate(configure_sign_in_params[:nickname]) && user&.authenticate(configure_sign_in_params[:password])
-      session[:user_id] = user.id
-      render 'api/v1/managements/index'
-    end
+    return unless user&.authenticate(configure_sign_in_params[:nickname]) && user&.authenticate(configure_sign_in_params[:password])
+    session[:user_id] = user.id
+    render 'api/v1/managements/index'
   end
 
   protected
