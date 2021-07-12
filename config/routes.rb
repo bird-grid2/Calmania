@@ -4,20 +4,16 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
+  
+  devise_for :users, controllers: {
+    registrations: "api/v1/users/registrations",
+    sessions: "api/v1/users/sessions"
+  }
+
   root to: "api/v1/shows#index"
   
-  namespace 'api', { format: 'json' } do
+  namespace 'api' do
     namespace 'v1' do
-      devise_for :users, controllers: {
-        registrations: "users/registrations",
-        sessions: "users/sessions"
-      }
-
-      devise_scope :user do
-        post '/sign_in', to: 'users/sessions#create'
-        get '/sign_in', to: 'users/sessions#new'
-      end
-      
       resources :users do
         resources :clock_work_events, except: [:index, :show]
       end
@@ -49,7 +45,6 @@ Rails.application.routes.draw do
       get '/signUp', to: 'shows#index'
       get '/user/:userId/edit', to: 'shows#index'
       get '/graph', to: 'shows#index'
-      get 'users/sign_in', to: 'api/v1/users/sign_in'
     end
   end
 end

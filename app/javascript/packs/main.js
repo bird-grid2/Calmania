@@ -6,27 +6,33 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 require("@rails/activestorage").start();
-require("turbolinks").start();
-require("@fortawesome/fontawesome-free");
 import Vue from 'vue';
 import App from '../app.vue';
 import router from '../router';
 import axios from 'axios';
 import { csrfToken } from '@rails/ujs';
-import '@fortawesome/fontawesome-free/js/all';
 import './application.scss';
+import "@fortawesome/fontawesome-free/js/all";
 
-axios.defaults.baseURL = process.env.API_BASE_URL;
-axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
+const instance = axios.create({
+  baseURL: process.env.API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+  responseType: 'json'
+})
+
+instance.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 
 document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById("app");
   const app = new Vue({
+    el: el,
     router: router,
-    el: '#app',
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)
-
   console.log(app)
 })
 

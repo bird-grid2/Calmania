@@ -20,5 +20,6 @@ module Calmania
     config.autoload_paths += ['public/assets']
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Sprockets::Rails::QuietAssets
+    
   end
 end
