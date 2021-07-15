@@ -4,10 +4,10 @@ import Index from "./component/index.vue";
 import Graph from "./component/graph.vue";
 import Management from "./component/management.vue";
 import Menu from "./component/menu.vue";
-import menuEdit from "./component/menuEdit.vue";
+import menuEdit from "./component/menu_edit.vue";
 import Log from "./component/log.vue";
-import logEdit from "./component/logEdit.vue";
-import signIn from "./component/devise/sessions/logIn.vue";
+import logEdit from "./component/log_edit.vue";
+import signIn from "./component/devise/sessions/log_in.vue";
 import signUp from "./component/devise/registrations/new.vue";
 import userEdit from "./component/devise/registrations/edit.vue";
 
