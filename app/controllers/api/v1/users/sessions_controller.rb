@@ -8,8 +8,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     user = User.find_by(email: configure_sign_in_params[:email])
 
     return unless user&.authenticate(configure_sign_in_params[:nickname]) && user&.authenticate(configure_sign_in_params[:password])
+
     session[:user_id] = user.id
-    render 'api/v1/managements/index'
+    render 'api/v1/devise/sessions/index'
   end
 
   protected
@@ -29,24 +30,24 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 end
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+# GET /resource/sign_in
+# def new
+#   super
+# end
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+# POST /resource/sign_in
+# def create
+#   super
+# end
 
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+# DELETE /resource/sign_out
+# def destroy
+#   super
+# end
 
-  # protected
+# protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+# If you have extra params to permit, append them to the sanitizer.
+# def configure_sign_in_params
+#   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+# end
