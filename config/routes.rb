@@ -4,16 +4,15 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
   post '/callback', to: 'webhook#callback'
   post '/send', to: 'webhook#broadcast'
-  
-  devise_for :users, controllers: {
-    registrations: "api/v1/users/registrations",
-    sessions: "api/v1/users/sessions"
-  }
 
   root to: "api/v1/shows#index"
   
   namespace 'api' do
     namespace 'v1' do
+      devise_for :users, controllers: {
+        registrations: "users/registrations",
+        sessions: "users/sessions"
+      }
       resources :users do
         resources :clock_work_events, except: [:index, :show]
       end

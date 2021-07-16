@@ -5,12 +5,13 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
 
   def create
-    user = User.find_by(email: configure_sign_in_params[:email])
+    user = User&.authenticate(sign_in_params[:email], sign_in_params[:nickname], sign_in_params[:password])
 
-    return unless user&.authenticate(configure_sign_in_params[:nickname]) && user&.authenticate(configure_sign_in_params[:password])
+    return unless user != nil
+    binding.pry
 
     session[:user_id] = user.id
-    render 'api/v1/devise/sessions/index'
+    render 'api/v1/mangements/index'
   end
 
   protected
