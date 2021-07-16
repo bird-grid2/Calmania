@@ -100,4 +100,3 @@ gem 'active_hash'
 gem 'clockwork'
 gem 'daemons'
 gem 'select2-rails'
-
