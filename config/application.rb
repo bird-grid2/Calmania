@@ -22,6 +22,5 @@ module Calmania
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Sprockets::Rails::QuietAssets
-    
   end
 end
