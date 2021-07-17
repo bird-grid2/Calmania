@@ -7,7 +7,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def create
     user = User&.authenticate(params[:user][:email], params[:user][:nickname], params[:user][:password])
 
-    if user != nil
+    if user.present?
       session[:user_id] = user.id
       render 'api/v1/mangements/index'
     else
