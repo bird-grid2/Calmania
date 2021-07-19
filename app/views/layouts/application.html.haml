@@ -1,16 +1,14 @@
 !!!
 %html{lang: 'ja'}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ "http-equiv" => "Content-Type", content: "text/html; charset=UTF-8"}/
     %meta{name: "viewport", content: "width=device-width,initial-scale=1.0,shrink-to-fit=no"}
+    %meta{ "http-equiv" => "Content-Security-Policy", content: "script-src self http://localhost:3000" }
     %title Calmania
     = include_gon
-    = csrf_meta_tags
-    = csp_meta_tag
-    = javascript_pack_tag 'main', 'data-turbolinks-track': 'reload'
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
    
   %body
-    = render 'layouts/notifications'
-    = yield
+    / = render 'layouts/notifications'
+    = javascript_pack_tag 'main', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'

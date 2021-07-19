@@ -4,19 +4,19 @@
       <h2>ログイン画面</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form class="new_user" id="new_user" accept-charset="UTF-8">
+    <form class="new_user" id="new_user" action="users/sessions" accept-charset="UTF-8">
       <div class='left_box'>
         <div class='field'>
           <label class="log-in" for="user_nickname_ニックネーム">ニックネーム</label>
-          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="nickname">
+          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="user.nickname">
         </div>
         <div class='field'>
           <label class="log-in" for="user_email_メールアドレス">メールアドレス</label>
-          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="email">
+          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="user.email">
         </div>
         <div class='field'>
           <label class="log-in" for="user_password_パスワード">パスワード</label>
-          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" v-model="password">
+          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" v-model="user.password">
         </div>
       </div>
       <div class='border-line'></div>
@@ -44,17 +44,21 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      user: {
         nickname: "",
         email: "",
         password: "",
+        jti: "",
+        height: "",
       }
+    }
   },
   methods: {
     logInUsers() {
       axios
-      .post("/users/sign_in", { user: this.user })
-      .then( ()=> { this.$router.push({ path: "/management" })})
-      .catch( ()=> { this.$router.push({ path: "/signIn" })});
+      .post("/users/sign_in", this.user )
+      .then( res => { this.$router.push({ path: "/management" })})
+      .catch( error => { this.$router.push({ path: "/signIn" })});
     },
     easyLogin() {
       document.getElementById('user_nickname').value = 'test-user';

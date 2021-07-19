@@ -16,11 +16,11 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
-    { path: "/", name: "index", component: Index }, { path: "/management", name: "managements", component: Management },
-    { path: "/menu", name: "menus", component: Menu }, { path: "/menu/:menuId/edit", name: "menuEdit", component: menuEdit },
-    { path: "/log", name: "logs", component: Log}, { path: "/log/:logId/edit", name: "logEdit", component: logEdit },
-    { path: "/signIn", name: "signIn", component: signIn }, { path: "/signUp", name: "singUp", component: signUp },
-    { path: "/user/:userId/edit", name: "userEdit", component: userEdit }, { path: "/graph", name: "graphs", component: Graph },
+    { path: "/", name: "index", component: Index }, { path: "/management", name: "managements", component: Management},
+    { path: "/menu", name: "menus", component: Menu}, { path: "/menu/:menuId/edit", name: "menuEdit", component: menuEdit},
+    { path: "/log", name: "logs", component: Log}, { path: "/log/:logId/edit", name: "logEdit", component: logEdit},
+    { path: "/signIn", name: "signIn", component: signIn}, { path: "/signUp", name: "singUp", component: signUp },
+    { path: "/user/:userId/edit", name: "userEdit", component: userEdit}, { path: "/graph", name: "graphs", component: Graph},
     { path: "*", redirect: "/"}
   ]
 });

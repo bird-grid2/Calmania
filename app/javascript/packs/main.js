@@ -10,9 +10,10 @@ import Vue from 'vue';
 import App from '../app.vue';
 import router from '../router';
 import axios from 'axios';
-import { csrfToken } from '@rails/ujs';
+import FlashMessage from '@smartweb/vue-flash-message';
 import './application.scss';
 import "@fortawesome/fontawesome-free/js/all";
+Vue.use(FlashMessage);
 
 const instance = axios.create({
   baseURL: process.env.API_BASE_URL,
@@ -22,8 +23,6 @@ const instance = axios.create({
   },
   responseType: 'json'
 })
-
-instance.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById("app");

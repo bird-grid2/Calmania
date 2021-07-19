@@ -4,15 +4,13 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :configure_sign_in_params, only: [:create]
 
+  def new
+    @user = User.new(sign_in_params)
+    render json: @user
+  end
+    
   def create
-    user = User&.authenticate(params[:user][:email], params[:user][:nickname], params[:user][:password])
-
-    if user.present?
-      session[:user_id] = user.id
-      render 'api/v1/mangements/index'
-    else
-      render 'shows/index'
-    end
+    render 'api/v1/mangements/index'
   end
 
   protected

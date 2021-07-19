@@ -3,8 +3,11 @@ class ApplicationController < ActionController::API
   require 'pycall/import'
   require 'matplotlib/pyplot'
   require 'numpy'
+  include ActionController::MimeResponds
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionView::Layouts
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_cache_buster
+  respond_to :json
 
   def after_sign_in_path_for(*)
     managements_path
@@ -45,12 +48,5 @@ class ApplicationController < ActionController::API
     add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit :sign_up, keys: [ :nickname, :email, :height, :password, :password_confirmation ]
     devise_parameter_sanitizer.permit :account_update, keys: add_list
-  end
-
-  private
-
-  def set_cache_buster
-    response.set_header("Cache-Control", "no-store, max-age=0")
-    response.set_header("Pragma", "no-store, max-age=0")
   end
 end

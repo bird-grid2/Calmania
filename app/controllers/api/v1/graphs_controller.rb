@@ -1,5 +1,6 @@
 class Api::V1::GraphsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_cache_buster, only: :index
   before_action :set_user, only: :index
   before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
@@ -91,5 +92,10 @@ class Api::V1::GraphsController < ApplicationController
     os.remove(os.path.join(dirpath, "test_#{@user.id}_2.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_3.png"))
     os.remove(os.path.join(dirpath, "test_#{@user.id}_4.png"))
+  end
+
+  def set_cache_buster
+    response.set_header("Cache-Control", "no-store, max-age=0")
+    response.set_header("Pragma", "no-store, max-age=0")
   end
 end

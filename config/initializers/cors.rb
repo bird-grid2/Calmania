@@ -6,6 +6,10 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       origins "https://calmania.work", "http://locakhost:8080"
     end
 
-    resource '*', headers: :any, methods: [:get, :post, :patch, :put, :delete, :options, :head]
+    resource '/api/*',
+      headers: %w(Authorization),
+      methods: :any,
+      expose: %w(Authorization),
+      max_age: 600
   end
 end

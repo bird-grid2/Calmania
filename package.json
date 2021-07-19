@@ -6,6 +6,7 @@
     "@rails/activestorage": "^6.0.3-7",
     "@rails/ujs": "^6.0.3-7",
     "@rails/webpacker": "5.4.0",
+    "@smartweb/vue-flash-message": "^0.6.10",
     "axios": "^0.21.1",
     "node-sass": "^6.0.1",
     "sass": "1.32.0",
