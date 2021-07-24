@@ -16,7 +16,7 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
-    { path: "/", name: "index", component: Index }, { path: "/management", name: "managements", component: Management},
+    { path: "/", name: "index", component: Index }, { path: "/:mangementId/management", name: "management", component: Management },
     { path: "/menu", name: "menus", component: Menu}, { path: "/menu/:menuId/edit", name: "menuEdit", component: menuEdit},
     { path: "/log", name: "logs", component: Log}, { path: "/log/:logId/edit", name: "logEdit", component: logEdit},
     { path: "/signIn", name: "signIn", component: signIn}, { path: "/signUp", name: "singUp", component: signUp },
