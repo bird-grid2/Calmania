@@ -10,7 +10,11 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
     
   def create
-    render 'api/v1/mangements/index'
+    @user = User&.authenticate(params[:user][:email], params[:user][:nickname], params[:user][:password])
+
+    if @user.present?
+      render json: @user
+    end
   end
 
   protected
