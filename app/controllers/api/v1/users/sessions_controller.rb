@@ -34,7 +34,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   private
 
   def payload(user)
-    return nil unless user && user.id
+    return nil unless user && user&.id
 
     {
       auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
