@@ -58,8 +58,7 @@ export default {
         password: this.password 
       })
       .then(res => {
-        console.log(res)
-        this.$router.push({ name: "management", params: { managementId: res.data.id}})
+        this.$router.push({ name: "management", params: { managementId: res.data.user.id}})
       })
       .catch(error => { 
         this.$router.push({ name: "signIn" })
