@@ -10,6 +10,7 @@ class Api::V1::ManagementsController < ApplicationController
     p = []
     f = []
     c = []
+    
 
     # calory calculate and view
     @cal.each do |cal|
@@ -23,17 +24,21 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
-    @today_cal = total.sum.to_s
-    @today_weight = weight.max.to_s
-    @today_bfp = bfp.max.to_s
-    @today_protain = p.sum.to_s
-    @today_fat = f.sum.to_s
-    @today_carb = c.sum.to_s
-
     next unless @user.height.present? && weight.present?
 
     @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
     @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
+
+    render json: {
+      totalCal: total.sum.to_s,
+      weight: weight.max.to_s,
+      bfp: bfp.max.to_s,
+      protain: p.sum.to_s,
+      fat: f.sum.to_s,
+      carboHydrate: c.sum.to_s,
+      bmi: @body_mass_index,
+      idealWeight: @weight 
+    }
   end
 
   private

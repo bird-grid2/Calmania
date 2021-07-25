@@ -31,7 +31,7 @@ class Api::V1::LogsController < ApplicationController
 
   def index
     @logs = Log.all.order(date: 'DESC')
-    render json: { status: 'SUCCESS', data: @logs }
+    render json: @logs
   end
 
   def search

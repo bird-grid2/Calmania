@@ -141,8 +141,11 @@ export default {
   },
   created() {
     axios
-    .get('/api/v1/managements/index.json')
-    .then(responce => { this.logs = responce.data })
+    .get('/api/v1/managements')
+    .then(res => { this.logs = res.data 
+      console.log(res)
+    })
+    .catch( error => { console.log(error)})
   }
 }
 </script>
