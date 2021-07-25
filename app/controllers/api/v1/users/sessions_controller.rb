@@ -4,14 +4,15 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :configure_sign_in_params, only: [:create]
 
-  # GET /resource/sign_in
-  def new
-    super
-  end
-
   # POST /resource/sign_in
   def create
-    super
+    resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
+  
+    if resource.valid_password?(params[:password])
+      render json: payload(resource)
+    else
+      render 'shows/index'
+    end
   end
 
   protected
@@ -28,6 +29,24 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   def after_update_path_for(*)
     api_v1_managements_path
+  end
+
+  def after_resending_confirmation_instructions_path_for(resource_name)
+    super(resource_name)
+  end
+
+  def after_confirmation_path_for(resource_name, resource)
+    super(resource_name, resource)
+  end
+
+  private
+  
+  def payload(user)
+    return nil unless user and user.id
+    {
+      auth_token: JsonWebToken.encode({user_id: user.id, exp: (Time.now + 2.week).to_i}),
+      user: {id: user.id}
+    }
   end
 end
 

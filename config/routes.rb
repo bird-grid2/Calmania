@@ -7,13 +7,13 @@ Rails.application.routes.draw do
 
   root to: "api/v1/shows#index"
 
-  devise_for :users, defaults: { format: :json }, controllers: {
-    registrations: "api/v1/users/registrations",
-    sessions: "api/v1/users/sessions"
-  }
-  
   namespace 'api' do
     namespace 'v1' do
+      devise_for :users, defaults: { format: :json }, controllers: {
+        registrations: "api/v1/users/registrations",
+        sessions: "api/v1/users/sessions"
+      }
+
       resources :users do
         resources :clock_work_events, except: [:index, :show]
       end

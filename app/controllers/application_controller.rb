@@ -8,6 +8,7 @@ class ApplicationController < ActionController::API
   include ActionView::Layouts
   before_action :configure_permitted_parameters, if: :devise_controller?
   respond_to :json
+  attr_reader :current_user
 
   def after_sign_in_path_for(*)
     managements_path
@@ -48,5 +49,31 @@ class ApplicationController < ActionController::API
     add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit :sign_up, keys: [ :nickname, :email, :height, :password, :password_confirmation ]
     devise_parameter_sanitizer.permit :account_update, keys: add_list
+  end
+
+  def authenticate_request!
+    unless user_id_in_token?
+      render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+      return
+    end
+    @current_user = User.find(auth_token[:user_id])
+  rescue JWT::VerificationError, JWT::DecodeError
+    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+  end
+
+  private
+
+  def http_token
+    @http_token ||= if request.headers['Authorization'].present?
+                      request.headers['Authorization'].split(' ').last
+                    end
+  end
+
+  def auth_token
+    @auth_token ||= JsonWebToken.decode(http_token)
+  end
+
+  def user_id_in_token?
+    http_token && auth_token && auth_token[:user_id].to_i
   end
 end

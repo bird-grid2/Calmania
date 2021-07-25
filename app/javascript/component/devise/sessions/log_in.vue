@@ -4,19 +4,19 @@
       <h2>ログイン画面</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form @submit.prevent class="new_user" id="new_user" action="users/sign_in" accept-charset="UTF-8" method="post">
+    <form @submit.prevent class="new_user" id="new_user" action="api/v1/users/sign_in" accept-charset="UTF-8" method="post">
       <div class='left_box'>
         <div class='field'>
           <label class="log-in" for="user_nickname_ニックネーム">ニックネーム</label>
-          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="session.nickname">
+          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="nickname">
         </div>
         <div class='field'>
           <label class="log-in" for="user_email_メールアドレス">メールアドレス</label>
-          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="session.email">
+          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="email">
         </div>
         <div class='field'>
           <label class="log-in" for="user_password_パスワード">パスワード</label>
-          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" v-model="session.password">
+          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" v-model="password">
         </div>
       </div>
       <div class='border-line'></div>
@@ -44,20 +44,22 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      session: {
-        nickname: "",
-        email: "",
-        password: "",
-      }
+      nickname: "",
+      email: "",
+      password: ""
     }
   },
   methods: {
     logInUsers() {
       axios
-      .post('users/sign_in', this.session)
+      .post('/api/v1/users/sign_in', { 
+        nickname: this.nickname,
+        email: this.email,
+        password: this.password 
+      })
       .then(res => {
-        e = res.data
-        this.$router.push({ name: "management", params: { managementId: e.id}})
+        console.log(res)
+        this.$router.push({ name: "management", params: { managementId: res.data.id}})
       })
       .catch(error => { 
         this.$router.push({ name: "signIn" })
@@ -65,9 +67,9 @@ export default {
       });
     },
     easyLogin() {
-      document.getElementById('user_nickname').value = 'test-user';
-      document.getElementById('user_email').value = 'test-user-calmania@gmail.com';
-      document.getElementById('user_password').value = '65oihue8';
+      this.nickname = 'test-user';
+      this.email = 'test-user-calmania@gmail.com';
+      this.password = '65oihue8';
       document.getElementById('login').click();
     }
   }
