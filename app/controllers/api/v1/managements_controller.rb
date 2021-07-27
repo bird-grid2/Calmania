@@ -1,5 +1,4 @@
 class Api::V1::ManagementsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_parameter, only: [:index]
 
   def index
@@ -24,7 +23,7 @@ class Api::V1::ManagementsController < ApplicationController
       end
     end
 
-    next unless @user.height.present? && weight.present?
+    return unless @user.height.present? && weight.present?
 
     @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
     @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
@@ -37,7 +36,7 @@ class Api::V1::ManagementsController < ApplicationController
       fat: f.sum.to_s,
       carboHydrate: c.sum.to_s,
       bmi: @body_mass_index,
-      idealWeight: @weight 
+      idealWeight: @weight,
     }
   end
 

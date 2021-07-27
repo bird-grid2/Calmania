@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   root to: "api/v1/shows#index"
 
-  namespace 'api' do
+  namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
-      devise_for :users, defaults: { format: :json }, controllers: {
+      devise_for :users, controllers: {
         registrations: "api/v1/users/registrations",
         sessions: "api/v1/users/sessions"
       }

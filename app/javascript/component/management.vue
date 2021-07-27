@@ -142,7 +142,7 @@ export default {
   created() {
     axios
     .get('/api/v1/managements')
-    .then(res => { this.logs = res.data 
+    .then(res => { 
       console.log(res)
     })
     .catch( error => { console.log(error)})
