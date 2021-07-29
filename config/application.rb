@@ -19,5 +19,6 @@ module Calmania
     # the framework and any gems in your application.
     config.autoload_paths += ['public/assets']
     config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
   end
 end

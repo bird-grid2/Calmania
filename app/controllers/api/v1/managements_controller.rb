@@ -1,4 +1,5 @@
 class Api::V1::ManagementsController < ApplicationController
+  before_action :authenticate_api_v1_user!
   before_action :set_parameter, only: [:index]
 
   def index
@@ -28,15 +29,17 @@ class Api::V1::ManagementsController < ApplicationController
     @body_mass_index = BigDecimal((weight.max / ((@user.height / 100)**2)).to_s).ceil(1)
     @weight = BigDecimal((((@user.height / 100)**2) * 22).to_s).ceil(2)
 
-    render json: {
-      totalCal: total.sum.to_s,
-      weight: weight.max.to_s,
-      bfp: bfp.max.to_s,
-      protain: p.sum.to_s,
-      fat: f.sum.to_s,
-      carboHydrate: c.sum.to_s,
-      bmi: @body_mass_index,
-      idealWeight: @weight,
+    render json: { success: true,
+      data: {
+        totalCal: total.sum.to_s,
+        weight: weight.max.to_s,
+        bfp: bfp.max.to_s,
+        protain: p.sum.to_s,
+        fat: f.sum.to_s,
+        carboHydrate: c.sum.to_s,
+        bmi: @body_mass_index,
+        idealWeight: @weight
+      }
     }
   end
 
@@ -49,6 +52,6 @@ class Api::V1::ManagementsController < ApplicationController
     @period = Log.where(created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
     @cal = Log.where(created_at: (date_time - 1.day)..date_time)
     @menus = Menu.all
-    @user = User.find(current_user.id)
+    @user = User.find(current_api_v1_user.id)
   end
 end

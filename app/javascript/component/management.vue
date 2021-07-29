@@ -32,14 +32,14 @@
             <h1>BMI</h1>
           </div>
           <div class='top-managements__left-contents--value'>
-            <h3>"#{@body_mass_index.present? ? @body_mass_index : '---'}"</h3>
+            <h3>{{ viewDetail[0] }}</h3>
           </div>
           <div class='border-dashed'></div>
           <div class='top-managements__left-contents--title'>
             <h1>適正体重</h1>
           </div>
           <div class='top-managements__left-contents--value'>
-            <h3>#{@weight.present? ? @weight : '---'}</h3><p>[kg]</p>
+            <h3>{{ viewDetail[1] }}</h3><p>[kg]</p>
           </div>
         </div>
         <div class='top-managements__right-contents'>
@@ -47,14 +47,14 @@
             <h1>体重</h1>
           </div>
           <div class='top-managements__right-contents--value'>
-            <h3>#{@today_weight.present? ? @today_weight : '---'}</h3><p>[kg]</p>
+            <h3>{{ viewDetail[2] }}</h3><p>[kg]</p>
           </div>
           <div class='border-dashed'></div>
           <div class='top-managements__right-contents-title'>
             <h1>体脂肪率</h1>
           </div>
           <div class='top-managements__right-contents--value'>
-            <h3>#{@today_bfp.present? ? @today_bfp : '---'}</h3><p>[%]</p>
+            <h3>{{ viewDetail[3] }}</h3><p>[%]</p>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
             <h2>摂取カロリー</h2>
           </div>
           <div class='total-value'>
-            <h3>#{@today_cal}</h3><p>[kCal]</p>
+            <h3>{{ viewDetail[4] }}</h3><p>[kCal]</p>
           </div>
         </div>
         <div class='border-line'></div>
@@ -73,7 +73,7 @@
             <h4>たんぱく質摂取量</h4>
           </div>
           <div class='value'>
-            <h6>#{@today_protain}</h6><p>[kCal]</p>
+            <h6>{{ viewDetail[5] }}</h6><p>[kCal]</p>
           </div>
         </div>
         <div class='border-line'></div>
@@ -82,7 +82,7 @@
             <h4>脂質摂取量</h4>
           </div>
           <div class='value'>
-            <h6>#{@today_fat}</h6><p>[kCal]</p>
+            <h6>{{ viewDetail[6] }}</h6><p>[kCal]</p>
           </div>
         </div>
         <div class='border-line'></div>
@@ -91,7 +91,7 @@
             <h4>炭水化物摂取量</h4>
           </div>
           <div class='value'>
-            <h6>#{@today_carb}</h6><p>[kCal]</p>
+            <h6>{{ viewDetail[7] }}</h6><p>[kCal]</p>
           </div>
         </div>
       </div>
@@ -125,6 +125,7 @@
               </tr>
             </tbody>
           </table>
+        <p>{{ viewDetail }}</p>
         </div>
       </div>
     </div>   
@@ -136,7 +137,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      logs: []
+      logs: {
+        bmi: "24.5",
+        idealWeight: "",
+        weight: "",
+        bfp: "",
+        totalCal: "",
+        protain: "",
+        fat: "",
+        carboHydrate: ""
+      }
     }
   },
   created() {
@@ -146,6 +156,23 @@ export default {
       console.log(res)
     })
     .catch( error => { console.log(error)})
+  },
+  computed: {
+    viewDetail: function() {
+      let target = [ 
+        this.logs.bmi,
+        this.logs.idealWeight,
+        this.logs.weight,
+        this.logs.bfp,
+        this.logs.totalCal,
+        this.logs.protain,
+        this.logs.fat,
+        this.logs.carboHydrate
+      ];
+
+      let res = target.map(elem => elem == "" ? '---' : elem);
+      return res
+    }
   }
 }
 </script>

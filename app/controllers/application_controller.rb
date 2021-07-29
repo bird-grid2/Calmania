@@ -71,6 +71,10 @@ class ApplicationController < ActionController::API
     @auth_token ||= JsonWebToken.decode(http_token)
   end
 
+  def set_current_user
+    session[:user_id] ||= User.find(params[:id])
+  end
+
   def user_id_in_token?
     http_token && auth_token && auth_token[:user_id].to_i
   end
