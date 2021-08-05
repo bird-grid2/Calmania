@@ -30,7 +30,7 @@ class Api::V1::ManagementsController < ApplicationController
       @weight = BigDecimal((((@current_user.height / 100)**2) * 22).to_s).ceil(2)
     end
 
-    managementData = {
+    management_data = {
       totalCal: total.sum.to_s,
       weight: weight.max.to_s,
       bfp: bfp.max.to_s,
@@ -41,7 +41,7 @@ class Api::V1::ManagementsController < ApplicationController
       idealWeight: @weight
     }
 
-    render json: { status: "success", data: managementData }
+    render json: { status: "success", data: management_data }
   end
 
   private
