@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
   end
 
   # 404 Not Found
-  def response_not_found(class_name = 'page')
+  def response_not_found(class_name)
     render status: 404, json: { status: 404, message: "#{class_name.capitalize} Not Found" }
   end
 
@@ -69,10 +69,6 @@ class ApplicationController < ActionController::API
 
   def auth_token
     @auth_token ||= JsonWebToken.decode(http_token)
-  end
-
-  def set_current_user
-    session[:user_id] ||= User.find(params[:id])
   end
 
   def user_id_in_token?

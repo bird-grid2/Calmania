@@ -1,10 +1,3 @@
-/* eslint no-console: 0 */
-// Run this example by adding <%= javascript_pack_tag 'hello_vue' %> (and
-// <%= stylesheet_pack_tag 'hello_vue' %> if you have styles in your component)
-// to the head of your layout file,
-// like app/views/layouts/application.html.erb.
-// All it does is render <div>Hello Vue</div> at the bottom of the page.
-
 require("@rails/activestorage").start();
 import Vue from 'vue';
 import App from '../app.vue';
@@ -13,6 +6,7 @@ import axios from 'axios';
 import FlashMessage from '@smartweb/vue-flash-message';
 import './application.scss';
 import "@fortawesome/fontawesome-free/js/all";
+import authHeader from '../store/authHeader'
 Vue.use(FlashMessage);
 
 const instance = axios.create({
@@ -35,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log(app)
 })
 
-
+/* eslint no-console: 0 */
+// Run this example by adding <%= javascript_pack_tag 'hello_vue' %> (and
+// <%= stylesheet_pack_tag 'hello_vue' %> if you have styles in your component)
+// to the head of your layout file,
+// like app/views/layouts/application.html.erb.
+// All it does is render <div>Hello Vue</div> at the bottom of the page.
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
 // need to always use single file components.

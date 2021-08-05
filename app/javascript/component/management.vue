@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import BackgroundService from '../store/background.service';
 export default {
   data() {
     return {
@@ -149,9 +149,8 @@ export default {
       }
     }
   },
-  created() {
-    axios
-    .get('/api/v1/managements')
+  mounted() {
+    BackgroundService.getLogsBoard()
     .then(res => { 
       console.log(res)
     })

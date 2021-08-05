@@ -58,6 +58,9 @@ export default {
         password: this.password 
       })
       .then(res => {
+        if(res.data.auth_token){
+          localStorage.setItem('user', JSON.stringify(res.data))
+        }
         this.$router.push({ name: "management", params: { managementId: res.data.user.id}})
       })
       .catch(error => { 

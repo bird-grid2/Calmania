@@ -38,7 +38,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
     {
       auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
-      user: { id: user.id }
+      user: { id: user.id, email: user.email, nickname: user.nickname }
     }
   end
 end
