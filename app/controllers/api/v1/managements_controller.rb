@@ -1,6 +1,5 @@
 class Api::V1::ManagementsController < ApplicationController
-  before_action :authenticate_api_v1_user!
-  before_action :authenticate_request!, only: [:index]
+  before_action :authenticate_request!
   before_action :set_parameter, only: [:index]
 
   def index
@@ -28,6 +27,9 @@ class Api::V1::ManagementsController < ApplicationController
     if @current_user.height.present? && weight.present?
       @body_mass_index = BigDecimal((weight.max / ((@current_user.height / 100)**2)).to_s).ceil(1)
       @weight = BigDecimal((((@current_user.height / 100)**2) * 22).to_s).ceil(2)
+    else
+      @body_mass_index = ""
+      @weight = ""
     end
 
     management_data = {
@@ -38,10 +40,10 @@ class Api::V1::ManagementsController < ApplicationController
       fat: f.sum.to_s,
       carboHydrate: c.sum.to_s,
       bmi: @body_mass_index,
-      idealWeight: @weight
+      idealWeight: @weight,
     }
 
-    render json: { status: "success", data: management_data }
+    render json: { managements: management_data, logs: @period }
   end
 
   private

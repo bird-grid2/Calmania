@@ -133,12 +133,12 @@
 </template>
 
 <script>
-import BackgroundService from '../store/background.service';
+import BackgroundService from '../service/background.service';
 export default {
   data() {
     return {
-      logs: {
-        bmi: "24.5",
+      managements: {
+        bmi: "",
         idealWeight: "",
         weight: "",
         bfp: "",
@@ -146,27 +146,29 @@ export default {
         protain: "",
         fat: "",
         carboHydrate: ""
-      }
+      },
+      logs: []
     }
   },
   mounted() {
     BackgroundService.getLogsBoard()
     .then(res => { 
-      console.log(res)
+      this.managements = res.data.managements
+      this.logs = res.data.logs
     })
     .catch( error => { console.log(error)})
   },
   computed: {
     viewDetail: function() {
       let target = [ 
-        this.logs.bmi,
-        this.logs.idealWeight,
-        this.logs.weight,
-        this.logs.bfp,
-        this.logs.totalCal,
-        this.logs.protain,
-        this.logs.fat,
-        this.logs.carboHydrate
+        this.managements.bmi,
+        this.managements.idealWeight,
+        this.managements.weight,
+        this.managements.bfp,
+        this.managements.totalCal,
+        this.managements.protain,
+        this.managements.fat,
+        this.managements.carboHydrate
       ];
 
       let res = target.map(elem => elem == "" ? '---' : elem);
