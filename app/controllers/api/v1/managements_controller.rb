@@ -10,7 +10,6 @@ class Api::V1::ManagementsController < ApplicationController
     p = []
     f = []
     c = []
-    
 
     # calory calculate and view
     @cal.each do |cal|
@@ -40,7 +39,7 @@ class Api::V1::ManagementsController < ApplicationController
       fat: f.sum.to_s,
       carboHydrate: c.sum.to_s,
       bmi: @body_mass_index,
-      idealWeight: @weight,
+      idealWeight: @weight
     }
 
     render json: { managements: management_data, logs: @period }

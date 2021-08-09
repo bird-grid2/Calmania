@@ -1,7 +1,6 @@
 class Api::V1::MenusController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_request!
   before_action :set_menu, only: [:edit, :update, :destroy]
-  before_action :move_to_index, only: [:index, :search]
 
   def new
     @menu = Menu.new
@@ -32,7 +31,7 @@ class Api::V1::MenusController < ApplicationController
 
   def index
     @menus = Menu.all.order(id: 'ASC')
-    render 'index', format: 'json', handlers: 'jbuilder'
+    render json: @menu
   end
 
   def search
@@ -94,9 +93,5 @@ class Api::V1::MenusController < ApplicationController
 
   def set_menu
     @menu = Menu.find(params[:id])
-  end
-
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
   end
 end

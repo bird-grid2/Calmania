@@ -11,23 +11,16 @@
       text-align: center;
       align-items: center;
       background: $maincolor;
-      .fas {
-        @include icons;
-        font-size: 2rem;
-        margin-bottom: 5%;
-      }
-      .far {
-        @include icons;
-        font-size: 2rem;
-        margin-bottom: 5%;
-      }
-      .pc {
-        display: none;
-      }
-      .sp {
-        display: block;
-        font-size: 1.2rem;
-        color: white;
+      a {
+        align-items: center;
+        .pc {
+          display: none;
+        }
+        .sp {
+          display: block;
+          font-size: 1.2rem;
+          color: white;
+        }
       }
     }
     .main_wrapper {

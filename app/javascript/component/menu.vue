@@ -1,23 +1,23 @@
 <template>
   <div class="wrapper">
     <div class='side-management'>
-      <router-link to='/management'>
-        <i class='fas fa-home'></i>
+      <router-link :to="{ name: 'management', params: { userId: getId() }}">
+        <font-awesome-icon :icon="['fas', 'home']" :style="iconStyle" />
         <h6 class='pc'>Home</h6>
         <h6 class='sp'>Home</h6>
       </router-link>
       <span></span>
-      <router-link to='new_menu_path'>
-        <i class='fas fa-plus-circle'></i>
+      <router-link to='/menus'>
+        <font-awesome-icon :icon="['fas', 'fa-plus-circle']" :style="iconStyle" />
         <h6 class='pc'>Create<br>menus</h6>
         <h6 class='sp'>Create menus</h6>
       </router-link>
       <span></span>
-      <router-link to='destroy_user_session_path'>
-        <i class='fas fa-sign-out-alt'></i>
+      <a @click="logout">
+        <font-awesome-icon :icon="['fas', 'fa-sign-out-alt']" :style="iconStyle" />
         <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
-      </router-link>
+      </a>
     </div>
     <div class='menus_wrapper'>
       <div class='upper-info'>
@@ -70,23 +70,42 @@
 </template>
 
 <script>
-import axios from 'axios'
+import BackgroundService from '../service/background.service'
 export default {
   data() {
     return {
-      menus: []
+      menus: [],
+      iconStyle: {
+        display: 'block',
+        width: '100%',
+        color: 'white',
+        fontSize: '3.5rem',
+        marginBottom: '5%'
+      }
     }
   },
-  created() {
-    axios
-    .get('api/v1/menus/index.json')
-    .then( responce => (this.menus = responce.data));
+  mounted() {
+    BackgroundService.getMenusBoard()
+    .then( res => {
+      this.menus = res.data
+      console.log(res)
+    })
+    .catch( error => { console.log(error) });
   },
   computed: {
     total: function() {
       let sum = 0;
       return this.menus.reduce((sum, menu) => sum + menu.masses, 0);
     }
+  },
+  methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
+    logout() {
+      sessionStorage.clear();
+      this.$router.push({name: 'index'})
+    }
   }
-};
+}
 </script>

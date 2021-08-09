@@ -1,7 +1,6 @@
 class Api::V1::LogsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_request!
   before_action :set_log, only: [:edit, :update, :destroy]
-  before_action :move_to_index, only: [:index, :search]
 
   def new
     @log = Log.new
@@ -30,8 +29,12 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def index
-    @logs = Log.all.order(date: 'DESC')
-    render json: @logs
+    @logs = Log.find_by(user_id: auth_token[:user_id])&.order(date: 'DESC')
+    if @logs.nil?
+      render json: {}
+    else
+      render json: @logs
+    end
   end
 
   def search
@@ -91,14 +94,10 @@ class Api::V1::LogsController < ApplicationController
   private
 
   def log_params
-    params.require(:log).permit(:date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_user.id)
+    params.require(:log).permit(:date, :weight, :bfp, :description, :total_cal, menu_numbers: []).merge(user_id: current_api_v1_user.id)
   end
 
   def set_log
     @log = Log.find(params[:id])
-  end
-
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
   end
 end

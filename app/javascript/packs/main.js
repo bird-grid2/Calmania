@@ -2,21 +2,17 @@ require("@rails/activestorage").start();
 import Vue from 'vue';
 import App from '../app.vue';
 import router from '../router';
-import axios from 'axios';
 import FlashMessage from '@smartweb/vue-flash-message';
 import './application.scss';
-import "@fortawesome/fontawesome-free/js/all";
-import authHeader from '../store/authHeader'
-Vue.use(FlashMessage);
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faChartBar } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-const instance = axios.create({
-  baseURL: process.env.API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest'
-  },
-  responseType: 'json'
-})
+library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle, faChartBar)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(FlashMessage);
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById("app");
@@ -26,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)
-  console.log(app)
 })
 
 /* eslint no-console: 0 */

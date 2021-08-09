@@ -2,35 +2,34 @@
   <div class='wrapper'>
     <div class='side-management'>
       <router-link to='/graph'>
-        <i class='far fa-chart-bar'></i>
+        <font-awesome-icon :icon="['far', 'chart-bar']" :style="iconStyle" />
         <h6 class='pc'>Show<br>graphs</h6>
         <h6 class='sp'>Show graphs</h6>
       </router-link>
-      <span></span>
-      <router-link to='/log'>
-        <i class='fas fa-file-alt'></i>
+      <span />
+      <router-link :to="{ name: 'logs', params: { userId: getId() }}">
+        <font-awesome-icon :icon="['fas', 'file-alt']" :style="iconStyle" />
         <h6 class='pc'>Create<br>logs</h6>
         <h6 class='sp'>Create logs</h6>
       </router-link>
-      <span></span>
-      <router-link to='/log/:id/edit'>
-        <i class='fas fa-edit'></i>
+      <span />
+      <router-link :to="{ name: 'userEdit', params: { userId: getId() }}">
+       <font-awesome-icon :icon="['fas', 'edit']" :style="iconStyle" />
         <h6 class='pc'>Edit<br>profile</h6>
         <h6 class='sp'>Edit profile</h6>
       </router-link>
-      <span></span>
-      <router-link to='/'>
-        <i class='fas fa-sign-out-alt'></i>
+      <span />
+      <a @click="logout">
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']" :style="iconStyle" />
         <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
-      </router-link>
+      </a>
     </div>
     <div class='main_wrapper'>
       <div class='top-managements'>
         <div class='top-managements__left-contents'>
           <div class='top-managements__left-contents--title'>
-            <h1>BMI</h1>
-          </div>
+            <h1>BMI</h1>         </div>
           <div class='top-managements__left-contents--value'>
             <h3>{{ viewDetail[0] }}</h3>
           </div>
@@ -125,7 +124,6 @@
               </tr>
             </tbody>
           </table>
-        <p>{{ viewDetail }}</p>
         </div>
       </div>
     </div>   
@@ -147,16 +145,32 @@ export default {
         fat: "",
         carboHydrate: ""
       },
-      logs: []
+      logs: [],
+      iconStyle: {
+        display: 'block',
+        width: '100%',
+        color: 'white',
+        fontSize: '3.5rem',
+        marginBottom: '5%'
+      }
     }
   },
   mounted() {
-    BackgroundService.getLogsBoard()
+    BackgroundService.getManagementsBoard()
     .then(res => { 
       this.managements = res.data.managements
       this.logs = res.data.logs
     })
     .catch( error => { console.log(error)})
+  },
+  methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
+    logout() {
+      sessionStorage.clear();
+      this.$router.push({name: 'index'})
+    }
   },
   computed: {
     viewDetail: function() {

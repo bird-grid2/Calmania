@@ -11,8 +11,11 @@ const instance = axios.create({
 })
 
 class  BackgroundSevice {
-  getLogsBoard() {
+  getManagementsBoard() {
     return instance.get('/api/v1/managements', { headers: authHeader() });
+  }
+  getLogsBoard() {
+    return instance.get('/api/v1/logs', { headers: authHeader() });
   }
   getMenusBoard() {
     return instance.get('/api/v1/menus', { headers: authHeader() });

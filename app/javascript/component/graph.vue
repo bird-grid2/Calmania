@@ -32,3 +32,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: {
+    iconStyle: {
+      display: 'block',
+      width: '100%',
+      color: 'white',
+      fontSize: '3.5rem',
+      marginBottom: '5%'
+    }
+  }
+}
+</script>

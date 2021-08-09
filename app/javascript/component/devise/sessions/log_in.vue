@@ -59,9 +59,9 @@ export default {
       })
       .then(res => {
         if(res.data.auth_token){
-          localStorage.setItem('user', JSON.stringify(res.data))
+          sessionStorage.setItem('user', JSON.stringify(res.data))
         }
-        this.$router.push({ name: "management", params: { managementId: res.data.user.id}})
+        this.$router.push({ name: "management", params: { userId: res.data.user.id}})
       })
       .catch(error => { 
         this.$router.push({ name: "signIn" })

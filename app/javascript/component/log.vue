@@ -1,29 +1,29 @@
 <template>
   <div class='wrapper'>
     <div class='side-management'>
-      <router-link to='/manegement'>
-        <i class='fas fa-home'></i>
+      <router-link :to="{ name: 'management', params: { userId: getId() }}">
+        <font-awesome-icon :icon="['fas', 'home']" :style="iconStyle" />
         <h6 class='pc'>Home</h6>
         <h6 class='sp'>Home</h6>
       </router-link>
       <span></span>
-      <router-link to='/menu'>
-        <i class='fas fa-th-list'></i>
+      <router-link to='/menus'>
+        <font-awesome-icon :icon="['fas', 'th-list']" :style="iconStyle" />
         <h6 class='pc'>Shows<br>menus</h6>
         <h6 class='sp'>Shows menus</h6>
       </router-link>
       <span></span>
-      <router-link to='/log'>
-        <i class='fas fa-plus-circle'></i>
+      <router-link :to="{ name: 'logs', params: {  userId: getId() }}">
+        <font-awesome-icon :icon="['fas', 'plus-circle']" :style="iconStyle" />
         <h6 class='pc'>Create<br>logs</h6>
         <h6 class='sp'>Create logs</h6>
       </router-link>
       <span></span>
-      <router-link to='/'>
-        <i class='fas fa-sign-out-alt'></i>
+      <a @click="logout">
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']" :style="iconStyle" />
         <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
-      </router-link>
+      </a>
     </div>
     <div class='logs_wrapper'>
       <div class='upper-info'>
@@ -79,18 +79,37 @@
 </template>
 
 <script>
-import axios from 'axios';
+import BackGround from '../service/background.service';
 
 export default {
   data() {
     return {
-      logs: []
+      logs: [],
+      iconStyle: {
+        display: 'block',
+        width: '100%',
+        color: 'white',
+        fontSize: '3.5rem',
+        marginBottom: '5%'
+      }
     }
   },
-  created() {
-    axios
-    .get('api/v1/logs/index.json')
-    .then( responce => (this.logs = responce.data));
+  mounted() {
+    BackGround.getLogsBoard()
+    .then( res => {
+      this.logs = res.data
+      console.log(res.data)  
+    })
+    .catch( error => { console.log(error) });
+  },
+  methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
+    logout() {
+      sessionStorage.clear();
+      this.$router.push({name: 'index'})
+    }
   }
 }
 </script>
