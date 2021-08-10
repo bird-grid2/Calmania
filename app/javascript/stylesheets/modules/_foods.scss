@@ -57,21 +57,23 @@
               height: 70%;
               display: flex;
               justify-content: center;
-              margin: 10px;
+              margin: 9px;
               height: 3vh;
               p {
                 line-height: 3vh;
                 padding: 0vh 1vh 0vh 0vh;
+                width: 30%;
+                font-size: 1.4rem;
               }
               .mass {
                 display: block;
-                width: 10em;
+                width: 8rem;
               }
             }
           }
           #fbox {
             display: flex;
-            width: 68%;
+            width: 70%;
             text-align: center;
             h2 {
               height: 30%;

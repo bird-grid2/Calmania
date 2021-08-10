@@ -8,10 +8,12 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def create
     resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
 
-    if resource.valid_password?(params[:password])
-      render json: payload(resource)
+    if resource.blank?
+      render json: "NG"
     else
-      render 'shows/index'
+      if resource.valid_password?(params[:password])
+        render json: payload(resource)
+      end
     end
   end
 

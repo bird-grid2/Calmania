@@ -13,7 +13,7 @@
         <h6 class='sp'>Shows menus</h6>
       </router-link>
       <span></span>
-      <router-link :to="{ name: 'logs', params: {  userId: getId() }}">
+      <router-link to="/log">
         <font-awesome-icon :icon="['fas', 'plus-circle']" :style="iconStyle" />
         <h6 class='pc'>Create<br>logs</h6>
         <h6 class='sp'>Create logs</h6>
@@ -98,7 +98,7 @@ export default {
     BackGround.getLogsBoard()
     .then( res => {
       this.logs = res.data
-      console.log(res.data)  
+      console.log(res.data)
     })
     .catch( error => { console.log(error) });
   },

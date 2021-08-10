@@ -9,11 +9,11 @@
       <span />
       <router-link :to="{ name: 'logs', params: { userId: getId() }}">
         <font-awesome-icon :icon="['fas', 'file-alt']" :style="iconStyle" />
-        <h6 class='pc'>Create<br>logs</h6>
-        <h6 class='sp'>Create logs</h6>
+        <h6 class='pc'>Show<br>logs</h6>
+        <h6 class='sp'>Show logs</h6>
       </router-link>
       <span />
-      <router-link :to="{ name: 'userEdit', params: { userId: getId() }}">
+      <router-link :to="{ name: 'editUser', params: { userId: getId() }}">
        <font-awesome-icon :icon="['fas', 'edit']" :style="iconStyle" />
         <h6 class='pc'>Edit<br>profile</h6>
         <h6 class='sp'>Edit profile</h6>

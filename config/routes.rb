@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       resources :shows, only: :index
       resources :graphs , only: :index
       resources :logs, except: :show do
-        resources :menus, only: :index
         collection do
           get :search
           get :dsearch
@@ -46,6 +45,7 @@ Rails.application.routes.draw do
       get '/signUp', to: 'shows#index'
       get '/user/:userId/edit', to: 'shows#index'
       get '/graph', to: 'shows#index'
+      get '/menus/new', to: 'menus#new'
     end
   end
 end

@@ -4,12 +4,14 @@ import Index from "./component/index.vue";
 import Graph from "./component/graph.vue";
 import Management from "./component/management.vue";
 import Menu from "./component/menu.vue";
-import menuEdit from "./component/menu_edit.vue";
+import editMenu from "./component/menu_edit.vue";
+import createMenu from "./component/menu_create.vue"
 import Log from "./component/log.vue";
-import logEdit from "./component/log_edit.vue";
+import editLog from "./component/log_edit.vue";
+import createLog from "./component/log_create.vue";
 import signIn from "./component/devise/sessions/log_in.vue";
 import signUp from "./component/devise/registrations/new.vue";
-import userEdit from "./component/devise/registrations/edit.vue";
+import editUser from "./component/devise/registrations/edit.vue";
 
 Vue.use(Router);
 
@@ -17,10 +19,10 @@ export default new Router({
   mode: "history",
   routes: [
     { path: "/", name: "index", component: Index }, { path: "/:userId/management", name: "management", component: Management },
-    { path: "/menus", name: "menus", component: Menu}, { path: "/menu/:menuId/edit", name: "menuEdit", component: menuEdit},
-    { path: "/:userId/log", name: "logs", component: Log}, { path: "/log/:logId/edit", name: "logEdit", component: logEdit},
-    { path: "/signIn", name: "signIn", component: signIn}, { path: "/signUp", name: "singUp", component: signUp },
-    { path: "/user/:userId/edit", name: "userEdit", component: userEdit}, { path: "/graph", name: "graphs", component: Graph},
-    { path: "*", redirect: "/"}
+    { path: "/menus", name: "menus", component: Menu }, { path: "/menu/:menuId/edit", name: "menuEdit", component: editMenu },
+    { path: "/menu", name: "createMenu", component: createMenu }, { path: "/:userId/log", name: "logs", component: Log },
+    { path: "/log/:logId/edit", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
+    { path: "/signIn", name: "signIn", component: signIn }, { path: "/signUp", name: "singUp", component: signUp },
+    { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", redirect: "/" }
   ]
 });

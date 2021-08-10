@@ -20,6 +20,9 @@ class  BackgroundSevice {
   getMenusBoard() {
     return instance.get('/api/v1/menus', { headers: authHeader() });
   }
+  getFoodsBoard() {
+    return instance.get('/api/v1/menus/new', { headers: authHeader() });
+  }
 }
 
 export default new BackgroundSevice();

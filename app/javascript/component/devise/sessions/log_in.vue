@@ -4,7 +4,7 @@
       <h2>ログイン画面</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form @submit.prevent class="new_user" id="new_user" action="api/v1/users/sign_in" accept-charset="UTF-8" method="post">
+    <form @submit.prevent  action="api/v1/users/sign_in" accept-charset="UTF-8" method="post">
       <div class='left_box'>
         <div class='field'>
           <label class="log-in" for="user_nickname_ニックネーム">ニックネーム</label>
@@ -21,11 +21,6 @@
       </div>
       <div class='border-line'></div>
       <div class='right_box'>
-        <div class='check_field'>
-          <input name="user[remember_me]" type="hidden" value="0">
-          <input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-          <label for="user_remember_me_ログイン情報を記憶する">ログイン情報を記憶する</label>
-        </div>
         <div class='actions'>
           <button id="login" @click="logInUsers">ログイン</button>
         </div>
@@ -61,12 +56,26 @@ export default {
         if(res.data.auth_token){
           sessionStorage.setItem('user', JSON.stringify(res.data))
         }
-        this.$router.push({ name: "management", params: { userId: res.data.user.id}})
+
+        if(res.data != "NG") {
+          this.$router.push({ name: "management", params: { userId: res.data.user.id}});
+          this.flashMessage.success({
+            message: "ログイン完了しました。",
+            time: 3000,
+            class: "notification__success"
+          });
+        }else{
+          this.nickname = ''
+          this.email = ''
+          this.password = ''
+          this.flashMessage.error({
+            message: "ログインに失敗しました。",
+            time: 3000,
+            class: "notification__alert"
+          });
+        }
       })
-      .catch(error => { 
-        this.$router.push({ name: "signIn" })
-        console.log(error)
-      });
+      .catch(error => { console.log(error) });
     },
     easyLogin() {
       this.nickname = 'test-user';

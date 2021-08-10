@@ -1,21 +1,13 @@
 <template>
   <div class='wrapper'>
     <div class='food_wrapper'>
-      <form @submit.prevent action='/api/v1/menu' accept-charset="UTF-8" method='patch'>
+      <form @submit.prevent action='/api/v1/menus' accept-charset="UTF-8" method='post'>
         <div class='upper_menu_content'>
           <p>MenuName :</p> 
           <input class="menu_name" type="text" name="menu[material]" id="menu_material">
         </div>
         <div class='input_form'>
-          <div class='input_form__column'>
-            <div class='input_form__column__label'>
-              <i class='fas fa-plus-circle icon' id='menu-plus'></i>
-            </div>
-            <div class='input_form__column__input_name_0#name'>
-              <select name="menu[names][]" id="menu_names"></select>
-            </div>
-          </div>
-          <div class='input_form__column__box_0#fbox'></div>
+          <menu-item></menu-item>
         </div>
         <div class='calculate_box'>
           <div class='calculate_box__title'>
@@ -41,8 +33,8 @@
           </div>
         </div>
         <div class='bottom_menu_content'>
-          <input @click="updateMenus" type="submit" name="commit" value="メニュー更新" class="btn" data-disable-with="メニュー更新">
-          <router-link class="btn" to="/menu">キャンセル</router-link>
+          <input @click="createMenus" type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
+          <router-link class="btn" to="/menus">キャンセル</router-link>
         </div>
       </form>
     </div>
@@ -51,40 +43,43 @@
 
 <script>
 import axios from 'axios';
+import MenuItem from './menu_item.vue'
 export default {
   data() {
     return {
-      material: "",
-      names: [],
-      masses: [],
-      total_protain: "",
-      total_fat: "",
-      total_curbohydrate: ""
-    };
+      menus: {
+        material: "",
+        names: [],
+        masses: [],
+        total_protain: "",
+        total_fat: "",
+        total_curbohydrate: ""
+      }
+    }
   },
+  components: { MenuItem },
   methods: {
-    updateMenus() {
+    createMenus() {
       axios
-      .patch("api/v1/menu/:logId", { menu: this.data })
+      .post("api/v1/menus", { menu: this.data })
       .then( res => {
-        if (res.data != 'not update') {
+        if (res.data != 'not create menu') {
           this.$router.push({ name: "menus" });
           this.flashMessage.success({
-            message: 'メニューを更新完了しました',
+            message: 'メニューを作成しました',
             time: 3000,
             class: 'notification__success'
           })
         }else{
           this.flashMessage.error({
-            message: 'メニューを更新失敗です',
+            message: 'メニューを作成失敗しました',
             time: 2000,
-            class: 'nitification__error'
+            class: 'notification__error'
           })
-        }      
+        }
       })
-      .catch( error => { console.log(error) });
+      .catch( error => { console.log(error); });
     }
-    
   }
 }
 </script>

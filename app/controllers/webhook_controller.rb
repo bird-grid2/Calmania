@@ -1,6 +1,6 @@
 class WebhookController < ApplicationController
   require 'line/bot'
-  protect_from_forgery except: [:callback, :broadcast] # CSRF protection
+  before_action :authenticate_request!, except: [:callback, :broadcast]
 
   def callback
     body = request.body.read

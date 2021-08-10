@@ -7,14 +7,14 @@
         <h6 class='sp'>Home</h6>
       </router-link>
       <span></span>
-      <router-link to='/menus'>
-        <font-awesome-icon :icon="['fas', 'fa-plus-circle']" :style="iconStyle" />
+      <router-link to='/menu'>
+        <font-awesome-icon :icon="['fas', 'plus-circle']" :style="iconStyle" />
         <h6 class='pc'>Create<br>menus</h6>
         <h6 class='sp'>Create menus</h6>
       </router-link>
       <span></span>
       <a @click="logout">
-        <font-awesome-icon :icon="['fas', 'fa-sign-out-alt']" :style="iconStyle" />
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']" :style="iconStyle" />
         <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
       </a>

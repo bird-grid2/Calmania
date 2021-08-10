@@ -1,16 +1,16 @@
 <template>
   <div class='wrapper'>
     <div class='side-management'>
-      <router-link to='/management'>
-        <i class='fas fa-home'></i>
+      <router-link :to="{ name: 'management', params: { userId: getId() }}">
+        <font-awesome-icon :icon="['fas', 'home']" :style="iconStyle" />
         <h6 class='pc'>Home</h6>
         <h6 class='sp'>Home</h6>
       </router-link>
-      <router-link to='/'>
-        <i class='fas fa-sign-out-alt'></i>
+      <a @click="logout">
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']" :style="iconStyle" />
         <h6 class='pc'>Sign<br>out</h6>
         <h6 class='sp'>Sign out</h6>
-      </router-link>
+      </a>
     </div>
     <div class='graph_wrapper'>
       <div class='graph_upper'>
@@ -42,6 +42,15 @@ export default {
       color: 'white',
       fontSize: '3.5rem',
       marginBottom: '5%'
+    }
+  },
+  methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
+    logout() {
+      sessionStorage.clear();
+      this.$router.push({name: 'index'})
     }
   }
 }

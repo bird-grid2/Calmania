@@ -1,13 +1,16 @@
 .notification {
-  .notice {
+  &__success {
     background-color: $light_blue;
     color: $white;
-    text-align: center;
   }
 
-  .alert {
+  &__notice {
+    background-color: $notice_yellow;
+    color: $white;
+  }
+
+  &__alert {
     background-color: $alert_orange;
     color: $white;
-    text-align: center;
   }
 }

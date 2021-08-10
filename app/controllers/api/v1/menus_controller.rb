@@ -3,34 +3,24 @@ class Api::V1::MenusController < ApplicationController
   before_action :set_menu, only: [:edit, :update, :destroy]
 
   def new
-    @menu = Menu.new
     @foods = Food.all
-
-    food = []
-
-    @foods.each_with_index do |elem, _|
-      food << elem
-    end
-    gon.food = food
+    render json: @foods
   end
 
   def create
     @menu = Menu.new(menu_params)
     if @menu.save
-      redirect_to api_vi_menus_path, notice: 'メニューを作成しました'
-      respond_to do |format|
-        format.html
-        format.json { render json: { status: 'SUCCESS', data: @menu } }
-      end
+      render json: "create menu"
     else
-      flash.now[:alert] = 'メニュー作成を失敗しました'
-      render json: { status: 'ERROR', data: @menu.errors }
-      redirect_back(fallback_location: ap1_v1_root_path)
+      render json: "not create menu"
     end
   end
 
   def index
     @menus = Menu.all.order(id: 'ASC')
+
+    return if @menus.blank?
+
     render json: @menu
   end
 

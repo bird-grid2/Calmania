@@ -1,16 +1,6 @@
 $(document).on('turbolinks:load', function(){
   if(document.URL.match(/menus/)){
-    $('body').on('change', '#menu_names', function(){
-      function massHTML(){
-        var html = `<div class="label">
-                      <p>重量 [g] :</p>
-                      <input class="mass" id="menu_masses" type="number" name="menu[masses][]">
-                    </div>`
-        return html;
-      };
-      $(this).next().remove();
-      $(this).parent().append(massHTML());
-    });
+    
 
 
 
