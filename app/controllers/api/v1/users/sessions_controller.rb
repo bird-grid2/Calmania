@@ -10,8 +10,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
     if resource.blank?
       render json: "NG"
-    else
-      render json: payload(resource) if resource.valid_password?(params[:password])
+    elsif resource.valid_password?(params[:password])
+      render json: payload(resource)
     end
   end
 
