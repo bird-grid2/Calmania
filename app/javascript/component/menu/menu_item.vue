@@ -1,15 +1,13 @@
 <template>
   <div class='input_form__column'>
     <div class='input_form__column__label'>
-      <font-awesome-icon :icon="['fas', 'plus-circle']" class='icon' id='menu-plus' :style="iconStyle" />
+      <font-awesome-icon :icon="['fas', 'plus-circle']" class='icon' id='menu-plus' :style="iconStyle" @click="plusMenu" />
     </div>
     <div class='input_form__column__input_name' id='name'>
-      <select name="menu[names][]" id="menu_names" @change="turnMass">
-        <option v-for="(food, index) in foods" :value="index">{{food}}</option>
-      </select>
+      <food @enable-mass="displayMass=$event" />
       <div class="label" v-if="displayMass">
         <p>重量 [g] :</p>
-        <input class="mass" id="menu_masses" type="number" name="menu[masses][]" @change="turnCalory(); calculateCal" v-model="mass">
+        <input class="mass" id="menu_masses" type="number" name="menu[masses][]" @change="turnCalory(); appendMasses(); calculateCal" v-model="mass">
       </div>
     </div>
     <div class='input_form__column__box' id='fbox' v-if="displayCalory">
@@ -42,11 +40,12 @@
 </template>
 
 <script>
-import backGroundService from '../service/background.service'
+
+import backGroundService from '../../service/background.service'
+import Food from './food.vue'
 export default {
-  data() {
+  data () {
     return {
-      foods: [],
       protain: 0.00,
       fat: 0.00,
       carbohydrate: 0.00,
@@ -54,7 +53,6 @@ export default {
       protainRate: [],
       fatRate: [],
       carboHydrateRate: [],
-      index: '',
       displayMass: false,
       displayCalory: false,
       iconStyle: {
@@ -66,15 +64,14 @@ export default {
       }
     }
   },
+  components: { Food },
   mounted() {
     backGroundService.getFoodsBoard()
     .then( res => {
-      this.foods.push("選択して下さい");
       res.data.forEach( elem => {
-        this.foods.push(elem.element) 
         this.protainRate.push(elem.protain_rate)
         this.fatRate.push(elem.fat_rate)
-        this.carboHydrateRate.push(elem.carbohydrate_rate)   
+        this.carboHydrateRate.push(elem.carbohydrate_rate) 
       });
     })
     .catch( error => { console.log(error) })
@@ -85,17 +82,24 @@ export default {
     },
     turnCalory() {
       this.displayCalory = true;
-    }
+    },
+    appendMasses() {
+      this.$emit('append-mass', this.mass)
+    },
+    plusMenu() {
+      this.$emit('plus-event')
+    },
+
   },
   computed: {
-    calculateCal: function(){
+    calculateCal: function() {
       let index = document.getElementById('menu_names').value - 1
 
       this.protain = Math.ceil(this.protainRate[index] * this.mass * 4) / 10
       this.fat = Math.ceil(this.fatRate[index] * this.mass * 9) / 10 
       this.carbohydrate = Math.ceil(this.carboHydrateRate[index] * this.mass * 4) / 10
     },
-    totalCal: function(){
+    totalCal: function() {
       let target = Math.ceil((this.protain + this.fat + this.carbohydrate) * 10) / 10;
       return target;
     }

@@ -1,13 +1,14 @@
 <template>
   <div class='wrapper'>
     <div class='food_wrapper'>
-      <form @submit.prevent action='/api/v1/menus' accept-charset="UTF-8" method='post'>
+      <form @submit.prevent action='/api/v1/menus' id="menu" accept-charset="UTF-8" method='post'>
         <div class='upper_menu_content'>
+          <p>{{ masses }}</p>
           <p>MenuName :</p> 
           <input class="menu_name" type="text" name="menu[material]" id="menu_material">
         </div>
-        <div class='input_form'>
-          <menu-item></menu-item>
+        <div class='input_form' id="item_form">
+          <menu-item @plus-event="appendItem" @append-mass="massList($event)" />
         </div>
         <div class='calculate_box'>
           <div class='calculate_box__title'>
@@ -42,19 +43,18 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import axios from 'axios';
-import MenuItem from './menu_item.vue'
+import MenuItem from './menu/menu_item.vue'
 export default {
   data() {
     return {
-      menus: {
-        material: "",
-        names: [],
-        masses: [],
-        total_protain: "",
-        total_fat: "",
-        total_curbohydrate: ""
-      }
+      material: "",
+      names: [],
+      masses: [],
+      total_protain: "",
+      total_fat: "",
+      total_curbohydrate: ""
     }
   },
   components: { MenuItem },
@@ -79,6 +79,31 @@ export default {
         }
       })
       .catch( error => { console.log(error); });
+    },
+    appendItem() {
+      let ComponentClass = Vue.extend(MenuItem);
+      let instance = new ComponentClass();
+      let target = document.getElementById('item_form')
+
+      instance.$on('plus-event', this.appendItem)
+      instance.$on('append-mass', this.massList)
+      instance.$mount();
+      target.append(instance.$el)
+    },
+    elementCount() {
+      let target = document.getElementById('item_form')
+      let res = target.childElementCount
+      return res
+    },
+    massList() {
+      let num = this.elementCount();
+      let val = document.getElementsByClassName('mass');
+      this.masses = [];
+      
+      for(let i = 0; i < num; i++) {
+        if (val[i] === undefined) { continue; }
+        this.masses.push(parseFloat(val[i].value));
+      }
     }
   }
 }
