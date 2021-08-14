@@ -87,12 +87,13 @@ export default {
 
       instance.$on('plus-event', this.appendItem)
       instance.$on('append-mass', this.massList)
+      instance.displayMenu = true
       instance.$mount();
       target.append(instance.$el)
     },
     elementCount() {
-      let target = document.getElementById('item_form')
-      let res = target.childElementCount
+      let target = document.getElementById('item_form');
+      let res = target.childElementCount;
       return res
     },
     massList() {

@@ -2,6 +2,7 @@
   <div class='input_form__column'>
     <div class='input_form__column__label'>
       <font-awesome-icon :icon="['fas', 'plus-circle']" class='icon' id='menu-plus' :style="iconStyle" @click="plusMenu" />
+      <font-awesome-icon :icon="['fas', 'minus-circle']" class="icon" id="menu-minus" :style="iconStyle" @click="deleteAction" v-if="displayMenu" />
     </div>
     <div class='input_form__column__input_name' id='name'>
       <food @enable-mass="displayMass=$event" />
@@ -55,6 +56,7 @@ export default {
       carboHydrateRate: [],
       displayMass: false,
       displayCalory: false,
+      displayMenu: false,
       iconStyle: {
         display: 'block',
         width: '100%',
@@ -89,7 +91,10 @@ export default {
     plusMenu() {
       this.$emit('plus-event')
     },
-
+    deleteAction() {
+      this.$destroy();
+      this.$el.parentNode.removeChild(this.$el);
+    }
   },
   computed: {
     calculateCal: function() {
