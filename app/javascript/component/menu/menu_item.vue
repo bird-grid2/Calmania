@@ -86,12 +86,13 @@ export default {
       this.displayCalory = true;
     },
     appendMasses() {
-      this.$emit('append-mass', this.mass)
+      this.$emit('reset-event')
     },
     plusMenu() {
       this.$emit('plus-event')
     },
     deleteAction() {
+      this.$emit('reset-event')
       this.$destroy();
       this.$el.parentNode.removeChild(this.$el);
     }
@@ -100,12 +101,13 @@ export default {
     calculateCal: function() {
       let index = document.getElementById('menu_names').value - 1
 
-      this.protain = Math.ceil(this.protainRate[index] * this.mass * 4) / 10
-      this.fat = Math.ceil(this.fatRate[index] * this.mass * 9) / 10 
-      this.carbohydrate = Math.ceil(this.carboHydrateRate[index] * this.mass * 4) / 10
+      this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
+      this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
+      this.carbohydrate = Math.round(this.carboHydrateRate[index] * this.mass * 4) / 10
+      return this.$emit('calculate-event', [this.protain, this.fat, this.carbohydrate])
     },
     totalCal: function() {
-      let target = Math.ceil((this.protain + this.fat + this.carbohydrate) * 10) / 10;
+      let target = Math.round((this.protain + this.fat + this.carbohydrate) * 10) / 10;
       return target;
     }
   }

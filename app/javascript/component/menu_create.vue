@@ -3,12 +3,11 @@
     <div class='food_wrapper'>
       <form @submit.prevent action='/api/v1/menus' id="menu" accept-charset="UTF-8" method='post'>
         <div class='upper_menu_content'>
-          <p>{{ masses }}</p>
           <p>MenuName :</p> 
-          <input class="menu_name" type="text" name="menu[material]" id="menu_material">
+          <input class="menu_name" type="text" name="menu[material]" id="menu_material" v-model="menu.material">
         </div>
         <div class='input_form' id="item_form">
-          <menu-item @plus-event="appendItem" @append-mass="massList($event)" />
+          <menu-item @plus-event="appendItem" @reset-event="reset"  @calculate-event="result($event)" />
         </div>
         <div class='calculate_box'>
           <div class='calculate_box__title'>
@@ -19,16 +18,16 @@
           </div>
           <div class='calculate_box__result'>
             <div class='calculate_box__result--protain'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_protain == "" ? '---' : this.menu.total_protain }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--fat'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_fat == "" ? '---' : this.menu.total_fat }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--carbohydrate'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_carbohydrate == "" ? '---' : this.menu.total_carbohydrate }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--total'>
-              <p>--- kCal</p>
+              <h3>{{ this.total == "" ? '---' : this.total }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--form'></div>
           </div>
@@ -49,19 +48,25 @@ import MenuItem from './menu/menu_item.vue'
 export default {
   data() {
     return {
-      material: "",
-      names: [],
-      masses: [],
-      total_protain: "",
-      total_fat: "",
-      total_curbohydrate: ""
+      menu: {
+        material: "",
+        names: [],
+        masses: [],
+        total_protain: "",
+        total_fat: "",
+        total_carbohydrate: ""
+      },
+      protain: [],
+      fat: [],
+      carbo: [],
+      total: ""
     }
   },
   components: { MenuItem },
   methods: {
     createMenus() {
       axios
-      .post("api/v1/menus", { menu: this.data })
+      .post("/api/v1/menus", { menu: this.menu })
       .then( res => {
         if (res.data != 'not create menu') {
           this.$router.push({ name: "menus" });
@@ -86,25 +91,38 @@ export default {
       let target = document.getElementById('item_form')
 
       instance.$on('plus-event', this.appendItem)
-      instance.$on('append-mass', this.massList)
+      instance.$on('reset-event', this.reset)
+      instance.$on('calculate-event', this.result)
       instance.displayMenu = true
       instance.$mount();
       target.append(instance.$el)
     },
-    elementCount() {
-      let target = document.getElementById('item_form');
-      let res = target.childElementCount;
-      return res
-    },
-    massList() {
-      let num = this.elementCount();
+    reset() {
+      let num = document.getElementById('item_form').childElementCount;
       let val = document.getElementsByClassName('mass');
-      this.masses = [];
+      let foodVal = document.getElementsByClassName('food_index');
+      this.menu.masses = [];
+      this.menu.names = [];
       
       for(let i = 0; i < num; i++) {
-        if (val[i] === undefined) { continue; }
-        this.masses.push(parseFloat(val[i].value));
+        if (foodVal[i].value == 0) { continue; }
+        this.menu.names.push(parseFloat(foodVal[i].value));
+        if (val.length != foodVal.length && i == num -1) {
+          this.menu.masses.push(parseFloat(val[(i - 1)].value));
+        }else{
+          this.menu.masses.push(parseFloat(val[i].value));
+        }
       }
+    },
+    result(mass) {
+      this.protain.push(parseFloat(mass[0]))
+      this.fat.push(parseFloat(mass[1]))
+      this.carbo.push(parseFloat(mass[2]))
+
+      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
+      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
+      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
+      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <fieldset id="menu">
-    <select name="menu[names][]" id="menu_names" @change="enableMass">
+  <fieldset>
+    <select class="food_index" name="menu[names][]" id="menu_names" @change="enableMass">
       <template v-for="(food, index) in foods" >
         <option  :value="index" :key="index">{{food}}</option>
       </template>
