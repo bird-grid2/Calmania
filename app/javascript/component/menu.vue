@@ -34,18 +34,18 @@
             <tr v-for="menu in menus" :key="menu.id">
               <td class='table-icon'>
                 <router-link :to="{name: 'menuEdit', params: { menuId: menu.id }}">
-                  <i class='fas fa-edit'></i>
+                  <font-awesome-icon :icon="['fas', 'edit']" class="fas"></font-awesome-icon>
                 </router-link>
-                <span></span>
+                <span />
                 <router-link to="/menus/#{menu.id}"  data-confirm="本当に削除しますか?"  method="delete">
-                  <i class='fas fa-trash-alt'></i>
+                  <font-awesome-icon :icon="['fas', 'trash-alt']" class="fas"></font-awesome-icon>
                 </router-link>
               </td>
               <td class='table-item'>
                 {{menu.material}}
               </td>
               <td class='table-item'>
-                {{total}}
+                {{total( menu.id - 1 )}}
               </td>
               <td class='table-item'>
                 {{menu.total_protain}}
@@ -88,15 +88,8 @@ export default {
     BackgroundService.getMenusBoard()
     .then( res => {
       this.menus = res.data
-      console.log(res)
     })
     .catch( error => { console.log(error) });
-  },
-  computed: {
-    total: function() {
-      let sum = 0;
-      return this.menus.reduce((sum, menu) => sum + menu.masses, 0);
-    }
   },
   methods: {
     getId() {
@@ -105,6 +98,10 @@ export default {
     logout() {
       sessionStorage.clear();
       this.$router.push({name: 'index'})
+    },
+    total(mass) {
+      let res = Math.round(this.menus[mass].masses.reduce((sum, menu) => sum += Number(menu), 0));
+      return res
     }
   }
 }

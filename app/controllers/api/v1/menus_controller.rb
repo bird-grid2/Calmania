@@ -21,7 +21,7 @@ class Api::V1::MenusController < ApplicationController
 
     return if @menus.blank?
 
-    render json: @menu
+    render json: @menus
   end
 
   def search
