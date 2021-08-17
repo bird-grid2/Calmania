@@ -45,16 +45,17 @@
 import Vue from 'vue';
 import axios from 'axios';
 import MenuItem from './menu/menu_item.vue'
+import authHeader from '../service/authHeader';
 export default {
   data() {
     return {
       menu: {
         material: "",
-        names: [],
-        masses: [],
         total_protain: "",
         total_fat: "",
-        total_carbohydrate: ""
+        total_carbohydrate: "",
+        names: [],
+        masses: []
       },
       protain: [],
       fat: [],
@@ -66,7 +67,7 @@ export default {
   methods: {
     createMenus() {
       axios
-      .post("/api/v1/menus", { menu: this.menu })
+      .post("/api/v1/menus", { headers: authHeader(), menu: this.menu  })
       .then( res => {
         if (res.data != 'not create menu') {
           this.$router.push({ name: "menus" });
