@@ -41,7 +41,6 @@
 </template>
 
 <script>
-
 import backGroundService from '../../service/background.service'
 import Food from './food.vue'
 export default {

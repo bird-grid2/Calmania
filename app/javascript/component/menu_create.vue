@@ -43,9 +43,8 @@
 
 <script>
 import Vue from 'vue';
-import axios from 'axios';
 import MenuItem from './menu/menu_item.vue'
-import authHeader from '../service/authHeader';
+import sendService from '../service/send.service';
 export default {
   data() {
     return {
@@ -66,8 +65,7 @@ export default {
   components: { MenuItem },
   methods: {
     createMenus() {
-      axios
-      .post("/api/v1/menus", { headers: authHeader(), menu: this.menu  })
+      sendService.postMenu(this.menu)
       .then( res => {
         if (res.data != 'not create menu') {
           this.$router.push({ name: "menus" });

@@ -31,7 +31,7 @@
               <th class='table-title'>脂質 [kCal]</th>
               <th class='table-title'>炭水化物 [kCal]</th>
             </tr>
-            <tr v-for="menu in menus" :key="menu.id">
+            <tr v-show="searchView" v-for="(menu, index) in menus" :key="menu.id">
               <td class='table-icon'>
                 <router-link :to="{name: 'menuEdit', params: { menuId: menu.id }}">
                   <font-awesome-icon :icon="['fas', 'edit']" class="fas"></font-awesome-icon>
@@ -45,7 +45,7 @@
                 {{menu.material}}
               </td>
               <td class='table-item'>
-                {{total( menu.id - 1 )}}
+                {{total(index)}}
               </td>
               <td class='table-item'>
                 {{menu.total_protain}}
@@ -57,12 +57,13 @@
                 {{menu.total_carbohydrate}}
               </td>
             </tr>
+            <div v-show="!searchView" class="name">一致するメニューがありません</div>
           </tbody>
         </table>
       </div>
       <div class='bottom-info'>
-        <form class="search-box" action="/menus/search" accept-charset="UTF-8" method="get">
-          <input placeholder="メニューを入力して下さい" class="search-input" type="text" name="keyword" id="keyword">
+        <form @submit.prevent class="search-box" action="/menus/search" accept-charset="UTF-8" method="get">
+          <input placeholder="メニューを入力して下さい" class="search-input" type="text" name="keyword" id="keyword" @keyup="incrementalSearch">
         </form>
       </div>
     </div>
@@ -70,7 +71,8 @@
 </template>
 
 <script>
-import BackgroundService from '../service/background.service'
+import sendService from '../service/send.service'
+import backgroundService from '../service/background.service'
 export default {
   data() {
     return {
@@ -81,15 +83,18 @@ export default {
         color: 'white',
         fontSize: '3.5rem',
         marginBottom: '5%'
-      }
+      },
+      searchView: true
     }
   },
   mounted() {
-    BackgroundService.getMenusBoard()
+    backgroundService.getMenusBoard()
     .then( res => {
-      this.menus = res.data
+      res.data.forEach( (elem) =>{
+        this.menus.push(elem);
+      })
     })
-    .catch( error => { console.log(error) });
+    .catch( error => { console.log(error) })
   },
   methods: {
     getId() {
@@ -102,6 +107,29 @@ export default {
     total(mass) {
       let res = Math.round(this.menus[mass].masses.reduce((sum, menu) => sum += Number(menu), 0));
       return res
+    },
+    incrementalSearch() {
+      let input = document.getElementById('keyword').value
+      
+      sendService.postMenuSearch(input)
+      .then( res => {
+        if(res.data == null) {
+          this.searchView = false;
+          if(input == null) {
+            this.menus = [];
+            res.data.forEach( elem => {
+              this.menus.push(elem);
+            })
+          }
+        }else{
+          this.searchView = true;
+          this.menus = [];
+          res.data.forEach( elem => {
+            this.menus.push(elem);
+          })
+        }
+      })
+      .catch( error => { console.log(error) });
     }
   }
 }

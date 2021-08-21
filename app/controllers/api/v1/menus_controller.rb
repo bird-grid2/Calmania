@@ -1,5 +1,5 @@
 class Api::V1::MenusController < ApplicationController
-  before_action :authenticate_request!, except: [ :create ]
+  before_action :authenticate_request!, except: [:create]
   before_action :set_menu, only: [:edit, :update, :destroy]
 
   def new
@@ -26,9 +26,11 @@ class Api::V1::MenusController < ApplicationController
 
   def search
     @menus = Menu.search(params[:keyword])
-    respond_to do |format|
-      format.html
-      format.json
+
+    if @menus.present?
+      render json: @menus
+    else
+      render json: 'nil'
     end
   end
 

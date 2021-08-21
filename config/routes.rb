@@ -23,15 +23,15 @@ Rails.application.routes.draw do
       resources :graphs , only: :index
       resources :logs, except: :show do
         collection do
-          get :search
-          get :dsearch
+          post :search
+          post :dsearch
         end
       end
     
       resources :menus, except: :show do
         resources :foods, only: :index
         collection do
-          get :search
+          post :search
         end
       end
 
