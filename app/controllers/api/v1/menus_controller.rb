@@ -1,5 +1,5 @@
 class Api::V1::MenusController < ApplicationController
-  before_action :authenticate_request!, except: [:create]
+  before_action :authenticate_request!
   before_action :set_menu, only: [:edit, :update, :destroy]
 
   def new

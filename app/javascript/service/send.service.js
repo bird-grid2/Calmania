@@ -18,6 +18,9 @@ class  SendSevice {
   postMenu(input) {
     return instance.post('api/v1/menus', { menu: input })
   }
+  postLog(input) {
+    return instance.post('api/v1/logs', { log: input })
+  }
 }
 
 export default new SendSevice();
