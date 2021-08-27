@@ -22,7 +22,7 @@
             <textarea class="comment" name="log[description]" id="log_description" v-model="logs.description" />
           </div>
           <div class='menu_columns' id="target">
-            <log-item @plus-event="appendItem" @reset-event="reset" @calculate-event="result($event)" />
+            <log-item @plus-event="appendItem" @reset-event="updateItem" @calculate-event="updateItem" />
           </div>
         </div>
         <div class='bottom_content'>
@@ -119,26 +119,30 @@ export default {
       let target = document.getElementById('target')
 
       instance.$on('plus-event', this.appendItem)
-      instance.$on('reset-event', this.reset)
-      instance.$on('calculate-event', this.result)
+      instance.$on('reset-event', this.updateItem)
+      instance.$on('calculate-event', this.updateItem)
       instance.minus = true
       instance.$mount();
       target.append(instance.$el)
     },
-    reset() {
+    updateItem() {
       this.$nextTick(() => {
         let num = document.getElementById('target').childElementCount;
         let protain = document.getElementsByName('total_protain');
         let fat = document.getElementsByName('total_fat');
         let carbo = document.getElementsByName('total_carbohydrate');
+        let index = document.getElementsByName('log[menu_numbers][]')
         this.totalProtain = [];
         this.totalFat = [];
         this.totalCarbohydrate = [];
+        this.logs.menu_numbers = [];
 
         for(let i = 0; i < num;  i++) {
           this.totalProtain.push(Number(protain[i].innerText))
           this.totalFat.push(Number(fat[i].innerText))
           this.totalCarbohydrate.push(Number(carbo[i].innerText))
+          if (index[i].options.selectedIndex == 0) { continue; }
+          this.logs.menu_numbers.push(Number(index[i].options.selectedIndex))
         }
 
         let value_1 = this.protainShow;
@@ -146,39 +150,6 @@ export default {
         let value_3 = this.carboShow;
         this.total = Math.round( value_1 + value_2 + value_3 );
       })
-    },
-    result(elem) {
-      if (this.totalProtain == "") {
-        this.totalProtain.push(Number(elem[0]))
-        this.totalFat.push(Number(elem[1]))
-        this.totalCarbohydrate.push(Number(elem[2]))
-
-        let value_1 = this.protainShow;
-        let value_2 = this.fatShow;
-        let value_3 = this.carboShow;
-        this.total = Math.round( value_1 + value_2 + value_3 );
-      }else{
-        this.$nextTick( () => {
-          let num = document.getElementById('target').childElementCount;
-          let protain = document.getElementsByName('total_protain');
-          let fat = document.getElementsByName('total_fat');
-          let carbo = document.getElementsByName('total_carbohydrate');
-          this.totalProtain = [];
-          this.totalFat = [];
-          this.totalCarbohydrate = [];
-
-          for(let i = 0; i < num;  i++) {
-            this.totalProtain.push(Number(protain[i].innerText))
-            this.totalFat.push(Number(fat[i].innerText))
-            this.totalCarbohydrate.push(Number(carbo[i].innerText))
-          }
-
-          let value_1 = this.protainShow;
-          let value_2 = this.fatShow;
-          let value_3 = this.carboShow;
-          this.total = Math.round( value_1 + value_2 + value_3 );
-        })
-      }
     }
   },
    computed: {

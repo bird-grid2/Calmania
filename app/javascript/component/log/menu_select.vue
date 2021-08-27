@@ -36,7 +36,6 @@ export default {
   methods: {
     calculateItem(e) {
       let num = e.target.options.selectedIndex - 1
-      console.log(num)
 
       if (num == -1) {
         this.$emit('delete-event')
