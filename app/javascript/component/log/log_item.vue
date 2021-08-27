@@ -2,7 +2,7 @@
   <div class='menu_columns__col'>
     <div class='menu_columns__col__label'>
       <font-awesome-icon :icon="['fas', 'plus-circle']" id='menu-plus' :style="iconStyle" @click="plusItem" />
-      <font-awesome-icon :icon="['fas', 'minus-circle']" id='menu-minus' :style="iconStyle" @click="deleteAction" v-show="minus" />
+      <font-awesome-icon :icon="['fas', 'minus-circle']" id='menu-minus' :style="iconStyle" @click="deleteAction" v-if="minus" />
     </div>
     <div class='input_name'>
       <menu-select @delete-event="deleteItem" @calculate-event="calculateEvent($event)" />
@@ -11,21 +11,21 @@
       <div class="show_protain" >
         <h2>タンパク質 合計</h2>
         <div class="label">
-          <h3>{{ protain }}</h3>
+          <h3 name="total_protain">{{ protain }}</h3>
           <p>[kCal]</p>
         </div>
       </div>
       <div class="show_fat">
         <h2>脂質 合計</h2>
         <div class="label">
-          <h3>{{ fat }}</h3>
+          <h3 name="total_fat" >{{ fat }}</h3>
           <p>[kCal]</p>
         </div>
       </div>
       <div class="show_carbohydrate">
         <h2>炭水化物 合計</h2>
         <div class="label">
-          <h3>{{ carbohydrate }}</h3>
+          <h3 name="total_carbohydrate">{{ carbohydrate }}</h3>
           <p>[kCal]</p>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default {
       this.fat = calory[1]
       this.carbohydrate = calory[2]
       this.caloryShow = true;
-      this.$emit('calculate-event', [ this.protain, this.fat, this.carbohydrate ]);
+      this.$emit('calculate-event', [ calory[0], calory[1], calory[2] ]);
     },
     deleteItem() {
       this.caloryShow = false;

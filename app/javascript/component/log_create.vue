@@ -30,21 +30,21 @@
             <div class='show_calory--protain'>
               <h2>タンパク質 合計</h2>
               <div class='label'>
-                <h3>{{ totalProtain == "0" ? '----' : totalProtain }}</h3>
+                <h3>{{ totalProtain == [] ? '----' : protainShow }}</h3>
                 <p>[kCal]</p>
               </div>
             </div>
             <div class='show_calory--fat'>
               <h2>脂質 合計</h2>
               <div class='label'>
-                <h3>{{ totalFat == "0" ? '----' : totalFat }}</h3>
+                <h3>{{ totalFat == [] ? '----' : fatShow }}</h3>
                 <p>[kCal]</p>
               </div>
             </div>
             <div class='show_calory--carbohydrate'>
               <h2>炭水化物 合計</h2>
               <div class='label'>
-                <h3>{{ totalCarbohydrate == "0" ? '----' : totalCarbohydrate }}</h3>
+                <h3>{{ totalCarbohydrate == [] ? '----' : carboShow }}</h3>
                 <p>[kCal]</p>
               </div>
             </div>
@@ -85,9 +85,9 @@ export default {
         fontSize: '3.5rem',
         marginBottom: '5%'
       },
-      totalProtain: "0",
-      totalFat: "0",
-      totalCarbohydrate: "0",
+      totalProtain: [],
+      totalFat: [],
+      totalCarbohydrate: [],
       total: "0"
     }
   },
@@ -126,14 +126,71 @@ export default {
       target.append(instance.$el)
     },
     reset() {
-      console.log('test')
+      this.$nextTick(() => {
+        let num = document.getElementById('target').childElementCount;
+        let protain = document.getElementsByName('total_protain');
+        let fat = document.getElementsByName('total_fat');
+        let carbo = document.getElementsByName('total_carbohydrate');
+        this.totalProtain = [];
+        this.totalFat = [];
+        this.totalCarbohydrate = [];
+
+        for(let i = 0; i < num;  i++) {
+          this.totalProtain.push(Number(protain[i].innerText))
+          this.totalFat.push(Number(fat[i].innerText))
+          this.totalCarbohydrate.push(Number(carbo[i].innerText))
+        }
+
+        let value_1 = this.protainShow;
+        let value_2 = this.fatShow;
+        let value_3 = this.carboShow;
+        this.total = Math.round( value_1 + value_2 + value_3 );
+      })
     },
     result(elem) {
-      this.totalProtain = Number(this.totalProtain) + elem[0]
-      this.totalFat = Number(this.totalFat) + elem[1]
-      this.totalCarbohydrate =  Number(this.totalCarbohydrate) + elem[2]
-      this.total = Math.round( this.totalProtain + this.totalFat + this.totalCarbohydrate)
+      if (this.totalProtain == "") {
+        this.totalProtain.push(Number(elem[0]))
+        this.totalFat.push(Number(elem[1]))
+        this.totalCarbohydrate.push(Number(elem[2]))
+
+        let value_1 = this.protainShow;
+        let value_2 = this.fatShow;
+        let value_3 = this.carboShow;
+        this.total = Math.round( value_1 + value_2 + value_3 );
+      }else{
+        this.$nextTick( () => {
+          let num = document.getElementById('target').childElementCount;
+          let protain = document.getElementsByName('total_protain');
+          let fat = document.getElementsByName('total_fat');
+          let carbo = document.getElementsByName('total_carbohydrate');
+          this.totalProtain = [];
+          this.totalFat = [];
+          this.totalCarbohydrate = [];
+
+          for(let i = 0; i < num;  i++) {
+            this.totalProtain.push(Number(protain[i].innerText))
+            this.totalFat.push(Number(fat[i].innerText))
+            this.totalCarbohydrate.push(Number(carbo[i].innerText))
+          }
+
+          let value_1 = this.protainShow;
+          let value_2 = this.fatShow;
+          let value_3 = this.carboShow;
+          this.total = Math.round( value_1 + value_2 + value_3 );
+        })
+      }
     }
-  }
+  },
+   computed: {
+      protainShow: function() {
+        return this.totalProtain.reduce( (sum, elem) => sum += elem, 0)
+      },
+      fatShow: function() {
+        return this.totalFat.reduce( (sum, elem) => sum +=elem, 0)
+      },
+      carboShow: function() {
+        return this.totalCarbohydrate.reduce( (sum, elem) => sum += elem, 0)
+      }
+    }
 }
 </script>
