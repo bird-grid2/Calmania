@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         collection do
           post :search
           post :dsearch
+          post :menu
         end
       end
     

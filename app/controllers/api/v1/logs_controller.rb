@@ -26,27 +26,30 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def index
-    @logs = Log.find_by(user_id: auth_token[:user_id])&.order(date: 'DESC')
-    if @logs.nil?
-      render json: {}
-    else
-      render json: @logs
-    end
+    @logs = Log.all&.order(date: 'DESC').where(user_id: auth_token[:user_id])
+    
+    return if @logs.nil?
+
+    render json: @logs
   end
 
   def search
-    @logs = Log.search(params[:keyword])
-    respond_to do |format|
-      format.html
-      format.json
+    @logs = Log.order(date: 'DESC').search(params[:keyword])
+
+    if @logs.present?
+      render json: @logs
+    else
+      render json: 'nil'
     end
   end
 
   def dsearch
-    @logs = Log.dsearch(params[:keyword2])
-    respond_to do |format|
-      format.html
-      format.json
+    @logs = Log.order(date: 'DESC').dsearch(params[:keyword2])
+
+    if @logs.present?
+      render json: @logs
+    else
+      render json: 'nil'
     end
   end
 

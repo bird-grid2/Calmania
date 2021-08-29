@@ -13,9 +13,9 @@ class Api::V1::ManagementsController < ApplicationController
 
     # calory calculate and view
     @cal.each do |cal|
-      total << cal.total_cal
-      weight << cal.weight
-      bfp << cal.bfp
+      total << cal.total_cal if cal.total_cal.present?
+      weight << cal.weight if cal.weight.present?
+      bfp << cal.bfp if cal.total_cal.present?
       cal.menu_numbers.each do |j|
         p << @menus.find(j).total_protain
         f << @menus.find(j).total_fat

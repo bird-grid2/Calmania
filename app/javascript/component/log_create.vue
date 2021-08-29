@@ -51,7 +51,7 @@
             <div class='show_calory--total'>
               <h2>総カロリー</h2>
               <div class='label'>
-                <h3>{{ total == "0" ? "----" : total }}</h3>
+                <h3>{{ logs.total_cal == "" ? "----" : logs.total_cal }}</h3>
                 <p>[kCal]</p>
               </div>
             </div>
@@ -76,6 +76,7 @@ export default {
         weight: "",
         bfp: "",
         description: "",
+        total_cal: "",
         menu_numbers: []
       },
       iconStyle: {
@@ -87,17 +88,20 @@ export default {
       },
       totalProtain: [],
       totalFat: [],
-      totalCarbohydrate: [],
-      total: "0"
+      totalCarbohydrate: []
     }
   },
   components: { logItem },
   methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
     createLogs() {
       sendService.postLog(this.logs)
       .then( res => {
         if (res.data != 'not create log') {
-          this.$router.push({ name: "logs" });
+          console.log(res)
+          this.$router.push({ name: "logs", params: { userId: this.getId } });
           this.flashMessage.success({
             message: 'ログを作成しました',
             time: 3000,
@@ -148,7 +152,7 @@ export default {
         let value_1 = this.protainShow;
         let value_2 = this.fatShow;
         let value_3 = this.carboShow;
-        this.total = Math.round( value_1 + value_2 + value_3 );
+        this.logs.total_cal = Math.round( value_1 + value_2 + value_3 );
       })
     }
   },

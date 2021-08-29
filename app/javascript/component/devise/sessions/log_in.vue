@@ -62,7 +62,7 @@ export default {
           this.flashMessage.success({
             message: "ログイン完了しました。",
             time: 3000,
-            class: "notification__success"
+            blockClass: "notification__success"
           });
         }else{
           this.nickname = ''
@@ -71,7 +71,7 @@ export default {
           this.flashMessage.error({
             message: "ログインに失敗しました。",
             time: 3000,
-            class: "notification__alert"
+            blockClass: "notification__alert"
           });
         }
       })

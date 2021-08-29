@@ -15,11 +15,20 @@ class  SendSevice {
   postMenuSearch(input) {
     return instance.post('/api/v1/menus/search', { keyword: input });
   }
+  postMenuNumber(input) {
+    return instance.post('/api/v1/logs/menu', { menu_number : input })
+  }
   postMenu(input) {
-    return instance.post('api/v1/menus', { menu: input })
+    return instance.post('api/v1/menus', { menu: input });
   }
   postLog(input) {
-    return instance.post('api/v1/logs', { log: input })
+    return instance.post('api/v1/logs', { log: input });
+  }
+  postLogSearch(input) {
+    return instance.post('api/v1/logs/search', { keyword: input });
+  }
+  postLogdSearch(input) {
+    return instance.post('api/v1/logs/dsearch', { keyword2: input });
   }
 }
 

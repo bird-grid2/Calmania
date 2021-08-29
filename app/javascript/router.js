@@ -21,7 +21,7 @@ export default new Router({
     { path: "/", name: "index", component: Index }, { path: "/:userId/management", name: "management", component: Management },
     { path: "/menus", name: "menus", component: Menu }, { path: "/menu/:menuId/edit", name: "menuEdit", component: editMenu },
     { path: "/menu", name: "createMenu", component: createMenu }, { path: "/:userId/log", name: "logs", component: Log },
-    { path: "/log/:logId/edit", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
+    { path: "/log/:userId/edit", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
     { path: "/signIn", name: "signIn", component: signIn }, { path: "/signUp", name: "singUp", component: signUp },
     { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", redirect: "/" }
   ]
