@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import backGround from '../service/background.service';
 export default {
   data() {
     return {
@@ -61,6 +61,12 @@ export default {
       total_fat: "",
       total_curbohydrate: ""
     };
+  },
+  mounted() {
+    backGround.getEditMenusBoard()
+    .then( res => {
+      console.log(res)
+    });
   },
   methods: {
     updateMenus() {

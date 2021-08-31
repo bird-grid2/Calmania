@@ -54,6 +54,12 @@ class Api::V1::MenusController < ApplicationController
       mass << m
     end
     gon.mass = mass
+
+    if @menu.present?
+      render json: @menu
+    else
+      render json: @menu.errors
+    end
   end
 
   def update

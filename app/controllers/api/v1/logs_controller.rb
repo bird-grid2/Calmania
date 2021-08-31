@@ -67,6 +67,12 @@ class Api::V1::LogsController < ApplicationController
       num << log
     end
     gon.edit = num
+
+    if @log.present?
+      render json: @log
+    else
+      render json: @log.errors
+    end
   end
 
   def destroy
@@ -98,6 +104,6 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def set_log
-    @log = Log.find(params[:id])
+    @log = Log.find(params[:logId])
   end
 end
