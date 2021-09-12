@@ -35,26 +35,6 @@ class Api::V1::MenusController < ApplicationController
   end
 
   def edit
-    @foods = Food.all
-    food = []
-    menu = []
-    mass = []
-
-    @foods.each do |f|
-      food << f
-    end
-    gon.food = food
-
-    @menu.names.each do |m|
-      menu << m
-    end
-    gon.menu = menu
-
-    @menu.masses.each do |m|
-      mass << m
-    end
-    gon.mass = mass
-
     if @menu.present?
       render json: @menu
     else

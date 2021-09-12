@@ -4,18 +4,10 @@
       <form @submit.prevent action='/api/v1/menu' accept-charset="UTF-8" method='patch'>
         <div class='upper_menu_content'>
           <p>MenuName :</p> 
-          <input class="menu_name" type="text" name="menu[material]" id="menu_material">
+          <input class="menu_name" type="text" name="menu[material]" id="menu_material" v-model="menu.material">
         </div>
-        <div class='input_form'>
-          <div class='input_form__column'>
-            <div class='input_form__column__label'>
-              <i class='fas fa-plus-circle icon' id='menu-plus'></i>
-            </div>
-            <div class='input_form__column__input_name_0#name'>
-              <select name="menu[names][]" id="menu_names"></select>
-            </div>
-          </div>
-          <div class='input_form__column__box_0#fbox'></div>
+        <div class='input_form' id="item_form">
+          <menu-item @plus-event="appendItem" @reset-event="reset"  @calculate-event="result($event)" />
         </div>
         <div class='calculate_box'>
           <div class='calculate_box__title'>
@@ -50,23 +42,53 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import backGround from '../service/background.service';
+import MenuItem from './menu/menu_item.vue'
 export default {
   data() {
     return {
-      material: "",
-      names: [],
-      masses: [],
-      total_protain: "",
-      total_fat: "",
-      total_curbohydrate: ""
+      menu: {
+        material: "",
+        names: [],
+        masses: [],
+        total_protain: "",
+        total_fat: "",
+        total_curbohydrate: ""
+      },
+      updateMenu: false
     };
   },
-  mounted() {
-    backGround.getEditMenusBoard()
+  components: { MenuItem },
+  created() {
+    backGround.getEditMenusBoard(this.$route.params['menuId'])
     .then( res => {
-      console.log(res)
+      this.menu.material = res.data.material
+      res.data.names.forEach( elem => {
+        this.menu.names.push(Number(elem))
+      })
+      res.data.masses.forEach( elem => {
+        this.menu.masses.push(Number(elem))
+      })
+      this.menu.total_protain = res.data.total_protain
+      this.menu.total_fat = res.data.total_fat
+      this.menu.total_curbohydrate = res.data.total_curbohydrate
+
+      let num = this.menu.names.length
+
+      for(let i = 0; i < num - 1; i++){
+        this.appendItem()
+      }
     });
+  },
+  beforeUpdate() {
+    let target = document.getElementById('menu_names');
+    let num = target.length
+
+    for(let j = 0; j < num; j++){
+      let index = this.menu.names[j]
+    }
+    console.log(target[0])
   },
   methods: {
     updateMenus() {
@@ -89,8 +111,46 @@ export default {
         }      
       })
       .catch( error => { console.log(error) });
+    },
+    appendItem() {
+      let ComponentClass = Vue.extend(MenuItem);
+      let instance = new ComponentClass();
+      let target = document.getElementById('item_form')
+
+      instance.$on('plus-event', this.appendItem)
+      instance.$on('reset-event', this.reset)
+      instance.$on('calculate-event', this.result)
+      instance.displayMenu = true
+      instance.$mount();
+      target.append(instance.$el)
+    },
+    reset() {
+      let num = document.getElementById('item_form').childElementCount;
+      let val = document.getElementsByClassName('mass');
+      let foodVal = document.getElementsByClassName('food_index');
+      this.menu.masses = [];
+      this.menu.names = [];
+      
+      for(let i = 0; i < num; i++) {
+        if (foodVal[i].value == 0) { continue; }
+        this.menu.names.push(parseFloat(foodVal[i].value));
+        if (val.length != foodVal.length && i == num -1) {
+          this.menu.masses.push(parseFloat(val[(i - 1)].value));
+        }else{
+          this.menu.masses.push(parseFloat(val[i].value));
+        }
+      }
+    },
+    result(mass) {
+      this.protain.push(parseFloat(mass[0]))
+      this.fat.push(parseFloat(mass[1]))
+      this.carbo.push(parseFloat(mass[2]))
+
+      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
+      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
+      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
+      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
     }
-    
   }
 }
 </script>

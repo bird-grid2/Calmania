@@ -8,10 +8,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faChartBar } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
 
 library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle, faChartBar)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('vSelect', vSelect)
 Vue.use(FlashMessage);
 
 document.addEventListener('DOMContentLoaded', () => {

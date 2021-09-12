@@ -2,7 +2,7 @@
   <fieldset>
     <select class="food_index" name="menu[names][]" id="menu_names" @change="enableMass">
       <template v-for="(food, index) in foods" >
-        <option  :value="index" :key="index">{{food}}</option>
+        <option  :value='index' :key="food.id">{{food}}</option>
       </template>
     </select>
   </fieldset>  
@@ -14,10 +14,11 @@ import backGroundService from '../../service/background.service'
 export default {
   data(){
     return {
+      selected: '',
       foods: []
     }
   },
-  mounted() {
+  created() {
     backGroundService.getFoodsBoard()
     .then( res => {
       this.foods.push("選択して下さい");
@@ -26,6 +27,7 @@ export default {
       });
     })
     .catch( error => { console.log(error) })
+    console.log('grandChild created')
   },
   methods: {
     enableMass() {

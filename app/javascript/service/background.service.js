@@ -24,8 +24,8 @@ class  BackgroundSevice {
   getMenusBoard() {
     return instance.get('/api/v1/menus');
   }
-  getEditMenusBoard() {
-    return instance.get('api/v1/menus/edit', params: { id: menuId })
+  getEditMenusBoard(params) {
+    return instance.get('api/v1/menus/edit', { params: { id: params }})
   }
   getFoodsBoard() {
     return instance.get('/api/v1/menus/new');

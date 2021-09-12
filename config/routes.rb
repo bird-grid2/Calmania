@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         resources :foods, only: :index
         collection do
           post :search
+          get :edit
         end
       end
 
