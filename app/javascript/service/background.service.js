@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest',
-    'Authorization' : "Bearer " + user.auth_token 
+    'Authorization' : "Bearer " + user.auth_token
   },
   responseType: 'json'
 })

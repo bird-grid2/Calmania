@@ -7,7 +7,7 @@
           <input class="menu_name" type="text" name="menu[material]" id="menu_material" v-model="menu.material">
         </div>
         <div class='input_form' id="item_form">
-          <menu-item @plus-event="appendItem" @reset-event="reset"  @calculate-event="result($event)" />
+          <menu-item id="menu_item" @plus-event="appendItem" @reset-event="reset" @calculate-event="result" />
         </div>
         <div class='calculate_box'>
           <div class='calculate_box__title'>
@@ -97,31 +97,48 @@ export default {
       target.append(instance.$el)
     },
     reset() {
-      let num = document.getElementById('item_form').childElementCount;
-      let val = document.getElementsByClassName('mass');
-      let foodVal = document.getElementsByClassName('food_index');
-      this.menu.masses = [];
-      this.menu.names = [];
-      
-      for(let i = 0; i < num; i++) {
-        if (foodVal[i].value == 0) { continue; }
-        this.menu.names.push(parseFloat(foodVal[i].value));
-        if (val.length != foodVal.length && i == num -1) {
-          this.menu.masses.push(parseFloat(val[(i - 1)].value));
-        }else{
-          this.menu.masses.push(parseFloat(val[i].value));
+      this.$nextTick(() => {
+        let num = document.getElementById('item_form').childElementCount;
+        let val = document.getElementsByClassName('mass');
+        let foodVal = document.getElementsByClassName('select_value');
+        this.menu.masses = [];
+        this.menu.names = [];
+        
+        for(let i = 0; i < num; i++) {
+          if (foodVal[i].innerHTML == "選択して下さい") { continue; }
+          this.menu.names.push(Number(foodVal[i].innerHTML));
+          if (val.length != foodVal.length && i == num -1) {
+            this.menu.masses.push(parseFloat(val[(i - 1)].value));
+          }else{
+            this.menu.masses.push(parseFloat(val[i].value));
+          }
         }
-      }
+        this.result()
+      })
     },
-    result(mass) {
-      this.protain.push(parseFloat(mass[0]))
-      this.fat.push(parseFloat(mass[1]))
-      this.carbo.push(parseFloat(mass[2]))
+    result() {
+      this.$nextTick(() => {
+        let num = document.getElementById('item_form').childElementCount;
+        let showProtain = document.getElementsByClassName('input_form__column__box__protain');
+        let showFat = document.getElementsByClassName('input_form__column__box__fat')
+        let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate')
 
-      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
-      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
-      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
-      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
+        this.protain = [];
+        this.fat = [];
+        this.carbo = [];
+
+        for(let i = 0; i < num; i++) {
+          if (showProtain[i] == undefined ) { continue; }
+          this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
+          this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
+          this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
+        }
+
+        this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
+        this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
+        this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
+        this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
+      })
     }
   }
 }

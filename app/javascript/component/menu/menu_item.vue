@@ -5,7 +5,7 @@
       <font-awesome-icon :icon="['fas', 'minus-circle']" class="icon" id="menu-minus" :style="iconStyle" @click="deleteAction" v-if="displayMenu" />
     </div>
     <div class='input_form__column__input_name' id='name'>
-      <food @enable-mass="displayMass=$event" />
+      <food @enable-mass="turnMass" ref="food" />
       <div class="label" v-if="displayMass">
         <p>重量 [g] :</p>
         <input class="mass" id="menu_masses" type="number" name="menu[masses][]" @change="turnCalory(); appendMasses(); calculateCal" v-model="mass">
@@ -79,6 +79,7 @@ export default {
   },
   methods: {
     turnMass() {
+      this.mass = '';
       this.displayMass = true;
     },
     turnCalory() {
@@ -98,12 +99,12 @@ export default {
   },
   computed: {
     calculateCal: function() {
-      let index = document.getElementById('menu_names').value - 1
+      let index = this.$refs.food.selected - 1;
 
       this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
       this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
       this.carbohydrate = Math.round(this.carboHydrateRate[index] * this.mass * 4) / 10
-      return this.$emit('calculate-event', [this.protain, this.fat, this.carbohydrate])
+      return this.$emit('calculate-event')
     },
     totalCal: function() {
       let target = Math.round((this.protain + this.fat + this.carbohydrate) * 10) / 10;

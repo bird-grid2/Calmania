@@ -1,10 +1,7 @@
 <template>
   <fieldset>
-    <select class="food_index" name="menu[names][]" id="menu_names" @change="enableMass">
-      <template v-for="(food, index) in foods" >
-        <option  :value='index' :key="food.id">{{food}}</option>
-      </template>
-    </select>
+    <v-select class="food_index" id="menu_names" :options="foods" label="food" v-model="selected" :reduce="foods => foods.id"  @input="enableMass($event)" />
+    <p class='select_value' :style="{display: 'none' }">{{ selected }}</p>
   </fieldset>  
 </template>
 
@@ -14,20 +11,19 @@ import backGroundService from '../../service/background.service'
 export default {
   data(){
     return {
-      selected: '',
+      selected: '選択して下さい',
       foods: []
     }
   },
   created() {
     backGroundService.getFoodsBoard()
     .then( res => {
-      this.foods.push("選択して下さい");
+      this.foods.push({ id: 0, food: "選択して下さい" });
       res.data.forEach( elem => {
-        this.foods.push(elem.element)
+        this.foods.push({ id: elem.id, food: elem.element })
       });
     })
     .catch( error => { console.log(error) })
-    console.log('grandChild created')
   },
   methods: {
     enableMass() {
