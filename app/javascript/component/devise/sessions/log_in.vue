@@ -16,7 +16,7 @@
         </div>
         <div class='field'>
           <label class="log-in" for="user_password_パスワード">パスワード</label>
-          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" v-model="password">
+          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" autocomplete="off" v-model="password">
         </div>
       </div>
       <div class='border-line'></div>

@@ -28,6 +28,11 @@ export default {
   methods: {
     enableMass() {
       this.$emit('enable-mass', true);
+    },
+    selectValue(num) {
+      this.selected = num;
+      let target = document.getElementsByClassName('food_index')
+
     }
   }
 }

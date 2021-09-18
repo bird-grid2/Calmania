@@ -95,6 +95,9 @@ export default {
       this.$emit('reset-event')
       this.$destroy();
       this.$el.parentNode.removeChild(this.$el);
+    },
+    editAction(num) {
+      this.$refs.food.selectValue(num)
     }
   },
   computed: {
