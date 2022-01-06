@@ -34,7 +34,7 @@ Rails.application.routes.draw do
         collection do
           post :search
           get :edit
-          get :foodData
+          get :food_data
         end
       end
 

@@ -1,7 +1,7 @@
 class Api::V1::MenusController < ApplicationController
   before_action :authenticate_request!
   before_action :set_menu, only: [:edit, :update, :destroy]
-  before_action :set_food, only: [:foodData]
+  before_action :set_food, only: [:food_data]
 
   def new
     @foods = Food.all
@@ -43,7 +43,7 @@ class Api::V1::MenusController < ApplicationController
     end
   end
 
-  def foodData
+  def food_data
     if @food.present?
       render json: @food
     else
