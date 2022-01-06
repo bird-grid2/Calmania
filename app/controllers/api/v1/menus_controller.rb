@@ -1,6 +1,7 @@
 class Api::V1::MenusController < ApplicationController
   before_action :authenticate_request!
   before_action :set_menu, only: [:edit, :update, :destroy]
+  before_action :set_food, only: [:foodData]
 
   def new
     @foods = Food.all
@@ -42,6 +43,14 @@ class Api::V1::MenusController < ApplicationController
     end
   end
 
+  def foodData
+    if @food.present?
+      render json: @food
+    else
+      render json: @food.errors
+    end
+  end
+
   def update
     if @menu.update(menu_params)
       redirect_to api_v1_menus_path, notice: 'メニューを更新しました'
@@ -71,5 +80,9 @@ class Api::V1::MenusController < ApplicationController
 
   def set_menu
     @menu = Menu.find(params[:id])
+  end
+  
+  def set_food
+    @food = Food.find(params[:id])
   end
 end

@@ -43,8 +43,8 @@
 
 <script>
 import Vue from 'vue';
-import MenuItem from './menu/menu_item.vue'
-import sendService from '../service/send.service';
+import MenuItem from './menu_item.vue'
+import sendService from '../../../service/send.service';
 export default {
   data() {
     return {

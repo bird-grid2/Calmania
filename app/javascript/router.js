@@ -4,8 +4,8 @@ import Index from "./component/index.vue";
 import Graph from "./component/graph.vue";
 import Management from "./component/management.vue";
 import Menu from "./component/menu.vue";
-import editMenu from "./component/menu_edit.vue";
-import createMenu from "./component/menu_create.vue"
+import editMenu from "./component/menu/edit/menu_edit.vue";
+import createMenu from "./component/menu/create/menu_create.vue"
 import Log from "./component/log.vue";
 import editLog from "./component/log_edit.vue";
 import createLog from "./component/log_create.vue";

@@ -8,7 +8,7 @@
       <food @enable-mass="turnMass" ref="food" />
       <div class="label" v-if="displayMass">
         <p>重量 [g] :</p>
-        <input class="mass" id="menu_masses" type="number" name="menu[masses][]" @change="turnCalory(); appendMasses(); calculateCal" v-model="mass">
+        <input class="mass" id="menu_masses" type="number" name="menu[masses][]" v-model="inputMass">
       </div>
     </div>
     <div class='input_form__column__box' id='fbox' v-if="displayCalory">
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import backGroundService from '../../service/background.service'
-import Food from './food.vue'
+import backGroundService from '../../../service/background.service'
+import Food from '../food.vue'
 export default {
   data () {
     return {
@@ -50,6 +50,8 @@ export default {
       fat: 0.00,
       carbohydrate: 0.00,
       mass: '',
+      foodNumber: '',
+      editNames: [],
       protainRate: [],
       fatRate: [],
       carboHydrateRate: [],
@@ -66,16 +68,19 @@ export default {
     }
   },
   components: { Food },
-  mounted() {
+  created() {
     backGroundService.getFoodsBoard()
     .then( res => {
       res.data.forEach( elem => {
         this.protainRate.push(elem.protain_rate)
         this.fatRate.push(elem.fat_rate)
-        this.carboHydrateRate.push(elem.carbohydrate_rate) 
+        this.carboHydrateRate.push(elem.carbohydrate_rate)
       });
     })
     .catch( error => { console.log(error) })
+  },
+  mounted() {
+    this.$refs.food.selected = this.foodNumber;
   },
   methods: {
     turnMass() {
@@ -96,22 +101,30 @@ export default {
       this.$destroy();
       this.$el.parentNode.removeChild(this.$el);
     },
-    editAction(num) {
-      this.$refs.food.selectValue(num)
-    }
-  },
-  computed: {
-    calculateCal: function() {
+    calculateCal() {
       let index = this.$refs.food.selected - 1;
 
       this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
       this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
       this.carbohydrate = Math.round(this.carboHydrateRate[index] * this.mass * 4) / 10
       return this.$emit('calculate-event')
-    },
+    }
+  },
+  computed: {
     totalCal: function() {
       let target = Math.round((this.protain + this.fat + this.carbohydrate) * 10) / 10;
       return target;
+    },
+    inputMass: {
+      get() {
+        return this.mass;
+      },
+      set(value) {
+        this.mass = value;
+        this.turnCalory();
+        this.calculateCal();
+        this.appendMasses();
+      }
     }
   }
 }

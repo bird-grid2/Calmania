@@ -1,6 +1,6 @@
 <template>
   <fieldset>
-    <v-select class="food_index" id="menu_names" :options="foods" label="food" v-model="selected" :reduce="foods => foods.id"  @input="enableMass($event)" />
+    <v-select class="food_index" id="menu_names" :options="foods" label="food" v-model="inputfood" :reduce="foods => foods.id" />
     <p class='select_value' :style="{display: 'none' }">{{ selected }}</p>
   </fieldset>  
 </template>
@@ -15,7 +15,7 @@ export default {
       foods: []
     }
   },
-  created() {
+  beforeCreate() {
     backGroundService.getFoodsBoard()
     .then( res => {
       this.foods.push({ id: 0, food: "選択して下さい" });
@@ -24,15 +24,22 @@ export default {
       });
     })
     .catch( error => { console.log(error) })
+    console.log('food beforeCreate')
   },
   methods: {
     enableMass() {
       this.$emit('enable-mass', true);
-    },
-    selectValue(num) {
-      this.selected = num;
-      let target = document.getElementsByClassName('food_index')
-
+    }
+  },
+  computed: {
+    inputfood : {
+      get() {
+        return this.selected;
+      },
+      set(value) {
+        this.selected = value;
+        this.enableMass();
+      }
     }
   }
 }

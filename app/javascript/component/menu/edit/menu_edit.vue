@@ -6,9 +6,7 @@
           <p>MenuName :</p> 
           <input class="menu_name" type="text" name="menu[material]" id="menu_material" v-model="menu.material">
         </div>
-        <div class='input_form' id="item_form">
-          <menu-item @plus-event="appendItem" @reset-event="reset"  @calculate-event="result()" ref="menuItem" />
-        </div>
+        <div class='input_form' id="item_form" />
         <div class='calculate_box'>
           <div class='calculate_box__title'>
             <h2>タンパク質 合計</h2>
@@ -34,7 +32,7 @@
         </div>
         <div class='bottom_menu_content'>
           <input @click="updateMenus" type="submit" name="commit" value="メニュー更新" class="btn" data-disable-with="メニュー更新">
-          <router-link class="btn" to="/menu">キャンセル</router-link>
+          <router-link class="btn" to="/menus">キャンセル</router-link>
         </div>
       </form>
     </div>
@@ -43,8 +41,8 @@
 
 <script>
 import Vue from 'vue';
-import backGround from '../service/background.service';
-import MenuItem from './menu/menu_item.vue'
+import menuItem from './edit_item.vue'
+import backGround from '../../../service/background.service';
 export default {
   data() {
     return {
@@ -56,11 +54,14 @@ export default {
         total_fat: "",
         total_curbohydrate: ""
       },
-      updateMenu: false
+      updateMenu: false,
+      protain: [],
+      fat: [],
+      carbo: []
     };
   },
-  components: { MenuItem },
-  created() {
+  components: { menuItem },
+  beforeCreate() {
     backGround.getEditMenusBoard(this.$route.params['menuId'])
     .then( res => {
       this.menu.material = res.data.material
@@ -73,20 +74,31 @@ export default {
       this.menu.total_protain = res.data.total_protain
       this.menu.total_fat = res.data.total_fat
       this.menu.total_curbohydrate = res.data.total_curbohydrate
-
-      let num = this.menu.names.length
-      this.$refs.menuItem.$refs.food.selected = this.menu.names[0];
-
-      for(let i = 0; i < num - 1; i++){
-        let food_index = this.menu.names[i + 1]
-        this.appendItem(food_index)
-      }
     });
+  },
+  created() {
+    console.log('menu c')
+  },
+  mounted() {
+    console.log('menu m')
+  },
+  beforeUpdate(){
+    if(this.updateMenu == false){
+      let num = this.menu.names.length
+
+      for(let i = 0; i < num; i++){
+        let food_index = this.menu.names[i]
+        let mass = this.menu.masses[i]
+        console.log(food_index)
+        this.updateItem(food_index, mass)
+      }
+      this.updateMenu = true
+    }
   },
   methods: {
     updateMenus() {
       axios
-      .patch("api/v1/menu/:logId", { menu: this.data })
+      .patch("api/v1/menu/:menuId", { menu: this.data })
       .then( res => {
         if (res.data != 'not update') {
           this.$router.push({ name: "menus" });
@@ -99,24 +111,38 @@ export default {
           this.flashMessage.error({
             message: 'メニューを更新失敗です',
             time: 2000,
-            class: 'nitification__error'
+            class: 'notification__error'
           })
         }      
       })
       .catch( error => { console.log(error) });
     },
-    appendItem(num) {
-      let ComponentClass = Vue.extend(MenuItem);
+     updateItem(food_index, massValue) {
+      let ComponentClass = Vue.extend(menuItem);
       let instance = new ComponentClass();
-      let target = document.getElementById('item_form')
+      let target = document.getElementById('item_form');
 
-      instance.$on('plus-event', this.appendItem)
-      instance.$on('reset-event', this.reset)
-      instance.$on('calculate-event', this.result)
-      instance.displayMenu = true
+      instance.$on('plus-event', this.appendItem);
+      instance.$on('reset-event', this.reset);
+      instance.$on('calculate-event', this.result);
+      instance.foodNumber = food_index;
+      instance.mass = massValue;
+      instance.displayMenu = true;
+      instance.displayMass = true;
       instance.$mount();
-      instance.$refs.food.selected = num;
-      target.append(instance.$el)
+      target.append(instance.$el);
+    },
+    appendItem() {
+      let ComponentClass = Vue.extend(menuItem);
+      let instance = new ComponentClass();
+      let target = document.getElementById('item_form');
+
+      instance.$on('plus-event', this.appendItem);
+      instance.$on('reset-event', this.reset);
+      instance.$on('calculate-event', this.result);
+      instance.displayMenu = true;
+      instance.$mount();
+      target.append(instance.$el);
     },
     reset() {
       let num = document.getElementById('item_form').childElementCount;
@@ -132,28 +158,26 @@ export default {
       }
     },
     result() {
-      this.$nextTick(() => {
-        let num = document.getElementById('item_form').childElementCount;
-        let showProtain = document.getElementsByClassName('input_form__column__box__protain');
-        let showFat = document.getElementsByClassName('input_form__column__box__fat')
-        let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate')
+      let num = document.getElementById('item_form').childElementCount;
+      let showProtain = document.getElementsByClassName('input_form__column__box__protain');
+      let showFat = document.getElementsByClassName('input_form__column__box__fat')
+      let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate')
 
-        this.protain = [];
-        this.fat = [];
-        this.carbo = [];
+      this.protain = [];
+      this.fat = [];
+      this.carbo = [];
 
-        for(let i = 0; i < num; i++) {
-          if (showProtain[i] == undefined ) { continue; }
-          this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
-          this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
-          this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
-        }
+      for(let i = 0; i < num; i++) {
+        if (showProtain[i] == undefined ) { continue; }
+        this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
+        this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
+        this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
+      }
 
-        this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
-        this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
-        this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
-        this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
-      })
+      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
+      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
+      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
+      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
     }
   }
 }
