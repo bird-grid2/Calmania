@@ -7,7 +7,7 @@ ruby '2.7.1'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
 gem 'redis-rails'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.2', '>= 1.2.3'
+gem 'pg', '~> 0.18.4'
 # Use Puma as the app server
 gem "puma", ">= 4.3.8"
 # Use SCSS for stylesheets
