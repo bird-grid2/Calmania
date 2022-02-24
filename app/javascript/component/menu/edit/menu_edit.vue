@@ -52,7 +52,7 @@ export default {
         masses: [],
         total_protain: "",
         total_fat: "",
-        total_curbohydrate: ""
+        total_carbohydrate: ""
       },
       updateMenu: false,
       protain: [],
@@ -65,31 +65,19 @@ export default {
     backGround.getEditMenusBoard(this.$route.params['menuId'])
     .then( res => {
       this.menu.material = res.data.material
-      res.data.names.forEach( elem => {
-        this.menu.names.push(Number(elem))
-      })
-      res.data.masses.forEach( elem => {
-        this.menu.masses.push(Number(elem))
-      })
+      res.data.names.forEach( elem => { this.menu.names.push(Number(elem)) })
+      res.data.masses.forEach( melem => { this.menu.masses.push(Number(melem)) })
       this.menu.total_protain = res.data.total_protain
       this.menu.total_fat = res.data.total_fat
-      this.menu.total_curbohydrate = res.data.total_curbohydrate
+      this.menu.total_carbohydrate = res.data.total_carbohydrate
     });
-  },
-  created() {
-    console.log('menu c')
-  },
-  mounted() {
-    console.log('menu m')
   },
   beforeUpdate(){
     if(this.updateMenu == false){
-      let num = this.menu.names.length
-
+      let num = this.menu.names.length;
       for(let i = 0; i < num; i++){
         let food_index = this.menu.names[i]
         let mass = this.menu.masses[i]
-        console.log(food_index)
         this.updateItem(food_index, mass)
       }
       this.updateMenu = true

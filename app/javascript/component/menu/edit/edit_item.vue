@@ -5,7 +5,7 @@
       <font-awesome-icon :icon="['fas', 'minus-circle']" class="icon" id="menu-minus" :style="iconStyle" @click="deleteAction" v-if="displayMenu" />
     </div>
     <div class='input_form__column__input_name' id='name'>
-      <food @enable-mass="turnMass" ref="food" />
+      <food @enable-mass="turnMass" ref="food" :number="foodNumber" />
       <div class="label" v-if="displayMass">
         <p>重量 [g] :</p>
         <input class="mass" id="menu_masses" type="number" name="menu[masses][]" v-model="inputMass">
@@ -53,7 +53,7 @@ export default {
       foodNumber: '',
       protainRate: '',
       fatRate: '',
-      carboHydrateRate: '',
+      carboRate: '',
       displayMass: false,
       displayCalory: false,
       displayMenu: false,
@@ -68,10 +68,16 @@ export default {
     }
   },
   components: { Food },
-  mounted() {
-    this.protainRate = backGround.getEditFoodsBoard(this.foodNumber).protainData
-    this.fatRate = backGround.getEditFoodsBoard(this.foodNumber).fatData
-    this.carboHydrateRate = backGround.getEditFoodsBoard(this.foodNumber).carboData
+  beforeMount(){
+    let a = 0; let self = this;
+    async function getData(params){
+      a = await backGround.getEditFoodsBoard(params);
+      return a
+    }
+    this.protainRate = getData(this.foodNumber);
+    console.log(this.protainRate);
+  },
+  updated() {
     console.log(this.protainRate)
   },
   methods: {
@@ -96,7 +102,7 @@ export default {
       let index = this.$refs.food.selected - 1
       this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
       this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
-      this.carbohydrate = Math.round(this.carboHydrateRate[index] * this.mass * 4) / 10
+      this.carbohydrate = Math.round(this.carboRate[index] * this.mass * 4) / 10
       return this.$emit('calculate-event')
     }
   },

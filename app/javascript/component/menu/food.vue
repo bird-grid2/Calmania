@@ -9,22 +9,28 @@
 <script>
 import backGroundService from '../../service/background.service'
 export default {
+  props: ['number'],
   data(){
     return {
       selected: '選択して下さい',
-      foods: []
+      foods: [],
+      update: false
     }
   },
   beforeCreate() {
-    backGroundService.getFoodsBoard()
-    .then( res => {
-      this.foods.push({ id: 0, food: "選択して下さい" });
-      res.data.forEach( elem => {
-        this.foods.push({ id: elem.id, food: elem.element })
-      });
-    })
-    .catch( error => { console.log(error) })
-    console.log('food beforeCreate')
+    let self = this
+    async function foodData(){
+      let fData = await backGroundService.getFoodsBoard().catch( error => { console.log(error) });
+      self.foods.push({ id: 0, food: "選択して下さい" }); 
+      await fData.data.forEach( elem => { self.foods.push({ id: elem.id, food: elem.element }) })
+    }
+    foodData();
+  },
+  beforeUpdate() {
+    if(this.update == false){
+      this.selected = this.number;
+      this.update = true;
+    }
   },
   methods: {
     enableMass() {
