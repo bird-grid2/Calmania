@@ -70,6 +70,7 @@ export default {
       this.menu.total_protain = res.data.total_protain
       this.menu.total_fat = res.data.total_fat
       this.menu.total_carbohydrate = res.data.total_carbohydrate
+      console.log(res.data)
     });
   },
   beforeUpdate(){
@@ -148,8 +149,8 @@ export default {
     result() {
       let num = document.getElementById('item_form').childElementCount;
       let showProtain = document.getElementsByClassName('input_form__column__box__protain');
-      let showFat = document.getElementsByClassName('input_form__column__box__fat')
-      let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate')
+      let showFat = document.getElementsByClassName('input_form__column__box__fat');
+      let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate');
 
       this.protain = [];
       this.fat = [];

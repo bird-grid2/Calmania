@@ -5,7 +5,7 @@
       <font-awesome-icon :icon="['fas', 'minus-circle']" class="icon" id="menu-minus" :style="iconStyle" @click="deleteAction" v-if="displayMenu" />
     </div>
     <div class='input_form__column__input_name' id='name'>
-      <food @enable-mass="turnMass" ref="food" :number="foodNumber" />
+      <food @enable-mass="turnMass" @load-food="loadCal" :number="foodNumber" />
       <div class="label" v-if="displayMass">
         <p>重量 [g] :</p>
         <input class="mass" id="menu_masses" type="number" name="menu[masses][]" v-model="inputMass">
@@ -69,16 +69,14 @@ export default {
   },
   components: { Food },
   beforeMount(){
-    let a = 0; let self = this;
+    let box = 0; let self = this;
     async function getData(params){
-      a = await backGround.getEditFoodsBoard(params);
-      return a
+      box = await backGround.getEditFoodsBoard(params);
+      self.protainRate = Number(box.data.protain_rate);
+      self.fatRate =  Number(box.data.fat_rate);
+      self.carboRate = Number(box.data.carbohydrate_rate);
     }
-    this.protainRate = getData(this.foodNumber);
-    console.log(this.protainRate);
-  },
-  updated() {
-    console.log(this.protainRate)
+    getData(this.foodNumber);
   },
   methods: {
     turnMass() {
@@ -98,12 +96,19 @@ export default {
       this.$destroy();
       this.$el.parentNode.removeChild(this.$el);
     },
-    calculateCal() {
-      let index = this.$refs.food.selected - 1
-      this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
-      this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
-      this.carbohydrate = Math.round(this.carboRate[index] * this.mass * 4) / 10
+    calculateCal(foodIndex) {
+      let index = foodIndex - 1;
+      this.protain = Math.round(this.protainRate * this.mass * 4) / 10
+      this.fat = Math.round(this.fatRate * this.mass * 9) / 10 
+      this.carbohydrate = Math.round(this.carboRate * this.mass * 4) / 10
       return this.$emit('calculate-event')
+    },
+    loadCal() {
+      console.log(this.protainRate, this.fatRate, this.carboRate)
+      this.protain = Math.round(this.protainRate * this.mass * 4) / 10
+      this.fat = Math.round(this.fatRate * this.mass * 9) / 10 
+      this.carbohydrate = Math.round(this.carboRate * this.mass * 4) / 10
+      return this.$emit('calculate-event');
     }
   },
   computed: {
@@ -123,8 +128,8 @@ export default {
   watch: {
     mass: function() {
       this.turnCalory();
-      
       this.appendMasses();
+      this.calculateCal();
     }
   }
 }

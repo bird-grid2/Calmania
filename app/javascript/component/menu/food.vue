@@ -30,6 +30,7 @@ export default {
     if(this.update == false){
       this.selected = this.number;
       this.update = true;
+      this.$emit('load-food');
     }
   },
   methods: {
