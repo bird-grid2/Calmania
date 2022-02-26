@@ -16,16 +16,16 @@
           </div>
           <div class='calculate_box__result'>
             <div class='calculate_box__result--protain'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_protain == "" ? '---' : this.menu.total_protain }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--fat'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_fat == "" ? '---' : this.menu.total_fat }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--carbohydrate'>
-              <p>--- kCal</p>
+              <h3>{{ this.menu.total_carbohydrate == "" ? '---' : this.menu.total_carbohydrate }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--total'>
-              <p>--- kCal</p>
+              <h3>{{ this.total == "" ? '---' : this.total }}</h3><p>kCal</p>
             </div>
             <div class='calculate_box__result--form'></div>
           </div>
@@ -57,7 +57,8 @@ export default {
       updateMenu: false,
       protain: [],
       fat: [],
-      carbo: []
+      carbo: [],
+      total: ""
     };
   },
   components: { menuItem },
@@ -161,6 +162,7 @@ export default {
         this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
         this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
         this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
+        if(i == 2){ console.log(showProtain[2].children[1].children[0].outerText) }
       }
 
       this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))

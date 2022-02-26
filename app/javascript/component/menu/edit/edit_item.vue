@@ -104,7 +104,6 @@ export default {
       return this.$emit('calculate-event')
     },
     loadCal() {
-      console.log(this.protainRate, this.fatRate, this.carboRate)
       this.protain = Math.round(this.protainRate * this.mass * 4) / 10
       this.fat = Math.round(this.fatRate * this.mass * 9) / 10 
       this.carbohydrate = Math.round(this.carboRate * this.mass * 4) / 10
