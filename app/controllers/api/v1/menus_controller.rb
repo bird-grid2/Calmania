@@ -4,7 +4,7 @@ class Api::V1::MenusController < ApplicationController
   before_action :set_food, only: [:food_data]
 
   def new
-    @foods = Food.all
+    @foods = Food.all.order(:id)
     render json: @foods
   end
 

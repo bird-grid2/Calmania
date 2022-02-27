@@ -58,7 +58,8 @@ export default {
       protain: [],
       fat: [],
       carbo: [],
-      total: ""
+      total: "",
+      count: 0
     };
   },
   components: { menuItem },
@@ -71,8 +72,7 @@ export default {
       this.menu.total_protain = res.data.total_protain
       this.menu.total_fat = res.data.total_fat
       this.menu.total_carbohydrate = res.data.total_carbohydrate
-      console.log(res.data)
-    });
+    }).catch(err => console.log(err));
   },
   beforeUpdate(){
     if(this.updateMenu == false){
@@ -115,6 +115,7 @@ export default {
       instance.$on('plus-event', this.appendItem);
       instance.$on('reset-event', this.reset);
       instance.$on('calculate-event', this.result);
+      instance.$on('load-calculate', this.loadResult);
       instance.foodNumber = food_index;
       instance.mass = massValue;
       instance.displayMenu = true;
@@ -147,6 +148,23 @@ export default {
         this.menu.masses.push(parseFloat(val[i].value));
       }
     },
+    loadResult(...args) {
+      let list = [];
+      list = args;
+      
+      if (list != [] ) {
+        if(this.count == 0){ this.protain = []; this.fat = []; this.carbo = []; }
+        this.protain.push(parseFloat(list[0]));
+        this.fat.push(parseFloat(list[1]));
+        this.carbo.push(parseFloat(list[2]));
+      }
+
+      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0));
+      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0));
+      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0));
+      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate);
+      this.count += 1;
+    },
     result() {
       let num = document.getElementById('item_form').childElementCount;
       let showProtain = document.getElementsByClassName('input_form__column__box__protain');
@@ -162,7 +180,6 @@ export default {
         this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
         this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
         this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
-        if(i == 2){ console.log(showProtain[2].children[1].children[0].outerText) }
       }
 
       this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
