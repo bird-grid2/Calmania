@@ -29,8 +29,15 @@ export default {
   beforeUpdate() {
     if(this.update == false){
       this.selected = this.number;
-      this.update = true;
-      this.$emit('load-food');
+
+      if(this.selected == ''){ this.selected = '選択して下さい' }
+
+      if(this.selected == '選択して下さい'){
+        this.update = true;
+      } else {
+        this.update = true;
+        this.$emit('load-food');
+      }
     }
   },
   methods: {

@@ -136,17 +136,25 @@ export default {
       target.append(instance.$el);
     },
     reset() {
-      let num = document.getElementById('item_form').childElementCount;
-      let val = document.getElementsByClassName('mass');
-      let foodVal = document.getElementsByClassName('select_value');
-      this.menu.masses = [];
-      this.menu.names = [];
-      
-      for(let i = 0; i < num; i++) {
-        if (foodVal[i].innerHTML == 0) { continue; }
-        this.menu.names.push(parseFloat(foodVal[i].innerHTML));
-        this.menu.masses.push(parseFloat(val[i].value));
-      }
+      this.$nextTick(() => {
+        let num = document.getElementById('item_form').childElementCount;
+        let val = document.getElementsByClassName('mass');
+        let foodVal = document.getElementsByClassName('select_value');
+        this.menu.masses = [];
+        this.menu.names = [];
+        
+        for(let i = 0; i < num; i++) {
+          if (foodVal[i].innerHTML == "選択して下さい") { continue; }
+          this.menu.names.push(Number(foodVal[i].innerHTML));
+          if (val.length != foodVal.length && i == num -1) {
+            this.menu.masses.push(parseFloat(val[(i - 1)].value));
+          }else{
+            this.menu.masses.push(parseFloat(val[i].value));
+          }
+        }
+
+        this.result();
+      });
     },
     loadResult(...args) {
       let list = [];
@@ -166,26 +174,28 @@ export default {
       this.count += 1;
     },
     result() {
-      let num = document.getElementById('item_form').childElementCount;
-      let showProtain = document.getElementsByClassName('input_form__column__box__protain');
-      let showFat = document.getElementsByClassName('input_form__column__box__fat');
-      let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate');
+      this.$nextTick(() => {
+        let num = document.getElementById('item_form').childElementCount;
+        let showProtain = document.getElementsByClassName('input_form__column__box__protain');
+        let showFat = document.getElementsByClassName('input_form__column__box__fat');
+        let showCarbo = document.getElementsByClassName('input_form__column__box__carbohydrate');
 
-      this.protain = [];
-      this.fat = [];
-      this.carbo = [];
+        this.protain = [];
+        this.fat = [];
+        this.carbo = [];
 
-      for(let i = 0; i < num; i++) {
-        if (showProtain[i] == undefined ) { continue; }
-        this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
-        this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
-        this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
-      }
+        for(let i = 0; i < num; i++) {
+          if (showProtain[i] == undefined ) { continue; }
+          this.protain.push(parseFloat(showProtain[i].children[1].children[0].innerHTML))
+          this.fat.push(parseFloat(showFat[i].children[1].children[0].innerHTML))
+          this.carbo.push(parseFloat(showCarbo[i].children[1].children[0].innerHTML))
+        }
 
-      this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0))
-      this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0))
-      this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0))
-      this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate)
+        this.menu.total_protain = Math.round(this.protain.reduce((num, elem) => num += elem, 0));
+        this.menu.total_fat = Math.round(this.fat.reduce((num, elem) => num += elem, 0));
+        this.menu.total_carbohydrate = Math.round(this.carbo.reduce((num, elem) => num += elem, 0));
+        this.total = Math.round(this.menu.total_protain + this.menu.total_fat + this.menu.total_carbohydrate);
+      });
     }
   }
 }

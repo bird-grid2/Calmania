@@ -51,9 +51,12 @@ export default {
       carbohydrate: 0.00,
       mass: '',
       foodNumber: '',
-      protainRate: '',
-      fatRate: '',
-      carboRate: '',
+      protainRate: [],
+      fatRate: [],
+      carboRate: [],
+      pRate: '',
+      fRate: '',
+      cRate: '',
       displayMass: false,
       displayCalory: false,
       displayMenu: false,
@@ -68,13 +71,25 @@ export default {
     }
   },
   components: { Food },
+  created() {
+    backGround.getFoodsBoard()
+    .then( res => {
+      res.data.forEach( elem => {
+        this.protainRate.push(elem.protain_rate)
+        this.fatRate.push(elem.fat_rate)
+        this.carboRate.push(elem.carbohydrate_rate)
+      });
+    })
+    .catch( error => { console.log(error) })
+  },
   beforeMount(){
     let box = 0; let self = this;
     async function getData(params){
+      if(self.foodNumber == 0) { return; }
       box = await backGround.getEditFoodsBoard(params).catch(err => console.log(err));
-      self.protainRate = Number(box.data.protain_rate);
-      self.fatRate =  Number(box.data.fat_rate);
-      self.carboRate = Number(box.data.carbohydrate_rate);
+      self.pRate = Number(box.data.protain_rate);
+      self.fRate =  Number(box.data.fat_rate);
+      self.cRate = Number(box.data.carbohydrate_rate);
     }
     getData(this.foodNumber);
   },
@@ -96,18 +111,18 @@ export default {
       this.$destroy();
       this.$el.parentNode.removeChild(this.$el);
     },
-    calculateCal(foodIndex) {
-      let index = foodIndex - 1;
-      this.protain = Math.round(this.protainRate * this.mass * 4) / 10
-      this.fat = Math.round(this.fatRate * this.mass * 9) / 10 
-      this.carbohydrate = Math.round(this.carboRate * this.mass * 4) / 10
-      console.log(this.protain, this.fat, this.carbohydrate);
-      return this.$emit('calculate-event')
+    calculateCal() {
+      let index = this.$refs.food.selected - 1;
+
+      this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
+      this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
+      this.carbohydrate = Math.round(this.carboRate[index] * this.mass * 4) / 10
+      return this.$emit('calculate-event');
     },
     loadCal() {
-      this.protain = Math.round(this.protainRate * this.mass * 4) / 10
-      this.fat = Math.round(this.fatRate * this.mass * 9) / 10 
-      this.carbohydrate = Math.round(this.carboRate * this.mass * 4) / 10
+      this.protain = Math.round(this.pRate * this.mass * 4) / 10
+      this.fat = Math.round(this.fRate * this.mass * 9) / 10 
+      this.carbohydrate = Math.round(this.cRate * this.mass * 4) / 10
       return this.$emit('load-calculate', this.protain, this.fat, this.carbohydrate);
     }
   },
@@ -128,8 +143,8 @@ export default {
   watch: {
     mass: function() {
       this.turnCalory();
-      this.appendMasses();
       this.calculateCal();
+      this.appendMasses();
     }
   }
 }
