@@ -53,12 +53,9 @@ class Api::V1::MenusController < ApplicationController
 
   def update
     if @menu.update(menu_params)
-      redirect_to api_v1_menus_path, notice: 'メニューを更新しました'
-      render json: { status: 'SUCCESS', data: @menu }
+      render json: "update menu"
     else
-      flash.now[:alert] = 'メニュー更新を失敗しました'
-      render json: { status: 'ERROR', data: @menu.errors }
-      redirect_back(fallback_location: ap1_v1_root_path)
+      render json: "not update menu"
     end
   end
 

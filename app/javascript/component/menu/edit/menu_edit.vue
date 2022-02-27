@@ -41,7 +41,8 @@
 
 <script>
 import Vue from 'vue';
-import menuItem from './edit_item.vue'
+import menuItem from './edit_item.vue';
+import sendService from '../../../service/send.service';
 import backGround from '../../../service/background.service';
 export default {
   data() {
@@ -87,10 +88,10 @@ export default {
   },
   methods: {
     updateMenus() {
-      axios
-      .patch("api/v1/menu/:menuId", { menu: this.data })
+      sendService
+      .updateMenu(this.$route.params['menuId'], this.menu)
       .then( res => {
-        if (res.data != 'not update') {
+        if (res.data != "not update menu") {
           this.$router.push({ name: "menus" });
           this.flashMessage.success({
             message: 'メニューを更新完了しました',

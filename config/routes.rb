@@ -38,16 +38,16 @@ Rails.application.routes.draw do
         end
       end
 
-      get '/', to: 'shows#index'
-      get '/management', to: 'shows#index'
-      get '/menus', to: 'shows#index'
-      get '/menu/:menuId/edit', to: 'shows#index'
-      get '/log', to: 'shows#index'
-      get '/log/:logId/edit', to: 'shows#index'
-      get '/signIn', to: 'shows#index'
-      get '/signUp', to: 'shows#index'
-      get '/user/:userId/edit', to: 'shows#index'
-      get '/graph', to: 'shows#index'
+      get '/', to: 'api/v1/shows#index'
+      get '/management', to: 'api/v1/shows#index'
+      get '/menus', to: 'api/v1/shows#index'
+      get '/menu/:menuId/edit', to: 'api/v1/shows#index'
+      get '/log', to: 'api/v1/shows#index'
+      get '/log/:logId/edit', to: 'api/v1/shows#index'
+      get '/signIn', to: 'api/v1/shows#index'
+      get '/signUp', to: 'api/v1/shows#index'
+      get '/user/:userId/edit', to: 'api/v1/shows#index'
+      get '/graph', to: 'api/v1/shows#index'
       get '/menus/new', to: 'menus#new'
     end
   end

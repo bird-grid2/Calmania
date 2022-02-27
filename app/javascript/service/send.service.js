@@ -21,6 +21,9 @@ class  SendSevice {
   postMenu(input) {
     return instance.post('api/v1/menus', { menu: input });
   }
+  updateMenu(menuId, input){
+    return instance.patch(`api/v1/menus/${ menuId }`, { menu: input});
+  }
   postLog(input) {
     return instance.post('api/v1/logs', { log: input });
   }
