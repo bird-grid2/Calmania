@@ -66,8 +66,8 @@
 
 <script>
 import Vue from 'vue';
-import sendService from '../service/send.service';
-import logItem from './log/log_item.vue';
+import sendService from '../../../service/send.service';
+import logItem from '../log_item.vue';
 export default {
   data() {
     return {
@@ -100,7 +100,6 @@ export default {
       sendService.postLog(this.logs)
       .then( res => {
         if (res.data != 'not create log') {
-          console.log(res)
           this.$router.push({ name: "logs", params: { userId: this.getId } });
           this.flashMessage.success({
             message: 'ログを作成しました',

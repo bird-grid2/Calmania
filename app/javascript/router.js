@@ -7,8 +7,8 @@ import Menu from "./component/menu.vue";
 import editMenu from "./component/menu/edit/menu_edit.vue";
 import createMenu from "./component/menu/create/menu_create.vue"
 import Log from "./component/log.vue";
-import editLog from "./component/log_edit.vue";
-import createLog from "./component/log_create.vue";
+import editLog from "./component/log/edit/log_edit.vue";
+import createLog from "./component/log/create/log_create.vue";
 import signIn from "./component/devise/sessions/log_in.vue";
 import signUp from "./component/devise/registrations/new.vue";
 import editUser from "./component/devise/registrations/edit.vue";

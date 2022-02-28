@@ -117,12 +117,14 @@ export default {
       this.protain = Math.round(this.protainRate[index] * this.mass * 4) / 10
       this.fat = Math.round(this.fatRate[index] * this.mass * 9) / 10 
       this.carbohydrate = Math.round(this.carboRate[index] * this.mass * 4) / 10
+      console.log(index, this.protainRate[index], this.fatRate[index], this.carboRate[index])
       return this.$emit('calculate-event');
     },
     loadCal() {
       this.protain = Math.round(this.pRate * this.mass * 4) / 10
       this.fat = Math.round(this.fRate * this.mass * 9) / 10 
       this.carbohydrate = Math.round(this.cRate * this.mass * 4) / 10
+      
       return this.$emit('load-calculate', this.protain, this.fat, this.carbohydrate);
     }
   },

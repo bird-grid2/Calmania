@@ -54,20 +54,6 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def edit
-    @menus = Menu.all
-    menu = []
-    num = []
-
-    @menus.each_with_index do |log, _|
-      menu << log
-    end
-    gon.menu = menu
-
-    @log.menu_numbers.each do |log|
-      num << log
-    end
-    gon.edit = num
-
     if @log.present?
       render json: @log
     else

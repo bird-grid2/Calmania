@@ -18,20 +18,20 @@ class  BackgroundSevice {
   getLogsBoard() {
     return instance.get('/api/v1/logs');
   }
-  getEditLogsBoard() {
-    return instance.get('api/v1/logs/edit')
+  getEditLogsBoard(args) {
+    return instance.get('api/v1/logs/edit', {params: { logId: args}})
   }
   getMenusBoard() {
     return instance.get('/api/v1/menus');
   }
-  getEditMenusBoard(params) {
-    return instance.get('api/v1/menus/edit', { params: { id: params }})
+  getEditMenusBoard(args) {
+    return instance.get('api/v1/menus/edit', { params: { id: args }})
   }
   getFoodsBoard() {
     return instance.get('/api/v1/menus/new');
   }
-  getEditFoodsBoard(params) {
-    return instance.get('/api/v1/menus/food_data', { params: { id: params } })
+  getEditFoodsBoard(args) {
+    return instance.get('/api/v1/menus/food_data', { params: { id: args } })
   }
 }
 
