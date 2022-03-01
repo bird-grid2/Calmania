@@ -27,6 +27,9 @@ class  SendSevice {
   postLog(input) {
     return instance.post('api/v1/logs', { log: input });
   }
+  updateLog(logId, input) {
+    return instance.patch(`api/v1/logs/${logId}`, { log: input });
+  }
   postLogSearch(input) {
     return instance.post('api/v1/logs/search', { keyword: input });
   }

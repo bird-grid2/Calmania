@@ -90,6 +90,6 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def set_log
-    @log = Log.find(params[:logId])
+    @log = Log.find(params[:id])
   end
 end

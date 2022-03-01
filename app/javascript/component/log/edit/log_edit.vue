@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-          <input @click="creatLogs" type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
+          <input @click="updateLogs" type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
           <router-link class="btn" to="/logs">キャンセル</router-link>
         </div>
       </form>
@@ -74,8 +74,9 @@
 
 <script>
 import Vue from 'vue';
-import backGround from '../../../service/background.service';
 import logItem from '../log_item.vue';
+import backGround from '../../../service/background.service';
+import sendService from '../../../service/send.service';
 export default {
   data() {
     return {
@@ -100,27 +101,53 @@ export default {
     }
   },
   beforeCreate() {
-    let self = this
+    let self = this;
+    let bgData = 0;
     loadLogs(this.$route.params['logId']);
 
     async function loadLogs(args){
-      let bgData = await backGround.getLogsBoard(args).catch(err => console.log(err));
-      self.logs.date = bgData.data.logs.date;
-      self.logs.weight = bgData.data.logs.weight;
-      self.logs.bfp = bgData.data.logs.bfp;
-      self.logs.description = bgData.data.logs.description;
-      bgData.data.logs.menu_numbers.forEach(elem => { self.logs.menu_numbers.push(Number(elem)); })
+      bgData = await backGround.getEditLogsBoard(args).catch(err => console.log(err));
+      self.logs.date = bgData.data.date;
+      self.logs.weight = bgData.data.weight;
+      self.logs.bfp = bgData.data.bfp;
+      self.logs.description = bgData.data.description;
+      bgData.data.menu_numbers.forEach(elem => { self.logs.menu_numbers.push(Number(elem)); })
     }
-    console.log(this.logs)
   },
   created() {
 
   },
   methods: {
-    createLogs() {
-      axios
-      .post("api/v1/Logs/update", { log: this.logs })
-      .then( (response)=> { this.$router.push({ path: "/log" }); }, (error)=> { console.log(error); });
+    updateLogs(){
+      sendService
+      .updateLog(this.logs)
+      .then( res => {
+        if (res.data != 'not update log') {
+          this.$router.push({ name: "logs", params: { userId: this.getId } });
+          this.flashMessage.success({
+            message: 'ログを作成しました',
+            time: 3000,
+            class: 'notification__success'
+          })
+        }else{
+          this.flashMessage.error({
+            message: 'ログを作成失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          })
+        }
+      }).catch(err => console.log(err));
+    }
+  },
+  computed: {
+    protainShow: function() {
+      return this.totalProtain.reduce( (sum, elem) => sum += elem, 0)
+    },
+    fatShow: function() {
+      return this.totalFat.reduce( (sum, elem) => sum +=elem, 0)
+    },
+    carboShow: function() {
+      return this.totalCarbohydrate.reduce( (sum, elem) => sum += elem, 0)
     }
   }
 }

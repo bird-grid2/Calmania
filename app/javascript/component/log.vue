@@ -39,7 +39,7 @@
             </tr>
             <tr v-show="searchView" v-for="log in logs" :key="log.id">
               <td class='table-icon'>
-                <router-link to="logs/#{log.id}/edit">
+                <router-link :to="{ name: 'editLog', params: { logId: log.id }}">
                   <font-awesome-icon :icon="['fas', 'edit']" :style="iconStyle" />
                 </router-link>
                 <span></span>

@@ -19,7 +19,7 @@ class  BackgroundSevice {
     return instance.get('/api/v1/logs');
   }
   getEditLogsBoard(args) {
-    return instance.get('api/v1/logs/edit', {params: { logId: args}})
+    return instance.get('api/v1/logs/edit', {params: { id: args}})
   }
   getMenusBoard() {
     return instance.get('/api/v1/menus');
