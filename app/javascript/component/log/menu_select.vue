@@ -1,13 +1,9 @@
 <template>
   <fieldset>
-    <select name="log[menu_numbers][]" id="log_menu_numbers" @change="calculateItem">
-      <template v-for="(menu, index) in menus" >
-        <option  :value="index" :key="index">{{menu}}</option>
-      </template>
-    </select>
+    <v-select class="menu_index" id="log_menu_numbers" :options="menus" label="material" v-model="inputMenu" :reduce="menus => menus.id" />
+    <p class='select_value' :style="{display: 'none' }">{{ selected }}</p>
   </fieldset>  
 </template>
-
 
 <script>
 import backGroundService from '../../service/background.service'
@@ -17,30 +13,44 @@ export default {
       menus: [],
       total_protain: [],
       total_fat: [],
-      total_carbohydrate: []
+      total_carbohydrate: [],
+      selected: 0
     }
   },
-  mounted() {
+  created() {
     backGroundService.getMenusBoard()
     .then( res => {
-      this.menus.push("メニューを選択して下さい");
+      this.menus.push({ id: 0, material: "メニューを選択して下さい" });
       res.data.forEach( elem => {
-        this.menus.push(elem.material)
+        this.menus.push({ id: elem.id, material: elem.material })
         this.total_protain.push(Number(elem.total_protain))
         this.total_fat.push(Number(elem.total_fat))
         this.total_carbohydrate.push(Number(elem.total_carbohydrate))
       });
     })
     .catch( error => { console.log(error) })
+    console.log('select bc')
   },
   methods: {
-    calculateItem(e) {
-      let num = e.target.options.selectedIndex - 1
+    calculateItem(args) {
+      let num = args - 1
 
       if (num == -1) {
         this.$emit('delete-event')
       }else{
         this.$emit('calculate-event', [ this.total_protain[num], this.total_fat[num], this.total_carbohydrate[num] ])
+      }
+    }
+  },
+  computed: {
+    inputMenu: {
+      get() {
+        return this.selected;
+      },
+      set(val) {
+        console.log(val);
+        this.selected = val;
+        this.calculateItem(val);
       }
     }
   }

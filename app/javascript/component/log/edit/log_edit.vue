@@ -21,16 +21,7 @@
             <p>コメント :</p> 
             <textarea class="comment" name="log[description]" id="log_description" v-model="logs.description"></textarea>
           </div>
-          <div class='menu_columns'>
-            <div class='menu_columns__col'>
-              <div class='menu_columns__col__label'>
-                <i class='fas fa-plus-circle icon' id='menu-plus'></i>
-              </div>
-              <div class='input_name'>
-                <select name="log[menu_numbers][]" id="log_menu_numbers"></select>
-              </div>
-              <div class='input_name_box_0#box'></div>
-            </div>
+          <div class='menu_columns' id='target'>
           </div>
         </div>
         <div class='bottom_content'>
@@ -74,7 +65,7 @@
 
 <script>
 import Vue from 'vue';
-import logItem from '../log_item.vue';
+import logItem from './log_edit_item.vue';
 import backGround from '../../../service/background.service';
 import sendService from '../../../service/send.service';
 export default {
@@ -97,9 +88,11 @@ export default {
       },
       totalProtain: [],
       totalFat: [],
-      totalCarbohydrate: []
+      totalCarbohydrate: [],
+      index: 0
     }
   },
+  components: { logItem },
   beforeCreate() {
     let self = this;
     let bgData = 0;
@@ -111,11 +104,12 @@ export default {
       self.logs.weight = bgData.data.weight;
       self.logs.bfp = bgData.data.bfp;
       self.logs.description = bgData.data.description;
-      bgData.data.menu_numbers.forEach(elem => { self.logs.menu_numbers.push(Number(elem)); })
+      bgData.data.menu_numbers.forEach(elem => { 
+        self.logs.menu_numbers.push(Number(elem)); 
+        self.loadItem(elem);
+      });
+      console.log('menu bc');
     }
-  },
-  created() {
-
   },
   methods: {
     updateLogs(){
@@ -125,18 +119,72 @@ export default {
         if (res.data != 'not update log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });
           this.flashMessage.success({
-            message: 'ログを作成しました',
+            message: 'ログを更新しました',
             time: 3000,
             class: 'notification__success'
           })
         }else{
           this.flashMessage.error({
-            message: 'ログを作成失敗しました',
+            message: 'ログを更新失敗しました',
             time: 2000,
             class: 'notification__error'
           })
         }
       }).catch(err => console.log(err));
+    },
+    appendItem() {
+      let ComponentClass = Vue.extend(logItem);
+      let instance = new ComponentClass();
+      let target = document.getElementById('target')
+
+      instance.$on('plus-event', this.appendItem)
+      instance.$on('reset-event', this.updateItem)
+      instance.$on('calculate-event', this.updateItem)
+      instance.minus = true
+      instance.$mount();
+      target.append(instance.$el);
+      this.index += 1;
+    },
+    loadItem(args) {
+      let ComponentClass = Vue.extend(logItem);
+      let instance = new ComponentClass();
+      let target = document.getElementById('target')
+
+      instance.$on('plus-event', this.appendItem)
+      instance.$on('reset-event', this.updateItem)
+      instance.$on('calculate-event', this.updateItem)
+      this.index == 0 ? instance.minus = false : instance.minus = true
+      console.log(args)
+      instance.menuNumber = args;
+      instance.$mount();
+      target.append(instance.$el);
+      this.index += 1;
+    },
+    updateItem() {
+      this.$nextTick(() => {
+        let num = document.getElementById('target').childElementCount;
+        let protain = document.getElementsByName('total_protain');
+        let fat = document.getElementsByName('total_fat');
+        let carbo = document.getElementsByName('total_carbohydrate');
+        let index = document.getElementsByName('select_value')
+        this.totalProtain = [];
+        this.totalFat = [];
+        this.totalCarbohydrate = [];
+        this.logs.menu_numbers = [];
+
+        for(let i = 0; i < num;  i++) {
+          this.totalProtain.push(Number(protain[i].innerText))
+          this.totalFat.push(Number(fat[i].innerText))
+          this.totalCarbohydrate.push(Number(carbo[i].innerText))
+          if (index[i].innerText == "0") { continue; }
+          this.logs.menu_numbers.push(Number(index[i].innerText))
+        }
+
+        let value_1 = this.protainShow;
+        let value_2 = this.fatShow;
+        let value_3 = this.carboShow;
+        this.logs.total_cal = Math.round( value_1 + value_2 + value_3 );
+      })
     }
   },
   computed: {

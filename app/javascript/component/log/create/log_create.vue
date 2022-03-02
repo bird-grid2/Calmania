@@ -67,7 +67,7 @@
 <script>
 import Vue from 'vue';
 import sendService from '../../../service/send.service';
-import logItem from '../log_item.vue';
+import logItem from './log_item.vue';
 export default {
   data() {
     return {
@@ -134,7 +134,8 @@ export default {
         let protain = document.getElementsByName('total_protain');
         let fat = document.getElementsByName('total_fat');
         let carbo = document.getElementsByName('total_carbohydrate');
-        let index = document.getElementsByName('log[menu_numbers][]')
+        let index = document.getElementsByClassName('select_value');
+        console.log(index);
         this.totalProtain = [];
         this.totalFat = [];
         this.totalCarbohydrate = [];
@@ -144,8 +145,8 @@ export default {
           this.totalProtain.push(Number(protain[i].innerText))
           this.totalFat.push(Number(fat[i].innerText))
           this.totalCarbohydrate.push(Number(carbo[i].innerText))
-          if (index[i].options.selectedIndex == 0) { continue; }
-          this.logs.menu_numbers.push(Number(index[i].options.selectedIndex))
+          if (index[i].innerText == "0") { continue; }
+          this.logs.menu_numbers.push(Number(index[i].innerText))
         }
 
         let value_1 = this.protainShow;

@@ -22,7 +22,7 @@ class  BackgroundSevice {
     return instance.get('api/v1/logs/edit', {params: { id: args}})
   }
   getMenusBoard() {
-    return instance.get('/api/v1/menus');
+    return instance.get('/api/v1/logs/menu_data');
   }
   getEditMenusBoard(args) {
     return instance.get('api/v1/menus/edit', { params: { id: args }})

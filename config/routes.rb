@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resources :logs, except: :show do
         collection do
           get :edit
+          get :menu_data
           post :search
           post :dsearch
         end

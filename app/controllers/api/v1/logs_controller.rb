@@ -3,16 +3,8 @@ class Api::V1::LogsController < ApplicationController
   before_action :set_log, only: [:edit, :update, :destroy]
 
   def new
-    @log = Log.new
-    @menus = Menu.all
-
-    menu = []
-
-    @menus.each_with_index do |log, _|
-      menu << log
-    end
-
-    gon.menu = menu
+    @logs = Menu.all.order(:id)
+    render json: @logs
   end
 
   def create
@@ -81,6 +73,11 @@ class Api::V1::LogsController < ApplicationController
       render json: { status: 'ERROR', data: @log.errors }
       redirect_back(fallback_location: ap1_v1_root_path)
     end
+  end
+
+  def menu_data
+    @menus = Menu.all.order(:id)
+    render json: @menus
   end
 
   private
