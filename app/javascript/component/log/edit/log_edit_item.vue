@@ -5,7 +5,7 @@
       <font-awesome-icon :icon="['fas', 'minus-circle']" id='menu-minus' :style="iconStyle" @click="deleteAction" v-if="minus" />
     </div>
     <div class='input_name'>
-      <menu-select @delete-event="deleteItem" @calculate-event="calculateEvent($event)" />
+      <menu-select @delete-event="deleteItem" @calculate-event="calculateEvent($event)" :number="menuNumber" />
     </div>
     <div class='input_name_box' id='box' v-show="caloryShow" >
       <div class="show_protain" >
@@ -41,8 +41,7 @@
 </template>
 
 <script>
-import menuSelect from '../menu_select.vue'
-import background from '../../../service/background.service'
+import menuSelect from './log_edit_select.vue'
 export default {
   data() {
     return {
@@ -62,21 +61,6 @@ export default {
     }
   },
   components: { menuSelect },
-  created() {
-    let mData = 0;
-    let self = this;
-    console.log(this.menuNumber)
-    loadMenu(this.menuNumber);
-    console.log('item c');
-
-    async function loadMenu(args){
-     mData = await background.getEditMenusBoard(args).catch(err => console.log(err));
-     self.protain = mData.data.total_protain;
-     self.fat = mData.data.total_fat;
-     self.carbohydrate = mData.data.total_carbohydrate;
-     self.caloryShow = true;
-    }
-  },
   methods: {
     plusItem() {
       this.$emit('plus-event');

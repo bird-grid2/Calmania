@@ -1,7 +1,7 @@
 <template>
   <div class='wrapper'>
     <div class='logs_create_wrapper'>
-      <form id="logs" action="/logs" accept-charset="UTF-8" method="post">
+      <form @submit.prevent id="logs" action="/api/v1/logs" accept-charset="UTF-8" method="patch">
         <div class='input-form'>
           <div class='upper_content'>
             <div class='input_column'>
@@ -55,8 +55,8 @@
               </div>
             </div>
           </div>
-          <input @click="updateLogs" type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
-          <router-link class="btn" to="/logs">キャンセル</router-link>
+          <input @click="updateLogs" type="submit" name="commit" value="ログ更新" class="btn">
+          <router-link class="linkbtn" :to="{ name: 'logs', params: {userId: this.getId()} }"><p>キャンセル</p></router-link>
         </div>
       </form>
     </div>
@@ -108,16 +108,18 @@ export default {
         self.logs.menu_numbers.push(Number(elem)); 
         self.loadItem(elem);
       });
-      console.log('menu bc');
     }
   },
   methods: {
+    getId() {
+      return JSON.parse(sessionStorage.getItem('user')).user.id
+    },
     updateLogs(){
       sendService
-      .updateLog(this.logs)
+      .updateLog(this.$route.params['logId'], this.logs)
       .then( res => {
         if (res.data != 'not update log') {
-          this.$router.push({ name: "logs", params: { userId: this.getId } });
+          this.$router.push({ name: "logs", params: { userId: this.getId() } });
           this.flashMessage.success({
             message: 'ログを更新しました',
             time: 3000,
@@ -154,7 +156,6 @@ export default {
       instance.$on('reset-event', this.updateItem)
       instance.$on('calculate-event', this.updateItem)
       this.index == 0 ? instance.minus = false : instance.minus = true
-      console.log(args)
       instance.menuNumber = args;
       instance.$mount();
       target.append(instance.$el);
@@ -166,7 +167,7 @@ export default {
         let protain = document.getElementsByName('total_protain');
         let fat = document.getElementsByName('total_fat');
         let carbo = document.getElementsByName('total_carbohydrate');
-        let index = document.getElementsByName('select_value')
+        let menuIndex = document.getElementsByClassName('select_value');
         this.totalProtain = [];
         this.totalFat = [];
         this.totalCarbohydrate = [];
@@ -176,8 +177,8 @@ export default {
           this.totalProtain.push(Number(protain[i].innerText))
           this.totalFat.push(Number(fat[i].innerText))
           this.totalCarbohydrate.push(Number(carbo[i].innerText))
-          if (index[i].innerText == "0") { continue; }
-          this.logs.menu_numbers.push(Number(index[i].innerText))
+          if (menuIndex[i].innerText == "0") { continue; }
+          this.logs.menu_numbers.push(Number(menuIndex[i].innerText))
         }
 
         let value_1 = this.protainShow;

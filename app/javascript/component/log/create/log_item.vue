@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import menuSelect from '../menu_select.vue'
+import menuSelect from './menu_select.vue'
 export default {
   data() {
     return {

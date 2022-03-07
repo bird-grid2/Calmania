@@ -183,11 +183,23 @@
           height: 70%;
           width: 15%;
           color: white;
-          background-color: $maincolor;
           text-align: center;
+          background-color: $maincolor;
           font-size: 20px;
-          line-height: 35px;
           margin-left: 15px;
+        }
+        .linkbtn{
+          height: 70%;
+          width: 15%;
+          display: block;
+          color: white;
+          background-color: $maincolor;
+          margin-left: 15px;
+          p {
+            text-align: center;
+            line-height: 2.524em;
+            font-size: 20px;
+          }
         }
       }
     }
