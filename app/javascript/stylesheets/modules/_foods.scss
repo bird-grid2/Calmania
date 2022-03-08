@@ -155,14 +155,29 @@
         align-items: center;
         .btn{
           display: block;
-          height: 50px;
-          width: 150px;
+          height: 70%;
+          width: 20%;
           margin: 0 10px;
           text-align: center;
           background-color: $maincolor;
           color: white;
           font-size: 20px;
-          line-height: 45px;
+          line-height: 2.524em;
+          padding: 0;
+          border: none;
+        }
+        .linkbtn{
+          height: 70%;
+          width: 20%;
+          display: block;
+          color: white;
+          background-color: $maincolor;
+          margin-left: 15px;
+          p {
+            text-align: center;
+            line-height: 2.524em;
+            font-size: 20px;
+          }
         }
       }
     }

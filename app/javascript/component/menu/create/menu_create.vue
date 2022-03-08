@@ -33,8 +33,8 @@
           </div>
         </div>
         <div class='bottom_menu_content'>
-          <input @click="createMenus" type="submit" name="commit" value="メニュー作成" class="btn" data-disable-with="メニュー作成">
-          <router-link class="btn" to="/menus">キャンセル</router-link>
+          <input @click="createMenus" type="submit" name="commit" value="メニュー作成" class="btn">
+          <router-link class="linkbtn" to="/menus"><p>キャンセル</p></router-link>
         </div>
       </form>
     </div>

@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-          <input @click="createLogs" type="submit" name="commit" value="ログ作成" class="btn" data-disable-with="ログ作成">
+          <input @click="createLogs" type="submit" name="commit" value="ログ作成" class="btn">
           <router-link class="linkbtn"  :to="{ name: 'logs', params: {userId: this.getId()} }"><p>キャンセル</p></router-link>
         </div>
       </form>

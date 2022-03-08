@@ -192,6 +192,8 @@
           background-color: $maincolor;
           font-size: 20px;
           margin-left: 15px;
+          border: none;
+          padding: 0;
         }
         .linkbtn{
           height: 70%;
@@ -202,7 +204,7 @@
           margin-left: 15px;
           p {
             text-align: center;
-            line-height: 2.524em;
+            line-height: 3.0275em;
             font-size: 20px;
           }
         }

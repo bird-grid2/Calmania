@@ -53,6 +53,6 @@ class Api::V1::ManagementsController < ApplicationController
 
     @period = Log.where(created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
     @cal = Log.where(created_at: (date_time - 1.day)..date_time)
-    @menus = Menu.all
+    @menus = Menu.all.order(:id)
   end
 end

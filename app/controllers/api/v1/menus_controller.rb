@@ -18,9 +18,9 @@ class Api::V1::MenusController < ApplicationController
   end
 
   def index
-    @menus = Menu.all.order(id: 'ASC')
+    @menus = Menu.all.order(:id)
 
-    return if @menus.blank?
+    return if @menus.nil?
 
     render json: @menus
   end
@@ -61,11 +61,9 @@ class Api::V1::MenusController < ApplicationController
 
   def destroy
     if @menu.destroy
-      redirect_to api_v1_menus_path, notice: 'メニューを削除しました'
+      render json: "delete menu"
     else
-      flash.now[:alert] = 'メニュー削除を失敗しました'
-
-      redirect_back(fallback_location: ap1_v1_root_path)
+      render json: "not delete menu"
     end
   end
 

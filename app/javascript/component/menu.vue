@@ -34,12 +34,12 @@
             <tr v-show="searchView" v-for="(menu, index) in menus" :key="menu.id">
               <td class='table-icon'>
                 <router-link :to="{name: 'menuEdit', params: { menuId: menu.id }}">
-                  <font-awesome-icon :icon="['fas', 'edit']" class="fas"></font-awesome-icon>
+                  <font-awesome-icon :icon="['fas', 'edit']" class="fas" :style="iconStyle"></font-awesome-icon>
                 </router-link>
                 <span />
-                <router-link to="/menus/#{menu.id}"  data-confirm="本当に削除しますか?"  method="delete">
-                  <font-awesome-icon :icon="['fas', 'trash-alt']" class="fas"></font-awesome-icon>
-                </router-link>
+                <button @click="deleteAction(menu.id, menu)" > <!-- data-confirm="本当に削除しますか?" -->
+                  <font-awesome-icon :icon="['fas', 'trash-alt']" class="fas" :style="iconStyle"></font-awesome-icon>
+                </button>
               </td>
               <td class='table-item'>
                 {{menu.material}}
@@ -81,7 +81,7 @@ export default {
         display: 'block',
         width: '100%',
         color: 'white',
-        fontSize: '3.5rem',
+        fontSize: '2.5rem',
         marginBottom: '5%'
       },
       searchView: true
@@ -130,6 +130,26 @@ export default {
         }
       })
       .catch( error => { console.log(error) });
+    },
+    deleteAction(index, params) {
+      sendService.deleteMenu(index, params)
+      .then( res => {
+        if (res.data != 'not delete menu') {
+          this.$router.push({ name: "menus", force: true});
+          this.flashMessage.success({
+            message: 'メニューを削除しました',
+            time: 3000,
+            class: 'notification__success'
+          })
+        }else{
+          this.flashMessage.error({
+            message: 'メニューを削除失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          })
+        }
+      })
+      .catch( error => { console.log(error); });
     }
   }
 }
