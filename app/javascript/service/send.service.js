@@ -36,6 +36,9 @@ class  SendSevice {
   postLogdSearch(input) {
     return instance.post('api/v1/logs/dsearch', { keyword2: input });
   }
+  deleteLog(menuId, input) {
+    return instance.delete(`api/v1/logs/${menuId}`, { log: input })
+  }
 }
 
 export default new SendSevice();

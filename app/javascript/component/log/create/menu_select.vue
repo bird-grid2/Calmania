@@ -14,7 +14,7 @@ export default {
       total_protain: [],
       total_fat: [],
       total_carbohydrate: [],
-      selected: 0
+      selected: 'メニューを選択して下さい'
     }
   },
   created() {

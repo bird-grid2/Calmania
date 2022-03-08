@@ -55,12 +55,9 @@ class Api::V1::LogsController < ApplicationController
 
   def destroy
     if @log.destroy
-      redirect_to api_v1_logs_path, notice: 'ログを削除しました'
-      render json: { status: 'SUCCESS', data: @log }
+      render json: 'delete log'
     else
-      flash.now[:alert] = 'ログ削除を失敗しました'
-      render json: { status: 'ERROR', data: @log.errors }
-      redirect_back(fallback_location: ap1_v1_root_path)
+      render json: 'not delete log'
     end
   end
 

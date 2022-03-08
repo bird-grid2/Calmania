@@ -43,9 +43,9 @@
                   <font-awesome-icon :icon="['fas', 'edit']" :style="iconStyle" />
                 </router-link>
                 <span></span>
-                <router-link to="logs/#{log.id}" data-confirm="本当に削除しますか?" rel="nofollow" data-method="delete">
+                <button @click="deleteAction(log.id, log)">
                   <font-awesome-icon :icon="['fas', 'trash-alt']" :style="iconStyle" />
-                </router-link>
+                </button>
               </td>
               <td class='table-item'>
                 {{log.date}}
@@ -159,6 +159,26 @@ export default {
           this.logs = [];
           res.data.forEach( elem => {
             this.logs.push(elem);
+          })
+        }
+      })
+      .catch( error => { console.log(error) });
+    },
+    deleteAction(index, params){
+      sendService.deleteLog(index, params)
+      .then( res => {
+        if (res.data != 'not delete log') {
+          this.$router.push({ name: "logs", params: { userId: this.getId } });
+          this.flashMessage.success({
+            message: 'ログを削除しました',
+            time: 3000,
+            class: 'notification__success'
+          })
+        }else{
+          this.flashMessage.error({
+            message: 'ログを削除失敗しました',
+            time: 2000,
+            class: 'notification__error'
           })
         }
       })

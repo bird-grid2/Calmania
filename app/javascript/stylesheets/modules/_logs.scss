@@ -54,6 +54,11 @@
             border: 1px solid white;
           }
         }
+        button {
+          background-color: $light_gray;
+          padding: 0;
+          border: none;
+        }
       }
     }
     @include bottom-info;
