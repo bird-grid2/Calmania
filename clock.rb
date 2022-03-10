@@ -17,6 +17,23 @@ module Clockwork
   sync_database_events model: ClockWorkEvent, every: 1.hour do |model_instance|
     container = model_instance.period_id
     timer = model_instance.send_time.strftime("%H:%M")
+    user_id = model_instance.user_id
+
+    num = ClockWorkEvent.where(user_id: user_id).count
+
+    if num > 1
+      clocks = ClockWorkEvent.where(user_id: user_id).order("id")
+      i = 0
+      
+      ActiveRecord::Base.transaction do
+        clocks.each do |clock|
+          if i <= num - 1
+            clock.destroy!
+          end
+        end
+      end
+    end
+
 
     case container
     when 0
