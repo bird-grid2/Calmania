@@ -25,7 +25,7 @@
           <button id="login" @click="logInUsers">ログイン</button>
         </div>
         <div class='bottom_field'>
-          <router-link class="bottom_field_label" to="/users/sign_up">ID 新規作成</router-link>
+          <router-link class="bottom_field_label" :to="{ name: 'signUp' }">ID 新規作成</router-link>
           <button class="bottom_field_label" id="easy_login" @click="easyLogin">かんたんログイン</button>
         </div>
       </div>

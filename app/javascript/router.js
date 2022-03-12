@@ -22,7 +22,7 @@ export default new Router({
     { path: "/menus", name: "menus", component: Menu }, { path: "/menu/:menuId/edit", name: "menuEdit", component: editMenu },
     { path: "/menu", name: "createMenu", component: createMenu }, { path: "/:userId/log", name: "logs", component: Log },
     { path: "/log/:userId/edit/:logId", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
-    { path: "/signIn", name: "signIn", component: signIn }, { path: "/signUp", name: "singUp", component: signUp },
+    { path: "/sign_in", name: "signIn", component: signIn }, { path: "/sign_up", name: "signUp", component: signUp },
     { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", redirect: "/" }
   ]
 });

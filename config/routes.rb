@@ -13,15 +13,16 @@ Rails.application.routes.draw do
         registrations: "api/v1/users/registrations",
         sessions: "api/v1/users/sessions"
       }
-      get '/users/sign_up', to: 'users/registrations#new'
-      post '/users/create', to: 'users/registrations#create'
+
+      devise_scope :user do
+        get "/sign_up", to: "users/registrations#new"
+        post "/user/create", to: "users/registrations#create"
+        get "/user/:id/edit", to: "users/registrations#edit"
+        patch "/user/:id/update", to: "users/registrations#update"
+        delete "/user/:id/delete", to: "users/registrations#destroy"
+      end
 
       resources :users, only: [] do
-        member do
-          get 'edit', to: 'users/registrations#edit'
-          patch 'update', to: 'users/registrations#update'
-          delete 'delete', to: 'users/registrations#destroy'
-        end
         resources :clock_work_events, except: [:index, :show]
       end
 
@@ -46,16 +47,16 @@ Rails.application.routes.draw do
         end
       end
 
-      get '/', to: 'api/v1/shows#index'
-      get '/management', to: 'api/v1/shows#index'
-      get '/menus', to: 'api/v1/shows#index'
-      get '/menu/:menuId/edit', to: 'api/v1/shows#index'
-      get '/log', to: 'api/v1/shows#index'
-      get '/log/:logId/edit', to: 'api/v1/shows#index'
-      get '/signIn', to: 'api/v1/shows#index'
-      get '/signUp', to: 'api/v1/shows#index'
-      get '/user/:userId/edit', to: 'api/v1/shows#index'
-      get '/graph', to: 'api/v1/shows#index'
+      get '/', to: 'shows#index'
+      get '/management', to: 'shows#index'
+      get '/menus', to: 'shows#index'
+      get '/menu/:menuId/edit', to: 'shows#index'
+      get '/log', to: 'shows#index'
+      get '/log/:logId/edit', to: 'shows#index'
+      get '/sign_in', to: 'shows#index'
+      get '/sign_up', to: 'shows#index'
+      get '/user/:userId/edit', to: 'shows#index'
+      get '/graph', to: 'shows#index'
       get '/menus/new', to: 'menus#new'
     end
   end

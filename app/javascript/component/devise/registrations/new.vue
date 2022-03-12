@@ -4,19 +4,19 @@
       <h2>新規作成</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+    <form class="new_user" id="new_user" @submit.prevent action="/users" accept-charset="UTF-8" method="post">
       <div class="left_box">
         <div class="field">
           <label class="new" for="user_nickname_ニックネーム_必須">ニックネーム (必須)</label>
-          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="nickname">
+          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="user.nickname">
         </div>
         <div class="field">
           <label class="new" for="user_email_メールアドレス_必須">メールアドレス (必須)</label>
-          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="email">
+          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="user.email">
         </div>
         <div class="field">
           <label class="new" for="user_height_身長cm_任意">身長[cm] (任意)</label>
-          <input placeholder="身長を入力してください" step="0.1" type="number" name="user[height]" id="user_height" v-model="height">
+          <input placeholder="身長を入力してください" step="0.1" type="number" name="user[height]" id="user_height" v-model="user.height">
         </div>
       </div>
       <div class='border-line'></div>
@@ -26,7 +26,7 @@
             <label class="password" required="required" for="user_password_パスワード">パスワード</label>
             <em>{{ passwordCount }}</em>
           </div>
-          <input placeholder="パスワード入力" type="password" name="user[password]" id="user_password" v-model="password">
+          <input placeholder="パスワード入力" type="password" name="user[password]" id="user_password" v-model="user.password">
         </div>
         <div class='field'>
           <label class="label" for="user_password_confirmation_確認入力">確認入力</label>
@@ -65,8 +65,8 @@ export default {
   },
   computed: {
     passwordCount() {
-      count = this.password.length
-      return this.password.length <= 6 ? (6 - count) + "文字以上入力" : "文字数OK" 
+      let count = this.user.password.length
+      return count <= 6 ? (6 - count) + "文字以上入力" : "文字数OK" 
     }
   }
 }

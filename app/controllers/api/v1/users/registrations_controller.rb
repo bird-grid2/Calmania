@@ -5,16 +5,17 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:edit, :update]
 
-
   def edit
-    resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = User.find(auth_token[:id])
 
-    if resource.blank?
+    if @user.blank?
       render json: "NG"
-    elsif resource.valid_password?(params[:password])
-      render json: payload(resource)
+    elsif @user.valid_password?(params[:password])
+      render json: @user
     end
   end
+
 
   protected
 
@@ -28,26 +29,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
-  end
-
-  # The path used after sign up.
-  def after_sign_up_path_for(*)
-    api_v1_managements_path
-  end
-
-  def after_update_path_for(*)
-    api_v1_managements_path
-  end
-
-  private
-
-  def payload(user)
-    return nil unless user && user&.id
-
-    {
-      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
-      user: { id: user.id, email: user.email, nickname: user.nickname }
-    }
   end
 end
 

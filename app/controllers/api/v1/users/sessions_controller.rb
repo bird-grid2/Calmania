@@ -4,6 +4,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :configure_sign_in_params, only: [:create]
 
+  def new; end
+
   # POST /resource/sign_in
   def create
     resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])

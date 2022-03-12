@@ -4,21 +4,21 @@
       <h2>ユーザー情報編集</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form class="edit_user" id="edit_user" action="/users" accept-charset="UTF-8" method="post">
+    <form class="edit_user" id="edit_user" @submit.prevent action="/users" accept-charset="UTF-8" method="post">
       <div class='left_box'>
         <div class='field'>
           <label class="edit" for="user_nickname_ニックネーム">ニックネーム</label>
-          <input autofocus="autofocus" autocomplete="name" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="nickname">
+          <input autofocus="autofocus" autocomplete="name" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="user.nickname">
         </div>
         <div class='field'>
           <label class="edit" for="user_email_メールアドレス">メールアドレス</label>
-          <input autofocus="autofocus" autocomplete="email" required="required" type="email" name="user[email]" id="user_email" v-model="email">
+          <input autofocus="autofocus" autocomplete="email" required="required" type="email" name="user[email]" id="user_email" v-model="user.email">
         </div>
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           <div>Currently waiting confirmation for: #{resource.unconfirmed_email}</div>
         <div class='field'>
           <label class="edit" for="user_height_身長_cm">身長 [cm]</label>
-          <input autocomplete="height" placeholder="身長を入力(任意)" type="number" name="user[height]" id="user_height" v-model="height">
+          <input autocomplete="height" placeholder="身長を入力(任意)" type="number" name="user[height]" id="user_height" v-model="user.height">
         </div>
         <!-- <div class='field'>
           <label class="edit" for="target_cal_目標摂取カロリー">目標摂取カロリー</label>
@@ -33,7 +33,7 @@
         <div class='field'>
           <label class="edit" for="user_clock_work_event_attributes_Remainder機能 (LINE 公式アカウント: @681lurjb)">Remainder機能 (line 公式アカウント: @681lurjb)</label>
           <p>privateなアカウントには登録しないでください</p>
-          <select name="user[clock_work_event_attributes][period_id]" id="user_clock_work_event_attributes_period_id" v-model="clock_work_event_attributes.period_id">
+          <select name="user[clock_work_event_attributes][period_id]" id="user_clock_work_event_attributes_period_id" v-model="user.clock_work_event_attributes.period_id">
             <option value="0">OFF(任意)</option>
             <option value="1">毎日</option>
             <option value="2">1日毎</option>
@@ -44,7 +44,7 @@
         </div>
         <div class='field'>
           <label class="edit" for="user_clock_work_event_attributes_送信時間">送信時間</label>
-          <input type="time" name="user[clock_work_event_attributes][send_time]" id="user_clock_work_event_attributes_send_time" v-model="clock_work_event_attributes.send_time" >
+          <input type="time" name="user[clock_work_event_attributes][send_time]" id="user_clock_work_event_attributes_send_time" v-model="user.clock_work_event_attributes.send_time" >
         </div>
       </div>
       <div class='border-line'></div>
@@ -55,21 +55,21 @@
             <i>(変更しない場合、空白)</i>
           </div>
           <em>{{ passwordCount }}</em>
-          <input autocomplete="new-password" placeholder="変更パスワード入力" type="password" name="user[password]" id="user_password" v-model="password">
+          <input autocomplete="new-password" placeholder="変更パスワード入力" type="password" name="user[password]" id="user_password" v-model="user.password">
         </div>
         <div class='field'>
           <label class="label" for="user_password_confirmation_変更パスワード確認">変更パスワード確認</label>
-          <input autocomplete="new-password" placeholder="変更パスワード確認" type="password" name="user[password_confirmation]" id="user_password_confirmation" v-model="password_confirmation">
+          <input autocomplete="new-password" placeholder="変更パスワード確認" type="password" name="user[password_confirmation]" id="user_password_confirmation" v-model="user.password_confirmation">
         </div>
         <div class='field'>
           <div class='edit_label'>
             <label class="label" for="user_current_password_現行パスワード">現行パスワード</label>
             <i>(情報更新時に入力)</i>
           </div>
-          <input autocomplete="current-password" placeholder="現行パスワード入力" required="required" type="password" name="user[current_password]" id="user_current_password" v-model="current_password">
+          <input autocomplete="current-password" placeholder="現行パスワード入力" required="required" type="password" name="user[current_password]" id="user_current_password" v-model="user.current_password">
         </div>
         <div class='actions'>
-          <input type="submit" name="commit" value="ユーザー情報更新" id="edit_submit" data-disable-with="ユーザー情報更新" @click=updateUsers>
+          <input type="submit" name="commit" value="ユーザー情報更新" id="edit_submit" data-disable-with="ユーザー情報更新" @click="updateUsers">
         </div>
         <div class='footer'>
           <router-link data-confirm="本当に削除しますか?" class="red-btn" rel="nofollow" data-method="delete" to="/users">ユーザー情報削除</router-link>
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import backGround from '../../../service/background.service';
 
 export default {
   data() {
@@ -100,6 +100,12 @@ export default {
         clock_work_event_attributes: { preriod_id: "", send_time: "" }
       }
     }
+    
+  },
+  beforeCreate() {
+    backGround.getUsersBoard(this.$route.params['userId']).then(res => {
+       console.log(res);
+    }).catch(err => console.log(err));
   },
   methods: {
     updateUsers() {
@@ -110,8 +116,9 @@ export default {
   },
   computed: {
     passwordCount() {
-      count = this.password.length
-      return this.password.length <= 6 ? (6 - count) + "文字以上入力" : "文字数OK" 
+      let count = this.user.password
+      let num = count.length
+      return num <= 6 ? (6 - num) + "文字以上入力" : "文字数OK" 
     }
   }
 }
