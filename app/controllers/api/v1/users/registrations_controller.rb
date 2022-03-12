@@ -5,6 +5,17 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:edit, :update]
 
+
+  def edit
+    resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
+
+    if resource.blank?
+      render json: "NG"
+    elsif resource.valid_password?(params[:password])
+      render json: payload(resource)
+    end
+  end
+
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -27,7 +38,19 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(*)
     api_v1_managements_path
   end
+
+  private
+
+  def payload(user)
+    return nil unless user && user&.id
+
+    {
+      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
+      user: { id: user.id, email: user.email, nickname: user.nickname }
+    }
+  end
 end
+
 
 # GET /resource/sign_up
 # def new

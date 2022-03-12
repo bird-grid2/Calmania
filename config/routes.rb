@@ -13,8 +13,15 @@ Rails.application.routes.draw do
         registrations: "api/v1/users/registrations",
         sessions: "api/v1/users/sessions"
       }
+      get '/users/sign_up', to: 'users/registrations#new'
+      post '/users/create', to: 'users/registrations#create'
 
-      resources :users do
+      resources :users, only: [] do
+        member do
+          get 'edit', to: 'users/registrations#edit'
+          patch 'update', to: 'users/registrations#update'
+          delete 'delete', to: 'users/registrations#destroy'
+        end
         resources :clock_work_events, except: [:index, :show]
       end
 
