@@ -76,7 +76,7 @@ class Api::V1::MenusController < ApplicationController
   def set_menu
     @menu = Menu.find(params[:id])
   end
-  
+
   def set_food
     @food = Food.find(params[:id])
   end
