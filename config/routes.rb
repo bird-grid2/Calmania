@@ -8,10 +8,7 @@ Rails.application.routes.draw do
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
-      devise_for :users, controllers: {
-        registrations: "api/v1/users/registrations",
-        sessions: "api/v1/users/sessions"
-      }
+      devise_for :users, controllers: { registrations: "api/v1/users/registrations", sessions: "api/v1/users/sessions" }
 
       devise_scope :api_v1_user do
         get "/sign_up", to: "users/registrations#new"
