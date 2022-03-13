@@ -1,18 +1,26 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_request!, except: [:new, :create]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:edit, :update]
 
   def edit
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = User.find(auth_token[:id])
-
-    if @user.blank?
+    binding.pry
+    if @current_user.blank?
       render json: "NG"
-    elsif @user.valid_password?(params[:password])
-      render json: @user
+    elsif @current_user.valid_password?(params[:password])
+      render json: payload(@current_user)
+    end
+  end
+
+  def create
+     @user = User.new(configure_sign_up_params)
+
+    if @user.save
+      render json: payload(@user)
+    else
+      render json: 'user not save'
     end
   end
 
@@ -29,6 +37,17 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
+  end
+
+  private
+
+  def payload(user)
+    return nil unless user && user&.id
+
+    {
+      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
+      user: { id: user.id, email: user.email, nickname: user.nickname }
+    }
   end
 end
 

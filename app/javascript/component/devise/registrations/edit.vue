@@ -102,15 +102,18 @@ export default {
     }
     
   },
-  beforeCreate() {
-    backGround.getUsersBoard(this.$route.params['userId']).then(res => {
+  created() {
+    backGround.getUsersBoard(this.getUserData()).then(res => {
        console.log(res);
     }).catch(err => console.log(err));
   },
   methods: {
+    getUserData(){
+      return JSON.parse(sessionStorage.getItem('user')).user
+    },
     updateUsers() {
       axios
-      .post("api/v1/users/registrations/update", { user: this.user })
+      .post("api/v1/users/registrations/update", { account_update: this.user })
       .then( (response)=> { this.$router.push({ path: "/management" }); }, (error)=> { console.log(error); });
     }
   },

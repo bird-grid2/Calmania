@@ -12,6 +12,9 @@ const instance = axios.create({
 })
 
 class  SendSevice {
+  postUser(input) {
+    return instance.post('api/v1/user/create', { registration: {sign_up: input }});
+  }
   postMenuSearch(input) {
     return instance.post('/api/v1/menus/search', { keyword: input });
   }

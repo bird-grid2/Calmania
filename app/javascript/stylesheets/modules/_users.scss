@@ -72,6 +72,8 @@
             color: white;
             background-color: $maincolor;
             font-size: 2rem;
+            padding: 0;
+            border: none;
           }
           .new_btn {
             display: block;
@@ -83,6 +85,8 @@
             background-color: red;
             color: white;
             margin-left: 5rem;
+            padding: 0;
+            border: none;
           }
         }
         .bottom_field {
@@ -104,6 +108,8 @@
           }
           #easy_login {
             background-color: coral;
+            padding: 0;
+            border: none;
           }
         }
       }
@@ -155,6 +161,8 @@
             font-size: 2rem;
             color: white;
             background: $maincolor;
+            padding: 0;
+            border: none;
           }
         }
       }
@@ -295,6 +303,8 @@
             display: inline-block;
             height: 4rem;
             width: 25rem;
+            padding: 0;
+            border: none;
           }
           select {
             display: inline-block;
@@ -325,6 +335,8 @@
             color: white;
             background-color: $maincolor;
             font-size: 2rem;
+            padding: 0;
+            border: none;
           }
           .new_btn {
             text-align: center;
@@ -349,7 +361,7 @@
           &_label{
             display: inline-block;
             width: 20rem;
-            margin: 2rem 0;
+            margin: 0;
             background-color: $maincolor;
             color: white;
             text-align: center;
@@ -357,6 +369,8 @@
           }
           #easy_login {
             background-color: coral;
+            padding: 0;
+            border: none;
           }
         }
       }
@@ -408,6 +422,8 @@
             font-size: 2rem;
             color: white;
             background: $maincolor;
+            padding: 0;
+            border: none;
           }
         }
       }

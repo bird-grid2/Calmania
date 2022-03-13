@@ -12,9 +12,6 @@ const instance = axios.create({
 })
 
 class  BackgroundSevice {
-  getUsersBoard(userId) {
-    return instance.get(`/api/v1/user/${userId}/edit`);
-  }
   getManagementsBoard() {
     return instance.get('/api/v1/managements');
   }

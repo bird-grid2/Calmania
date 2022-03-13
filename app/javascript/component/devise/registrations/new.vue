@@ -33,7 +33,7 @@
           <input placeholder="パスワード入力(確認)" required="required" type="password" name="user[password_confirmation]" id="user_password_confirmation">
         </div>
         <div class='actions'>
-          <input type="submit" name="commit" value="新規作成" data-disable-with="新規作成" @click="createUser">
+          <input type="submit" name="commit" value="新規作成" @click="createUser">
           <router-link class="new_btn" to="/">戻る</router-link>
         </div>
       </div>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   data() {
@@ -57,10 +57,30 @@ export default {
     }
   },
   methods: {
-    createUsers() {
-      axios
-      .post("api/v1/users/registrations/create", { user: this.user })
-      .then( (response)=> { this.$router.push({ path: "/management" }); }, (error)=> { console.log(error); });
+    createUser() {
+      axios.post( '/api/v1/user/create', { sign_up: this.user }).then( (res)=> {
+        if(res.data != "user not save") {
+          if(res.data.auth_token){
+            sessionStorage.setItem('user', JSON.stringify(res.data))
+          }
+          this.$router.push({ name: "management", params: { userId: res.data.user.id}});
+          this.flashMessage.success({
+            message: "ユーザー登録しました。",
+            time: 3000,
+            blockClass: "notification__success"
+          });
+        }else{
+          this.nickname = ''
+          this.email = ''
+          this.password = ''
+          this.flashMessage.error({
+            message: "ユーザー登録に失敗しました。",
+            time: 3000,
+            blockClass: "notification__alert"
+          });
+        }
+      })
+      .catch( err => { console.log(err); });
     }
   },
   computed: {

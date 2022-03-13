@@ -14,10 +14,10 @@ Rails.application.routes.draw do
         sessions: "api/v1/users/sessions"
       }
 
-      devise_scope :user do
+      devise_scope :api_v1_user do
         get "/sign_up", to: "users/registrations#new"
         post "/user/create", to: "users/registrations#create"
-        get "/user/:id/edit", to: "users/registrations#edit"
+        get "/user/edit", to: "users/registrations#edit"
         patch "/user/:id/update", to: "users/registrations#update"
         delete "/user/:id/delete", to: "users/registrations#destroy"
       end
