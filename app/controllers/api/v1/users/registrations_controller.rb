@@ -14,7 +14,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-     @user = User.new(configure_sign_up_params)
+    @user = User.new(configure_sign_up_params)
 
     if @user.save
       render json: payload(@user)
@@ -22,7 +22,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       render json: 'user not save'
     end
   end
-
 
   protected
 
@@ -49,7 +48,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     }
   end
 end
-
 
 # GET /resource/sign_up
 # def new

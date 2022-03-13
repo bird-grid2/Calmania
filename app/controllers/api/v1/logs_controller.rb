@@ -19,7 +19,7 @@ class Api::V1::LogsController < ApplicationController
 
   def index
     @logs = Log.order(date: 'DESC').where(user_id: auth_token[:user_id])
-    
+
     return if @logs.nil?
 
     render json: @logs

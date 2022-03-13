@@ -24,16 +24,13 @@ module Clockwork
     if num > 1
       clocks = ClockWorkEvent.where(user_id: user_id).order("id")
       i = 0
-      
+
       ActiveRecord::Base.transaction do
         clocks.each do |clock|
-          if i <= num - 1
-            clock.destroy!
-          end
+          clock.destroy! if i <= num - 1
         end
       end
     end
-
 
     case container
     when 0
