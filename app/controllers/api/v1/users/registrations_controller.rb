@@ -6,7 +6,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:edit, :update]
 
   def edit
-    binding.pry
     if @current_user.blank?
       render json: "NG"
     elsif @current_user.valid_password?(params[:password])

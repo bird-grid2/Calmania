@@ -47,11 +47,8 @@ Rails.application.routes.draw do
         end
       end
 
-      get '/', to: 'shows#index'
-      get '/management', to: 'shows#index'
-      get '/menus', to: 'shows#index'
-      get '/menu/:menuId/edit', to: 'shows#index'
-      get '/log', to: 'shows#index'
+      get '/', to: 'shows#index'; get '/management', to: 'shows#index'; get '/menus', to: 'shows#index'
+      get '/menu/:menuId/edit', to: 'shows#index'; get '/log', to: 'shows#index'
       get '/log/:logId/edit', to: 'shows#index'
       get '/sign_in', to: 'shows#index'
       get '/sign_up', to: 'shows#index'
