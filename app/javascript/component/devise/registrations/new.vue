@@ -58,7 +58,8 @@ export default {
   },
   methods: {
     createUser() {
-      axios.post( '/api/v1/user/create', { sign_up: this.user }).then( (res)=> {
+      axios.post( '/api/v1/user/create', { registration: { sign_up: this.user }}).then( (res)=> {
+        console.log(res)
         if(res.data != "user not save") {
           if(res.data.auth_token){
             sessionStorage.setItem('user', JSON.stringify(res.data))
