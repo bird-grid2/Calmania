@@ -2,7 +2,6 @@
 
 class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :authenticate_request!, except: [:new, :create]
-  before_action :configure_sign_in_params, only: [:create]
 
   def new; end
 
@@ -20,10 +19,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_in_params
-    add_list = [:nickname, :email, :password]
-    devise_parameter_sanitizer.permit(:sign_in, keys: add_list)
-  end
 
   def after_sign_up_path_for(*)
     api_v1_managements_path

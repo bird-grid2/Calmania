@@ -30,7 +30,7 @@
         </div>
         <div class='field'>
           <label class="label" for="user_password_confirmation_確認入力">確認入力</label>
-          <input placeholder="パスワード入力(確認)" required="required" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+          <input placeholder="パスワード入力(確認)" required="required" type="password" name="user[password_confirmation]" id="user_password_confirmation" v-model="user.password_confirmation">
         </div>
         <div class='actions'>
           <input type="submit" name="commit" value="新規作成" @click="createUser">
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     createUser() {
-      axios.post( '/api/v1/user/create', { registration: { sign_up: this.user }}).then( (res)=> {
+      axios.post( '/api/v1/user/create', { user: this.user }).then( (res)=> {
         console.log(res)
         if(res.data != "user not save") {
           if(res.data.auth_token){

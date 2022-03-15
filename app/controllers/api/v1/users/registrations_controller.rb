@@ -2,8 +2,7 @@
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_request!, except: [:new, :create]
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:edit, :update]
+  before_action :configure_permitted_parameters, only: [:create, :edit, :update]
 
   def edit
     if @current_user.blank?
@@ -14,8 +13,8 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new(configure_sign_up_params)
-
+    @user = User.create(sign_up_params)
+    
     if @user.save
       render json: payload(@user)
     else
@@ -23,21 +22,19 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  protected
+  private
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    add_list = [:nickname, :email, :height, :password, :password_confirmation]
-    devise_parameter_sanitizer.permit(:sign_up, keys: add_list)
-  end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:height])
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    add_list = [:nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
+    add_list = [:height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
   end
 
-  private
+  def sign_up_params
+    params.require(:user).permit(:email, :nickname, :password, :password_confirmation, :height)
+  end
 
   def payload(user)
     return nil unless user && user&.id
