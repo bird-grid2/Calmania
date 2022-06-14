@@ -8,11 +8,10 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
-
     if resource.blank?
       render json: "NG"
     elsif resource.valid_password?(params[:password])
-      render json: payload(resource)
+      render json: payload(resource, params[:password])
     end
   end
 
@@ -30,11 +29,11 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   private
 
-  def payload(user)
+  def payload(user, password)
     return nil unless user && user&.id
 
     {
-      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
+      auth_token: JsonWebToken.encode({ user_id: user.id, password: password, exp: (Time.now + 2.week).to_i }),
       user: { id: user.id, email: user.email, nickname: user.nickname }
     }
   end

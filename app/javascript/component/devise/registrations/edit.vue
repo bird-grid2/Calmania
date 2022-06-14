@@ -82,7 +82,7 @@
 
 <script>
 import backGround from '../../../service/background.service';
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   data() {
@@ -104,17 +104,16 @@ export default {
   },
   mounted() {
     backGround.getUsersBoard(this.getUserData()).then(res => {
-      console.log(res.data);
       this.user.nickname = res.data.user.nickname;
       this.user.email = res.data.user.email;
       this.user.height = res.data.user.height;
       this.user.target_cal = res.data.user.target_cal;
-      this.user.password = res.data.user.jti
+      this.user.password = res.data.password;
     }).catch(err => console.log(err));
   },
   methods: {
     getUserData(){
-      return JSON.parse(sessionStorage.getItem('user')).user.id;
+      return JSON.parse(sessionStorage.getItem('user')).auth_token;
     },
     updateUsers() {
       axios

@@ -5,9 +5,11 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, only: [:create, :update]
 
   def load_data
+    data = JsonWebToken.decode(params[:token])
+
     if user_id_in_token?
-      @current_user = User.find(params[:user_id])
-      render json: editPayload(@current_user)
+      @current_user = User.find(data[:user_id])
+      render json: editPayload(@current_user, data[:password])
     else
       render json: "NG"
     end
@@ -37,20 +39,11 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:email, :nickname, :password, :password_confirmation, :height)
   end
 
-  def payload(user)
+  def editPayload(user, password)
     return nil unless user && user&.id
 
     {
-      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
-      user: { id: user.id, email: user.email, nickname: user.nickname }
-    }
-  end
-
-  def editPayload(user)
-    return nil unless user && user&.id
-
-    {
-      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
+      password: password,
       user: user
     }
   end
