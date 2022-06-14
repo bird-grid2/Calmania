@@ -10,7 +10,7 @@ class Api::V1::ManagementsController < ApplicationController
     p = []
     f = []
     c = []
-
+    
     # calory calculate and view
     @cal.each do |cal|
       total << cal.total_cal if cal.total_cal.present?
@@ -51,8 +51,8 @@ class Api::V1::ManagementsController < ApplicationController
     require 'time'
     date_time = Time.current.midnight + 1.day
 
-    @period = Log.where(created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
-    @cal = Log.where(created_at: (date_time - 1.day)..date_time)
+    @period = Log.where(user_id: auth_token[:user_id], created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
+    @cal = Log.where(user_id: auth_token[:user_id], created_at: (date_time - 1.day)..date_time)
     @menus = Menu.all.order(:id)
   end
 end

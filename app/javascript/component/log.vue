@@ -111,8 +111,7 @@ export default {
   },
   methods: {
     getId() {
-      const responce = JSON.parse(sessionStorage.getItem('user')).user.id;
-      return responce
+      return JSON.parse(sessionStorage.getItem('user')).user.id;
     },
     logout() {
       sessionStorage.clear();

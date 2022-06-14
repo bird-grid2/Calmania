@@ -6,7 +6,6 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionView::Layouts
-  before_action :configure_permitted_parameters, if: :devise_controller?
   respond_to :json
   attr_reader :current_user
 
@@ -44,12 +43,6 @@ class ApplicationController < ActionController::API
   end
 
   protected
-
-  def configure_permitted_parameters
-    add_list = [ :nickname, :email, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, :password, :password_confirmation, { clock_work_event_attributes: [:period_id, :send_time] }]
-    devise_parameter_sanitizer.permit :sign_up, keys: [ :nickname, :email, :height, :password, :password_confirmation ]
-    devise_parameter_sanitizer.permit :account_update, keys: add_list
-  end
 
   def authenticate_request!
     unless user_id_in_token?

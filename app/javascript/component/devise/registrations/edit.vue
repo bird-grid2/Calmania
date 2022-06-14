@@ -82,6 +82,7 @@
 
 <script>
 import backGround from '../../../service/background.service';
+import axios from 'axios'
 
 export default {
   data() {
@@ -100,16 +101,20 @@ export default {
         clock_work_event_attributes: { preriod_id: "", send_time: "" }
       }
     }
-    
   },
-  created() {
+  mounted() {
     backGround.getUsersBoard(this.getUserData()).then(res => {
-       console.log(res);
+      console.log(res.data);
+      this.user.nickname = res.data.user.nickname;
+      this.user.email = res.data.user.email;
+      this.user.height = res.data.user.height;
+      this.user.target_cal = res.data.user.target_cal;
+      this.user.password = res.data.user.jti
     }).catch(err => console.log(err));
   },
   methods: {
     getUserData(){
-      return JSON.parse(sessionStorage.getItem('user')).user
+      return JSON.parse(sessionStorage.getItem('user')).user.id;
     },
     updateUsers() {
       axios

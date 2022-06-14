@@ -170,6 +170,7 @@ export default {
     logout() {
       sessionStorage.clear();
       this.$router.push({name: 'index'})
+      location.reload();
     }
   },
   computed: {

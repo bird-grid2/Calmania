@@ -10,8 +10,6 @@ import { faChartBar } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
-import backGround from '../service/background.service'
-import send from '../service/send.service'
 
 library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle, faChartBar)
 
@@ -24,8 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: el,
     router: router,
-    backGround: backGround,
-    send: send,
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)

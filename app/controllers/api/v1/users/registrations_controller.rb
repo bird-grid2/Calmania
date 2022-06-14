@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_request!, except: [:new, :create]
-  before_action :configure_permitted_parameters, only: [:create, :edit, :update]
+  before_action :authenticate_request!, except: [:new, :create, :load_data]
+  before_action :configure_permitted_parameters, only: [:create, :update]
 
-  def edit
-    if @current_user.blank?
+  def load_data
+    if user_id_in_token?
+      @current_user = User.find(params[:user_id])
+      render json: editPayload(@current_user)
+    else
       render json: "NG"
-    elsif @current_user.valid_password?(params[:password])
-      render json: payload(@current_user)
     end
   end
 
   def create
     @user = User.create(sign_up_params)
-    
+
     if @user.save
       render json: payload(@user)
     else
@@ -44,6 +45,16 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       user: { id: user.id, email: user.email, nickname: user.nickname }
     }
   end
+
+  def editPayload(user)
+    return nil unless user && user&.id
+
+    {
+      auth_token: JsonWebToken.encode({ user_id: user.id, exp: (Time.now + 2.week).to_i }),
+      user: user
+    }
+  end
+
 end
 
 # GET /resource/sign_up

@@ -1,17 +1,35 @@
 import axios from 'axios';
 let user = JSON.parse(sessionStorage.getItem('user'));
+let target = 0;
 
-const instance = axios.create({
-  baseURL: process.env.API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Authorization' : "Bearer " + user.auth_token
-  },
-  responseType: 'json'
-})
+if(user == null){
+  target = axios.create({
+    baseURL: process.env.API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization' : "Bearer "
+    },
+    responseType: 'json'
+  })
+} else {
+  target = axios.create({
+    baseURL: process.env.API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization' : "Bearer " + user.auth_token
+    },
+    responseType: 'json'
+  })
+}
+
+const instance = target;
 
 class  BackgroundSevice {
+  getUsersBoard(args) {
+    return instance.get('api/v1/user/load_data', {params: { user_id: args}});
+  }
   getManagementsBoard() {
     return instance.get('/api/v1/managements');
   }

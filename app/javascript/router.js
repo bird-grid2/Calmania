@@ -12,6 +12,7 @@ import createLog from "./component/log/create/log_create.vue";
 import signIn from "./component/devise/sessions/log_in.vue";
 import signUp from "./component/devise/registrations/new.vue";
 import editUser from "./component/devise/registrations/edit.vue";
+import notFound from "./component/not_found.vue"
 
 Vue.use(Router);
 
@@ -23,6 +24,6 @@ export default new Router({
     { path: "/menu", name: "createMenu", component: createMenu }, { path: "/:userId/log", name: "logs", component: Log },
     { path: "/log/:userId/edit/:logId", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
     { path: "/sign_in", name: "signIn", component: signIn }, { path: "/sign_up", name: "signUp", component: signUp },
-    { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", redirect: "/" }
+    { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", component: notFound }
   ]
 });

@@ -64,6 +64,7 @@ export default {
             time: 3000,
             blockClass: "notification__success"
           });
+          
         }else{
           this.nickname = ''
           this.email = ''

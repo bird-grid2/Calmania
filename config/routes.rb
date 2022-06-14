@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       devise_scope :api_v1_user do
         get "/sign_up", to: "users/registrations#new"
         post "/user/create", to: "users/registrations#create"
-        get "/user/edit", to: "users/registrations#edit"
+        get "/user/load_data", to: "users/registrations#load_data"
         patch "/user/:id/update", to: "users/registrations#update"
         delete "/user/:id/delete", to: "users/registrations#destroy"
       end
@@ -44,16 +44,17 @@ Rails.application.routes.draw do
       end
 
       get '/', to: 'shows#index'
-      get '/management', to: 'shows#index'
+      get '/:id/management', to: 'shows#index'
       get '/menus', to: 'shows#index'
-      get '/menu/:menuId/edit', to: 'shows#index'
-      get '/log', to: 'shows#index'
-      get '/log/:logId/edit', to: 'shows#index'
+      get '/menu/:id/edit', to: 'shows#index'
+      get '/:id/log', to: 'shows#index'
+      get '/log/:id/edit', to: 'shows#index'
       get '/sign_in', to: 'shows#index'
       get '/sign_up', to: 'shows#index'
-      get '/user/:userId/edit', to: 'shows#index'
+      get '/user/edit', to: 'shows#index'
       get '/graph', to: 'shows#index'
       get '/menus/new', to: 'menus#new'
+      match '*path', to: 'application#responce_not_found', via: :all
     end
   end
 end
