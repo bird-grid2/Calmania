@@ -25,26 +25,31 @@
           <input type="number" autocomplete="target_cal" placeholder='目標摂取カロリー(任意)' v-model="user.target_cal">
         </div>
         <div class="field">
-          <label class="edit">PFCバランス</label>
-            <input type="number" autocomplete="ideal_protain_rate" placeholder="たんぱく質の摂取割合(任意)" v-model="user.ideal_protain_rate">
-            <input type="number" autocomplete="ideal_fat_rate" placeholder="脂質の摂取割合(任意)" v-model="user.ideal_fat_rate">
-            <input type="number" autocomplete="ideal_carbohydrate_rate" placeholder="炭水化物の摂取割合(任意)" v-model="user.ideal_carbohydrate_rate">
+          <label for="ideal_PFC_rate" class="edit">PFCバランス</label>
+          <input type="number" autocomplete="ideal_protain_rate" placeholder="たんぱく質の摂取割合(任意)" v-model="user.ideal_protain_rate">
+          <input type="number" autocomplete="ideal_fat_rate" placeholder="脂質の摂取割合(任意)" id="rate" v-model="user.ideal_fat_rate">
+          <input type="number" autocomplete="ideal_carbohydrate_rate" placeholder="炭水化物の摂取割合(任意)" id="rate" v-model="user.ideal_carbohydrate_rate">
         </div>
         <div class='field'>
           <label class="edit" for="user_clock_work_event_attributes_Remainder機能 (LINE 公式アカウント: @681lurjb)">Remainder機能 (line 公式アカウント: @681lurjb)</label>
           <p>privateなアカウントには登録しないでください</p>
-          <select name="user[clock_work_event_attributes][period_id]" id="user_clock_work_event_attributes_period_id" v-model="user.clock_work_event_attributes.period_id">
-            <option value="0">OFF(任意)</option>
-            <option value="1">毎日</option>
-            <option value="2">1日毎</option>
-            <option value="3">2日毎</option>
-            <option value="4">3日毎</option>
-            <option value="5">1週間毎</option>
-          </select>
-        </div>
-        <div class='field'>
-          <label class="edit" for="user_clock_work_event_attributes_送信時間">送信時間</label>
-          <input type="time" name="user[clock_work_event_attributes][send_time]" id="user_clock_work_event_attributes_send_time" v-model="user.clock_work_event_attributes.send_time" >
+          <div class="remainder">
+            <div class="send_timing">
+              <label class="edit" for="user_clock_work_event_attributes_period_id_送信タイミング">送信タイミング</label>
+              <select name="user[clock_work_event_attributes][period_id]" id="user_clock_work_event_attributes_period_id" v-model="user.clock_work_event_attributes.period_id">
+                <option :value="0">OFF(任意)</option>
+                <option :value="1">毎日</option>
+                <option :value="2">1日毎</option>
+                <option :value="3">2日毎</option>
+                <option :value="4">3日毎</option>
+                <option :value="5">1週間毎</option>
+              </select>
+            </div>
+            <div class="send_time">
+              <label class="edit" for="user_clock_work_event_attributes_送信時間">送信時間</label>
+              <input type="time" name="user[clock_work_event_attributes][send_time]" id="user_clock_work_event_attributes_send_time" v-model="user.clock_work_event_attributes.send_time" >
+            </div>
+          </div>
         </div>
       </div>
       <div class='border-line'></div>
@@ -98,7 +103,7 @@ export default {
         ideal_protain_rate: "",
         ideal_fat_rate: "",
         ideal_carbohydrate_rate: "",
-        clock_work_event_attributes: { preriod_id: "", send_time: "" }
+        clock_work_event_attributes: { period_id: "0", send_time: "" }
       }
     }
   },

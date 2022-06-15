@@ -42,7 +42,7 @@
           }
           input {
             display: inline-block;
-            height: 4rem;
+            height: 3rem;
             width: 25rem;
           }
           select {
@@ -310,6 +310,42 @@
             display: inline-block;
             height: 2.5rem;
             width: 25rem;
+          }
+          #rate {
+            display: inline-block;
+            margin-top: 0.5rem;
+          }
+          .remainder {
+            display: flex;
+            margin-top: 2rem;
+            .send_timing {
+              display: flex;
+              flex-direction: column;
+              text-align: center;
+              label {
+                text-align: center;
+              }
+              #user_clock_work_event_attributes_period_id {
+                display: inline-block;
+                height: 2.5rem;
+                width: 15rem;
+                margin-top: 0.2rem;
+              }
+            }
+            .send_time {
+              display: flex;
+              flex-direction: column;
+              margin-left: 5rem;
+              label {
+                text-align: center;
+              }
+              #user_clock_work_event_attributes_send_time {
+                display: inline-block;
+                height: 2.5rem;
+                width: 15rem;
+                margin-top: 0.2rem;
+              }
+            }
           }
         }
       }
