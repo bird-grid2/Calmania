@@ -14,22 +14,22 @@
           <label class="edit" for="user_email_メールアドレス">メールアドレス</label>
           <input autofocus="autofocus" autocomplete="email" required="required" type="email" name="user[email]" id="user_email" v-model="user.email">
         </div>
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          <div>Currently waiting confirmation for: #{resource.unconfirmed_email}</div>
+        <!-- - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          <div>Currently waiting confirmation for: #{resource.unconfirmed_email}</div> -->
         <div class='field'>
           <label class="edit" for="user_height_身長_cm">身長 [cm]</label>
           <input autocomplete="height" placeholder="身長を入力(任意)" type="number" name="user[height]" id="user_height" v-model="user.height">
         </div>
-        <!-- <div class='field'>
-          <label class="edit" for="target_cal_目標摂取カロリー">目標摂取カロリー</label>
-          <input type="number" :target_cal, autocomplete="target_cal" placeholder='目標摂取カロリー(任意)'>
-        </div>
         <div class='field'>
-          = f.label :ideal_PFC_rate, value: 'ＰＦＣバランス' , class:'edit'
-          = f.number_field :ideal_protain_rate, autocomplete: "ideal_protain_rate", placeholder: 'たんぱく質の摂取割合(任意)'
-          = f.number_field :ideal_fat_rate, autocomplete: "ideal_fat_rate", placeholder: '脂質の摂取割合(任意)'
-          = f.number_field :ideal_carbohydrate_rate, autocomplete: "ideal_carbohydrate_rate", placeholder: '炭水化物の摂取割合(任意)'
-        </div> -->
+          <label class="edit" for="target_cal_目標摂取カロリー">目標摂取カロリー</label>
+          <input type="number" autocomplete="target_cal" placeholder='目標摂取カロリー(任意)' v-model="user.target_cal">
+        </div>
+        <div class="field">
+          <label class="edit">PFCバランス</label>
+            <input type="number" autocomplete="ideal_protain_rate" placeholder="たんぱく質の摂取割合(任意)" v-model="user.ideal_protain_rate">
+            <input type="number" autocomplete="ideal_fat_rate" placeholder="脂質の摂取割合(任意)" v-model="user.ideal_fat_rate">
+            <input type="number" autocomplete="ideal_carbohydrate_rate" placeholder="炭水化物の摂取割合(任意)" v-model="user.ideal_carbohydrate_rate">
+        </div>
         <div class='field'>
           <label class="edit" for="user_clock_work_event_attributes_Remainder機能 (LINE 公式アカウント: @681lurjb)">Remainder機能 (line 公式アカウント: @681lurjb)</label>
           <p>privateなアカウントには登録しないでください</p>
