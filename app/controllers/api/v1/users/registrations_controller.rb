@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_request!, except: [:new, :create]
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_request!, except: [:create]
+  before_action :configure_sign_up_parameters, only: [:create]
+  before_action :configure_account_update_parameters, only: [:update]
 
   def load_data
     data = JsonWebToken.decode(params[:token])
-
+    
     if user_id_in_token?
-      @current_user = User.find(data[:user_id])
-      render json: editPayload(@current_user, data[:password], params[:token])
+      render json: editPayload(@current_user, data["password"], params[:token])
     else
       render json: "NG"
     end
@@ -26,6 +26,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+
     resource = User.find(params[:user_id])
   
     if resource.update(sign_up_params)
@@ -38,10 +39,12 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   private
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_permitted_parameters
-    binding.pry
+  def configure_sign_up_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:height])
+  end
 
+  def configure_account_update_parameters
+    binding.pry
     add_list = [:height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
   end

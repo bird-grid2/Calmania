@@ -49,7 +49,7 @@ class ApplicationController < ActionController::API
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
       return
     end
-    @current_user = User.find(auth_token[:user_id])
+    @current_user = User.find(auth_token["user_id"])
   rescue JWT::VerificationError, JWT::DecodeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
@@ -65,6 +65,6 @@ class ApplicationController < ActionController::API
   end
 
   def user_id_in_token?
-    http_token && auth_token && auth_token[:user_id].to_i
+    http_token && auth_token && auth_token["user_id"].to_i
   end
 end

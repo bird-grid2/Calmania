@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     getUserData(){
-      return JSON.parse(sessionStorage.getItem('user')).auth_token;
+      return JSON.parse(sessionStorage.getItem('user'));
     },
     updateUsers() {
       send
