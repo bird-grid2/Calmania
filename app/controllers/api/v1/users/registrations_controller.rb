@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_request!, except: [:new, :create, :load_data]
-  before_action :configure_permitted_parameters, only: [:create, :update]
+  before_action :authenticate_request!, except: [:new, :create]
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def load_data
     data = JsonWebToken.decode(params[:token])
 
     if user_id_in_token?
       @current_user = User.find(data[:user_id])
-      render json: editPayload(@current_user, data[:password])
+      render json: editPayload(@current_user, data[:password], params[:token])
     else
       render json: "NG"
     end
@@ -19,9 +19,19 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     @user = User.create(sign_up_params)
 
     if @user.save
-      render json: payload(@user)
+      render json: payload(@user, @user.password)
     else
       render json: 'user not save'
+    end
+  end
+
+  def update
+    resource = User.find(params[:user_id])
+  
+    if resource.update(sign_up_params)
+      render json: 'update user info'
+    else
+      render json: "NG"
     end
   end
 
@@ -29,6 +39,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_permitted_parameters
+    binding.pry
     devise_parameter_sanitizer.permit(:sign_up, keys: [:height])
 
     add_list = [:height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
@@ -39,10 +50,20 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:email, :nickname, :password, :password_confirmation, :height)
   end
 
-  def editPayload(user, password)
+  def payload(user, password)
     return nil unless user && user&.id
 
     {
+      auth_token: JsonWebToken.encode({ user_id: user.id, password: password, exp: (Time.now + 2.week).to_i }),
+      user: { id: user.id, email: user.email, nickname: user.nickname }
+    }
+  end
+
+  def editPayload(user, password, token)
+    return nil unless user && user&.id
+
+    {
+      auth_token: token,
       password: password,
       user: user
     }

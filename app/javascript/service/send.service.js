@@ -57,6 +57,9 @@ class  SendSevice {
   deleteMenu(menuId, input) {
     return instance.delete(`api/v1/menus/${menuId}`, { menu: input })
   }
+  updateUser(userId, input){
+    return instance.patch(`/api/v1/user/${userId}/update`, { registration: input })
+  }
 }
 
 export default new SendSevice();

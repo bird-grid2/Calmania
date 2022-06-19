@@ -4,7 +4,7 @@
       <h2>ユーザー情報編集</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form class="edit_user" id="edit_user" @submit.prevent action="/users" accept-charset="UTF-8" method="post">
+    <form @submit.prevent class="edit_user" id="edit_user"  action="api/v1/users" accept-charset="UTF-8" method="patch">
       <div class='left_box'>
         <div class='field'>
           <label class="edit" for="user_nickname_ニックネーム">ニックネーム</label>
@@ -87,7 +87,7 @@
 
 <script>
 import backGround from '../../../service/background.service';
-import axios from 'axios';
+import send from '../../../service/send.service';
 
 export default {
   data() {
@@ -113,7 +113,7 @@ export default {
       this.user.email = res.data.user.email;
       this.user.height = res.data.user.height;
       this.user.target_cal = res.data.user.target_cal;
-      this.user.password = res.data.password;
+      this.user.current_password = res.data.password;
     }).catch(err => console.log(err));
   },
   methods: {
@@ -121,9 +121,24 @@ export default {
       return JSON.parse(sessionStorage.getItem('user')).auth_token;
     },
     updateUsers() {
-      axios
-      .post("api/v1/users/registrations/update", { account_update: this.user })
-      .then( (response)=> { this.$router.push({ path: "/management" }); }, (error)=> { console.log(error); });
+      send
+      .updateUser(this.$route.params['userId'], { user: this.user })
+      .then( res => {
+        if (res.data != 'NG') {
+          this.$router.push({ name: "management", params: { userId: this.$route.params['userId'] } });
+          this.flashMessage.success({
+            message: 'ユーザー情報を更新しました',
+            time: 3000,
+            class: 'notification__success'
+          })
+        }else{
+          this.flashMessage.error({
+            message: 'ユーザー情報の更新失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          })
+        }
+      }).catch(err => console.log(err));
     }
   },
   computed: {
