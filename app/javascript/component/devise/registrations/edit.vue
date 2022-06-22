@@ -122,7 +122,7 @@ export default {
     },
     updateUsers() {
       send
-      .updateUser(this.$route.params['userId'], { user: this.user })
+      .updateUser(this.$route.params['userId'], this.user )
       .then( res => {
         if (res.data != 'NG') {
           this.$router.push({ name: "management", params: { userId: this.$route.params['userId'] } });

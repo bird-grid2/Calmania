@@ -451,6 +451,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier
   unicorn
+  warden-jwt_auth
   web-console (>= 3.3.0)
   webdrivers
   webpacker

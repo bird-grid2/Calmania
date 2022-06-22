@@ -93,6 +93,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise-jwt'
+gem 'warden-jwt_auth'
 gem 'rack-cors'
 gem 'haml-rails'
 gem 'font-awesome-sass'

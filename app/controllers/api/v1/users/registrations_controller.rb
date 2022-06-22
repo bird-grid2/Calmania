@@ -7,7 +7,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   def load_data
     data = JsonWebToken.decode(params[:token])
-    
+
     if user_id_in_token?
       render json: editPayload(@current_user, data["password"], params[:token])
     else
@@ -26,10 +26,10 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-
+    super
     resource = User.find(params[:user_id])
-  
-    if resource.update(sign_up_params)
+    binding.pry
+    if resource.update(account_update_params)
       render json: 'update user info'
     else
       render json: "NG"
@@ -44,7 +44,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_parameters
-    binding.pry
     add_list = [:height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
     devise_parameter_sanitizer.permit(:account_update, keys: add_list)
   end
@@ -52,6 +51,12 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:user).permit(:email, :nickname, :password, :password_confirmation, :height)
   end
+
+  def account_update_params
+    add_list = [ :email, :nickname, :password, :password_confirmation, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
+    params.require(:user).permit(add_list)
+  end
+
 
   def payload(user, password)
     return nil unless user && user&.id
