@@ -103,7 +103,7 @@ export default {
         ideal_protain_rate: "",
         ideal_fat_rate: "",
         ideal_carbohydrate_rate: "",
-        clock_work_event_attributes: { period_id: "0", send_time: "" }
+        clock_work_event_attributes: [{ period_id: "0" }, { send_time: "" }]
       }
     }
   },
@@ -122,7 +122,7 @@ export default {
     },
     updateUsers() {
       send
-      .updateUser(this.$route.params['userId'], this.user )
+      .updateUser(this.$route.params['userId'], this.user)
       .then( res => {
         if (res.data != 'NG') {
           this.$router.push({ name: "management", params: { userId: this.$route.params['userId'] } });

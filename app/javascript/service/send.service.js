@@ -58,7 +58,8 @@ class  SendSevice {
     return instance.delete(`api/v1/menus/${menuId}`, { menu: input })
   }
   updateUser(userId, input){
-    return instance.patch(`/api/v1/user/${userId}/update`, { registration: input })
+    console.log(input)
+    return instance.patch(`/api/v1/user/${userId}/update`, { user: input })
   }
 }
 
