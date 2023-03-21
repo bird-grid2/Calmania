@@ -132,6 +132,7 @@
 
 <script>
 import BackgroundService from '../service/background.service';
+import sendService from '../service/send.service';
 export default {
   data() {
     return {
@@ -168,9 +169,21 @@ export default {
       return JSON.parse(sessionStorage.getItem('user')).user.id
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push({name: 'index'})
-      location.reload();
+      const data = JSON.parse(sessionStorage.getItem('user'));
+      sendService.signOut(data.user.email, data.user.nickname, data.auth_token).then((res)=> {
+        console.log(res);
+        // if(res == 'Success'){
+          sessionStorage.clear();
+          this.$router.push({name: 'index'})
+          location.reload();
+        /**  } else {
+          this.flashMessage.error({
+            message: 'ログアウトが失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          });
+        } **/
+      }).catch((error)=>{ console.log(error); });
     }
   },
   computed: {

@@ -15,6 +15,15 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     end
   end
 
+  # DELETE /resource/sign_out
+  def destroy
+    denylist = JwtDenylist.new(jti: payload['jti'], exp: payload['exp'])
+    denylist.save
+    rendder json: { message: 'ログアウトしました' }, status: 200
+  end
+
+
+
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -39,7 +48,4 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 end
 
-# DELETE /resource/sign_out
-# def destroy
-#   super
-# end
+
