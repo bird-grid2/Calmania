@@ -13,8 +13,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :clock_work_events, except: [:index, :show]
   end
-  root to: "shows#index"
-  # root to: "api/v1/shows#index"
+  root to: "api/v1/shows#index"
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
