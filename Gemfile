@@ -79,7 +79,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'rubocop', require: false
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '< 6.3'
   gem 'rspec_junit_formatter'
 end
 
@@ -106,3 +106,4 @@ gem 'clockwork'
 gem 'daemons'
 gem 'select2-rails'
 gem 'parser'
+gem 'active_model_serializers'

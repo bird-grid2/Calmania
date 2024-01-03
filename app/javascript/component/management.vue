@@ -172,17 +172,17 @@ export default {
       const data = JSON.parse(sessionStorage.getItem('user'));
       sendService.signOut(data.user.email, data.user.nickname, data.auth_token).then((res)=> {
         console.log(res);
-        // if(res == 'Success'){
+        if(res.status === 200){
           sessionStorage.clear();
           this.$router.push({name: 'index'})
           location.reload();
-        /**  } else {
+        } else {
           this.flashMessage.error({
             message: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'
           });
-        } **/
+        } 
       }).catch((error)=>{ console.log(error); });
     }
   },

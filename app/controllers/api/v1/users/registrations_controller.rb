@@ -6,7 +6,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_parameters, if: :devise_controller?
 
   def load_data
-    data = JsonWebToken.decode(params[:token])
+    data = JWT.decode(params[:token], Rails.application.secrets.secret_key_base)
     binding.pry
     if user_id_in_token?
       render json: editPayload(@current_user, data["password"], params[:token])
@@ -54,16 +54,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def account_update_params
     add_list = [ :email, :nickname, :password, :password_confirmation, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:period_id, :send_time] }]
     params.require(:user).permit(add_list)
-  end
-
-
-  def payload(user, password)
-    return nil unless user && user&.id
-
-    {
-      auth_token: JsonWebToken.encode({ user_id: user.id, password: password, exp: (Time.now + 2.week).to_i }),
-      user: { id: user.id, email: user.email, nickname: user.nickname }
-    }
   end
 
   def editPayload(user, password, token)

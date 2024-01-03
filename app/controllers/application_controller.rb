@@ -63,10 +63,30 @@ class ApplicationController < ActionController::API
   end
 
   def auth_token
-    @auth_token ||= JsonWebToken.decode(http_token)
+    @auth_token ||= decrypt(http_token)
   end
 
   def user_id_in_token?
     http_token && auth_token && auth_token["user_id"].to_i
+  end
+
+  def payload(user, password)
+    return nil unless user && user&.id
+
+    jti_raw = [user.id, Time.now.to_i].join(':')
+    jti = Digest::MD5.hexdigest(jti_raw)
+
+    payload = {
+      auth_token: { user_id: user.id, password: password, jti: jti, exp: (Time.now + 2.week).to_i },
+      user: { id: user.id, email: user.email, nickname: user.nickname }
+    }
+
+    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+  end
+
+  def decrypt(token)
+    JWT.decode(token, Rails.application.credentials.secret_key_base)
+  rescue StandardError
+    raise InvalidTokenError
   end
 end

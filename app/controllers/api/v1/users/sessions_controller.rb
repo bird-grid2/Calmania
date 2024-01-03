@@ -8,18 +8,21 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
+    token = payload(resource, params[:password])
     if resource.blank?
-      render json: "NG"
+       render json: "NG"
     elsif resource.valid_password?(params[:password])
-      render json: payload(resource, params[:password])
+      # render json: payload(resource, params[:password])
+      render json: ActiveModelSerializers::SerializableResource.new(resource, serializer: UserSerializer).as_json.deep_merge(user: { token: token })
     end
   end
 
   # DELETE /resource/sign_out
   def destroy
+    binding.pry
     denylist = JwtDenylist.new(jti: payload['jti'], exp: payload['exp'])
     denylist.save
-    rendder json: { message: 'ログアウトしました' }, status: 200
+    render json: { message: 'ログアウトしました' }, status: 200
   end
 
 
@@ -36,15 +39,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     api_v1_managements_path
   end
 
-  private
-
-  def payload(user, password)
-    return nil unless user && user&.id
-
-    {
-      auth_token: JsonWebToken.encode({ user_id: user.id, password: password, exp: (Time.now + 2.week).to_i }),
-      user: { id: user.id, email: user.email, nickname: user.nickname }
-    }
+  def set_flash_message!(key, kind, options = {})
+    # nothing
   end
 end
 

@@ -53,6 +53,7 @@ export default {
         password: this.password 
       })
       .then(res => {
+        console.log(res.data.auth_token)
         if(res.data.auth_token){
           sessionStorage.setItem('user', JSON.stringify(res.data))
         }
