@@ -8,15 +8,15 @@
       <div class='left_box'>
         <div class='field'>
           <label class="log-in" for="user_nickname_ニックネーム">ニックネーム</label>
-          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="nickname">
+          <input autofocus="autofocus" placeholder="ニックネームを入力してください" required="required" type="text" name="user[nickname]" id="user_nickname" v-model="user.nickname">
         </div>
         <div class='field'>
           <label class="log-in" for="user_email_メールアドレス">メールアドレス</label>
-          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="email">
+          <input placeholder="メールアドレスを入力してください" required="required" type="email" value="" name="user[email]" id="user_email" v-model="user.email">
         </div>
         <div class='field'>
           <label class="log-in" for="user_password_パスワード">パスワード</label>
-          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" autocomplete="off" v-model="password">
+          <input placeholder="パスワードを入力してください" required="required" type="password" name="user[password]" id="user_password" autocomplete="off" v-model="user.password">
         </div>
       </div>
       <div class='border-line'></div>
@@ -39,27 +39,29 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      nickname: "",
-      email: "",
-      password: ""
+      user: {
+        nickname: "",
+        email: "",
+        password: ""
+      }
     }
   },
   methods: {
     logInUsers() {
+      
       axios
       .post('/api/v1/users/sign_in', { 
-        nickname: this.nickname,
-        email: this.email,
-        password: this.password 
+        nickname: this.user.nickname,
+        email: this.user.email,
+        password: this.user.password 
       })
       .then(res => {
-        console.log(res.data.auth_token)
-        if(res.data.auth_token){
+        if(res.data){
           sessionStorage.setItem('user', JSON.stringify(res.data))
         }
 
         if(res.data != "NG") {
-          this.$router.push({ name: "management", params: { userId: res.data.user.id}});
+          this.$router.push({ name: "management", params: { userId: res.data.id, token: res.user}});
           this.flashMessage.success({
             message: "ログイン完了しました。",
             time: 3000,
@@ -67,9 +69,9 @@ export default {
           });
           
         }else{
-          this.nickname = ''
-          this.email = ''
-          this.password = ''
+          this.user.nickname = ''
+          this.user.email = ''
+          this.user.password = ''
           this.flashMessage.error({
             message: "ログインに失敗しました。",
             time: 3000,
@@ -80,9 +82,9 @@ export default {
       .catch(error => { console.log(error) });
     },
     easyLogin() {
-      this.nickname = 'test-user';
-      this.email = 'test-user-calmania@gmail.com';
-      this.password = '65oihue8';
+      this.user.nickname = 'test-user';
+      this.user.email = 'test-user-calmania@gmail.com';
+      this.user.password = '65oihue8';
       document.getElementById('login').click();
     }
   }

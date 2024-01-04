@@ -28,7 +28,7 @@ const instance = target;
 
 class  BackgroundSevice {
   getUsersBoard(args) {
-    return instance.get('api/v1/user/load_data', {params: { token: args.auth_token }});
+    return instance.get('api/v1/user/load_data', {params: { token: args.data }});
   }
   getManagementsBoard() {
     return instance.get('/api/v1/managements');

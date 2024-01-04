@@ -67,6 +67,8 @@ class ApplicationController < ActionController::API
   end
 
   def user_id_in_token?
+   # binding.pry
+
     http_token && auth_token && auth_token["user_id"].to_i
   end
 
@@ -81,7 +83,7 @@ class ApplicationController < ActionController::API
       user: { id: user.id, email: user.email, nickname: user.nickname }
     }
 
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+    return JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 
   def decrypt(token)

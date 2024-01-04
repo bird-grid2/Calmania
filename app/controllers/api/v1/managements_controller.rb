@@ -1,5 +1,5 @@
 class Api::V1::ManagementsController < ApplicationController
-  before_action :authenticate_request!
+  #before_action :authenticate_request!
   before_action :set_parameter, only: [:index]
 
   def index
