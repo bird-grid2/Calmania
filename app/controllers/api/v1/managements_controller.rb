@@ -1,5 +1,5 @@
 class Api::V1::ManagementsController < ApplicationController
-  #before_action :authenticate_request!
+  before_action :authenticate_request!
   before_action :set_parameter, only: [:index]
 
   def index
@@ -51,8 +51,8 @@ class Api::V1::ManagementsController < ApplicationController
     require 'time'
     date_time = Time.current.midnight + 1.day
 
-    @period = Log.where(user_id: auth_token[:user_id], created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
-    @cal = Log.where(user_id: auth_token[:user_id], created_at: (date_time - 1.day)..date_time)
+    @period = Log.where(user_id: auth_token[0]["auth_token"]["user_id"], created_at: (date_time - 31.days)..date_time).order(date: 'DESC')
+    @cal = Log.where(user_id: auth_token[0]["auth_token"]["user_id"], created_at: (date_time - 1.day)..date_time)
     @menus = Menu.all.order(:id)
   end
 end

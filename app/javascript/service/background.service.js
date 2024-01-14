@@ -1,5 +1,5 @@
 import axios from 'axios';
-let user = JSON.parse(sessionStorage.getItem('user'));
+let user = JSON.parse(sessionStorage.getItem('user')).user.token;
 let target = 0;
 
 if(user == null){
@@ -18,7 +18,7 @@ if(user == null){
     headers: {
       'Content-Type': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
-      'Authorization' : "Bearer " + user.auth_token
+      'Authorization' : "Bearer " + user
     },
     responseType: 'json'
   })

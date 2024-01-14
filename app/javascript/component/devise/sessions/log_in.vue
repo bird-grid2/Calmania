@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     logInUsers() {
-      
       axios
       .post('/api/v1/users/sign_in', { 
         nickname: this.user.nickname,
@@ -61,7 +60,11 @@ export default {
         }
 
         if(res.data != "NG") {
-          this.$router.push({ name: "management", params: { userId: res.data.id, token: res.user}});
+          this.$router.push({ name: "management",
+            params: {
+              userId: res.data.id
+            }
+          });
           this.flashMessage.success({
             message: "ログイン完了しました。",
             time: 3000,
@@ -79,7 +82,9 @@ export default {
           });
         }
       })
-      .catch(error => { console.log(error) });
+      .catch(error => { 
+        console.log(error)
+      });
     },
     easyLogin() {
       this.user.nickname = 'test-user';
