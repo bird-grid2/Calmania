@@ -170,7 +170,7 @@ export default {
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
-      sendService.signOut(data.user.email, data.user.nickname, data.auth_token).then((res)=> {
+      sendService.signOut(data.user.token).then((res)=> {
         console.log(res);
         if(res.status === 200){
           sessionStorage.clear();

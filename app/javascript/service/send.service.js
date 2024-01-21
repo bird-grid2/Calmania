@@ -61,8 +61,8 @@ class  SendSevice {
     console.log(input)
     return instance.patch(`/api/v1/user/${userId}/update`, { user: input })
   }
-  signOut(email, nickName, token){
-    return instance.delete(`/api/v1/users/sign_out`, { email: email, nickname: nickName, auth_token: token });
+  signOut(token){
+    return instance.delete(`/api/v1/users/sign_out`, { auth_token: token });
   }
 }
 
