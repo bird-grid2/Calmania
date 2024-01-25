@@ -86,7 +86,7 @@ class ApplicationController < ActionController::API
 
   def decrypt(token)
     JWT.decode(token, Rails.application.credentials.secret_key_base)
-  rescue StandardError
-    raise InvalidTokenError
+  rescue StandardError => e
+    puts "#{e.message}"
   end
 end

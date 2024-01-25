@@ -1,8 +1,17 @@
 import axios from 'axios'
-let user =  JSON.parse(sessionStorage.getItem('user')).user.token;
 let target = 0;
 
-if(user == null){
+if(JSON.parse(sessionStorage.getItem('user')).user.token){
+  target = axios.create({
+    baseURL: process.env.API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization' : "Bearer " + JSON.parse(sessionStorage.getItem('user')).user.token
+    },
+    responseType: 'json'
+  });
+} else {
   target = axios.create({
     baseURL: process.env.API_BASE_URL,
     headers: {
@@ -11,17 +20,7 @@ if(user == null){
       'Authorization' : "Bearer "
     },
     responseType: 'json'
-  })
-} else {
-  target = axios.create({
-    baseURL: process.env.API_BASE_URL,
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      'Authorization' : "Bearer " + user
-    },
-    responseType: 'json'
-  })
+  });
 }
 
 const instance = target;
@@ -62,7 +61,7 @@ class  SendSevice {
     return instance.patch(`/api/v1/user/${userId}/update`, { user: input })
   }
   signOut(token){
-    return instance.delete(`/api/v1/users/sign_out`, { auth_token: token });
+    return instance.delete(`/api/v1/users/sign_out`, { data: token });
   }
 }
 
