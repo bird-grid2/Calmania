@@ -50,7 +50,7 @@ class ApplicationController < ActionController::API
       return
     end
     begin
-      @current_user = User.find(auth_token[0]["auth_token"]["user_id"])
+      @current_user = User.find(auth_token[0]["user"]["id"])
     rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
     end
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::API
   end
 
   def user_id_in_token?
-    http_token && auth_token && auth_token[0]["auth_token"]["user_id"].to_i
+    http_token && auth_token && auth_token[0]["user"]["id"].to_i
   end
 
   def payload(user, password)
@@ -77,8 +77,8 @@ class ApplicationController < ActionController::API
     jti = Digest::MD5.hexdigest(jti_raw)
 
     payload = {
-      auth_token: { user_id: user.id, password: password, jti: jti, exp: (Time.now + 2.week).to_i },
-      user: { id: user.id, email: user.email, nickname: user.nickname }
+      auth_data: { jti: jti, exp: (Time.now + 2.week).to_i },
+      user: { id: user.id, email: user.email, nickname: user.nickname, password: user.password }
     }
 
     return JWT.encode(payload, Rails.application.credentials.secret_key_base)

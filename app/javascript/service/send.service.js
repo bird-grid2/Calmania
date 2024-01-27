@@ -61,7 +61,7 @@ class  SendSevice {
     return instance.patch(`/api/v1/user/${userId}/update`, { user: input })
   }
   signOut(token){
-    return instance.delete(`/api/v1/users/sign_out`, { data: token });
+    return instance.delete(`/api/v1/users/sign_out`, { auth_token: token });
   }
 }
 
