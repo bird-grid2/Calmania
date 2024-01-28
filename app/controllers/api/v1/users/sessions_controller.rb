@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::SessionsController < Devise::SessionsController
-  before_action :authenticate_request!, except: [:new, :create]
+  before_action :authenticate_request!, except: [:new, :create, :destroy]
   skip_before_action :verify_signed_out_user, only: :destroy
 
   def new; end
@@ -20,11 +20,12 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    binding.pry
-    denylist = JwtDenylist.new(jti: auth_token[0]["auth_data"]["jti"], exp: auth_token[0]["auth_data"]["exp"])
-    denylist.save
+    #denylist = JwtDenylist.new(jti: auth_token[0]["jti"], exp: auth_token[0]["exp"])
+   # binding.pry
+    #denylist.save
     render json: { message: 'ログアウトしました' }, status: 200
   end
+
 
 
 

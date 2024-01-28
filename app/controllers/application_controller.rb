@@ -74,11 +74,16 @@ class ApplicationController < ActionController::API
     return nil unless user && user&.id
 
     jti_raw = [user.id, Time.now.to_i].join(':')
-    jti = Digest::MD5.hexdigest(jti_raw)
+    jti = Digest::SHA256.hexdigest(jti_raw)
 
     payload = {
-      auth_data: { jti: jti, exp: (Time.now + 2.week).to_i },
-      user: { id: user.id, email: user.email, nickname: user.nickname, password: user.password }
+      jti: jti, 
+      exp: (Time.now + 2.week).to_i,
+      user: {
+        id: user.id, 
+        email: user.email, 
+        nickname: user.nickname
+      }
     }
 
     return JWT.encode(payload, Rails.application.credentials.secret_key_base)
