@@ -20,9 +20,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    #denylist = JwtDenylist.new(jti: auth_token[0]["jti"], exp: auth_token[0]["exp"])
-   # binding.pry
-    #denylist.save
+    denylist = JwtDenylist.new(jti: auth_token[0]["jti"], exp: Time.at(auth_token[0]["exp"]))
+    denylist.save
     render json: { message: 'ログアウトしました' }, status: 200
   end
 

@@ -40,10 +40,39 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem "whenever", require: false
 gem 'listen', '>= 3.0.5'
 
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'devise'
+gem 'warden-jwt_auth'
+gem 'devise-jwt'
+gem 'rack-cors'
+gem 'haml-rails'
+gem 'font-awesome-sass'
+gem 'pry-rails'
+gem 'jquery-rails'
+gem 'gon'
+gem 'line-bot-api'
+gem 'active_hash'
+gem 'clockwork'
+gem 'daemons'
+gem 'select2-rails'
+gem 'parser'
+gem 'active_model_serializers'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'foreman'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-rails'
+  gem 'rubocop', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
@@ -71,39 +100,8 @@ group :production do
   gem 'rmagick'
 end
 
-group :development, :test do
-  gem 'capistrano'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-bundler'
-  gem 'capistrano3-unicorn'
-  gem 'capistrano-rails'
-  gem 'rubocop', require: false
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'rspec_junit_formatter'
-end
-
 group :development, :production do
   gem 'pycall'
   gem 'matplotlib'
   gem 'numpy'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'devise'
-gem 'warden-jwt_auth'
-gem 'devise-jwt'
-gem 'rack-cors'
-gem 'haml-rails'
-gem 'font-awesome-sass'
-gem 'pry-rails'
-gem 'jquery-rails'
-gem 'gon'
-gem 'line-bot-api'
-gem 'active_hash'
-gem 'clockwork'
-gem 'daemons'
-gem 'select2-rails'
-gem 'parser'
-gem 'active_model_serializers'
