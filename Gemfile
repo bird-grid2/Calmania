@@ -19,7 +19,7 @@ gem 'uglifier'
 # gem 'mini_racer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+# gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -43,8 +43,8 @@ gem 'listen', '>= 3.0.5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
-gem 'warden-jwt_auth'
 gem 'devise-jwt'
+gem 'rack', '>= 3.0.9.1'
 gem 'rack-cors'
 gem 'haml-rails'
 gem 'font-awesome-sass'
@@ -58,7 +58,6 @@ gem 'daemons'
 gem 'select2-rails'
 gem 'parser'
 gem 'active_model_serializers'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

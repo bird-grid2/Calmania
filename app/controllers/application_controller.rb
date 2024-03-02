@@ -70,8 +70,8 @@ class ApplicationController < ActionController::API
     http_token && auth_token && auth_token[0]["user"]["id"].to_i
   end
 
-  def payload(user, password)
-    return nil unless user && user&.id
+  def payload(user)
+    return nil unless user&.id
 
     jti_raw = [user.id, Time.now.to_i].join(':')
     jti = Digest::SHA256.hexdigest(jti_raw)
@@ -79,6 +79,7 @@ class ApplicationController < ActionController::API
     payload = {
       jti: jti, 
       exp: (Time.now + 2.week).to_i,
+      scp: 'api_v1_user',
       user: {
         id: user.id, 
         email: user.email, 
@@ -86,12 +87,12 @@ class ApplicationController < ActionController::API
       }
     }
 
-    return JWT.encode(payload, Rails.application.credentials.secret_key_base)
+    JWT.encode(payload, Rails.application.credentials.secret_key_base)
   end
 
   def decrypt(token)
     JWT.decode(token, Rails.application.credentials.secret_key_base)
   rescue StandardError => e
-    puts "#{e.message}"
+    puts e.message
   end
 end

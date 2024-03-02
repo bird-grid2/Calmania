@@ -7,9 +7,9 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   def load_data
     data = JWT.decode(params[:token], Rails.application.secrets.secret_key_base)
-    binding.pry
+
     if user_id_in_token?
-      render json: editPayload(@current_user, data["password"], params[:token])
+      render json: edit_payload(@current_user, data["password"], params[:token])
     else
       render json: "NG"
     end
@@ -19,14 +19,13 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     @user = User.create(sign_up_params)
 
     if @user.save
-      render json: payload(@user, @user.password)
+      render json: payload(@user)
     else
       render json: 'user not save'
     end
   end
 
   def update
-    binding.pry
     resource = User.find_for_database_authentication(params[:user_id])
     if resource.update(account_update_params)
       render json: 'update user info'
@@ -56,8 +55,8 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(add_list)
   end
 
-  def editPayload(user, password, token)
-    return nil unless user && user&.id
+  def edit_payload(user, password, token)
+    return nil unless user&.id
 
     {
       auth_token: token,
@@ -65,7 +64,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       user: user
     }
   end
-
 end
 
 # GET /resource/sign_up

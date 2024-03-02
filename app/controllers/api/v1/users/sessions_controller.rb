@@ -9,9 +9,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     resource = User.find_for_database_authentication(email: params[:email], nickname: params[:nickname])
-    token = payload(resource, params[:password])
+    token = payload(resource)
     if resource.blank?
-       render json: "NG"
+      render json: "NG"
     elsif resource.valid_password?(params[:password])
       # render json: payload(resource, params[:password])
       render json: ActiveModelSerializers::SerializableResource.new(resource, serializer: UserSerializer).as_json.deep_merge(user: { token: token })
@@ -24,9 +24,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     denylist.save
     render json: { message: 'ログアウトしました' }, status: 200
   end
-
-
-
 
   protected
 
@@ -44,5 +41,3 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     # nothing
   end
 end
-
-
