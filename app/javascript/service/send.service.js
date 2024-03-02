@@ -1,7 +1,7 @@
 import axios from 'axios'
 let target = 0;
 
-if(JSON.parse(sessionStorage.getItem('user')).user.token){
+if(JSON.parse(sessionStorage.getItem('user'))){
   target = axios.create({
     baseURL: process.env.API_BASE_URL,
     headers: {

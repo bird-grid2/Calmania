@@ -171,7 +171,6 @@ export default {
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
       sendService.signOut(data.user.token).then((res)=> {
-        console.log(res);
         if(res.status === 200){
           sessionStorage.clear();
           this.$router.push({name: 'index'})
