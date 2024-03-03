@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     sendInstance(){
-      new SendService()
+      return new SendService()
     },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id

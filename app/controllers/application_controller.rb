@@ -50,7 +50,7 @@ class ApplicationController < ActionController::API
       return
     end
     begin
-      @current_user = User.find(auth_token[0]["user"]["id"])
+      @current_user ||= User.find(auth_token[0]["user"]["id"])
     rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
     end
