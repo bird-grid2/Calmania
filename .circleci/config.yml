@@ -15,7 +15,7 @@ jobs:
           POSTGRES_DB: Calmania_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-      - image: circleci/python:3.6.4
+      - image: circleci/python:latest
         environment:
           DATABASE_URL: postgresql://postgres:password@localhost/Calmania_test?sslmode=disable
 
