@@ -1,12 +1,12 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@1.1.2
+  ruby: circleci/ruby:latest
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.1-node
+      - image: circleci/ruby:latest
         environment:
-          BUNDLER_VERSION: 2.1.4
+          BUNDLER_VERSION: 2.5.5
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
