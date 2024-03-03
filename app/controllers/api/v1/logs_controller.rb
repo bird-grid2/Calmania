@@ -18,7 +18,7 @@ class Api::V1::LogsController < ApplicationController
   end
 
   def index
-    @logs = Log.order(date: 'DESC').where(user_id: auth_token[:user_id])
+    @logs = Log.order(date: 'DESC').where(user_id: @current_user.id)
 
     return if @logs.nil?
 
