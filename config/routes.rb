@@ -43,18 +43,18 @@ Rails.application.routes.draw do
         end
       end
 
-      get '/', to: 'shows#index'
-      get '/:id/management', to: 'shows#index'
-      get '/menus', to: 'shows#index'
-      get '/menu/:id/edit', to: 'shows#index'
-      get '/:id/log', to: 'shows#index'
-      get '/log/:id/edit', to: 'shows#index'
-      get '/sign_in', to: 'shows#index'
-      get '/sign_up', to: 'shows#index'
-      get '/user/edit', to: 'shows#index'
-      get '/graph', to: 'shows#index'
-      get '/menus/new', to: 'menus#new'
-      match '*path', to: 'application#responce_not_found', via: :all
+      #get '/', to: 'shows#index'
+      #get '/:id/management', to: 'shows#index'
+      #get '/menus', to: 'shows#index'
+      #get '/menu/:id/edit', to: 'shows#index'
+      #get '/:id/log', to: 'shows#index'
+      #get '/log/:id/edit', to: 'shows#index'
+      #get '/sign_in', to: 'shows#index'
+      #get '/sign_up', to: 'shows#index'
+      #get '/user/edit', to: 'shows#index'
+      #get '/graph', to: 'shows#index'
+      #get '/menus/new', to: 'menus#new'
+      match '*path', to: 'application#response_not_found', via: :all
     end
   end
 end

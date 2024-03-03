@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import backGroundService from '../../../service/background.service'
+import { BackgroundService } from '../../../service/background.service'
 import Food from '../food.vue'
 export default {
   data () {
@@ -69,7 +69,8 @@ export default {
   },
   components: { Food },
   created() {
-    backGroundService.getFoodsBoard()
+    const instance = new BackgroundService()
+    instance.getFoodsBoard()
     .then( res => {
       res.data.forEach( elem => {
         this.protainRate.push(elem.protain_rate)

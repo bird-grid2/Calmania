@@ -6,9 +6,12 @@
     %meta{ "http-equiv" => "Content-Security-Policy", content: "script-src self http://localhost:3000" }
     %title Calmania
     = include_gon
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
    
   %body
+    #app
     / = render 'layouts/notifications'
     = javascript_pack_tag 'main', 'data-turbolinks-track': 'reload'
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = yield 
+    

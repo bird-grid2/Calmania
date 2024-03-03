@@ -131,8 +131,8 @@
 </template>
 
 <script>
-import BackgroundService from '../service/background.service';
-import sendService from '../service/send.service';
+import { BackgroundService } from '../service/background.service';
+import { SendService, sendService } from '../service/send.service';
 export default {
   data() {
     return {
@@ -157,7 +157,8 @@ export default {
     }
   },
   mounted() {
-    BackgroundService.getManagementsBoard()
+    const instance = new BackgroundService()
+    instance.getManagementsBoard()
     .then(res => { 
       this.managements = res.data.managements
       this.logs = res.data.logs
@@ -170,7 +171,9 @@ export default {
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
-      sendService.signOut(data.user.token).then((res)=> {
+      const instance = new SendService();
+
+      instance.signOut(data.user.token).then((res)=> {
         if(res.status === 200){
           sessionStorage.clear();
           this.$router.push({name: 'index'})

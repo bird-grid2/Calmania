@@ -66,7 +66,7 @@
 
 <script>
 import Vue from 'vue';
-import sendService from '../../../service/send.service';
+import { SendService } from '../../../service/send.service';
 import logItem from './log_item.vue';
 export default {
   data() {
@@ -93,11 +93,14 @@ export default {
   },
   components: { logItem },
   methods: {
+    sendInstance() {
+      new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id
     },
     createLogs() {
-      sendService.postLog(this.logs)
+      this.sendInstance.postLog(this.logs)
       .then( res => {
         if (res.data != 'not create log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });

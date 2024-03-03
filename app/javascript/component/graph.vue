@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { SendService } from '../service/send.service';
+
 export default {
   data: {
     iconStyle: {
@@ -45,12 +47,28 @@ export default {
     }
   },
   methods: {
+    sendInstance(){
+      new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push({name: 'index'})
+      const data = JSON.parse(sessionStorage.getItem('user'));
+
+      this.sendInstance.signOut(data.user.token).then((res)=> {
+        if(res.status === 200){
+          sessionStorage.clear();
+          this.$router.push({name: 'index'})
+          location.reload();
+        } else {
+          this.flashMessage.error({
+            message: 'ログアウトが失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          });
+        } 
+      }).catch((error)=>{ console.log(error); });
     }
   }
 }

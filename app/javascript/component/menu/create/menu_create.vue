@@ -44,7 +44,7 @@
 <script>
 import Vue from 'vue';
 import MenuItem from './menu_item.vue'
-import sendService from '../../../service/send.service';
+import { SendService } from '../../../service/send.service';
 export default {
   data() {
     return {
@@ -65,7 +65,8 @@ export default {
   components: { MenuItem },
   methods: {
     createMenus() {
-      sendService.postMenu(this.menu)
+      const instance = new SendService()
+      instance.postMenu(this.menu)
       .then( res => {
         if (res.data != 'not create menu') {
           this.$router.push({ name: "menus" });

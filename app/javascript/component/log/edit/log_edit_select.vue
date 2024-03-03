@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import backGroundService from '../../../service/background.service'
+import { BackgroundService } from '../../../service/background.service'
 export default {
   data(){
     return {
@@ -20,7 +20,8 @@ export default {
   },
   props: ['number'],
   created() {
-    backGroundService.getMenusBoard()
+    const instance = new BackgroundService()
+    instance.getMenusBoard()
     .then( res => {
       this.menus.push({ id: 0, material: "メニューを選択して下さい" });
       res.data.forEach( elem => {

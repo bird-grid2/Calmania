@@ -42,8 +42,8 @@
 <script>
 import Vue from 'vue';
 import menuItem from './edit_item.vue';
-import sendService from '../../../service/send.service';
-import backGround from '../../../service/background.service';
+import { SendService } from '../../../service/send.service';
+import { BackgroundService } from '../../../service/background.service';
 export default {
   data() {
     return {
@@ -65,6 +65,7 @@ export default {
   },
   components: { menuItem },
   beforeCreate() {
+    const backGround = new BackgroundService()
     backGround.getEditMenusBoard(this.$route.params['menuId'])
     .then( res => {
       this.menu.material = res.data.material
@@ -87,8 +88,11 @@ export default {
     }
   },
   methods: {
+    sendInstance() {
+      new SendService()
+    },
     updateMenus() {
-      sendService
+      this.sendInstance
       .updateMenu(this.$route.params['menuId'], this.menu)
       .then( res => {
         if (res.data != "not update menu") {

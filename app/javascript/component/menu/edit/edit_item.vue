@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import backGround from '../../../service/background.service'
+import { BackgroundService } from '../../../service/background.service'
 import Food from '../food.vue'
 export default {
   data () {
@@ -72,6 +72,7 @@ export default {
   },
   components: { Food },
   created() {
+    const backGround = new BackgroundService()
     backGround.getFoodsBoard()
     .then( res => {
       res.data.forEach( elem => {
@@ -84,6 +85,7 @@ export default {
   },
   beforeMount(){
     let box = 0; let self = this;
+    const backGround = new BackgroundService()
     async function getData(params){
       if(self.foodNumber == 0) { return; }
       box = await backGround.getEditFoodsBoard(params).catch(err => console.log(err));

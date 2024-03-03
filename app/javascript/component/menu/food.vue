@@ -7,7 +7,7 @@
 
 
 <script>
-import backGroundService from '../../service/background.service'
+import { BackgroundService } from '../../service/background.service'
 export default {
   props: ['number'],
   data(){
@@ -19,8 +19,9 @@ export default {
   },
   beforeCreate() {
     let self = this
+    const instance = new BackgroundService()
     async function foodData(){
-      let fData = await backGroundService.getFoodsBoard().catch( error => { console.log(error) });
+      let fData = await instance.getFoodsBoard().catch( error => { console.log(error) });
       self.foods.push({ id: 0, food: "選択して下さい" }); 
       await fData.data.forEach( elem => { self.foods.push({ id: elem.id, food: elem.element }) })
     }

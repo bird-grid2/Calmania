@@ -66,8 +66,8 @@
 <script>
 import Vue from 'vue';
 import logItem from './log_edit_item.vue';
-import backGround from '../../../service/background.service';
-import sendService from '../../../service/send.service';
+import { BackgroundService } from '../../../service/background.service';
+import { SendService } from '../../../service/send.service';
 export default {
   data() {
     return {
@@ -94,6 +94,7 @@ export default {
   },
   components: { logItem },
   beforeCreate() {
+    const backGround = new BackgroundService()
     let self = this;
     let bgData = 0;
     loadLogs(this.$route.params['logId']);
@@ -111,11 +112,14 @@ export default {
     }
   },
   methods: {
+    sendInstance() {
+      new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id
     },
     updateLogs(){
-      sendService
+      this.sendInstance
       .updateLog(this.$route.params['logId'], this.logs)
       .then( res => {
         if (res.data != 'not update log') {

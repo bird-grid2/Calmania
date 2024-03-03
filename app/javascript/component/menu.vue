@@ -71,8 +71,8 @@
 </template>
 
 <script>
-import sendService from '../service/send.service'
-import backgroundService from '../service/background.service'
+import { SendService } from '../service/send.service'
+import { BackgroundService } from '../service/background.service'
 export default {
   data() {
     return {
@@ -88,7 +88,8 @@ export default {
     }
   },
   mounted() {
-    backgroundService.getMenusBoard()
+    const instance = new BackgroundService()
+    instance.getMenusBoard()
     .then( res => {
       res.data.forEach( (elem) =>{
         this.menus.push(elem);
@@ -97,12 +98,28 @@ export default {
     .catch( error => { console.log(error) })
   },
   methods: {
+    sendInstance(){
+      new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push({name: 'index'})
+      const data = JSON.parse(sessionStorage.getItem('user'));
+
+      this.sendInstance.signOut(data.user.token).then((res)=> {
+        if(res.status === 200){
+          sessionStorage.clear();
+          this.$router.push({name: 'index'})
+          location.reload();
+        } else {
+          this.flashMessage.error({
+            message: 'ログアウトが失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          });
+        } 
+      }).catch((error)=>{ console.log(error); });
     },
     total(mass) {
       let res = Math.round(this.menus[mass].masses.reduce((sum, menu) => sum += Number(menu), 0));
@@ -111,7 +128,7 @@ export default {
     incrementalSearch() {
       let input = document.getElementById('keyword').value
       
-      sendService.postMenuSearch(input)
+      this.sendInstance.postMenuSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -132,7 +149,7 @@ export default {
       .catch( error => { console.log(error) });
     },
     deleteAction(index, params) {
-      sendService.deleteMenu(index, params)
+      this.sendInstance.deleteMenu(index, params)
       .then( res => {
         if (res.data != 'not delete menu') {
           this.$router.push({ name: "menus", force: true});

@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import BackGround from '../service/background.service';
-import sendService from '../service/send.service';
+import { BackgroundService } from '../service/background.service';
+import { SendService } from '../service/send.service';
 export default {
   data() {
     return {
@@ -97,6 +97,7 @@ export default {
     }
   },
   mounted() {
+    const BackGround = new BackgroundService()
     BackGround.getLogsBoard()
     .then( res => {
       if (res.data.length == 1) {
@@ -110,17 +111,33 @@ export default {
     .catch( error => { console.log(error) });
   },
   methods: {
+    sendInstance(){
+      new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).user.id;
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push({name: 'index'})
+      const data = JSON.parse(sessionStorage.getItem('user'));
+
+      this.sendInstance.signOut(data.user.token).then((res)=> {
+        if(res.status === 200){
+          sessionStorage.clear();
+          this.$router.push({name: 'index'})
+          location.reload();
+        } else {
+          this.flashMessage.error({
+            message: 'ログアウトが失敗しました',
+            time: 2000,
+            class: 'notification__error'
+          });
+        } 
+      }).catch((error)=>{ console.log(error); });
     },
     incrementaldSearch() {
       let input =  document.getElementById('keyword2').value
       
-      sendService.postLogdSearch(input)
+      this.sendInstance.postLogdSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -143,7 +160,7 @@ export default {
     incrementalSearch() {
       let input = document.getElementById('keyword').value
       
-      sendService.postLogSearch(input)
+      this.sendInstance.postLogSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -164,7 +181,7 @@ export default {
       .catch( error => { console.log(error) });
     },
     deleteAction(index, params){
-      sendService.deleteLog(index, params)
+      this.sendInstance.deleteLog(index, params)
       .then( res => {
         if (res.data != 'not delete log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });
