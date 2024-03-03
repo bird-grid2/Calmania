@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::API
   require 'pycall'
   require 'pycall/import'
-  include PyCall::Import
-  pyimport 'matplotlib.pyplot', as: 'plt'
-  pyimport 'numpy'
+  require 'matplotlib/pyplot'
+  require 'numpy'
   include ActionController::MimeResponds
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionView::Layouts
