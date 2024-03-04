@@ -28,10 +28,8 @@ export default {
         this.total_fat.push(Number(elem.total_fat))
         this.total_carbohydrate.push(Number(elem.total_carbohydrate))
       });
-      console.log(this.menus)
     })
     .catch( error => { console.log(error) })
-    console.log('select bc')
   },
   methods: {
     calculateItem(args) {
@@ -50,7 +48,6 @@ export default {
         return this.selected;
       },
       set(val) {
-        console.log(val);
         this.selected = val;
         this.calculateItem(val);
       }

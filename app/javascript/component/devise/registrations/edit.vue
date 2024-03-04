@@ -86,8 +86,8 @@
 </template>
 
 <script>
-import backGround from '../../../service/background.service';
-import send from '../../../service/send.service';
+import { BackgroundService } from '../../../service/background.service';
+import { SendService } from '../../../service/send.service';
 
 export default {
   data() {
@@ -108,6 +108,7 @@ export default {
     }
   },
   mounted() {
+    const backGround = new BackgroundService();
     backGround.getUsersBoard(this.getUserData()).then(res => {
       this.user.nickname = res.data.user.nickname;
       this.user.email = res.data.user.email;
@@ -117,11 +118,14 @@ export default {
     }).catch(err => console.log(err));
   },
   methods: {
+    sendInstance(){
+      return new SendService();
+    },
     getUserData(){
       return JSON.parse(sessionStorage.getItem('user'));
     },
     updateUsers() {
-      send
+      this.sendInstance()
       .updateUser(this.$route.params['userId'], this.user)
       .then( res => {
         if (res.data != 'NG') {

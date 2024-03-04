@@ -60,6 +60,7 @@ export default {
         }
 
         if(res.data != "NG") {
+          console.log(res.data)
           this.$router.push({ name: "management",
             params: {
               userId: res.data.id

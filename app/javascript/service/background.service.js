@@ -47,7 +47,7 @@ export class BackgroundService {
     return this.instance.get('api/v1/menus/edit', { params: { id: args }})
   }
   getFoodsBoard() {
-    return this.instance.get('/api/v1/menus/new');
+    return this.instance.get('/api/v1/menus');
   }
   getEditFoodsBoard(args) {
     return this.instance.get('/api/v1/menus/food_data', { params: { id: args } })

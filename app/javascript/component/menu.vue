@@ -102,7 +102,7 @@ export default {
       return new SendService()
     },
     getId() {
-      return JSON.parse(sessionStorage.getItem('user')).user.id
+      return JSON.parse(sessionStorage.getItem('user')).id
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
@@ -128,7 +128,7 @@ export default {
     incrementalSearch() {
       let input = document.getElementById('keyword').value
       
-      this.sendInstance.postMenuSearch(input)
+      this.sendInstance().postMenuSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -149,7 +149,7 @@ export default {
       .catch( error => { console.log(error) });
     },
     deleteAction(index, params) {
-      this.sendInstance.deleteMenu(index, params)
+      this.sendInstance().deleteMenu(index, params)
       .then( res => {
         if (res.data != 'not delete menu') {
           this.$router.push({ name: "menus", force: true});

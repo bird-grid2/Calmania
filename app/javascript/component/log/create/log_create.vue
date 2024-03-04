@@ -94,13 +94,13 @@ export default {
   components: { logItem },
   methods: {
     sendInstance() {
-      new SendService()
+      return new SendService()
     },
     getId() {
-      return JSON.parse(sessionStorage.getItem('user')).user.id
+      return JSON.parse(sessionStorage.getItem('user')).id
     },
     createLogs() {
-      this.sendInstance.postLog(this.logs)
+      this.sendInstance().postLog(this.logs)
       .then( res => {
         if (res.data != 'not create log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });
@@ -138,7 +138,6 @@ export default {
         let fat = document.getElementsByName('total_fat');
         let carbo = document.getElementsByName('total_carbohydrate');
         let index = document.getElementsByClassName('select_value');
-        console.log(index);
         this.totalProtain = [];
         this.totalFat = [];
         this.totalCarbohydrate = [];

@@ -115,7 +115,7 @@ export default {
       return new SendService()
     },
     getId() {
-      return JSON.parse(sessionStorage.getItem('user')).user.id;
+      return JSON.parse(sessionStorage.getItem('user')).id;
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
@@ -137,7 +137,7 @@ export default {
     incrementaldSearch() {
       let input =  document.getElementById('keyword2').value
       
-      this.sendInstance.postLogdSearch(input)
+      this.sendInstance().postLogdSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -160,7 +160,7 @@ export default {
     incrementalSearch() {
       let input = document.getElementById('keyword').value
       
-      this.sendInstance.postLogSearch(input)
+      this.sendInstance().postLogSearch(input)
       .then( res => {
         if(res.data == null) {
           this.searchView = false;
@@ -181,7 +181,7 @@ export default {
       .catch( error => { console.log(error) });
     },
     deleteAction(index, params){
-      this.sendInstance.deleteLog(index, params)
+      this.sendInstance().deleteLog(index, params)
       .then( res => {
         if (res.data != 'not delete log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });

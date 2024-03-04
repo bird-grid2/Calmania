@@ -89,10 +89,10 @@ export default {
   },
   methods: {
     sendInstance() {
-      new SendService()
+      return new SendService()
     },
     updateMenus() {
-      this.sendInstance
+      this.sendInstance()
       .updateMenu(this.$route.params['menuId'], this.menu)
       .then( res => {
         if (res.data != "not update menu") {

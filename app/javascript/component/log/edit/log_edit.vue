@@ -113,13 +113,13 @@ export default {
   },
   methods: {
     sendInstance() {
-      new SendService()
+      return new SendService()
     },
     getId() {
-      return JSON.parse(sessionStorage.getItem('user')).user.id
+      return JSON.parse(sessionStorage.getItem('user')).id
     },
     updateLogs(){
-      this.sendInstance
+      this.sendInstance()
       .updateLog(this.$route.params['logId'], this.logs)
       .then( res => {
         if (res.data != 'not update log') {

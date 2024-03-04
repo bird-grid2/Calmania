@@ -40,6 +40,7 @@ Rails.application.routes.draw do
           post :search
           get :edit
           get :food_data
+          get :new
         end
       end
 

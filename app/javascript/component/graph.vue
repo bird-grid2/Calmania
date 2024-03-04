@@ -51,7 +51,7 @@ export default {
       return new SendService()
     },
     getId() {
-      return JSON.parse(sessionStorage.getItem('user')).user.id
+      return JSON.parse(sessionStorage.getItem('user')).id
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
