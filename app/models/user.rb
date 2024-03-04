@@ -11,7 +11,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :clock_work_event, allow_destroy: true
 
   validates :nickname, :email, presence: true, uniqueness: true
-  validates :password_digest, presence: true
+  validates :encrypted_password, presence: true
   validates :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, numericality: { allow_nil: true }
 
   private
