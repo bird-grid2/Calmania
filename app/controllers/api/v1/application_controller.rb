@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class Api::V1::ApplicationController < ActionController::API
   require 'pycall'
   require 'pycall/import'
   # require 'matplotlib/pyplot'

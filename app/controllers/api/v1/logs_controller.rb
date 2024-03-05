@@ -1,4 +1,4 @@
-class Api::V1::LogsController < ApplicationController
+class Api::V1::LogsController < Api::V1::ApplicationController
   before_action :authenticate_request!
   before_action :set_log, only: [:edit, :update, :destroy]
 

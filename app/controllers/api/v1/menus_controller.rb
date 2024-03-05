@@ -1,4 +1,4 @@
-class Api::V1::MenusController < ApplicationController
+class Api::V1::MenusController < Api::V1::ApplicationController
   before_action :authenticate_request!
   before_action :set_menu, only: [:edit, :update, :destroy]
   before_action :set_food, only: [:food_data]

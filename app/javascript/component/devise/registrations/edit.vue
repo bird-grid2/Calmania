@@ -28,7 +28,7 @@
           <label for="ideal_PFC_rate" class="edit">PFCバランス</label>
           <input type="number" autocomplete="ideal_protain_rate" placeholder="たんぱく質の摂取割合(任意)" v-model="user.ideal_protain_rate">
           <input type="number" autocomplete="ideal_fat_rate" placeholder="脂質の摂取割合(任意)" id="rate" v-model="user.ideal_fat_rate">
-          <input type="number" autocomplete="ideal_carbohydrate_rate" placeholder="炭水化物の摂取割合(任意)" id="rate" v-model="user.ideal_carbohydrate_rate">
+          <input type="number" autocomplete="ideal_carbohydrate_rate" placeholder="炭水化物の摂取割合(任意)" id="rate2" v-model="user.ideal_carbohydrate_rate">
         </div>
         <div class='field'>
           <label class="edit" for="user_clock_work_event_attributes_Remainder機能 (LINE 公式アカウント: @681lurjb)">Remainder機能 (line 公式アカウント: @681lurjb)</label>
@@ -103,13 +103,15 @@ export default {
         ideal_protain_rate: "",
         ideal_fat_rate: "",
         ideal_carbohydrate_rate: "",
-        clock_work_event_attributes: [{ period_id: "0" }, { send_time: "" }]
+        clock_work_event_attributes: [{id: ""}, { period_id: "0" }, { send_time: "" }]
       }
     }
   },
   mounted() {
     const backGround = new BackgroundService();
-    backGround.getUsersBoard(this.getUserData()).then(res => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    
+    backGround.getUsersBoard(userData.user.token).then(res => {
       this.user.nickname = res.data.user.nickname;
       this.user.email = res.data.user.email;
       this.user.height = res.data.user.height;
@@ -120,9 +122,6 @@ export default {
   methods: {
     sendInstance(){
       return new SendService();
-    },
-    getUserData(){
-      return JSON.parse(sessionStorage.getItem('user'));
     },
     updateUsers() {
       this.sendInstance()

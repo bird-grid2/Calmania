@@ -1,4 +1,4 @@
-class Api::V1::GraphsController < ApplicationController
+class Api::V1::GraphsController < Api::V1::ApplicationController
   before_action :authenticate_request!
   before_action :set_cache_buster, only: :index
   before_action :set_user, only: :index

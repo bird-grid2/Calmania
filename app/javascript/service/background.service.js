@@ -29,7 +29,7 @@ export class BackgroundService {
     this.instance = target;
   }
   getUsersBoard(args) {
-    return this.instance.get('api/v1/user/load_data', {params: { token: args.data }});
+    return this.instance.get('api/v1/user/load_data', {params: { token: args }});
   }
   getManagementsBoard(args) {
     return this.instance.get('/api/v1/managements');
