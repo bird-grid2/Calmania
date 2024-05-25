@@ -132,7 +132,7 @@
 
 <script>
 import { BackgroundService } from '../service/background.service';
-import { SendService, sendService } from '../service/send.service';
+import { SendService } from '../service/send.service';
 export default {
   data() {
     return {

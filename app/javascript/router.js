@@ -1,29 +1,35 @@
-import Vue from "vue";
-import Router from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Index from "./component/index.vue";
 import Graph from "./component/graph.vue";
 import Management from "./component/management.vue";
 import Menu from "./component/menu.vue";
-import editMenu from "./component/menu/edit/menu_edit.vue";
-import createMenu from "./component/menu/create/menu_create.vue"
+import EditMenu from "./component/menu/edit/menu_edit.vue";
+import CreateMenu from "./component/menu/create/menu_create.vue"
 import Log from "./component/log.vue";
-import editLog from "./component/log/edit/log_edit.vue";
-import createLog from "./component/log/create/log_create.vue";
-import signIn from "./component/devise/sessions/log_in.vue";
-import signUp from "./component/devise/registrations/new.vue";
-import editUser from "./component/devise/registrations/edit.vue";
-import notFound from "./component/not_found.vue"
+import EditLog from "./component/log/edit/log_edit.vue";
+import CreateLog from "./component/log/create/log_create.vue";
+import SignIn from "./component/devise/sessions/log_in.vue";
+import SignUp from "./component/devise/registrations/new.vue";
+import EditUser from "./component/devise/registrations/edit.vue";
+import NotFound from "./component/not_found.vue"
 
-Vue.use(Router);
-
-export default new Router({
-  mode: "history",
+const router = createRouter({
+  history: createWebHistory(),
   routes: [
-    { path: "/", name: "index", component: Index }, { path: "/:userId/management", name: "management", component: Management },
-    { path: "/menus", name: "menus", component: Menu }, { path: "/menu/:menuId/edit", name: "menuEdit", component: editMenu },
-    { path: "/menu", name: "createMenu", component: createMenu }, { path: "/:userId/log", name: "logs", component: Log },
-    { path: "/log/:userId/edit/:logId", name: "editLog", component: editLog }, { path: "/log", name: "createLog", component: createLog },
-    { path: "/sign_in", name: "signIn", component: signIn }, { path: "/sign_up", name: "signUp", component: signUp },
-    { path: "/user/:userId/edit", name: "editUser", component: editUser }, { path: "/graph", name: "graphs", component: Graph }, { path: "*", component: notFound }
+    { path: "/api/v1/", name: "index", component: Index },
+    { path: "/api/v1/sign_in", name: "signIn", component: SignIn }, 
+    { path: "/api/v1/sign_up", name: "signUp", component: SignUp },
+    { path: "/api/v1/graph", name: "graphs", component: Graph },  
+    { path: "/api/v1/log", name: "createLog", component: CreateLog },
+    { path: "/api/v1/menus", name: "menus", component: Menu }, 
+    { path: "/api/v1/menu", name: "createMenu", component: CreateMenu },
+    { path: "/api/v1/menu/:menuId/edit", name: "menuEdit", component: EditMenu }, 
+    { path: "/api/v1/users/:userId/edit", name: "editUser", component: EditUser }, 
+    { path: "/api/v1/users/:userId/management", name: "management", component: Management },
+    { path: "/api/v1/users/:userId/log", name: "logs", component: Log }, 
+    { path: "/api/v1/users/:userId/log/:logId/edit", name: "editLog", component: EditLog },
+    { path: "*", component: NotFound }
   ]
 });
+
+export default router

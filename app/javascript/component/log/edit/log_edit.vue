@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { createApp } from 'vue';
 import logItem from './log_edit_item.vue';
 import { BackgroundService } from '../../../service/background.service';
 import { SendService } from '../../../service/send.service';
@@ -152,7 +152,7 @@ export default {
       this.index += 1;
     },
     loadItem(args) {
-      let ComponentClass = Vue.extend(logItem);
+      let ComponentClass = createApp().extend(logItem);
       let instance = new ComponentClass();
       let target = document.getElementById('target')
 

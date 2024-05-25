@@ -1,5 +1,5 @@
 require("@rails/activestorage").start();
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from '../app.vue';
 import router from '../router';
 import FlashMessage from '@smartweb/vue-flash-message';
@@ -11,21 +11,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 
+const app = createApp(App);
 library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle, faChartBar)
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('vSelect', vSelect)
-Vue.use(FlashMessage);
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('vSelect', vSelect)
+app.use(FlashMessage);
+app.use(router);
+app.mount('#app');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.getElementById("app");
-  const app = new Vue({
-    el: el,
-    router: router,
-    render: h => h(App)
-  }).$mount()
+/*document.addEventListener('DOMContentLoaded', () => {  
   document.body.appendChild(app.$el)
-})
+}) */
 
 /* eslint no-console: 0 */
 // Run this example by adding <%= javascript_pack_tag 'hello_vue' %> (and

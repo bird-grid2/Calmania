@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { createApp } from 'vue';
 import MenuItem from './menu_item.vue'
 import { SendService } from '../../../service/send.service';
 export default {
@@ -86,7 +86,7 @@ export default {
       .catch( error => { console.log(error); });
     },
     appendItem() {
-      let ComponentClass = Vue.extend(MenuItem);
+      let ComponentClass = createApp().extend(MenuItem);
       let instance = new ComponentClass();
       let target = document.getElementById('item_form')
 

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { createApp } from 'vue';
 import menuItem from './edit_item.vue';
 import { SendService } from '../../../service/send.service';
 import { BackgroundService } from '../../../service/background.service';
@@ -113,7 +113,7 @@ export default {
       .catch( error => { console.log(error) });
     },
      updateItem(food_index, massValue) {
-      let ComponentClass = Vue.extend(menuItem);
+      let ComponentClass = createApp().extend(menuItem);
       let instance = new ComponentClass();
       let target = document.getElementById('item_form');
 

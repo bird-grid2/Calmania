@@ -58,6 +58,10 @@ gem 'daemons'
 gem 'select2-rails'
 gem 'parser'
 gem 'active_model_serializers'
+gem 'rails-vue-loader'
+gem 'vue-compiler'
+gem 'babel-transpiler'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

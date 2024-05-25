@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { createApp } from 'vue';
 import { SendService } from '../../../service/send.service';
 import logItem from './log_item.vue';
 export default {
@@ -120,7 +120,7 @@ export default {
       .catch( error => { console.log(error) });
     },
     appendItem() {
-      let ComponentClass = Vue.extend(logItem);
+      let ComponentClass = createApp().extend(logItem);
       let instance = new ComponentClass();
       let target = document.getElementById('target')
 
