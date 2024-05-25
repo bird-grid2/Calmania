@@ -105,6 +105,6 @@ end
 
 group :development, :production do
   gem 'pycall'
-  gem 'matplotlib'
-  gem 'numpy'
+  #gem 'matplotlib'
+  #gem 'numpy'
 end
