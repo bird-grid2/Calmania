@@ -19,6 +19,7 @@ module Calmania
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+    config.autoload_paths << "#{root}/lib"
     config.autoload_once_paths << "#{root}/app/serializers"
     # Configuration for the application, engines, and railties goes here.
     #
@@ -26,7 +27,7 @@ module Calmania
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("extras")
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
@@ -35,7 +36,6 @@ module Calmania
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.autoload_paths += ['public/assets']
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
   end
