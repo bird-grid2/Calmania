@@ -19,7 +19,7 @@ module Calmania
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
-    config.autoload_paths << "#{root}/lib"
+    # config.autoload_paths << "#{root}/lib"
     config.autoload_once_paths << "#{root}/app/serializers"
     # Configuration for the application, engines, and railties goes here.
     #
@@ -36,6 +36,7 @@ module Calmania
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.autoload_paths += ['public/assets']
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
   end
