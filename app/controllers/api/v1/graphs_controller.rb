@@ -1,9 +1,9 @@
-class Api::V1::GraphsController < api::v1::ApplicationController
+class Api::V1::GraphsController < Api::V1::ApplicationController
   require 'pycall'
-  # require 'matplotlib'
+  require 'matplotlib'
   require 'matplotlib/pyplot'
   require 'numpy'
- #  Matplotlib.use('Agg')
+  Matplotlib.use('Agg')
   @plt = Matplotlib::Pyplot
   @np = Numpy
   @os = PyCall.import_module('os')
