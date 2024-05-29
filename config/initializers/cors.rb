@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Rails.application.credentials.dig(Rails.env.to_sym, :cors_origins)
+    origins ENV["API_PRODUCTION_URL"] || ENV["API_BASE_URL"]
     resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
