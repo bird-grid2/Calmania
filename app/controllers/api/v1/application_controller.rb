@@ -1,7 +1,4 @@
 class Api::V1::ApplicationController < ActionController::API
-  require 'pycall'
-  require 'matplotlib/pyplot'
-  require 'numpy'
   include ActionController::MimeResponds
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionView::Layouts

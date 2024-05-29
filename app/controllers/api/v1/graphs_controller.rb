@@ -1,4 +1,7 @@
 class Api::V1::GraphsController < Api::V1::ApplicationController
+  require 'pycall'
+  require 'matplotlib/pyplot'
+  require 'numpy'
   Matplotlib.use('Agg')
   @plt = Matplotlib::Pyplot
   @np = Numpy
