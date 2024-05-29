@@ -48,6 +48,11 @@ jobs:
       - run: echo 'export PYTHON="python3"'
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run:
+          name: Accept repository changes and upgrade system
+          command: |
+            sudo apt-get update --allow-releaseinfo-change
+            sudo apt-get -y upgrade
+      - run:
           name: Set up Python
           command: |
             sudo apt-get update
