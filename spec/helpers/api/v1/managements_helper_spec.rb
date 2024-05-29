@@ -11,7 +11,5 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe Api::V1::ManagementsHelper, type: :helper do
-  if Rails.env == 'development'
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  # pending "add some examples to (or delete) #{__FILE__}"
 end
