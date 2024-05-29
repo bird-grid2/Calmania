@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_dependency 'application_controller'
 
 class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:

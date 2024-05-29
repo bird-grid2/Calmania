@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_dependency 'application_controller'
 
 class Api::V1::Users::SessionsController < Devise::SessionsController
   before_action :authenticate_request!, except: [:new, :create, :destroy]

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_dependency 'application_controller'
 
 class Api::V1::Users::UnlocksController < Devise::UnlocksController
   # GET /resource/unlock/new
