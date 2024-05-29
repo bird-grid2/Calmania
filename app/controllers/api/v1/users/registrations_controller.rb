@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_dependency 'application_controller'
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_request!, except: [:create, :update]
