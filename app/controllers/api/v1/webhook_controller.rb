@@ -1,4 +1,4 @@
-class Api::V1::WebhookController < Api::V1::ApplicationController
+class Api::V1::WebhookController < ApplicationController
   require 'line/bot'
   before_action :authenticate_request!, except: [:callback, :broadcast]
 

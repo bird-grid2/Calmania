@@ -1,4 +1,4 @@
-class Api::V1::ShowsController < Api::V1::ApplicationController
+class Api::V1::ShowsController < ApplicationController
   before_action :response_headers, only: [:index]
 
   def index

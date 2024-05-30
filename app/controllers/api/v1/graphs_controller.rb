@@ -1,4 +1,4 @@
-class Api::V1::GraphsController < Api::V1::ApplicationController
+class Api::V1::GraphsController < ApplicationController
   require 'pycall'
   require 'matplotlib/pyplot'
   require 'numpy'

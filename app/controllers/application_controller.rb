@@ -1,4 +1,4 @@
-class Api::V1::ApplicationController < ActionController::API
+class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionView::Layouts
