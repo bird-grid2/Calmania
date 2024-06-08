@@ -65,17 +65,19 @@ export default {
               userId: res.data.id
             }
           });
-          this.flashMessage.success({
+          console.log(JSON.stringify(this.$flashMessage))
+          this.$flashMessage.show({
+            type: "success",
             message: "ログイン完了しました。",
             time: 3000,
             blockClass: "notification__success"
           });
-          
         }else{
           this.user.nickname = ''
           this.user.email = ''
           this.user.password = ''
-          this.flashMessage.error({
+          this.$flashMessage.show({
+            type: "error",
             message: "ログインに失敗しました。",
             time: 3000,
             blockClass: "notification__alert"

@@ -37,13 +37,15 @@
 import { SendService } from '../service/send.service';
 
 export default {
-  data: {
-    iconStyle: {
-      display: 'block',
-      width: '100%',
-      color: 'white',
-      fontSize: '3.5rem',
-      marginBottom: '5%'
+  data() {
+    return {
+      iconStyle: {
+        display: 'block',
+        width: '100%',
+        color: 'white',
+        fontSize: '3.5rem',
+        marginBottom: '5%'
+      }
     }
   },
   methods: {
@@ -62,7 +64,8 @@ export default {
           this.$router.push({name: 'index'})
           location.reload();
         } else {
-          this.flashMessage.error({
+          this.$flashMessage.show({
+            type: 'error',
             message: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'

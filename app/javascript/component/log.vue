@@ -126,7 +126,8 @@ export default {
           this.$router.push({name: 'index'})
           location.reload();
         } else {
-          this.flashMessage.error({
+          this.$flashMessage.show({
+            type: 'error',
             message: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'
@@ -185,13 +186,15 @@ export default {
       .then( res => {
         if (res.data != 'not delete log') {
           this.$router.push({ name: "logs", params: { userId: this.getId } });
-          this.flashMessage.success({
+          this.$flashMessage.show({
+            type: 'success',
             message: 'ログを削除しました',
             time: 3000,
             class: 'notification__success'
           })
         }else{
-          this.flashMessage.error({
+          this.flashMessage().show({
+            type: 'error',
             message: 'ログを削除失敗しました',
             time: 2000,
             class: 'notification__error'

@@ -166,20 +166,23 @@ export default {
     .catch( error => { console.log(error)})
   },
   methods: {
+    sendInstance(){
+      return new SendService()
+    },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).id
     },
     logout() {
       const data = JSON.parse(sessionStorage.getItem('user'));
-      const instance = new SendService();
 
-      instance.signOut(data.user.token).then((res)=> {
+      this.sendInstance().signOut(data.user.token).then((res)=> {
         if(res.status === 200){
           sessionStorage.clear();
           this.$router.push({name: 'index'})
           location.reload();
         } else {
-          this.flashMessage.error({
+          this.$flashMessage.show({
+            type: 'error',
             message: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'

@@ -13,7 +13,9 @@ class Api::V1::GraphsController < ApplicationController
   before_action :reset_cache, only: :index
   before_action :set_graph, only: :index
 
+  # Retrieves all graphs for the current user
   def index
+    binding.pry
     gon.userId = @user.id
   end
 
