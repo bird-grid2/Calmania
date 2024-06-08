@@ -1,7 +1,7 @@
 require("@rails/activestorage").start();
 import { createApp } from 'vue';
 import App from '../app.vue';
-import router from '../router';
+import router from '../router.js';
 import FlashMessage from '@smartweb/vue-flash-message';
 import './application.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,7 +15,7 @@ const app = createApp(App);
 library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTrashAlt, faMinusCircle, faChartBar)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.component('vSelect', vSelect)
+app.component('v-select', vSelect)
 app.use(FlashMessage);
 app.use(router);
 app.mount('#app');

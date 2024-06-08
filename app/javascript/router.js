@@ -16,19 +16,19 @@ import NotFound from "./component/not_found.vue"
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/api/v1/", name: "index", component: Index },
-    { path: "/api/v1/sign_in", name: "signIn", component: SignIn }, 
-    { path: "/api/v1/sign_up", name: "signUp", component: SignUp },
-    { path: "/api/v1/graph", name: "graphs", component: Graph },  
-    { path: "/api/v1/log", name: "createLog", component: CreateLog },
-    { path: "/api/v1/menus", name: "menus", component: Menu }, 
-    { path: "/api/v1/menu", name: "createMenu", component: CreateMenu },
-    { path: "/api/v1/menu/:menuId/edit", name: "menuEdit", component: EditMenu }, 
-    { path: "/api/v1/users/:userId/edit", name: "editUser", component: EditUser }, 
-    { path: "/api/v1/users/:userId/management", name: "management", component: Management },
-    { path: "/api/v1/users/:userId/log", name: "logs", component: Log }, 
-    { path: "/api/v1/users/:userId/log/:logId/edit", name: "editLog", component: EditLog },
-    { path: "*", component: NotFound }
+    { path: "/", name: "index", component: Index },
+    { path: "/sign_in", name: "signIn", component: SignIn }, 
+    { path: "/sign_up", name: "signUp", component: SignUp },
+    { path: "/graph", name: "graphs", component: Graph },  
+    { path: "/log", name: "createLog", component: CreateLog },
+    { path: "/menus", name: "menus", component: Menu }, 
+    { path: "/menu", name: "createMenu", component: CreateMenu },
+    { path: "/menu/:menuId/edit", name: "menuEdit", component: EditMenu }, 
+    { path: "/users/:userId/edit", name: "editUser", component: EditUser }, 
+    { path: "/users/:userId/management", name: "management", component: Management },
+    { path: "/users/:userId/log", name: "logs", component: Log }, 
+    { path: "/users/:userId/log/:logId/edit", name: "editLog", component: EditLog },
+    { path: "/:pathMatch(.*)*", component: NotFound }
   ]
 });
 

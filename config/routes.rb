@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   require 'sidekiq-status/web'
   mount Sidekiq::Web, at: "/sidekiq"
-  root to: "api/v1/shows#index", defaults: { format: :json }
+  root to: "api/v1/shows#index"
+  
  
 
   namespace 'api', defaults: { format: :json } do
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
       post '/callback', to: 'webhook#callback'
       post '/send', to: 'webhook#broadcast'
       
-      devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+      devise_for :users, controllers: { registrations: "api/v1/users/registrations", sessions: "api/v1/users/sessions" }
 
       devise_scope :api_v1_user do
         get "/sign_up", to: "users/registrations#new"
@@ -46,17 +47,6 @@ Rails.application.routes.draw do
         end
       end
 
-      #get '/', to: 'shows#index'
-      #get '/:id/management', to: 'shows#index'
-      #get '/menus', to: 'shows#index'
-      #get '/menu/:id/edit', to: 'shows#index'
-      #get '/:id/log', to: 'shows#index'
-      #get '/log/:id/edit', to: 'shows#index'
-      #get '/sign_in', to: 'shows#index'
-      #get '/sign_up', to: 'shows#index'
-      #get '/user/edit', to: 'shows#index'
-      #get '/graph', to: 'shows#index'
-      #get '/menus/new', to: 'menus#new'
       match '*path', to: 'application#response_not_found', via: :all
     end
   end

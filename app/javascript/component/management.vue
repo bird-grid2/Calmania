@@ -1,7 +1,7 @@
 <template>
   <div class='wrapper'>
     <div class='side-management'>
-      <router-link to='/graph'>
+      <router-link :to="{ name:'graphs' }">
         <font-awesome-icon :icon="['far', 'chart-bar']" :style="iconStyle" />
         <h6 class='pc'>Show<br>graphs</h6>
         <h6 class='sp'>Show graphs</h6>

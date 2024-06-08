@@ -9,7 +9,7 @@ Rails.application.configure do
   config.enable_reloading = true
 
   # Do not eager load code on boot.
-  config.eager_load = true
+  config.eager_load = false
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -68,4 +68,6 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+   # 必要に応じて静的ファイルの提供を有効にする
+   config.public_file_server.enabled = true
 end

@@ -7,10 +7,8 @@
     %title Calmania
     = include_gon
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
    
   %body
-    // = render 'layouts/notifications'
-    = javascript_pack_tag 'main', 'data-turbolinks-track': 'reload'
     = yield 
+    = javascript_pack_tag 'main', 'data-turbolinks-track': 'reload'
     

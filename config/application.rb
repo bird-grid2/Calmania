@@ -2,6 +2,21 @@ require_relative "boot"
 
 require "rails/all"
 
+# Include each railties manually, excluding `active_storage/engine`
+%w(
+  active_model/railtie
+  active_job/railtie
+  active_record/railtie
+  action_controller/railtie
+  action_mailer/railtie
+  action_mailbox/engine
+  action_text/engine
+  action_view/railtie
+  action_cable/engine
+).each do |railtie|
+  require railtie
+end
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -18,8 +33,8 @@ module Calmania
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks])
-    config.autoload_paths << "#{root}/lib"
+    # config.autoload_lib(ignore: %w[assets tasks])
+    config.eager_load_paths << Rails.root.join("lib")
     config.autoload_once_paths << "#{root}/app/serializers"
     # Configuration for the application, engines, and railties goes here.
     #
@@ -36,8 +51,11 @@ module Calmania
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.autoload_paths += ['public/assets']
-    config.middleware.use ActionDispatch::Flash
+    # config.autoload_paths += ['public/assets']
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
   end
 end
