@@ -65,10 +65,9 @@ export default {
               userId: res.data.id
             }
           });
-          console.log(JSON.stringify(this.$flashMessage))
           this.$flashMessage.show({
             type: "success",
-            message: "ログイン完了しました。",
+            title: "ログイン完了しました。",
             time: 3000,
             blockClass: "notification__success"
           });
@@ -78,8 +77,8 @@ export default {
           this.user.password = ''
           this.$flashMessage.show({
             type: "error",
-            message: "ログインに失敗しました。",
-            time: 3000,
+            title: "ログインに失敗しました。",
+            time: 2000,
             blockClass: "notification__alert"
           });
         }

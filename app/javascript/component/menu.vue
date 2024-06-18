@@ -115,7 +115,7 @@ export default {
         } else {
           this.$flashMessage.show({
             type: 'error',
-            message: 'ログアウトが失敗しました',
+            title: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'
           });
@@ -156,14 +156,14 @@ export default {
           this.$router.push({ name: "menus", force: true});
           this.$flashMessage.show({
             type: 'success',
-            message: 'メニューを削除しました',
+            title: 'メニューを削除しました',
             time: 3000,
             class: 'notification__success'
           })
         }else{
           this.$flashMessage.show({
             type: 'error',
-            message: 'メニューを削除失敗しました',
+            title: 'メニューを削除失敗しました',
             time: 2000,
             class: 'notification__error'
           })

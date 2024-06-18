@@ -9,6 +9,8 @@ import { faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faTras
 import { faChartBar } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vSelect from 'vue-select'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import 'vue-select/dist/vue-select.css';
 
 const app = createApp(App);
@@ -17,6 +19,7 @@ library.add(faFileAlt, faEdit, faSignOutAlt, faHome, faThList, faPlusCircle, faT
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('v-select', vSelect)
 app.use(FlashMessage);
+app.use(VueAxios, axios)
 app.use(router);
 app.mount('#app');
 

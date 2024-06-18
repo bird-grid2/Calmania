@@ -188,14 +188,14 @@ export default {
           this.$router.push({ name: "logs", params: { userId: this.getId } });
           this.$flashMessage.show({
             type: 'success',
-            message: 'ログを削除しました',
+            title: 'ログを削除しました',
             time: 3000,
             class: 'notification__success'
           })
         }else{
           this.flashMessage().show({
             type: 'error',
-            message: 'ログを削除失敗しました',
+            title: 'ログを削除失敗しました',
             time: 2000,
             class: 'notification__error'
           })

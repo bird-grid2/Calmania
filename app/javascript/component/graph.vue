@@ -12,33 +12,40 @@
         <h6 class='sp'>Sign out</h6>
       </a>
     </div>
-    <div class='graph_wrapper'>
+    <div v-if="this.checkFlg" class='graph_wrapper'>
       <div class='graph_upper'>
         <div class='left_graph'>
-          {{ `<img src="/assets/test_${gon.userId}_1.png">` }}
+          {{ `<img src="/assets/test_${this.getId()}_1.png">` }}
         </div>
         <div class="right_graph">
-          {{ `<img src="/assets/test_${gon.userId}_2.png">` }}
+          {{ `<img src="/assets/test_${this.getId()}_2.png">` }}
         </div>
       </div>
       <div class='graph_bottom'>
         <div class='left_graph'>
-          {{ `<img src="/assets/test_${gon.userId}_3.png">` }}
+          {{ `<img src="/assets/test_${this.getId()}_3.png">` }}
         </div>
         <div class='right_graph'>
-          {{ `<img src="/assets/test_${gon.userId}_4.png">` }}
+          {{ `<img src="/assets/test_${this.getId()}_4.png">` }}
         </div>
       </div>
+    </div>
+    <div v-else class='graph_warpper'>
+        <div calss=" no_graph">
+          <h1>グラフがありません</h1>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
 import { SendService } from '../service/send.service';
-
+import { BackgroundService } from '../service/background.service';
+import axios from 'axios';
 export default {
   data() {
     return {
+      checkFlg: false,
       iconStyle: {
         display: 'block',
         width: '100%',
@@ -48,9 +55,19 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getInstance().getGraphsBoard()
+    .then(response => {
+      console.log('Response:', response);
+    })
+    //this.checkFlg = this.checkPath();
+  },
   methods: {
     sendInstance(){
-      return new SendService()
+      return new SendService();
+    },
+    getInstance(){
+      return new BackgroundService();
     },
     getId() {
       return JSON.parse(sessionStorage.getItem('user')).id
@@ -66,12 +83,19 @@ export default {
         } else {
           this.$flashMessage.show({
             type: 'error',
-            message: 'ログアウトが失敗しました',
+            title: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'
           });
         } 
       }).catch((error)=>{ console.log(error); });
+    },
+    checkPath() {
+        const flg = this.getInstance().getGraphsBoard().then((res)=> {
+          return res.data.imagePath;
+        });
+
+        return flg;
     }
   }
 }

@@ -52,6 +52,9 @@ export class BackgroundService {
   getEditFoodsBoard(args) {
     return this.instance.get('/api/v1/menus/food_data', { params: { id: args } })
   }
+  getGraphsBoard() {
+    return this.instance.get('/api/v1/graphs');
+  }
 }
 
 export default new BackgroundService();

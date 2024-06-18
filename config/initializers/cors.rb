@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ENV["API_PRODUCTION_URL"] || ENV["API_BASE_URL"]
+    origins ENV.fetch("API_PRODUCTION_URL") || ENV.fetch("API_BASE_URL")
     resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end

@@ -183,7 +183,7 @@ export default {
         } else {
           this.$flashMessage.show({
             type: 'error',
-            message: 'ログアウトが失敗しました',
+            title: 'ログアウトが失敗しました',
             time: 2000,
             class: 'notification__error'
           });
