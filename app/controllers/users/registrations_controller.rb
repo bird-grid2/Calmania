@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_request!, except: [:create, :update]
+class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_request!, except: [:create]
   before_action :configure_sign_up_parameters, if: :devise_controller?
   before_action :configure_account_update_parameters, if: :devise_controller?
 

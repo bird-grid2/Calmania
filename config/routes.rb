@@ -3,28 +3,26 @@ Rails.application.routes.draw do
   require 'sidekiq-status/web'
   mount Sidekiq::Web, at: "/sidekiq"
   root to: "api/v1/shows#index"
-  
- 
+
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }, defaults: { format: :json }
+
+  devise_scope :user do
+    get "/users/sign_up", to: "users/registrations#new", defaults: { format: :json }
+    post "/users/create", to: "users/registrations#create", defaults: { format: :json }
+    get "/user/load_data", to: "users/registrations#load_data", defaults: { format: :json }
+    patch "/user/:id/update", to: "users/registrations#update", defaults: { format: :json }
+    delete "/user/:id/delete", to: "users/registrations#destroy", defaults: { format: :json }
+  end
+
+  resources :users, only: [], defaults: { format: :json }  do
+    resources :clock_work_events, except: [:index, :show]
+  end
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
       post '/callback', to: 'webhook#callback'
       post '/send', to: 'webhook#broadcast'
       
-      devise_for :users, controllers: { registrations: "api/v1/users/registrations", sessions: "api/v1/users/sessions" }
-
-      devise_scope :api_v1_user do
-        get "/sign_up", to: "users/registrations#new"
-        post "/user/create", to: "users/registrations#create"
-        get "/user/load_data", to: "users/registrations#load_data"
-        patch "/user/:id/update", to: "users/registrations#update"
-        delete "/user/:id/delete", to: "users/registrations#destroy"
-      end
-
-      resources :users, only: [] do
-        resources :clock_work_events, except: [:index, :show]
-      end
-
       resources :managements, only: :index
       resources :shows, only: :index
       resources :graphs , only: :index

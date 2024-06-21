@@ -4,7 +4,7 @@
       <h2>ログイン画面</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form @submit.prevent  action="api/v1/users/sign_in" accept-charset="UTF-8" method="post">
+    <form @submit.prevent  action="/users/sign_in" accept-charset="UTF-8" method="post">
       <div class='left_box'>
         <div class='field'>
           <label class="log-in" for="user_nickname_ニックネーム">ニックネーム</label>
@@ -49,7 +49,7 @@ export default {
   methods: {
     logInUsers() {
       axios
-      .post('/api/v1/users/sign_in', { 
+      .post('/users/sign_in', { 
         nickname: this.user.nickname,
         email: this.user.email,
         password: this.user.password 

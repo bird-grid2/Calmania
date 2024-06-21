@@ -30,14 +30,14 @@ class Api::V1::GraphsController < ApplicationController
     @total = []
     @fat = []
     @bmi = []
-
+    binding.pry
     @result.each do |w|
       w.weight.nil? || w.total_cal.nil? || w.bfp.nil? and next
       @date << w.date.strftime("%m/%d").to_s
       @weight << w.weight.to_s
       @total << w.total_cal.to_s
       @fat << w.bfp.to_s
-      @bmi << (w.weight / ((height / 100)**2)).to_s
+      @bmi << (w.weight / ((@height / 100)**2)).to_s
     end
   end
 

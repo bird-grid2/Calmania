@@ -4,7 +4,7 @@
       <h2>新規作成</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form class="new_user" id="new_user" @submit.prevent action="/users" accept-charset="UTF-8" method="post">
+    <form class="new_user" id="new_user" @submit.prevent action="/user/create" accept-charset="UTF-8" method="post">
       <div class="left_box">
         <div class="field">
           <label class="new" for="user_nickname_ニックネーム_必須">ニックネーム (必須)</label>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Users::SessionsController < Devise::SessionsController
+class Users::SessionsController < Devise::SessionsController
   before_action :authenticate_request!, except: [:new, :create, :destroy]
   skip_before_action :verify_signed_out_user, only: :destroy
 
