@@ -76,6 +76,7 @@ class ApplicationController < ActionController::API
       jti: jti, 
       exp: (Time.now + 2.week).to_i,
       scp: 'api_v1_user',
+      sub: user.id,
       user: {
         id: user.id, 
         email: user.email, 

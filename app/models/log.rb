@@ -17,7 +17,8 @@ class Log < ApplicationRecord
   end
 
   def frequency
-    user.send(user.period_id.pluralize)
+    period = user.clock_work_event&.period
+    period&.name
   end
 
 end

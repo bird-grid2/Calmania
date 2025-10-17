@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/sign_up", to: "users/registrations#new", defaults: { format: :json }
     post "/users/create", to: "users/registrations#create", defaults: { format: :json }
-    get "/user/load_data", to: "users/registrations#load_data", defaults: { format: :json }
-    patch "/user/:id/update", to: "users/registrations#update", defaults: { format: :json }
-    delete "/user/:id/delete", to: "users/registrations#destroy", defaults: { format: :json }
+    get "/users/load_data", to: "users/registrations#load_data", defaults: { format: :json }
+    patch "/users/:id/update", to: "users/registrations#update", defaults: { format: :json }
+    delete "/users/sign_out", to: "users/sessions#destroy", defaults: { format: :json }
   end
 
-  resources :users, only: [], defaults: { format: :json }  do
+  resources :users, only: [], defaults: { format: :json } do
     resources :clock_work_events, except: [:index, :show]
   end
 

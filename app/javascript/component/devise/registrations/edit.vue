@@ -4,7 +4,7 @@
       <h2>ユーザー情報編集</h2>
       <img src='/assets/b_ornament_146_0S.png'>
     </header>
-    <form @submit.prevent class="edit_user" id="edit_user"  action="`/user/${userId}/update`" accept-charset="UTF-8" method="patch">
+    <form @submit.prevent class="edit_user" id="edit_user"  action="`/users/${userId}/update`" accept-charset="UTF-8" method="POST">
       <div class='left_box'>
         <div class='field'>
           <label class="edit" for="user_nickname_ニックネーム">ニックネーム</label>

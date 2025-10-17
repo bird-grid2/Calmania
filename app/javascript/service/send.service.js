@@ -59,12 +59,10 @@ export class SendService {
     return this.instance.delete(`api/v1/menus/${menuId}`, { menu: input })
   }
   updateUser(userId, input) {
-    console.log(input)
-    console.log(userId)
-    return this.instance.patch(`user/${userId}/update`, { user: input })
+    return this.instance.patch(`/users/${userId}/update`, {user: input })
   }
   signOut(token) {
-    return this.instance.delete(`users/sign_out`, { auth_token: token });
+    return this.instance.delete(`/users/sign_out`, { auth_token: token });
   }
 }
 

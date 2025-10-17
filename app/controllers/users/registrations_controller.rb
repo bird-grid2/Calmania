@@ -24,6 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    binding.pry
     resource = User.find_for_database_authentication(params[:user_id])
     if resource.update(account_update_params)
       render json: 'update user info'
@@ -49,8 +50,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    add_list = [:email, :nickname, :password, :password_confirmation, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:id, :period_id, :send_time] }]
-    params.require(:user).permit(add_list).merge(user_id: @current_user.id)
+    add_list = [:nickname, :password, :password_confirmation, :height, :ideal_protain_rate, :ideal_fat_rate, :ideal_carbohydrate_rate, :target_cal, { clock_work_event_attributes: [:id, :period_id, :send_time] }]
+    params.require(:user).permit(add_list)
   end
 
   def edit_payload(user, token)
